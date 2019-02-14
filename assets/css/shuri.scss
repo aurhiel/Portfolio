@@ -1,0 +1,9 @@
+
+// Shuri variables (before bootstrap to override default variables)
+@import 'shuri/variables';
+
+// Libraries
+@import 'shuri/bootstrap';  // node_module : Bootstrap Libraries
+
+// Shuri
+@import 'shuri/core';
