@@ -1,0 +1,36 @@
+// App-Header
+//
+
+.app-core {
+  &--home {
+    .app-header {
+      // Menu is IN the homepage jumbotron > reset min-height
+      min-height: auto;
+
+      // Hide brand logo/text
+      .navbar-brand {
+        opacity: 0;
+        visibility: hidden;
+      }
+
+      .navbar {
+        background: none;
+      }
+    }
+
+
+    &.app-core--navbar-fixed {
+      .app-header {
+        .navbar-brand {
+          opacity: 1;
+          visibility: visible;
+        }
+
+        .navbar {
+          background-color: $navbar-bg;
+          background-color: transparentize($navbar-bg, .05);
+        }
+      }
+    }
+  }
+}

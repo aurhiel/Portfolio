@@ -1,0 +1,51 @@
+// Identity
+//
+
+.#{$theme-prefix}identity {
+  line-height: 1.2;
+  white-space: nowrap;
+
+  > * {
+    // Reset <h> properties
+    margin-bottom: 0;
+  }
+
+  .--names {
+    font-size: 3.2em;
+    font-weight: 600;
+    // CSS required for .--badge child
+    display: inline-block;
+    position: relative;
+    z-index: 0;
+  }
+
+  .--badge {
+    font-size: .2em;
+    letter-spacing: .2em;
+    font-weight: $font-weight-light;
+    text-transform: lowercase;
+    // CSS for opacified border (:after) by using currentcolor
+    position: absolute; // (require position relative or absolute)
+    top: -1.4em;
+    right: -3.2em;
+    padding: .4em 1.2em .3em;
+
+    &:after {
+      content: '';
+      position: absolute;
+      top: 0;
+      bottom: 0;
+      right: 0;
+      left: 0;
+      border: .1em solid;
+      opacity: .1;
+      border-radius: 1em;
+    }
+  }
+
+  .--status {
+    font-size: 1em;
+    font-weight: 300;
+    opacity: .5;
+  }
+}

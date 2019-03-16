@@ -1,0 +1,83 @@
+// Jumbo
+//
+
+.app-core {
+  &--home {
+    .jumbotron {
+      text-align: center;
+      // padding-top: 4.2rem;
+      // padding-bottom: 4rem;
+      // min-height: calc(100vh - #{$theme-header-min-height} - 2rem);
+
+      .#{$theme-prefix}logo {
+        font-size: 5rem;
+      }
+
+      .#{$theme-prefix}identity {
+        max-width: 20rem;
+        text-align: left;
+        margin: 2rem auto 0 auto;
+      }
+
+      .col-logo {
+        text-align: center;
+      }
+    }
+  }
+}
+
+
+
+@include media-breakpoint-up(sm) {
+  .app-core {
+    &--home {
+      .jumbotron {
+        text-align: left;
+        padding-top: 4.4rem;
+
+        .#{$theme-prefix}identity {
+          margin-left: 0;
+        }
+
+        .#{$theme-prefix}logo {
+          font-size: 8rem;
+          margin-bottom: -6rem;
+          margin-left: -5rem;
+        }
+      }
+    }
+  }
+}
+
+
+@include media-breakpoint-up(md) {
+  .app-core {
+    &--home {
+      .jumbotron {
+        .#{$theme-prefix}logo {
+          // font-size: 7rem;
+          // margin-bottom: -7rem;
+          margin-left: 0;
+        }
+      }
+    }
+  }
+}
+
+@include media-breakpoint-up(lg) {
+  .app-core {
+    &--home {
+      .jumbotron {
+        padding-top: 4.8rem;
+
+        .#{$theme-prefix}logo {
+          font-size: 10rem;
+          margin-bottom: -8rem;
+          // position: absolute;
+          // left: 0;
+          // top: -12rem;
+        }
+      }
+    }
+  }
+}

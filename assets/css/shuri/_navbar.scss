@@ -1,0 +1,35 @@
+// Navbar
+//
+
+.navbar {
+  background-color: $navbar-bg;
+  transition: background-color 300ms ease;
+
+  .#{$theme-prefix}logo,
+  .#{$theme-prefix}identity {
+    display: inline-block;
+    vertical-align: middle;
+  }
+
+  .#{$theme-prefix}logo {
+    font-size: .7em;
+  }
+
+  .#{$theme-prefix}identity {
+    font-size: .4em;
+    margin-left: .4rem;
+  }
+}
+
+@include media-breakpoint-up(sm) {
+  .nav-item {
+    margin: 0 .4rem;
+  }
+}
+
+
+@include media-breakpoint-up(lg) {
+  .nav-item {
+    margin: 0 .8rem;
+  }
+}

@@ -1,0 +1,24 @@
+// Core
+
+.app-core {
+  min-width: 320px;
+  overflow-x: hidden;
+
+  // Children are above the ".app-bg"
+  .app-header, .app-body, .app-footer {
+    position: relative;
+    z-index: 1;
+  }
+
+  .app-bg {
+    // background-color: $body-bg;
+    background-color: red; // TODO Remove later (debug)
+    // background-image: url('');
+    position: fixed;
+    z-index: 0;
+    top: 0;
+    left: 0;
+    height: 100%;
+    width: 100%;
+  }
+}

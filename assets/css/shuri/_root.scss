@@ -1,0 +1,22 @@
+// Root
+//
+// NOTE "Je s'appelle :root"
+
+:root {
+  font-size: 14px;
+}
+
+
+// Responsive
+
+@include media-breakpoint-up(lg) {
+  :root {
+    font-size: 16px;
+  }
+}
+
+@include media-breakpoint-up(xl) {
+  :root {
+    font-size: 18px;
+  }
+}

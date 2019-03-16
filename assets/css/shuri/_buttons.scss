@@ -1,0 +1,14 @@
+// Buttons
+//
+
+.btn {
+  box-shadow: 0 .5rem .8rem -.5rem transparentize($black, .6);
+
+  &:hover {
+    box-shadow: 0 .55rem .4rem -.5rem transparentize($black, .6);
+  }
+
+  &-transparent {
+    background: none;
+  }
+}

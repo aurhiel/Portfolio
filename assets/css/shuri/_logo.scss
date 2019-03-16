@@ -1,0 +1,12 @@
+// Logo
+//
+
+.#{$theme-prefix}logo {
+  color: $primary;
+
+  &--svg {
+    fill: currentcolor; // Reset filled color
+    width: 2.875em;
+    height: auto;
+  }
+}

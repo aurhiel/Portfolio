@@ -1,6 +1,28 @@
 var Encore = require('@symfony/webpack-encore');
 var CopyWebpackPlugin = require("copy-webpack-plugin");
 var GoogleFontsPlugin = require("google-fonts-webpack-plugin");
+// var ExtractTextPlugin = require("extract-text-webpack-plugin");
+/*
+// Try to copy SVG icons with webfonts-generator, results : crappy/ugly icons ...
+const webfontsGenerator = require('webfonts-generator');
+
+webfontsGenerator({
+  fontName: 'shuricon',
+  templateOptions : {
+    classPrefix: 'shuricon-',
+    baseSelector: '.shuricon'
+  },
+  dest: './public/build/fonts/shuricon/',
+  cssDest: './public/build/shuricon.css',
+  cssFontsUrl: './fonts/shuricon/',
+  files: [
+    './assets/fonts/linearicons-svg/phone.svg',
+    './assets/fonts/linearicons-svg/envelope.svg',
+    './assets/fonts/linearicons-svg/map-marker.svg',
+    './assets/fonts/linearicons-svg/construction.svg'
+  ],
+});
+*/
 
 Encore
     // the project directory where compiled assets will be stored
@@ -15,6 +37,9 @@ Encore
 
     // "Under works" page JS & CSS (with SASS)
     .addEntry('under-works', './assets/js/under-works.js')
+
+    //
+    .addStyleEntry('home', './assets/css/home.scss')
 
     // Themes
     // .addStyleEntry('kakeibo-dark', './assets/css/kakeibo-dark.scss')
@@ -48,6 +73,25 @@ Encore
     .addPlugin(new CopyWebpackPlugin([
       { from: './assets/static' }
     ]))
+
+    // .addPlugin(new MiniCssExtractPlugin({
+    //   // Options similar to the same options in webpackOptions.output
+    //   // both options are optional
+    //   filename: "[name].css",
+    //   chunkFilename: "[id].css"
+    // }))
+
+    // Fonts icons loader
+    /*.addLoader({
+      test: /\.font\.js/,
+      loader: ExtractTextPlugin.extract({
+        // fallback: 'style-loader',
+        use: [
+          'css-loader',
+          'webfonts-loader'
+        ],
+      }),
+    })*/
 
     .enableSourceMaps(!Encore.isProduction())
 

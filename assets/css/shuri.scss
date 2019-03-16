@@ -1,9 +1,36 @@
+// Shuri v0.1
+//
+// Shuri is a CSS theme for bootstrap
 
-// Shuri variables (before bootstrap to override default variables)
+
+
+// NOTE Variables & Mixins are located before bootstrap to override his default variables
+//
+
 @import 'shuri/variables';
+@import 'shuri/mixins';
+
+
 
 // Libraries
-@import 'shuri/bootstrap';  // node_module : Bootstrap Libraries
 
-// Shuri
-@import 'shuri/core';
+@import 'bootstrap/bootstrap';
+@import 'linearicons/linearicons';
+
+
+
+// Shuri itself
+
+@import 'shuri/root';
+@import 'shuri/logo';
+@import 'shuri/identity';
+@import 'shuri/lists';
+@import 'shuri/alert';
+@import 'shuri/buttons';
+@import 'shuri/navbar';
+@import 'shuri/jumbotron';
+
+// Shuri app components (core/header/footer/...)
+
+@import 'shuri/app-core';
+@import 'shuri/app-header';

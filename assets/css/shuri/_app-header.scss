@@ -1,0 +1,42 @@
+// App-Header
+//
+
+.app-core {
+  .app-header {
+    position: relative;
+    z-index: 5;
+    min-height: $theme-header-min-height;
+
+    // Bootstrap navbar (= menu) in ".app-header"
+    .navbar {
+      position: absolute;
+      z-index: 5;
+      left: 0;
+      width: 100%;
+      // transition: position 400ms ease;
+    }
+  }
+
+  // OOS : Out Of Screen
+  &--navbar-oos {
+    .app-header {
+      .navbar {
+        position: fixed;
+        top: -$theme-header-min-height;
+        opacity: 0;
+        transition: top 200ms ease, opacity 400ms ease;
+      }
+    }
+  }
+
+  &--navbar-fixed {
+    .app-header {
+      .navbar {
+        background-color: $navbar-bg;
+        background-color: transparentize($navbar-bg, .05);
+        top: 0;
+        opacity: 1;
+      }
+    }
+  }
+}

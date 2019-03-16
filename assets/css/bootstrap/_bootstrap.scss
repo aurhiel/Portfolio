@@ -1,7 +1,9 @@
+// Bootstrap Libs
+//
+// Retrieve Bootstrap CSS libraries to use
 
-@import "~bootstrap/scss/functions";
-@import "~bootstrap/scss/variables";
-@import "~bootstrap/scss/mixins";
+@import "required";
+
 @import "~bootstrap/scss/root";
 @import "~bootstrap/scss/reboot";
 @import "~bootstrap/scss/type";

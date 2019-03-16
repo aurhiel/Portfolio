@@ -1,0 +1,19 @@
+// Home page
+//
+
+
+// Libraries
+
+@import 'shuri/variables';
+@import 'shuri/mixins';
+@import 'bootstrap/required';  // node_module : Bootstrap required (Variables, Functions & Mixins)
+
+
+
+// Homepage
+
+@import 'home/jumbotron';
+
+// Theme app components (core/header/footer/...)
+
+@import 'home/app-header';

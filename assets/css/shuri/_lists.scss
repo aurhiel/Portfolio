@@ -1,0 +1,38 @@
+// Lists (styles for <ul>, <ol>, ...)
+//
+
+
+.list-contact-method {
+  // font-size: .825rem;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+
+  // List item
+  li {
+    display: inline-block;
+    margin: .6rem .8rem;
+  }
+
+  // Icons
+  .icon {
+    opacity: .5;
+  }
+
+  // Links
+  /*a {
+    text-decoration: none;
+    position: relative;
+
+    .icon {
+      transition: opacity 200ms ease, color 200ms ease;
+    }
+
+    &:hover {
+      .icon {
+        color: $primary;
+        opacity: 1;
+      }
+    }
+  }*/
+}
