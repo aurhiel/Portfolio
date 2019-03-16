@@ -1,0 +1,87 @@
+// Core
+//
+
+.app-core {
+  &--under-works {
+    background-color: $body-bg;
+    color: $body-color;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    min-height: 100vh;
+
+    ul {
+      // font-size: .825rem;
+      list-style: none;
+      margin: 0;
+      padding: 0;
+
+      li {
+        display: inline-block;
+        margin: .6rem .8rem;
+      }
+
+      a {
+        color: $body-color;
+        text-decoration: none;
+        position: relative;
+
+        &:after {
+          content: '';
+          background-color: $primary;
+          width: 0;
+          height: .08rem;
+          position: absolute;
+          bottom: -.4rem;
+          left: 2rem;
+          opacity: 0;
+          transition: opacity .25s ease-in-out, width .35s ease-in-out;
+        }
+
+        .icon {
+          transition: opacity 200ms ease, color 200ms ease;
+        }
+
+        &:hover {
+          &:after {
+            width: 50%;
+            opacity: 1;
+            transition: opacity .35s ease-in-out, width .25s ease-in-out;
+          }
+
+          .icon {
+            color: $primary;
+            opacity: 1;
+          }
+        }
+      }
+    }
+
+    // ALL icons on "Under works" page
+    .icon {
+      font-size: 1.4rem;
+      margin-right: .4rem;
+      opacity: .5;
+
+      &-map-marker {
+        margin-right: .2rem;
+      }
+    }
+
+    .jumbotron {
+      background: none;
+      text-align: center;
+      max-width: 51rem;
+      margin: 0 auto;
+    }
+
+    .alert {
+      max-width: 34rem;
+    }
+
+    .#{$theme-prefix}logo {
+      font-size: 5rem;
+      @include filter(drop-shadow(0 0 14px rgba(0, 0, 0, .2)));
+    }
+  }
+}

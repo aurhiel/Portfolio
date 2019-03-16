@@ -1,0 +1,23 @@
+// Linearicons
+//
+// Linearicons v0.1
+
+
+// Variables
+@import 'variables';
+
+// Font face
+@font-face {
+	font-family: $icons-font-family;
+	src:url('#{$icons-font-path}/#{$icons-font-family}.eot?');
+	src:url('#{$icons-font-path}/#{$icons-font-family}.eot?#iefix#{$icons-font-hash}') format('embedded-opentype'),
+		url('#{$icons-font-path}/#{$icons-font-family}.woff2?#{$icons-font-hash}') format('woff2'),
+		url('#{$icons-font-path}/#{$icons-font-family}.woff?#{$icons-font-hash}') format('woff'),
+		url('#{$icons-font-path}/#{$icons-font-family}.ttf?#{$icons-font-hash}') format('truetype'),
+		url('#{$icons-font-path}/#{$icons-font-family}.svg?#{$icons-font-hash}##{$icons-font-family}') format('svg');
+	font-weight: normal;
+	font-style: normal;
+}
+
+// Icons
+@import 'icons';

@@ -1,3 +1,5 @@
+{# default twig values #}
+{% if bg_animated is not defined %}{% set bg_animated = false %}{% endif %}
 <!DOCTYPE html>
 <html>
   <head>
@@ -27,13 +29,10 @@
       <meta name="robots" content="noindex, nofollow" />
     {% endif %}
 
-    {# Stylesheets #}
+    {# Base stylesheets #}
     <link rel="stylesheet" href="{{ asset('build/shuri.css') }}">
-    {% if stylesheets is defined %}
-      {% for stylesheet_url in stylesheets %}
-        <link rel="stylesheet" href="{{ asset('build/' ~ stylesheet_url) }}">
-      {% endfor %}
-    {% endif %}
+    <link rel="stylesheet" href="{{ asset('build/google-fonts.css') }}">
+
     {# Custom stylesheets from twig templates #}
     {% block stylesheets %}{% endblock %}
   </head>
@@ -66,14 +65,15 @@
     {# Custom javascripts from twig templates #}
     {% block javascripts_defines %}{% endblock %}
 
-    {# Javascripts #}
+    {# Base javascripts #}
+    {#
+    <!-- can't use symfony Encore in 0.24.0 now (downgraded to 0.20.0 see "package.json") -->
     <script src="{{ asset('build/runtime.js') }}"></script>
+    #}
+    <script src="{{ asset('build/manifest.js') }}"></script>
+    <script src="{{ asset('build/vendors.js') }}"></script>
     <script src="{{ asset('build/shuri.js') }}"></script>
-    {% if scripts is defined %}
-      {% for script_url in scripts %}
-        <script src="{{ asset('build/' ~ script_url) }}"></script>
-      {% endfor %}
-    {% endif %}
+
     {# Custom javascripts from twig templates #}
     {% block javascripts %}{% endblock %}
   </body>

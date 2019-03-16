@@ -1,6 +1,6 @@
 var Encore = require('@symfony/webpack-encore');
 var CopyWebpackPlugin = require("copy-webpack-plugin");
-// var GoogleFontsPlugin = require("google-fonts-webpack-plugin");
+var GoogleFontsPlugin = require("google-fonts-webpack-plugin");
 
 Encore
     // the project directory where compiled assets will be stored
@@ -13,18 +13,36 @@ Encore
     // will create public/build/main.js and public/build/main.css
     .addEntry('shuri', './assets/js/shuri.js')
 
+    // "Under works" page JS & CSS (with SASS)
+    .addEntry('under-works', './assets/js/under-works.js')
+
     // Themes
     // .addStyleEntry('kakeibo-dark', './assets/css/kakeibo-dark.scss')
 
     // Vendors
-    // .createSharedEntry('vendor', './webpack.shared_entry.js')
+    // .createSharedEntry('vendor', './entry.js')
+    // Vendors
+    .createSharedEntry('vendors', ['jquery', 'bootstrap'])
 
     // will require an extra script tag for runtime.js
     // but, you probably want this, unless you're building a single-page app
-    .enableSingleRuntimeChunk()
+    // .enableSingleRuntimeChunk()
 
     // Cleaning things
     .cleanupOutputBeforeBuild()
+
+    // Google Fonts
+    .addPlugin(new GoogleFontsPlugin({
+        fonts: [
+            // { family: "Quicksand", variants: [ "400", "500", "700" ] },
+            { family: "Raleway", variants: [
+              "300", "400", "500", "600", "700",
+              // "400italic", "500italic", "600italic", "700italic"
+            ] },
+        ],
+        "path": "fonts/google/",
+        "filename": "google-fonts.css"
+    }))
 
     // Copy static files like fonts, images, ...
     .addPlugin(new CopyWebpackPlugin([
@@ -40,7 +58,9 @@ Encore
     //.enableTypeScriptLoader()
 
     // uncomment if you use Sass/SCSS files
-    .enableSassLoader()
+    .enableSassLoader(function(sassOptions) {}, {
+      // resolveUrlLoader: false
+    })
 
     // uncomment for legacy applications that require $/jQuery as a global variable
     .autoProvidejQuery()

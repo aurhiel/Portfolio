@@ -1,0 +1,59 @@
+{% extends 'base.html.twig' %}
+
+{# Resets (header & footer) #}
+{% block header %}{% endblock %}
+{% block footer %}{% endblock %}
+
+{# Add Stylesheets #}
+{% block stylesheets %}
+  <link rel="stylesheet" href="{{ asset('build/under-works.css') }}">
+{% endblock %}
+
+{# Add Javascripts #}
+{% block javascripts %}
+  <script src="{{ asset('build/under-works.js') }}"></script>
+{% endblock %}
+
+{# Body part #}
+{% block body %}
+  <div class="container">
+    <div class="alert alert-warning mx-auto my-3 text-center">
+      <span class="icon icon-construction"></span> Site en cours de rénovation !
+    </div>
+  </div>
+
+  <div class="jumbotron jumbotron-fluid">
+    <div class="container">
+      {% include 'components/logo.html.twig' %}
+
+      <div class="my-4">
+        {% include 'components/identity.html.twig' %}
+      </div>
+
+      <hr class="my-4">
+
+      <ul class="list-contact-method my-4">
+        <li>
+          <a href="tel:{{ identity.phone }}">
+            <span class="icon icon-phone-handset"></span>
+            {{ identity.phone }}
+          </a>
+        </li>
+        <li>
+          <a href="mailto:{{ identity.mail }}">
+            <span class="icon icon-envelope"></span>
+            {{ identity.mail }}
+          </a>
+        </li>
+        <li>
+          <span class="icon icon-map-marker"></span>
+          {{ identity.location.city }}, {{ identity.location.department }}
+        </li>
+      </ul>
+
+      <a class="btn btn-primary" href="mailto:{{ identity.mail }}" role="button">
+        Contactez-moi
+      </a>
+    </div>
+  </div>
+{% endblock %}

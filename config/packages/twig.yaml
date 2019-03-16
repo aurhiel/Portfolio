@@ -2,3 +2,14 @@ twig:
     default_path: '%kernel.project_dir%/templates'
     debug: '%kernel.debug%'
     strict_variables: '%kernel.debug%'
+    globals:
+      # Personal informations for portfolio
+      identity:
+        first_name: 'Aurélien'
+        last_name:  'Litti'
+        status:     'Développeur Web - Front & Back-end'
+        mail:       'litti.aurelien@gmail.com'
+        phone:      '06 95 06 40 91'
+        location:
+          city: 'Aix-en-Provence'
+          department: 'Bouches-du-Rhône'
