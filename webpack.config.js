@@ -108,6 +108,9 @@ Encore
 
     // uncomment for legacy applications that require $/jQuery as a global variable
     .autoProvidejQuery()
+
+    // Post CSS to autoprefix CSS properties for example
+    .enablePostCssLoader()
 ;
 
 // Get webpack config

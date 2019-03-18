@@ -11,6 +11,7 @@
 
       .#{$theme-prefix}logo {
         font-size: 5rem;
+        filter: drop-shadow(0 0 14px rgba(0, 0, 0, .2));
       }
 
       .#{$theme-prefix}identity {
