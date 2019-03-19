@@ -1,0 +1,78 @@
+// Typography
+//
+
+
+// Basic heading titles
+
+.heading {
+  margin-top: 1.2em;
+  margin-bottom: 1em;
+  position: relative;
+  z-index: 0;
+
+  &.text-center {
+    &:before, &:after {
+      left: 50%;
+    }
+
+    &:before {
+      margin-left: var(--heading-text-drop-offset);
+    }
+
+    &:after {
+      margin-left: -2.2em;
+    }
+  }
+
+  &.text-right {
+    &:before, &:after {
+      left: auto;
+    }
+
+    &:before {
+      right: .2em;
+    }
+
+    &:after {
+      right: 0;
+    }
+  }
+
+  // Drop text
+  &:before {
+    content: attr(data-text);
+    font-size: 2em;
+    white-space: nowrap;
+    // set on top right of heading text
+    position: absolute;
+    top: -.8em;
+    left: .2em;
+    opacity: .04;
+  }
+
+  // Title underline
+  &:after {
+    content: '';
+    background-color: $primary;
+    box-shadow: .04em .04em .2em rgba(0, 0, 0, .14);
+    // using "em" because, title underline is relative to parent size
+    width: 4.4em;
+    height: .14em;
+    // set it to bottom
+    position: absolute;
+    z-index: -1;
+    bottom: -.06em;
+    left: 0;
+  }
+}
+
+
+// Prettier paragraph
+
+.text-contextual {
+  font-size: $contextual-font-size;
+  line-height: 2.4rem;
+  text-indent: 1.4rem;
+  text-align: justify;
+  margin-bottom: 1.6rem;
+}

@@ -1,0 +1,71 @@
+// Card
+// 
+
+.card-services {
+  display: flex;
+  flex-flow: row wrap;
+  border: $card-border-width solid $card-border-color;
+  @include border-radius($card-border-radius * 2);
+  column-count: 3;
+  orphans: 1;
+  widows: 1;
+  overflow: hidden;
+
+  .card-hidden-info {
+    background-color: $dark;
+    background-color: transparentize($dark, .05);
+    color: $white;
+    line-height: 1.6rem;
+    // Set position
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    // Hide it
+    pointer-events: none;
+    opacity: 0;
+    transition: opacity 300ms ease;
+  }
+
+  > .card {
+    background: none;
+    font-size: $contextual-font-size;
+    text-align: center;
+    display: inline-block;
+    width: 100%;
+    flex: 0 0 50%;
+    // border: $card-border-width solid $card-border-color;
+    @include border-radius(0);
+    position: relative;
+    z-index: 0;
+
+    &:hover {
+      .card-hidden-info {
+        opacity: 1;
+      }
+    }
+
+    .icon {
+      font-size: 2.6rem;
+      display: block;
+      margin-bottom: .8rem;
+      opacity: .6;
+    }
+
+    .card-body {
+      padding-top: 4.6rem;
+      padding-bottom: 4.4rem;
+    }
+  }
+}
+
+
+
+@include media-breakpoint-up(md) {
+  .card-services {
+    > .card {
+      flex: 0 0 33.334%;
+    }
+  }
+}

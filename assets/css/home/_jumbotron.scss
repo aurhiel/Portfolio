@@ -11,7 +11,7 @@
 
       .#{$theme-prefix}logo {
         font-size: 5rem;
-        filter: drop-shadow(0 0 14px rgba(0, 0, 0, .2));
+        filter: drop-shadow(0 0 .14em rgba(0, 0, 0, .2));
       }
 
       .#{$theme-prefix}identity {
@@ -23,11 +23,21 @@
       .col-logo {
         text-align: center;
       }
+
+      // Remove left & right margin coming from list items
+      .list-contact-method {
+        margin-right: -.8rem;
+        margin-left: -.8rem;
+      }
     }
   }
 }
 
 
+
+//
+// Responsive
+//
 
 @include media-breakpoint-up(sm) {
   .app-core {
@@ -69,7 +79,8 @@
   .app-core {
     &--home {
       .jumbotron {
-        padding-top: 4.8rem;
+        padding-top: 5rem;
+        padding-bottom: 5.4rem;
 
         .#{$theme-prefix}logo {
           font-size: 10rem;

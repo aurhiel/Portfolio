@@ -1,6 +1,10 @@
-var Encore = require('@symfony/webpack-encore');
-var CopyWebpackPlugin = require("copy-webpack-plugin");
-var GoogleFontsPlugin = require("google-fonts-webpack-plugin");
+var Encore              = require('@symfony/webpack-encore');
+var CopyWebpackPlugin   = require("copy-webpack-plugin");
+var GoogleFontsPlugin   = require("google-fonts-webpack-plugin");
+var FaviconsPlugin      = require("favicons-webpack-plugin");
+var FaviconsTwigPlugin  = require("create-favicons-partial-webpack");
+
+// var HTMLPlugin = require("html-webpack-plugin");
 // var ExtractTextPlugin = require("extract-text-webpack-plugin");
 /*
 // Try to copy SVG icons with webfonts-generator, results : crappy/ugly icons ...
@@ -32,22 +36,18 @@ Encore
     // the public path you will use in Symfony's asset() function - e.g. asset('build/some_file.js')
     .setManifestKeyPrefix('build/')
 
-    // will create public/build/main.js and public/build/main.css
+    // Vendors
+    // .createSharedEntry('vendors', './vendors.js') // new way to add vendor on Encore 0.24.0
+    .createSharedEntry('vendors', ['jquery', 'bootstrap'])
+
+    // Main theme (Bootstrap + Shuri)
     .addEntry('shuri', './assets/js/shuri.js')
 
-    // "Under works" page JS & CSS (with SASS)
+    // // Page : "Under works" page JS & CSS (with SASS)
     .addEntry('under-works', './assets/js/under-works.js')
 
-    //
+    // // Page : Home
     .addStyleEntry('home', './assets/css/home.scss')
-
-    // Themes
-    // .addStyleEntry('kakeibo-dark', './assets/css/kakeibo-dark.scss')
-
-    // Vendors
-    // .createSharedEntry('vendor', './entry.js')
-    // Vendors
-    .createSharedEntry('vendors', ['jquery', 'bootstrap'])
 
     // will require an extra script tag for runtime.js
     // but, you probably want this, unless you're building a single-page app
@@ -56,20 +56,68 @@ Encore
     // Cleaning things
     .cleanupOutputBeforeBuild()
 
+    // HTML templates builder
+    // .addPlugin(new HTMLPlugin({
+    //   title: 'Yay !',
+    //   inject: false,
+    //   minify: false
+    // }))
+
     // Google Fonts
     .addPlugin(new GoogleFontsPlugin({
-        fonts: [
-            // { family: "Quicksand", variants: [ "400", "500", "700" ] },
-            { family: "Raleway", variants: [
-              "300", "400", "500", "600", "700",
-              // "400italic", "500italic", "600italic", "700italic"
-            ] },
-        ],
-        "path": "fonts/google/",
-        "filename": "google-fonts.css"
+      fonts: [
+        // { family: "Quicksand", variants: [ "400", "500", "700" ] },
+        { family: "Raleway", variants: [
+          "300", "400", "500", "600", "700",
+          // "400italic", "500italic", "600italic", "700italic"
+        ] },
+      ],
+      "path": "fonts/google/",
+      "filename": "google-fonts.css"
     }))
 
-    // Copy static files like fonts, images, ...
+    // Favicons
+    .addPlugin(new FaviconsPlugin({
+      logo : './assets/images/favicon.png',
+      // favicon background color
+      background: '#2d2733',
+      // favicon app title
+      title: 'Litti Aurélien',
+      // The prefix for all image files (might be a folder or a name)
+      prefix: 'favicons/',
+      // inject the html into the html-webpack-plugin
+      inject: false,
+      // which icons should be generated
+      icons: {
+        android: true,
+        appleIcon: true,
+        appleStartup: true,
+        coast: false,
+        favicons: true,
+        firefox: true,
+        opengraph: false,
+        twitter: false,
+        yandex: false,
+        windows: false
+      }
+      /*
+      // Emit all stats of the generated icons
+      emitStats: false,
+      // The name of the json containing all favicon information
+      statsFilename: 'iconstats-[hash].json',
+      // Generate a cache file with control hashes and
+      // don't rebuild the favicons until those hashes change
+      persistentCache: true,
+      */
+    }))
+    // Build twig file for favicons HTML <link>
+    .addPlugin(new FaviconsTwigPlugin({
+      path: './templates/components/',
+      fileName: 'head-favicons.html.twig',
+      inputFilePath: './public/build/favicons/.cache',
+    }))
+
+    // Copy static files like fonts, images, ... (= if lazy or messy script/css)
     .addPlugin(new CopyWebpackPlugin([
       { from: './assets/static' }
     ]))

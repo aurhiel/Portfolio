@@ -50,6 +50,33 @@ $body-bg:                   $white;
 // $body-color:                $gray-900 !default;
 
 
+
+// Grid breakpoints
+//
+
+$grid-breakpoints: (
+  xs: 0,
+  sm: 576px,
+  md: 768px,
+  lg: 992px,
+  xl: 1200px,
+  xxl: 1400px
+);
+
+
+// Grid containers
+//
+
+$container-max-widths: (
+  sm: 540px,
+  md: 720px,
+  lg: 960px,
+  xl: 1140px,
+  xxl: 1340px
+);
+
+
+
 // Options
 //
 // Quickly modify global styling by enabling or disabling optional features.
@@ -80,13 +107,25 @@ $body-bg:                   $white;
 // $font-weight-lighter:         lighter !default;
 // $font-weight-light:           300 !default;
 // $font-weight-normal:          400 !default;
-$font-weight-bold:            600 !default;
+$font-weight-bold:            600;
 // $font-weight-bolder:          bolder !default;
 
 // stylelint-disable value-keyword-case
 $font-family-sans-serif:      'Raleway', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
 // $font-family-monospace:       SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
 // $font-family-base:            $font-family-sans-serif;
+
+// $headings-margin-bottom:      $spacer / 2 !default;
+// $headings-font-family:        null !default;
+$headings-font-weight:        700;
+// $headings-line-height:        1.2 !default;
+// $headings-color:              null !default;
+
+
+// Text contextual (prettier text)
+//
+
+$contextual-font-size: .875rem;
 
 
 

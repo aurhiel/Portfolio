@@ -12,8 +12,18 @@
 
 // Homepage
 
+@import 'home/type';
+@import 'home/card';
 @import 'home/jumbotron';
 
 // Theme app components (core/header/footer/...)
 
 @import 'home/app-header';
+
+
+.block-services {
+  .text-contextual {
+    max-width: 45rem;
+    padding-right: 2.75rem;
+  }
+}

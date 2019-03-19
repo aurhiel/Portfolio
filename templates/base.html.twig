@@ -1,7 +1,7 @@
 {# default twig values #}
 {% if bg_animated is not defined %}{% set bg_animated = false %}{% endif %}
 <!DOCTYPE html>
-<html>
+<html lang="fr">
   <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
@@ -14,6 +14,9 @@
       {%- endif -%}Litti Aurélien | Développeur Web - Indépendant - Fullstack | Aix-en-Provence, Marseille, Toulon
     {%- endblock -%}
     </title>
+
+    {# meta.favicons #}
+    {% include 'components/head-favicons.html.twig' %}
 
     {# meta.desc #}
     {%- block meta_desc -%}
@@ -32,7 +35,6 @@
     {# Base stylesheets #}
     <link rel="stylesheet" href="{{ asset('build/shuri.css') }}">
     <link rel="stylesheet" href="{{ asset('build/google-fonts.css') }}">
-
     {# Custom stylesheets from twig templates #}
     {% block stylesheets %}{% endblock %}
   </head>
@@ -73,7 +75,6 @@
     <script src="{{ asset('build/manifest.js') }}"></script>
     <script src="{{ asset('build/vendors.js') }}"></script>
     <script src="{{ asset('build/shuri.js') }}"></script>
-
     {# Custom javascripts from twig templates #}
     {% block javascripts %}{% endblock %}
   </body>
