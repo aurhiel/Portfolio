@@ -93,6 +93,25 @@ var shuri = {
     }).trigger('scroll');
 
 
+    // // Scroll to event
+    self.$body.on('click', '.scroll-to', function(e) {
+      // get element ID where to scroll from link #href
+      var anchor_id = $(this).attr('href');
+      var $elem     = self.$body.find(anchor_id);
+
+      if($elem.length > 0) {
+        var offset = self.$header_navbar.outerHeight() + parseInt($elem.css('marginTop'));
+        self.$html_body.animate({
+          scrollTop: $elem.offset().top - offset
+        }, 300);
+      }
+
+      // disable anchor in url
+      e.preventDefault();
+      return false;
+    });
+
+
 
     //
     // Doc ready
