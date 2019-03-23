@@ -1,17 +1,19 @@
 // Contextual backgrounds (based on Bootstrap mixin)
+//
 
-// TODO : Finish it !
-
+// Opacified background
 
 @mixin bg-variant-transparent($parent, $color, $amount) {
-  #{$parent} {
+  #{$parent}-#{$amount} {
     background-color: $color !important;
-    background-color: transparentize($color, $amount) !important;
+    background-color: transparentize($color, 1 - ($amount / 100)) !important;
   }
-  a#{$parent},
-  button#{$parent} {
+
+  a#{$parent}-#{$amount},
+  button#{$parent}-#{$amount} {
     @include hover-focus {
       background-color: darken($color, 10%) !important;
+      background-color: transparentize(darken($color, 10%), 1 - ($amount / 100)) !important;
     }
   }
 }

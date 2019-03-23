@@ -1,0 +1,13 @@
+
+// Generate opacified (.75 & .95) background according to theme colors
+
+
+// @each $color, $value in $theme-colors {
+//   @include bg-variant-transparent(".bg-#{$color}", $value, 75);
+//   @include bg-variant-transparent(".bg-#{$color}", $value, 95);
+// }
+
+
+.bg-none {
+  background: none;
+} 
