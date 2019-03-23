@@ -3,7 +3,6 @@
 // Shuri is a CSS theme for bootstrap
 
 
-
 // NOTE Variables & Mixins are located before bootstrap to override his default variables
 //
 
@@ -26,6 +25,7 @@
 @import 'shuri/identity';
 @import 'shuri/type';
 @import 'shuri/lists';
+@import 'shuri/card';
 @import 'shuri/alert';
 @import 'shuri/buttons';
 @import 'shuri/navbar';
@@ -36,3 +36,4 @@
 
 @import 'shuri/app-core';
 @import 'shuri/app-header';
+@import 'shuri/app-section';

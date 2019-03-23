@@ -20,15 +20,17 @@
   {# Homepage's jumbotron #}
   {% include 'home/_landing.html.twig' %}
 
-  {# Whoami block #}
-  {% include 'home/_whoami.html.twig' %}
+  <div class="app-main-content">
+    {# Whoami block #}
+    {% include 'home/_whoami.html.twig' %}
 
-  {# Projects block #}
-  {% include 'home/_projects.html.twig' %}
+    {# Projects block #}
+    {% include 'home/_projects.html.twig' %}
 
-  {# Testimonials block #}
-  {% include 'home/_testimonials.html.twig' %}
+    {# Testimonials block
+    {% include 'home/_testimonials.html.twig' %} #}
 
-  {# Logs (~blog) block #}
-  {% include 'home/_logs.html.twig' %}
+    {# Logs (~blog) block
+    {% include 'home/_logs.html.twig' %} #}
+  </div>
 {% endblock %}

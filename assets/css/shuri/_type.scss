@@ -38,16 +38,18 @@
     }
   }
 
-  // Drop text
+  // Title drop text
   &:before {
     content: attr(data-text);
     font-size: 2em;
     white-space: nowrap;
     // set on top right of heading text
     position: absolute;
+    z-index: -1;
     top: -.8em;
     left: .2em;
     opacity: .04;
+    user-select: none;
   }
 
   // Title underline

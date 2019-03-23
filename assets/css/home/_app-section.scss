@@ -1,0 +1,74 @@
+
+.app-section--whoami {
+  .card-grid {
+    overflow: hidden;
+  }
+
+  .card-hidden-info {
+    background-color: $dark;
+    background-color: transparentize($dark, .05);
+    color: $white;
+    // Set position
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    // Hide it
+    pointer-events: none;
+    opacity: 0;
+    transition: opacity $theme-transition-duration ease;
+
+    // Need an animation on opacity to not seeing text on hover
+    ._text {
+      font-weight: bold;
+      line-height: 1.5rem;
+      transform: scale(1.2);
+      opacity: 0;
+      transition:
+        transform $theme-transition-duration ease,
+        opacity $theme-transition-duration ease;
+    }
+  }
+
+  .card {
+    background: none;
+    font-size: $contextual-font-size;
+    text-align: center;
+    position: relative;
+    z-index: 0;
+
+    &:hover {
+      .card-hidden-info {
+        transition: opacity $theme-transition-duration ease;
+        opacity: 1;
+      }
+
+      // Add a delay value of ($theme-transition-duration / 2)
+      //   in order to first animate opacity globally and then animate on _text
+      ._text {
+        transform: scale(1);
+        opacity: 1;
+        transition:
+          transform $theme-transition-duration ease $theme-transition-duration / 2,
+          opacity 300ms ease $theme-transition-duration / 2;
+      }
+    }
+
+    .icon {
+      font-size: 2.6rem;
+      display: block;
+      margin-bottom: .8rem;
+      opacity: .6;
+    }
+  }
+}
+
+
+@include media-breakpoint-up(xl) {
+  .app-section--whoami {
+    .text-contextual {
+      padding-right: 2.75rem;
+    }
+  }
+}

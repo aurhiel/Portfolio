@@ -16,7 +16,7 @@ $white:    #fff;
 // $gray-500: #adb5bd;
 // $gray-600: #6c757d;
 $gray-700: #38353c;
-$gray-800: #2d2733;
+$gray-800: #27252a; // #2d2733;
 $gray-900: #29262C;
 // $black:    #211f23;
 
@@ -189,9 +189,13 @@ $theme-prefix: 'shuri-';
 $theme-root-build: '/build';
 $theme-root-fonts: '#{$theme-root-build}/fonts';
 $theme-root-images: '#{$theme-root-build}/images';
+$theme-bg-pattern: '#{$theme-root-images}/patterns/seigaiha.png';
 
 // Header
 $theme-header-min-height: 4.6rem;
+
+// Animations
+$theme-transition-duration: 300ms;
 
 
 

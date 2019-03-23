@@ -42,8 +42,25 @@ var shuri = {
 
     if ( direction == scroll.SCROLL_DOWN && (scroll.position > top_when_fixed) )
       this.$body.addClass(this.fixed_navbar_class);
-    else if ( direction == scroll.SCROLL_UP && (scroll.position) <= this.$header_navbar.scrollTop() )
+    else if ( direction == scroll.SCROLL_UP && (scroll.position) <= 0 )
       this.$body.removeClass(this.fixed_navbar_class + ' ' + this.oos_navbar_class);
+  },
+
+  $scroll_elems : {},
+  scroll_hide_class : 'scroll-hide',
+  scroll_anim__hide_elems : function() {
+    this.$scroll_elems.addClass(this.scroll_hide_class);
+  },
+  scroll_anim__display_elems : function(scroll) {
+    var self = this;
+
+    self.$scroll_elems.each(function() {
+      var $elem = $(this);
+      var position_show_elem = $elem.offset().top - self.$window.height() - 100; // 100px in order to see animation
+
+      if( scroll.position > position_show_elem )
+        $elem.removeClass(self.scroll_hide_class);
+    });
   },
 
 
@@ -53,11 +70,15 @@ var shuri = {
     var self = this;
 
     // Set nodes
-    self.$body = $('.app-core');
-    self.$window = $(window);
+    self.$body      = $('.app-core');
+    self.$html_body = $('html, body')
+    self.$window    = $(window);
     // // Set header nodes
     self.$header        = self.$body.find('.app-header');
     self.$header_navbar = self.$header.find('.navbar');
+    // // Set scroll elems to animate
+    self.$scroll_elems  = self.$body.find('.scrolling-machine');
+    self.scroll_anim__hide_elems(scroll);
 
     // Set loading
     self.loading();
@@ -75,18 +96,24 @@ var shuri = {
       position    : 0,
       direction   : function() { return (this.position > this.previousPos) ? this.SCROLL_DOWN : this.SCROLL_UP; }
     };
+
+
     // // Scrolling event
     self.$window.on('scroll', function(e) {
       // Set scroll position
       scroll.position   = self.$window.scrollTop();
 
       // On home page change scroll offset to display menu AFTER the main jumbotron
-      var offset = self.$header_navbar.outerHeight(); // Minimal offset of 5px in order to see CSS animation
-      if( self.$body.hasClass('app-core--home') )
-        offset = self.$body.find('.jumbotron').first().outerHeight() - self.$header_navbar.outerHeight();
+      // var offset = self.$header_navbar.outerHeight(); // Minimal offset of 5px in order to see CSS animation
+      // if( self.$body.hasClass('app-core--home') )
+      //   offset = self.$body.find('.jumbotron').first().outerHeight() - self.$header_navbar.outerHeight();
+      var offset = 50; // used to see navbar animation
 
       // Fix navbar ?
       self.toggle_fixed_navbar(scroll, offset);
+
+      // Display elements ?
+      self.scroll_anim__display_elems(scroll);
 
       // Set previous scroll position
       scroll.previousPos = scroll.position;

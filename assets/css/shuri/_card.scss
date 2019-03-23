@@ -1,0 +1,35 @@
+// Card
+//
+
+.card-grid {
+  display: flex;
+  flex-flow: row wrap;
+  border: $card-border-width solid $card-border-color;
+  @include border-radius($card-border-radius * 2);
+  column-count: 3;
+  orphans: 1;
+  widows: 1;
+
+  > .card {
+    display: inline-block;
+    width: 100%;
+    flex: 0 0 50%;
+    // border: $card-border-width solid $card-border-color;
+    @include border-radius(0);
+
+    .card-body {
+      padding-top: 4.6rem;
+      padding-bottom: 4.4rem;
+    }
+  }
+}
+
+
+
+@include media-breakpoint-up(md) {
+  .card-grid {
+    > .card {
+      flex: 0 0 33.33334%;
+    }
+  }
+}

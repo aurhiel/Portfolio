@@ -3,22 +3,51 @@
 .app-core {
   min-width: 320px;
   overflow-x: hidden;
+}
 
-  // Children are above the ".app-bg"
-  .app-header, .app-body, .app-footer {
-    position: relative;
-    z-index: 1;
+
+// All of these above the ".app-bg"
+
+.app-body, .app-footer {
+  position: relative;
+  z-index: 5;
+}
+
+
+// Application background
+
+.app-bg {
+  background: $body-bg url('#{$theme-bg-pattern}') repeat;
+  background-attachment: fixed;
+  position: fixed;
+  z-index: 0;
+  top: 0;
+  left: 0;
+  height: 100%;
+  width: 100%;
+}
+
+
+// Maximized main content with border radius
+
+@include media-breakpoint-up(lg) {
+  .app-main-content {
+    max-width: map-get($grid-breakpoints, lg);
+    margin-left: auto;
+    margin-right: auto;
+    border-radius: .4rem;
+    overflow: hidden;
   }
+}
 
-  .app-bg {
-    // background-color: $body-bg;
-    background-color: red; // TODO Remove later (debug)
-    // background-image: url('');
-    position: fixed;
-    z-index: 0;
-    top: 0;
-    left: 0;
-    height: 100%;
-    width: 100%;
+@include media-breakpoint-up(xl) {
+  .app-main-content {
+    max-width: map-get($grid-breakpoints, xl);
+  }
+}
+
+@include media-breakpoint-up(xxl) {
+  .app-main-content {
+    max-width: map-get($grid-breakpoints, xxl);
   }
 }
