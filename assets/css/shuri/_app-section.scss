@@ -12,14 +12,19 @@
       z-index: 5; // behind the header
       opacity: 1;
       pointer-events: auto;
-    }
 
-    .contact-checkbox-for-quote {
-      display: none
-    }
+      .contact-checkbox-for-quote {
+        display: none
+      }
 
-    .contact-inputs-quote {
-      display: block;
+      .contact-inputs-quote {
+        display: block;
+        padding-top: 0;
+      }
+
+      .btn-toggle-form-contact {
+        display: none;
+      }
     }
   }
 
