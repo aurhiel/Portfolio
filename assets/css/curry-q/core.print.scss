@@ -1,0 +1,16 @@
+// "main": "../curriculum-vitae.less"
+
+// Remove headers with URL & page num & co
+@page {
+  margin: 0;
+}
+
+body {
+  font-size: 12px;
+  margin: 1.6cm 1cm;
+}
+
+* {
+  // Buggy shadows > ERASE AAAALLL SHADOWS !
+  box-shadow: none !important;
+}

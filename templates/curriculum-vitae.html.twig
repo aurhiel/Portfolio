@@ -1,0 +1,432 @@
+<!DOCTYPE html>
+<html lang="fr">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta content="width=device-width, initial-scale=1" name="viewport" />
+    <title>Curriculum vitae - Litti Aurélien | Développeur Web - Indépendant - Fullstack</title>
+
+    <!-- Stylesheets -->
+    <!-- <link href="css/bootstrap/bootstrap.css" rel="stylesheet"> -->
+    <link rel="stylesheet" href="{{ asset('build/google-fonts.css') }}">
+    <link rel="stylesheet" href="{{ asset('build/curry-q.css') }}">
+  </head>
+  <body>
+    <div class="curry-q-vitae">
+      <header class="cqv-block block--transparent block--header">
+        <h1 class="_name">
+          Litti Aurélien
+          <small>Développeur Web - Fullstack</small>
+        </h1>
+
+        <div class="_infos">
+          <span class="info-item info--phone">
+            <span class="_icon">
+              <span class="icon-mobile"></span>
+            </span>
+            <span class="_text">{{ identity.phone }}</span>
+          </span>
+
+          <span class="info-item info--mail">
+            <span class="_icon">
+              <span class="icon-mail"></span>
+            </span>
+            <span class="_text">{{ identity.mail }}</span>
+          </span>
+
+          <span class="info-item info--address">
+            <span class="_icon">
+              <span class="icon-marker"></span>
+            </span>
+            <span class="_text">{{ identity.location.city }}, {{ identity.location.department }}</span>
+          </span>
+        </div>
+      </header>
+
+      <div class="cqv-block block--infos-user">
+        <span class="info-item item--left">
+          <span class="_icon">
+            <span class="icon-mobile"></span>
+          </span>
+          <span class="_text">{{ identity.phone }}</span>
+        </span>
+
+        <span class="info-item item--right">
+          <span class="_icon">
+            <span class="icon-mail"></span>
+          </span>
+          <span class="_text">{{ identity.mail }}</span>
+        </span>
+      </div>
+
+      <div class="cqv-block block--default block--avatar">
+        <div class="_avatar">
+          <img src="{{ asset('build/images/photo.png') }}" alt="Photo de Litti Aurélien" />
+        </div>
+      </div>
+
+      <div class="cqv-block block--default block--main">
+          <div class="main-col main-col--left">
+            <div class="cqv-frame frame--formations">
+              <h2 class="_title">Formations</h2>
+              <span class="_icon"><span class="icon-graduation-cap"></span></span>
+              <div class="_content">
+                <div class="_subtitle">2011 - 2012</div>
+                <div class="_text">
+                  Licence Pro<br>
+                  Multimédia Internet et Webmaster
+                </div>
+              </div>
+
+              <div class="_content">
+                <div class="_subtitle">2009 - 2011</div>
+                <div class="_text">
+                  BTS Informatique &amp; Réseau (IRIS)
+                </div>
+              </div>
+
+              <div class="_content">
+                <div class="_subtitle">2007 - 2009</div>
+                <div class="_text">
+                  Bac STI Génie Elecronique
+                </div>
+              </div>
+            </div>
+
+            <div class="cqv-frame frame--skills">
+              <h2 class="_title">Compétences</h2>
+              <span class="_icon"><span class="icon-magic"></span></span>
+
+              <div class="_content skills-scale--techs">
+                <div class="_subtitle">Techs. &amp; framework</div>
+                <div class="_text">
+                  <span class="skills-scale">
+                    <span class="_rating">
+                      <span class="_rate"></span>
+                      <span class="_rate"></span>
+                      <span class="_rate"></span>
+                      <span class="_rate rate--empty"></span>
+                      <span class="_rate rate--empty"></span>
+                    </span>
+                    <span class="_label">Git</span>
+                  </span>
+                    <span class="skills-scale">
+                      <span class="_rating">
+                        <span class="_rate"></span>
+                        <span class="_rate"></span>
+                        <span class="_rate"></span>
+                        <span class="_rate"></span>
+                        <span class="_rate rate--empty"></span>
+                      </span>
+                      <span class="_label">Docker</span>
+                    </span>
+                    <span class="skills-scale">
+                      <span class="_rating">
+                        <span class="_rate"></span>
+                        <span class="_rate"></span>
+                        <span class="_rate"></span>
+                        <span class="_rate"></span>
+                        <span class="_rate rate--empty"></span>
+                      </span>
+                      <span class="_label">Prestashop</span>
+                    </span>
+                    <span class="skills-scale">
+                      <span class="_rating">
+                        <span class="_rate"></span>
+                        <span class="_rate"></span>
+                        <span class="_rate"></span>
+                        <span class="_rate"></span>
+                        <span class="_rate rate--empty"></span>
+                      </span>
+                      <span class="_label">Wordpress</span>
+                    </span>
+                    <span class="skills-scale">
+                      <span class="_rating">
+                        <span class="_rate"></span>
+                        <span class="_rate"></span>
+                        <span class="_rate"></span>
+                        <span class="_rate rate--empty"></span>
+                        <span class="_rate rate--empty"></span>
+                      </span>
+                      <span class="_label">Symfony</span>
+                    </span>
+                </div>
+              </div>
+
+              <div class="_content skills-scale--software">
+                <div class="_subtitle">Logiciels</div>
+                <div class="_text">
+                  <span class="skills-scale">
+                    <span class="_rating">
+                      <span class="_rate"></span>
+                      <span class="_rate"></span>
+                      <span class="_rate"></span>
+                      <span class="_rate"></span>
+                      <span class="_rate rate--empty"></span>
+                    </span>
+                    <span class="_label">GitKraken</span>
+                  </span>
+                  <span class="skills-scale">
+                    <span class="_rating">
+                      <span class="_rate"></span>
+                      <span class="_rate"></span>
+                      <span class="_rate"></span>
+                      <span class="_rate"></span>
+                      <span class="_rate rate--empty"></span>
+                    </span>
+                    <span class="_label">PHPStorm / Atom</span>
+                  </span>
+                  <span class="skills-scale">
+                    <span class="_rating">
+                      <span class="_rate"></span>
+                      <span class="_rate"></span>
+                      <span class="_rate"></span>
+                      <span class="_rate"></span>
+                      <span class="_rate rate--empty"></span>
+                    </span>
+                    <span class="_label">Adobe Photoshop</span>
+                  </span>
+                  <span class="skills-scale">
+                    <span class="_rating">
+                      <span class="_rate"></span>
+                      <span class="_rate"></span>
+                      <span class="_rate"></span>
+                      <span class="_rate"></span>
+                      <span class="_rate"></span>
+                    </span>
+                    <span class="_label">Libre/Open Office</span>
+                  </span>
+                </div>
+              </div>
+
+              <div class="_content skills-scale--dev">
+                <div class="_subtitle">Langages <small>Programmation</small></div>
+                <div class="_text">
+                  <span class="skills-scale">
+                    <span class="_rating">
+                      <span class="_rate"></span>
+                      <span class="_rate"></span>
+                      <span class="_rate"></span>
+                      <span class="_rate"></span>
+                      <span class="_rate rate--empty"></span>
+                    </span>
+                    <span class="_label">PHP</span>
+                  </span>
+                  <span class="skills-scale">
+                    <span class="_rating">
+                      <span class="_rate"></span>
+                      <span class="_rate"></span>
+                      <span class="_rate"></span>
+                      <span class="_rate"></span>
+                      <span class="_rate"></span>
+                    </span>
+                    <span class="_label">HTML / CSS</span>
+                  </span>
+                  <span class="skills-scale">
+                    <span class="_rating">
+                      <span class="_rate"></span>
+                      <span class="_rate"></span>
+                      <span class="_rate"></span>
+                      <span class="_rate"></span>
+                      <span class="_rate"></span>
+                    </span>
+                    <span class="_label">SASS &amp; Less</span>
+                  </span>
+                  <span class="skills-scale">
+                    <span class="_rating">
+                      <span class="_rate"></span>
+                      <span class="_rate"></span>
+                      <span class="_rate"></span>
+                      <span class="_rate"></span>
+                      <span class="_rate"></span>
+                    </span>
+                    <span class="_label">Javascript</span>
+                  </span>
+                </div>
+              </div>
+
+              <div class="_content skills-scale--speak">
+                <div class="_subtitle">Langages <small>Parlé/écrit</small></div>
+                <div class="_text">
+                  <span class="skills-scale">
+                    <span class="_rating">
+                      <span class="_rate"></span>
+                      <span class="_rate"></span>
+                      <span class="_rate"></span>
+                      <span class="_rate"></span>
+                      <span class="_rate rate--empty"></span>
+                    </span>
+                    <span class="_label">Anglais</span>
+                  </span>
+                  <span class="skills-scale">
+                    <span class="_rating">
+                      <span class="_rate"></span>
+                      <span class="_rate"></span>
+                      <span class="_rate rate--empty"></span>
+                      <span class="_rate rate--empty"></span>
+                      <span class="_rate rate--empty"></span>
+                    </span>
+                    <span class="_label">Italien</span>
+                  </span>
+                </div>
+              </div>
+            </div>
+          </div>
+
+
+          <div class="main-col main-col--right">
+            <div class="cqv-frame frame--parcours">
+              <h2 class="_title">Parcours</h2>
+              <span class="_icon"><span class="icon-briefcase"></span></span>
+
+              <div class="_content">
+                <div class="_subtitle">Août 2012 - Janvier 2017</div>
+                <div class="_text">
+                  Développeur Web / Intégrateur - <span style="color: yellowgreen;">e-frogg</span><br>
+                  <small>
+                    Intégration &amp; Développement sur divers CMS &amp; framework (framework interne, Prestashop, Wordpress, Drupal, ...)
+                  </small>
+                </div>
+              </div>
+
+              <div class="_content">
+                <div class="_subtitle">Avril - Juin 2012</div>
+                <div class="_text">
+                  Stage - Live<span style="color:red;">2</span>Times<br>
+                  <small>Maintenance et développement de sites</small>
+                </div>
+              </div>
+
+              <div class="_content">
+                <div class="_subtitle">Mai - Juin 2010</div>
+                <div class="_text">
+                  Stage - Pacaéo Informatique<br>
+                  <small>Logiciel récupération photo, C#</small>
+                </div>
+              </div>
+            </div>
+
+            <div class="cqv-frame frame--experiences">
+              <h2 class="_title">Expériences</h2>
+              <span class="_icon"><span class="icon-paper-plane"></span></span>
+
+              <div class="_content">
+                <div class="_subtitle">Février - Avril 2012</div>
+                <div class="_text">
+                  Projet Tuteuré<br>
+                  <small>Site internet sur les circuits courts</small>
+                </div>
+              </div>
+
+              <div class="_content">
+                <div class="_subtitle">Janvier - Mars 2012</div>
+                <div class="_text">
+                  Projet Référencement<br>
+                  <small>Site internet : EverydayElectro.com</small>
+                </div>
+              </div>
+
+              <div class="_content">
+                <div class="_subtitle">Novembre - Janvier 2012</div>
+                <div class="_text">
+                  Projet Multimédia<br>
+                  <small>Aider Scrat à garder son gland</small>
+                </div>
+              </div>
+            </div>
+          </div>
+      </div>
+
+      <div class="cqv-block block--transparent block--spare-time">
+        <div class="_title">Loisirs</div>
+        <div class="list-rounded-icons">
+          <div class="ri-item item--music">
+            <div class="_icon"><span class="icon-music"></span></div>
+            <div class="_label">Musique</div>
+          </div>
+
+          <div class="ri-item item--cinema">
+            <div class="_icon"><span class="icon-cinema"></span></div>
+            <div class="_label">Cinéma</div>
+          </div>
+
+          <div class="ri-item item--gaming">
+            <div class="_icon"><span class="icon-gamepad"></span></div>
+            <div class="_label">Jeux-vidéo</div>
+          </div>
+
+          <div class="ri-item item--moto">
+            <div class="_icon"><span class="icon-motorcycle"></span></div>
+            <div class="_label">Moto</div>
+          </div>
+        </div>
+
+        <!--
+        <div class="_patchwork patchwork--music pappug-flipper" style="display: none">
+          <div class="patchwork-item pappug-item">
+            <img src="https://i1.sndcdn.com/artworks-000111778084-ol8w9r-t200x200.jpg"
+              alt="Cover Puppet &amp; The Eden Project - The Fire" />
+          </div>
+          <div class="patchwork-item pappug-item">
+            <img src="https://i1.sndcdn.com/artworks-000083359081-865sev-t200x200.jpg"
+              alt="Cover Ephixa - Catfish" />
+          </div>
+          <div class="patchwork-item pappug-item">
+            <img src="https://i1.sndcdn.com/artworks-000124691338-tngkln-t200x200.jpg"
+              alt="Cover Ephixa - Warcraft" />
+          </div>
+          <div class="patchwork-item pappug-item">
+            <img src="https://i1.sndcdn.com/artworks-000081977308-dfz2p5-t200x200.jpg"
+              alt="Cover Borealis - Imago VX" />
+          </div>
+          <div class="patchwork-item pappug-item">
+            <img src="https://i1.sndcdn.com/artworks-000076173814-e8bls0-t200x200.jpg"
+              alt="Cover Blue in Grey" />
+          </div>
+          <div class="patchwork-item pappug-item">
+            <img src="https://i1.sndcdn.com/artworks-000077102373-l6czgk-t200x200.jpg"
+              alt="Cover Jacoo - Andromeda" />
+          </div>
+          <div class="patchwork-item pappug-item">
+            <img src="https://i1.sndcdn.com/artworks-000076890315-t4yc1g-t200x200.jpg"
+              alt="Cover error23 - Digital Cosmos (Original Mix)" />
+          </div>
+          <div class="patchwork-item pappug-item">
+            <img src="https://i1.sndcdn.com/artworks-000073335116-x1epug-t200x200.jpg"
+              alt="Cover BLCKSPNKRS - Mantra (Original Mix)" />
+          </div>
+          <div class="patchwork-item pappug-item">
+            <img src="https://i1.sndcdn.com/artworks-000005783186-z9knr1-t200x200.jpg"
+              alt="Cover Emil Berliner - Flummifreuden" />
+          </div>
+          <div class="patchwork-item pappug-item">
+            <img src="https://i1.sndcdn.com/artworks-000053809503-n0zvms-t200x200.jpg"
+              alt="Cover Marek Hemmann - Topper" />
+          </div>
+          <div class="patchwork-item pappug-item">
+            <img src="https://i1.sndcdn.com/artworks-000067328224-xn1kvh-t200x200.jpg"
+              alt="Cover Space Motion by Elleven" />
+          </div>
+          <div class="patchwork-item pappug-item">
+            <img src="https://i1.sndcdn.com/artworks-000049830635-wxr61n-t200x200.jpg"
+              alt="Cover Maribou State - Tongue (Feat. Holly Walker)" />
+          </div>
+        </div>
+        -->
+        <script>
+          // var $patchworks = $('._patchwork');
+          // var $patchworks_music = $patchworks.filter('.patchwork--music');
+          //
+          // for(i = 0; i < 4; i++) {
+          //   var $clones = $patchworks_music.find('.patchwork-item').clone();
+          //   $patchworks_music.append($clones);
+          // }
+        </script>
+      </div>
+
+      <footer class="cqv-block block--default block--footer">
+          Fait avec <span class="made-with-love icon-heart"></span> par <a href="{{ path('home') }}">Litti Aurélien</a>
+      </footer>
+    </div>
+  </body>
+</html>

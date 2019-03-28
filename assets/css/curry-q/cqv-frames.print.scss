@@ -1,0 +1,19 @@
+// "main": "../curriculum-vitae.less"
+
+.cqv-frame {
+  margin: 0 auto;
+
+  >._title {
+    margin-bottom: .4em;
+  }
+
+  &.frame--formations {
+    margin-bottom: 5.9em;
+  }
+
+  &.frame--skills {
+    >._content {
+      width: 49%;
+    }
+  }
+}

@@ -1,0 +1,24 @@
+// "main": "../curriculum-vitae.less"
+
+.cqv-block {
+  padding: 2em;
+
+  &.block--main {
+    display: table;
+    table-layout: fixed;
+    width: 100%;
+
+    .main-col {
+      display: table-cell;
+      vertical-align: top;
+
+      &--left {
+        padding-right: 1em;
+      }
+
+      &--right {
+        padding-left: 1em;
+      }
+    }
+  }
+}

@@ -1,0 +1,74 @@
+// "main": "../curriculum-vitae.less"
+
+.cqv-block {
+  padding: 0;
+
+  &.block--transparent {
+    background: none;
+    color: #444;
+  }
+
+  &.block--header {
+    text-align: left;
+    display: inline-block;
+    vertical-align: middle;
+    width: 75%;
+    padding: 1em;
+    margin-bottom: 3em;
+
+    > ._name {
+      display: block;
+      color: #222;
+      border-bottom: .05em solid #F6F6F6;
+      margin-bottom: .4em;
+      padding-bottom: .4em;
+    }
+
+    > ._infos {
+      display: block;
+
+      .info-item {
+        + .info-item {
+          margin-left: 1em;
+        }
+      }
+    }
+  }
+
+  &.block--avatar {
+    display: inline-block;
+    vertical-align: middle;
+    width: 24%;
+
+    > ._avatar {
+      margin-top: 0;
+    }
+  }
+
+  &.block--main {
+    .main-col {
+      display: inline-block;
+      vertical-align: top;
+
+      &--left {
+        width: 52%;
+      }
+
+      &--right {
+        width: 47%;
+      }
+    }
+  }
+
+  &.block--spare-time {
+    margin-top: 4em;
+
+    > ._title {
+      color: darken($text-color, 10%);
+    }
+  }
+
+  &.block--infos-user, &.block--footer {
+    display: none;
+  }
+}

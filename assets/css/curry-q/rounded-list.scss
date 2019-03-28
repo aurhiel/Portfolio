@@ -1,0 +1,74 @@
+// "main": "../curriculum-vitae.less"
+
+.list-rounded-icons {
+  .ri-item {
+    display: inline-block;
+    vertical-align: middle;
+    margin: 1em;
+  }
+}
+
+.ri-item {
+  > ._icon, > ._label {
+    display: inline-block;
+    vertical-align: middle;
+  }
+
+  > ._icon {
+    background-color: #222;
+    font-size: 1em;
+    display: inline-block;
+    border-radius: 50%;
+    padding: .4em;
+    text-shadow: .15em .15em 0 rgba(0, 0, 0, .1);
+  }
+
+  > ._label {
+    font-size: 1.2em;
+    margin-left: .4em;
+  }
+
+  &.item--music {
+    > ._icon {
+      /* Permalink - use to edit and share this gradient: http://colorzilla.com/gradient-editor/#e67e22+0,d35400+100 */
+      background: #e67e22; /* Old browsers */
+      background: -moz-linear-gradient(-45deg,  #e67e22 0%, #d35400 100%); /* FF3.6-15 */
+      background: -webkit-linear-gradient(-45deg,  #e67e22 0%,#d35400 100%); /* Chrome10-25,Safari5.1-6 */
+      background: linear-gradient(135deg,  #e67e22 0%,#d35400 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+      filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#e67e22', endColorstr='#d35400',GradientType=1 ); /* IE6-9 fallback on horizontal gradient */
+    }
+  }
+
+  &.item--cinema {
+    > ._icon {
+      /* Permalink - use to edit and share this gradient: http://colorzilla.com/gradient-editor/#3498db+0,2980b9+100 */
+      background: #3498db; /* Old browsers */
+      background: -moz-linear-gradient(-45deg,  #3498db 0%, #2980b9 100%); /* FF3.6-15 */
+      background: -webkit-linear-gradient(-45deg,  #3498db 0%,#2980b9 100%); /* Chrome10-25,Safari5.1-6 */
+      background: linear-gradient(135deg,  #3498db 0%,#2980b9 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+      filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#3498db', endColorstr='#2980b9',GradientType=1 ); /* IE6-9 fallback on horizontal gradient */
+    }
+  }
+
+  &.item--moto {
+    > ._icon {
+      /* Permalink - use to edit and share this gradient: http://colorzilla.com/gradient-editor/#34495e+0,2c3e50+100 */
+      background: #34495e; /* Old browsers */
+      background: -moz-linear-gradient(-45deg,  #34495e 0%, #2c3e50 100%); /* FF3.6-15 */
+      background: -webkit-linear-gradient(-45deg,  #34495e 0%,#2c3e50 100%); /* Chrome10-25,Safari5.1-6 */
+      background: linear-gradient(135deg,  #34495e 0%,#2c3e50 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+      filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#34495e', endColorstr='#2c3e50',GradientType=1 ); /* IE6-9 fallback on horizontal gradient */
+    }
+  }
+
+  &.item--gaming {
+    > ._icon {
+      /* Permalink - use to edit and share this gradient: http://colorzilla.com/gradient-editor/#9b59b6+0,8e44ad+100 */
+      background: #9b59b6; /* Old browsers */
+      background: -moz-linear-gradient(-45deg,  #9b59b6 0%, #8e44ad 100%); /* FF3.6-15 */
+      background: -webkit-linear-gradient(-45deg,  #9b59b6 0%,#8e44ad 100%); /* Chrome10-25,Safari5.1-6 */
+      background: linear-gradient(135deg,  #9b59b6 0%,#8e44ad 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+      filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#9b59b6', endColorstr='#8e44ad',GradientType=1 ); /* IE6-9 fallback on horizontal gradient */
+    }
+  }
+}

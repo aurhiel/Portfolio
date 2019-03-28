@@ -1,0 +1,62 @@
+// "main": "../curriculum-vitae.less"
+
+.skills-scale {
+  display: block;
+
+  > ._rating {
+    font-size: 1.2em;
+    font-weight: bold;
+    letter-spacing: -.25em;
+    display: inline-block;
+    vertical-align: middle;
+    margin-right: .4em;
+
+    > ._rate {
+      &:after {
+        content: '/';
+      }
+
+      &.rate--empty {
+        opacity: .25;
+      }
+    }
+  }
+
+  > ._label {
+    font-size: .85em;
+    display: inline-block;
+    vertical-align: middle;
+  }
+}
+
+.skills-scale--software {
+  .skills-scale {
+    > ._rating {
+      color: #4e445a;
+    }
+  }
+}
+
+.skills-scale--techs {
+  .skills-scale {
+    > ._rating {
+      color: #e0ae54;
+    }
+  }
+}
+
+.skills-scale--speak {
+  .skills-scale {
+    > ._rating {
+      color: #9b425c;
+    }
+  }
+}
+
+.skills-scale--dev {
+  .skills-scale {
+    > ._rating {
+      color: #384561;
+    }
+  }
+}

@@ -1,0 +1,17 @@
+// "main": "../curriculum-vitae.less"
+
+.cqv-block {
+  &.block--header {
+    font-size: 1.2em;
+    padding-top: 2.8em;
+    padding-bottom: 4.6em;
+  }
+
+  &.block--infos-user {
+    font-size: 1em;
+  }
+
+  &.block--avatar {
+    font-size: 1.2em;
+  }
+}

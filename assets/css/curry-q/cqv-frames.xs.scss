@@ -1,0 +1,9 @@
+// "main": "../curriculum-vitae.less"
+
+.cqv-frame {
+  &.frame--skills {
+    >._content {
+      width: 49%;
+    }
+  }
+}

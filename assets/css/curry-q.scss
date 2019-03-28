@@ -1,0 +1,69 @@
+
+// @import 'kmns/_mixins';
+
+$text-color: #444;
+$bg-light: #F6F6F6;
+
+// Media sizes
+$screen-xs-min: 480px;
+$screen-sm-min: 768px;
+$screen-md-min: 992px;
+$screen-lg-min: 1200px;
+$screen-xl-min: 1400px;
+
+// @import 'curry-q/_fonts';
+@import 'curry-q/icons';
+@import 'curry-q/core';
+@import 'curry-q/texts';
+
+// CQV Core -----------------
+@import 'curry-q/cqv-blocks';
+@import 'curry-q/cqv-frames';
+
+// Gears --------------------
+// Gears > Skills scale
+@import 'curry-q/skills-scale';
+// Gears > Rounded Icons List
+@import 'curry-q/rounded-list';
+
+
+// Responsive ---------------
+// Responsive > SMALL (>= 480px)
+@media screen and (min-width: $screen-xs-min) {
+  // CQV Core -----------------
+  @import 'curry-q/cqv-frames.xs';
+}
+
+// Responsive > SMALL (>= 768px)
+@media screen and (min-width: $screen-sm-min) {
+  // CQV Core -----------------
+  @import 'curry-q/cqv-blocks.sm';
+}
+
+// Responsive > SMALL (>= 992px)
+@media screen and (min-width: $screen-md-min) {
+  // CQV Core -----------------
+  @import 'curry-q/core.md';
+  @import 'curry-q/cqv-blocks.md';
+  @import 'curry-q/cqv-frames.md';
+}
+
+// Responsive > SMALL (>= 1200px)
+@media screen and (min-width: $screen-lg-min) {
+  // CQV Core -----------------
+  @import 'curry-q/core.lg';
+  @import 'curry-q/cqv-blocks.lg';
+}
+
+
+// Print --------------------
+@media print {
+  // CQV Core -----------------
+  @import 'curry-q/core.print';
+  @import 'curry-q/cqv-blocks.print';
+  @import 'curry-q/cqv-frames.print';
+
+  // Gears --------------------
+  // Gears > Rounded Icons List
+  @import 'curry-q/rounded-list.print';
+}

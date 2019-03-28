@@ -1,0 +1,37 @@
+// "main": "../curriculum-vitae.less"
+
+.cqv-block {
+  &.block--header {
+    padding-bottom: 3.4em;
+
+    &:after {
+      bottom: 0;
+      height: 100%;
+    }
+  }
+
+  &.block--infos-user {
+    background-color: #cecece;
+    background-color: rgba(255, 255, 255, 0.1);
+    margin: 0 auto;
+    max-width: 100%;
+    border-width: 0;
+    border-top-width: .1em;
+    border-radius: 0;
+
+    .info-item {
+      // display: inline-block;
+      width: 49%;
+
+      &.item--left {
+        padding-right: 7em;
+        text-align: right;
+      }
+
+      &.item--right {
+        padding-left: 7em;
+        text-align: left;
+      }
+    }
+  }
+}

@@ -1,0 +1,37 @@
+// "main": "../curriculum-vitae.less"
+
+.list-rounded-icons {
+  .ri-item {
+    margin: 0 1em;
+  }
+}
+
+.ri-item {
+  > ._icon {
+    font-size: 1.6em;
+  }
+
+  &.item--music {
+    > ._icon {
+      color: #e67e22;
+    }
+  }
+
+  &.item--cinema {
+    > ._icon {
+      color: #3498db;
+    }
+  }
+
+  &.item--moto {
+    > ._icon {
+      color: #34495e;
+    }
+  }
+
+  &.item--gaming {
+    > ._icon {
+      color: #9b59b6;
+    }
+  }
+}
