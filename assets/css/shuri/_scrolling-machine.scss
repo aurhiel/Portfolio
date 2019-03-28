@@ -1,0 +1,52 @@
+
+$sm-duration: 666ms;
+$sm-minimal-transitions:
+  opacity $sm-duration ease;
+  // transform 666ms ease;
+
+
+
+// Minimal animation (opacity)
+
+.scrolling-machine {
+  position: relative;
+  opacity: 1;
+  transition: $sm-minimal-transitions;
+
+  &.sm--hide {
+    opacity: 0;
+    // remove transition in order to not seeing elements hiding on doc.ready
+    // transition: none;
+  }
+}
+
+
+
+// Animations custom
+
+.sm--from-left {
+  left: 0;
+  transition: #{$sm-minimal-transitions}, left #{$sm-duration} ease;
+
+  &.sm--hide {
+    left: -4rem;
+  }
+}
+
+.sm--from-right {
+  right: 0;
+  transition: #{$sm-minimal-transitions}, right #{$sm-duration} ease;
+
+  &.sm--hide {
+    right: -4rem;
+  }
+}
+
+.sm--from-center {
+  transform: scale(1);
+  transition: #{$sm-minimal-transitions}, transform #{$sm-duration} ease;
+
+  &.sm--hide {
+    transform: scale(1.2);
+  }
+}

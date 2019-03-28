@@ -20,6 +20,7 @@
 
 // Shuri itself
 
+@import 'shuri/reboot';
 @import 'shuri/root';
 @import 'shuri/logo';
 @import 'shuri/identity';
@@ -37,3 +38,6 @@
 @import 'shuri/app-core';
 @import 'shuri/app-header';
 @import 'shuri/app-section';
+@import 'shuri/app-footer';
+
+@import 'shuri/scrolling-machine';

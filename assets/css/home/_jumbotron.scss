@@ -8,6 +8,8 @@
       // padding-top: 4.2rem;
       // padding-bottom: 4rem;
       // min-height: calc(100vh - #{$theme-header-min-height} - 2rem);
+      // padding: 1rem 5rem 1rem 5.4rem;
+      padding: 2rem;
 
       .#{$theme-prefix}logo {
         font-size: 5rem;
@@ -22,6 +24,15 @@
 
       .col-logo {
         text-align: center;
+        z-index: 1;
+      }
+
+      .col-identity {
+        z-index: 5;
+      }
+
+      .btn {
+        box-shadow: 0 .5rem .8rem -.5rem transparentize($black, .6);
       }
 
       // Remove left & right margin coming from list items
@@ -55,6 +66,12 @@
           margin-bottom: -6rem;
           margin-left: -5rem;
         }
+
+        .col-identity {
+          hr {
+            margin-left: 0;
+          }
+        }
       }
     }
   }
@@ -62,32 +79,67 @@
 
 
 @include media-breakpoint-up(md) {
-  .app-core {
-    &--home {
-      .jumbotron {
-        .#{$theme-prefix}logo {
-          // font-size: 7rem;
-          // margin-bottom: -7rem;
-          margin-left: 0;
-        }
-      }
-    }
-  }
 }
 
 @include media-breakpoint-up(lg) {
   .app-core {
     &--home {
       .jumbotron {
+        // Maximize jumbotron content to align with .app-main-content
+        max-width: map-get($grid-breakpoints, lg);
+        margin-right: auto;
+        margin-left: auto;
+        // ...
         padding-top: 5rem;
         padding-bottom: 5.4rem;
 
         .#{$theme-prefix}logo {
           font-size: 10rem;
           margin-bottom: -8rem;
-          // position: absolute;
-          // left: 0;
-          // top: -12rem;
+        }
+      }
+    }
+  }
+}
+
+@include media-breakpoint-up(xl) {
+  .app-core {
+    &--home {
+      .jumbotron {
+        // Maximize jumbotron content to align with .app-main-content
+        max-width: map-get($grid-breakpoints, xl);
+        // ...
+        padding-top: 6rem;
+        padding-bottom: 6.4rem;
+
+        .#{$theme-prefix}identity {
+          font-size: 1.2rem;
+        }
+
+        .#{$theme-prefix}logo {
+          font-size: 12rem;
+        }
+      }
+    }
+  }
+}
+
+@include media-breakpoint-up(xxl) {
+  .app-core {
+    &--home {
+      .jumbotron {
+        // Maximize jumbotron content to align with .app-main-content
+        max-width: map-get($grid-breakpoints, xxl);
+        // ...
+        padding-top: 8rem;
+        padding-bottom: 10rem;
+
+        .#{$theme-prefix}identity {
+          font-size: 1.3rem;
+        }
+
+        .#{$theme-prefix}logo {
+          font-size: 12.8rem;
         }
       }
     }

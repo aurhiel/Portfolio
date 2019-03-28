@@ -1,8 +1,35 @@
 // Core
 
 .app-core {
-  min-width: 320px;
+  min-width: 340px;
   overflow-x: hidden;
+
+  &--no-script {
+    .app-header {
+      .navbar {
+        background-color: $navbar-bg !important;
+        background-color: transparentize($navbar-bg, .05) !important;
+        position: fixed;
+        top: 0;
+        width: 100%;
+      }
+
+      .navbar-brand {
+        opacity: 1 !important;
+        visibility: visible !important;
+      }
+    }
+
+    .message-no-script {
+      margin-top: 4.8rem;
+      margin-bottom: -1rem;
+      max-width: map-get($grid-breakpoints, lg);
+
+      .alert {
+        margin-bottom: 0;
+      }
+    }
+  }
 }
 
 
@@ -28,9 +55,31 @@
 }
 
 
-// Maximized main content with border radius
+@include media-breakpoint-up(sm) {
+  .app-core {
+    &--no-script {
+      .message-no-script {
+        margin-top: 5.2rem;
+        margin-bottom: -3.4rem;
+      }
+    }
+  }
+}
+
+
+// Maximized main content with border radiuses
 
 @include media-breakpoint-up(lg) {
+  .app-core {
+    &--no-script {
+      .message-no-script {
+        margin-top: 5.6rem;
+        margin-bottom: -4.2rem;
+        max-width: map-get($grid-breakpoints, lg);
+      }
+    }
+  }
+
   .app-main-content {
     max-width: map-get($grid-breakpoints, lg);
     margin-left: auto;
@@ -41,12 +90,28 @@
 }
 
 @include media-breakpoint-up(xl) {
+  .app-core {
+    &--no-script {
+      .message-no-script {
+        max-width: map-get($grid-breakpoints, xl);
+      }
+    }
+  }
+
   .app-main-content {
     max-width: map-get($grid-breakpoints, xl);
   }
 }
 
 @include media-breakpoint-up(xxl) {
+  .app-core {
+    &--no-script {
+      .message-no-script {
+        max-width: map-get($grid-breakpoints, xxl);
+      }
+    }
+  }
+
   .app-main-content {
     max-width: map-get($grid-breakpoints, xxl);
   }

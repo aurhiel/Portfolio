@@ -157,6 +157,22 @@ $btn-border-radius-lg:        $border-radius-lg * 5;
 $btn-border-radius-sm:        $border-radius-sm * 5;
 
 
+// NOTE Transform inputs into pills
+$input-border-radius: $border-radius * 4;
+$input-border-radius-sm: $border-radius-sm * 4;
+$input-border-radius-lg: $border-radius-lg * 4;
+
+// Remove border
+$input-border-width: 0;
+$input-focus-box-shadow:  0 0 0 .2rem rgba($primary, .75);
+
+// Custom <select>
+$custom-select-border-radius: $input-border-radius;
+$custom-select-border-radius-sm: $input-border-radius-sm;
+$custom-select-border-radius-lg: $input-border-radius-lg;
+
+
+
 // Navbar (menu)
 //
 
@@ -191,8 +207,15 @@ $theme-root-fonts: '#{$theme-root-build}/fonts';
 $theme-root-images: '#{$theme-root-build}/images';
 $theme-bg-pattern: '#{$theme-root-images}/patterns/seigaiha.png';
 
+
+// Custom colors
+$theme-primary-deg-first: $primary;
+$theme-primary-deg-last: #2ecc71;
+
+
 // Header
 $theme-header-min-height: 4.6rem;
+
 
 // Animations
 $theme-transition-duration: 300ms;

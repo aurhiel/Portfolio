@@ -21,6 +21,11 @@
   }
 }
 
+.nav-item {
+  transition: margin $theme-transition-duration * 2.2 ease-in-out;
+}
+
+
 @include media-breakpoint-up(sm) {
   .nav-item {
     margin: 0 .4rem;
@@ -30,6 +35,38 @@
 
 @include media-breakpoint-up(lg) {
   .nav-item {
-    margin: 0 .8rem;
+    margin: .8rem;
+  }
+}
+
+
+@include media-breakpoint-up(xl) {
+  .app-core {
+    &--no-script {
+      .nav-item {
+        margin: .8rem;
+      }
+    }
+  }
+
+  .nav-item {
+    margin-top: 1.2rem;
+    margin-bottom: 1.2rem;
+  }
+}
+
+
+@include media-breakpoint-up(xxl) {
+  .app-core {
+    &--no-script {
+      .nav-item {
+        margin: .8rem;
+      }
+    }
+  }
+  
+  .nav-item {
+    margin-top: 1.8rem;
+    margin-bottom: 1.8rem;
   }
 }

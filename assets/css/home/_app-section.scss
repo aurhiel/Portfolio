@@ -20,7 +20,7 @@
     transition: opacity $theme-transition-duration ease;
 
     // Need an animation on opacity to not seeing text on hover
-    ._text {
+    .--text {
       font-weight: bold;
       line-height: 1.5rem;
       transform: scale(1.2);
@@ -46,7 +46,7 @@
 
       // Add a delay value of ($theme-transition-duration / 2)
       //   in order to first animate opacity globally and then animate on _text
-      ._text {
+      .--text {
         transform: scale(1);
         opacity: 1;
         transition:

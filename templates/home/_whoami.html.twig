@@ -1,23 +1,34 @@
-<section class="app-section app-section--whoami scrolling-machine">
-  <h3 class="heading" id="whoami" data-text="Qui suis-je ?">Qui suis-je ?</h3>
-  <div class="row align-items-center">
-    <div class="col-lg-4 col-xl-5">
+<section class="app-section app-section--whoami">
+  <div class="--inner row align-items-center">
+    <div class="col-md-5 col-xl-6 scrolling-machine sm--from-left">
+      <h3 class="heading" id="whoami" data-text="Qui suis-je ?">Qui suis-je ?</h3>
       <p class="text-contextual">
-        Développeur web depuis maintenant 7ans, et en tant que freelance depuis 1an,
+        Développeur web depuis maintenant {{ 'now'|date('Y') - identity.year_start_work }}&nbsp;ans,
+        et en tant que freelance depuis {{ 'now'|date('Y') - identity.year_start_freelance }}&nbsp;an,
         j'aime me diversifier dans les multiples domaines du web, allant de la
         réalisation d'une maquette, en passant par son intégration (front-end)
         et développement (back-end).
       </p>
 
       <p class="text-contextual mb-0">
-        Selon vos besoin, je suis à même de réaliser vos projets qu'ils soient
-        sur-mesure ou via des solutions clé en main.
-        Ainsi, à l'aide de mes diverses compétences web, je vous accompagne tout
-        au long du processus de création de votre projet.
+        Selon vos besoins, je suis à même de réaliser vos projets qu'ils soient
+        sur-mesure (<strong class="text-normal">&laquo;&nbsp;from scratch&nbsp;&raquo;</strong>,
+        <strong class="text-normal">Symfony</strong>, ...) ou via des solutions clé en main
+        (<strong class="text-normal">Wordpress</strong>, <strong class="text-normal">Prestashop</strong>, ...).
+        Domicilié à <strong>{{ identity.location.city }}</strong>, je peux vous rencontrer
+        dans le secteur des <strong class="text-normal">{{ identity.location.department }}</strong>, mais aussi
+        jusqu'à <strong>Toulon</strong> par exemple ou via <strong>Skype</strong> si nécessaire.
       </p>
+
+      <hr class="my-4 ml-0">
+
+      <a href="{{ path('curriculum') }}"
+        class="btn btn-sm btn-outline-secondary px-4">
+        Curriculum Vitae
+      </a>
     </div>
 
-    <div class="col-lg-8 col-xl-7">
+    <div class="col-md-7 col-xl-6 scrolling-machine sm--from-right">
       <ul class="card-grid pl-0 my-3">
         {# Service / Responsive design #}
         <li class="card">
@@ -28,7 +39,7 @@
             </p>
           </div>
           <div class="card-hidden-info d-flex align-items-center p-4">
-            <div class="_text w-100 text-center">
+            <div class="--text w-100 text-center">
               L'ensemble de mes sites sont réalisés de manière &laquo;&nbsp;responsive&nbsp;&raquo;,
               ils s'adaptent à tous les formats d'écran.
             </div>
@@ -44,7 +55,7 @@
             </p>
           </div>
           <div class="card-hidden-info d-flex align-items-center p-4">
-            <div class="_text w-100 text-center">
+            <div class="--text w-100 text-center">
               Je développe mes applications web pour qu'elles soient à la fois
               performantes mais aussi adaptées à tout profil d'utilisateur.
             </div>
@@ -60,7 +71,7 @@
             </p>
           </div>
           <div class="card-hidden-info d-flex align-items-center p-4">
-            <div class="_text w-100 text-center">
+            <div class="--text w-100 text-center">
               J'aime créer des designs simples mais toujours originaux
               afin qu'ils perdurent dans le temps.
             </div>
@@ -76,29 +87,34 @@
             </p>
           </div>
           <div class="card-hidden-info d-flex align-items-center p-4">
-            <div class="_text w-100 text-center">
+            <div class="--text w-100 text-center">
               Je m'efforce à produire un code clair, commenté, voir documenté
               afin de faciliter son suivi &amp; son amélioration.
             </div>
           </div>
         </li>
 
-        {# Service / Managment #}
+        {# Service / Managment
         <li class="card">
           <div class="card-body">
             <span class="icon icon-layers"></span>
             <p class="card-text">
-              Gestion & suivi
+              Outils préférés (stack)
             </p>
           </div>
           <div class="card-hidden-info d-flex align-items-center p-4">
-            <div class="_text w-100 text-center">
-              ... // TODO
+            <div class="--text w-100 text-center">
+              Front-end : Bootstrap, jQuery<strongr>
+              Back-end : Symfony<strongr>
+              CMS : Prestashop, Wordpress<strongr>
+              Logiciels : Atom, GitKraken, Photoshop<strongr>
+              Systèmes : Linux, Windows
             </div>
           </div>
         </li>
+        #}
 
-        {# Service / ? #}
+        {# Service / ?
         <li class="card">
           <div class="card-body">
             <span class="icon icon-leaf"></span>
@@ -107,11 +123,12 @@
             </p>
           </div>
           <div class="card-hidden-info d-flex align-items-center p-4">
-            <div class="_text w-100 text-center">
+            <div class="--text w-100 text-center">
               &amp; écologique ! // TODO
             </div>
           </div>
         </li>
+        #}
       </ul>
     </div>
   </div>

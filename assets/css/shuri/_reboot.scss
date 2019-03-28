@@ -1,0 +1,20 @@
+// Reboot
+//
+
+
+// Horizontal bar
+
+hr {
+  background-color: $theme-primary-deg-first;
+  background: linear-gradient(45deg, $theme-primary-deg-first, $theme-primary-deg-last);
+  border: 0;
+  height: .125rem;
+  width: 10rem;
+}
+
+
+// Strong
+
+b, strong {
+  font-weight: 600;
+}

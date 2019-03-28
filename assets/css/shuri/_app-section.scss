@@ -1,19 +1,69 @@
 
+// Core --no-script
+
+
+
+.app-core {
+  &--no-script {
+    // Contact form
+    .app-section--contact {
+      position: static;
+      opacity: 1;
+      // pointer-events: auto;
+      // TODO finish re-display with no-js
+    }
+
+    .contact-checkbox-for-quote {
+      display: none
+    }
+
+    .contact-inputs-quote {
+      display: block;
+    }
+  }
+
+  &--display-form-contact {
+    overflow: hidden;
+
+    // Contact form
+    .app-section--contact {
+      opacity: 1;
+      // visibility: visible;
+      overflow-y: scroll;
+      pointer-events: auto;
+    }
+
+    // blur others elements
+    .app-header, .app-body, .app-footer {
+      filter: blur(4rem);
+    }
+  }
+}
+
+
 
 // Base section
 
 .app-section {
-  padding: 3rem 2rem;
-  background-color: yellow;
+  padding: 1.8rem 1rem;
+
+  // Specifics sections
+
   &--whoami {
     background-color: $white;
+
+    .--inner {
+      max-width: 1200px;
+      margin-left: auto;
+      margin-right: auto;
+    }
   }
 
   &--projects {
     background-color: $light;
     text-align: center;
 
-    ._inner {
+    .--inner {
       max-width: 900px;
       margin-left: auto;
       margin-right: auto;
@@ -22,6 +72,56 @@
         max-width: 570px;
         margin-left: auto;
         margin-right: auto;
+      }
+    }
+  }
+
+  // Popup contact form
+  &--contact {
+    background-color: $dark;
+    background-color: transparentize($dark, .04);
+    color: $white;
+    // remove default .app-section padding
+    padding: 0;
+    // positionning & sizing
+    position: fixed;
+    z-index: 10;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    // hide & disable
+    opacity: 0;
+    pointer-events: none;
+    // visibility: hidden;
+    // transitions
+    transition: opacity $theme-transition-duration ease-in-out;
+    overflow-x: hidden;
+
+    .--inner {
+      max-width: 42rem;
+      margin-left: auto;
+      margin-right: auto;
+      padding: 1.8rem 1rem;
+    }
+
+    .form-group {
+      margin-bottom: 1.4rem;
+    }
+
+    hr {
+      margin-top: 1.4rem;
+      margin-bottom: 1.4rem;
+    }
+
+    .contact-inputs-quote {
+      display: none;
+      padding-top: 1.4rem;
+    }
+
+    .is-quote {
+      .contact-inputs-quote {
+        display: block;
       }
     }
   }
@@ -41,19 +141,19 @@
   border-radius: .5rem;
 
   &:hover {
-    ._img {
+    .--img {
       transform: scale(1.2);
       filter: blur(.2rem);
     }
 
-    ._text {
+    .--text {
       opacity: 1;
       pointer-events: auto;
     }
   }
 
   // Main project image
-  ._img {
+  .--img {
     // set scale for animation on :hover
     transform: scale(1);
     filter: blur(0);
@@ -63,7 +163,7 @@
   }
 
   // Main project text
-  ._text {
+  .--text {
     background-color: $dark;
     background-color: transparentize($dark, .15);
     color: $white;
@@ -87,12 +187,12 @@
     pointer-events: none;
   }
 
-  ._title {
+  .--title {
     font-size: 1rem;
     line-height: 1.6;
   }
 
-  ._specs {
+  .--specs {
     font-size: .825rem;
     list-style: none;
     padding: 0;
@@ -113,9 +213,15 @@
   }
 }
 
+@include media-breakpoint-up(md) {
+  .app-section {
+    padding: 3rem 2rem;
+  }
+}
+
 @include media-breakpoint-up(lg) {
   .app-project-item {
-    ._text {
+    .--text {
       padding-left: 1.4rem;
       padding-right: 1.4rem;
     }

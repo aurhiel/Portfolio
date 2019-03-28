@@ -2,13 +2,20 @@
 //
 
 .btn {
-  box-shadow: 0 .5rem .8rem -.5rem transparentize($black, .6);
+  text-shadow: .09em .09em 0 transparentize($black, .85);
 
-  &:hover {
-    box-shadow: 0 .55rem .4rem -.5rem transparentize($black, .6);
+  @include hover {
+    text-shadow: 0 0 .4em transparentize($black, .75);
   }
 
-  &-transparent {
-    background: none;
+  &-primary {
+    background: $theme-primary-deg-first linear-gradient(45deg, $theme-primary-deg-first, $theme-primary-deg-last);
+    background-repeat: repeat-x;
+    border-color: transparent !important;
+    // transition: background $theme-transition-duration ease-in-out;
+
+    @include hover {
+      background: $theme-primary-deg-first;
+    }
   }
 }

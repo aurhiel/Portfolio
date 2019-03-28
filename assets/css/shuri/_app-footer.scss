@@ -1,0 +1,27 @@
+// Footer
+//
+
+
+.app-footer {
+
+}
+
+@include media-breakpoint-up(lg) {
+  .app-footer {
+    max-width: map-get($grid-breakpoints, lg);
+    margin-left: auto;
+    margin-right: auto;
+  }
+}
+
+@include media-breakpoint-up(xl) {
+  .app-footer {
+    max-width: map-get($grid-breakpoints, xl);
+  }
+}
+
+@include media-breakpoint-up(xxl) {
+  .app-footer {
+    max-width: map-get($grid-breakpoints, xxl);
+  }
+}

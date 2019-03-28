@@ -1,32 +1,9 @@
 var Encore              = require('@symfony/webpack-encore');
 var CopyWebpackPlugin   = require("copy-webpack-plugin");
-var GoogleFontsPlugin   = require("google-fonts-webpack-plugin");
+var GoogleFontsPlugin   = require("@beyonk/google-fonts-webpack-plugin");
 var FaviconsPlugin      = require("favicons-webpack-plugin");
 var FaviconsTwigPlugin  = require("create-favicons-partial-webpack");
 
-// var HTMLPlugin = require("html-webpack-plugin");
-// var ExtractTextPlugin = require("extract-text-webpack-plugin");
-/*
-// Try to copy SVG icons with webfonts-generator, results : crappy/ugly icons ...
-const webfontsGenerator = require('webfonts-generator');
-
-webfontsGenerator({
-  fontName: 'shuricon',
-  templateOptions : {
-    classPrefix: 'shuricon-',
-    baseSelector: '.shuricon'
-  },
-  dest: './public/build/fonts/shuricon/',
-  cssDest: './public/build/shuricon.css',
-  cssFontsUrl: './fonts/shuricon/',
-  files: [
-    './assets/fonts/linearicons-svg/phone.svg',
-    './assets/fonts/linearicons-svg/envelope.svg',
-    './assets/fonts/linearicons-svg/map-marker.svg',
-    './assets/fonts/linearicons-svg/construction.svg'
-  ],
-});
-*/
 
 Encore
     // the project directory where compiled assets will be stored
@@ -37,8 +14,8 @@ Encore
     .setManifestKeyPrefix('build/')
 
     // Vendors
-    // .createSharedEntry('vendors', './vendors.js') // new way to add vendor on Encore 0.24.0
-    .createSharedEntry('vendors', ['jquery', 'bootstrap'])
+    .createSharedEntry('entries', './shared_entries.js') // new way to add vendor on Encore^0.24.0
+    // .createSharedEntry('vendors', ['jquery', 'bootstrap']) // old way (Encore^0.20.0)
 
     // Main theme (Bootstrap + Shuri)
     .addEntry('shuri', './assets/js/shuri.js')
@@ -49,9 +26,12 @@ Encore
     // // Page : Home
     .addStyleEntry('home', './assets/css/home.scss')
 
+    // // Page : Curriculum vitae
+    .addStyleEntry('curry-q', './assets/css/curry-q.scss')
+
     // will require an extra script tag for runtime.js
     // but, you probably want this, unless you're building a single-page app
-    // .enableSingleRuntimeChunk()
+    .enableSingleRuntimeChunk()
 
     // Cleaning things
     .cleanupOutputBeforeBuild()
@@ -122,25 +102,7 @@ Encore
       { from: './assets/static' }
     ]))
 
-    // .addPlugin(new MiniCssExtractPlugin({
-    //   // Options similar to the same options in webpackOptions.output
-    //   // both options are optional
-    //   filename: "[name].css",
-    //   chunkFilename: "[id].css"
-    // }))
-
-    // Fonts icons loader
-    /*.addLoader({
-      test: /\.font\.js/,
-      loader: ExtractTextPlugin.extract({
-        // fallback: 'style-loader',
-        use: [
-          'css-loader',
-          'webfonts-loader'
-        ],
-      }),
-    })*/
-
+    // Source maps for production environment
     .enableSourceMaps(!Encore.isProduction())
 
     // the following line enables hashed filenames (e.g. app.abc123.css)
@@ -151,7 +113,7 @@ Encore
 
     // uncomment if you use Sass/SCSS files
     .enableSassLoader(function(sassOptions) {}, {
-      // resolveUrlLoader: false
+      resolveUrlLoader: false // without this option = VERY bad performance
     })
 
     // uncomment for legacy applications that require $/jQuery as a global variable
@@ -165,8 +127,8 @@ Encore
 const config = Encore.getWebpackConfig();
 
 // Use polling instead of inotify
-// config.watchOptions = {
-//     poll: true,
-// };
+config.watchOptions = {
+    poll: true,
+};
 
 module.exports = config;

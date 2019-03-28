@@ -55,11 +55,12 @@
   // Title underline
   &:after {
     content: '';
-    background-color: $primary;
+    // background-color: $primary;
+    background: $theme-primary-deg-first linear-gradient(45deg, $theme-primary-deg-first, $theme-primary-deg-last);
     box-shadow: .04em .04em .2em rgba(0, 0, 0, .14);
     // using "em" because, title underline is relative to parent size
     width: 4.4em;
-    height: .14em;
+    height: .12em;
     // set it to bottom
     position: absolute;
     z-index: -1;
@@ -77,4 +78,10 @@
   text-indent: 1.4rem;
   text-align: justify;
   margin-bottom: 1.6rem;
+}
+
+
+
+.text-normal {
+  font-weight: normal;
 }
