@@ -7,10 +7,11 @@
   &--no-script {
     // Contact form
     .app-section--contact {
-      position: static;
+      background: none;
+      position: relative;
+      z-index: 5; // behind the header
       opacity: 1;
-      // pointer-events: auto;
-      // TODO finish re-display with no-js
+      pointer-events: auto;
     }
 
     .contact-checkbox-for-quote {
