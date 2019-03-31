@@ -116,8 +116,8 @@ var shuri = {
     // // Set scroll elems node
     self.$scroll_elems  = self.$body.find('.scrolling-machine');
     // // Contact form
-    self.$form_contact            = self.$body.find('.app-section--contact form');
-    self.$contact_quote_checkbox  = self.$form_contact.find('#contact-is-quote');
+    self.$form_contact            = self.$body.find('.app-section--contact .form--contact');
+    self.$contact_quote_checkbox  = self.$form_contact.find('#contact_is_quote');
     self.$contact_quote_inputs    = self.$form_contact.find('.contact-inputs-quote').find('select, input');
 
 
@@ -177,7 +177,7 @@ var shuri = {
       return false;
     });
 
-    // // Toggle form contact event
+    // // Toggle popin with form contact event
     self.$body.on('click', '.btn-toggle-form-contact', function(e) {
       var $button = $(this);
 
@@ -194,7 +194,8 @@ var shuri = {
       return false;
     });
 
-    self.$form_contact.on('change', '#contact-is-quote', function() {
+    // // Contact form > Quote checkbox change event
+    self.$contact_quote_checkbox.on('change', function() {
       self.form_contact__toggle_is_quote($(this).is(':checked'));
     });
 

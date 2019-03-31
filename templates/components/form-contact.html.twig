@@ -1,0 +1,72 @@
+{% if form_contact is defined %}
+  <section class="app-section app-section--contact">
+    <div class="--inner d-flex align-items-center flex-column">
+      <h2 class="heading text-center mb-4" data-text="Formulaire de contact"
+        style="--heading-text-drop-offset: -5.3em;" id="contact-form">
+        Formulaire de contact
+      </h2>
+      <p class="text-muted small text-center mb-5">
+        Vous souhaitez développer un projet web ? Vous avez besoin de conseils pour votre site ? Juste un café ?<br>
+        Remplissez ce formulaire et je me ferai une joie de vous répondre !
+      </p>
+
+      {{ form_start(form_contact, {
+        attr : {
+          class : 'form--contact'
+        }
+      }) }}
+        <div class="form-row">
+          <div class="form-group col-sm-6 col-md-4">
+            {{ form_label(form_contact.lastname) }}
+            {{ form_widget(form_contact.lastname) }}
+            {{ form_errors(form_contact.lastname) }}
+          </div>
+          <div class="form-group col-sm-6 col-md-4">
+            {{ form_label(form_contact.firstname) }}
+            {{ form_widget(form_contact.firstname) }}
+            {{ form_errors(form_contact.firstname) }}
+          </div>
+          <div class="form-group col-sm-6 col-md-4">
+            {{ form_label(form_contact.email) }}
+            {{ form_widget(form_contact.email) }}
+            {{ form_errors(form_contact.email) }}
+          </div>
+        </div>
+
+        <div class="form-group">
+          {{ form_label(form_contact.message) }}
+          {{ form_widget(form_contact.message) }}
+          {{ form_errors(form_contact.message) }}
+        </div>
+
+        <hr class="w-100">
+
+        <div class="contact-checkbox-for-quote text-center">
+          {{ form_label(form_contact.is_quote) }}
+          {{ form_widget(form_contact.is_quote) }}
+          {{ form_errors(form_contact.is_quote) }}
+        </div>
+
+        <div class="contact-inputs-quote">
+          <div class="form-row">
+            <div class="form-group col-sm-6">
+              {{ form_label(form_contact.amount) }}
+              {{ form_widget(form_contact.amount) }}
+              {{ form_errors(form_contact.amount) }}
+            </div>
+            <div class="form-group col-sm-6">
+              {{ form_label(form_contact.project_type) }}
+              {{ form_widget(form_contact.project_type) }}
+              {{ form_errors(form_contact.project_type) }}
+            </div>
+          </div>
+        </div>
+
+        <div class="text-center mt-4">
+          {{ form_widget(form_contact.cancel) }}
+          {{ form_widget(form_contact.send) }}
+        </div>
+      {{ form_end(form_contact)}}
+    </div>
+  </section>
+{% endif %}
