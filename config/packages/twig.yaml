@@ -2,6 +2,8 @@ twig:
     default_path: '%kernel.project_dir%/templates'
     debug: '%kernel.debug%'
     strict_variables: '%kernel.debug%'
+    # Set Bootstrap 4 theme inputs
+    form_themes: ['bootstrap_4_layout.html.twig']
     globals:
       # Personal informations for portfolio
       identity:
