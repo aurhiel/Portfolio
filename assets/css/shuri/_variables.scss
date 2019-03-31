@@ -13,7 +13,7 @@ $white:    #fff;
 // $gray-200: #e9ecef;
 // $gray-300: #dee2e6;
 // $gray-400: #ced4da;
-// $gray-500: #adb5bd;
+$gray-500: #adb5bd;
 // $gray-600: #6c757d;
 $gray-700: #38353c;
 $gray-800: #27252a; // #2d2733;
@@ -145,6 +145,9 @@ $input-btn-padding-x:         1.5rem;
 $input-btn-padding-x-sm:      1rem;
 $input-btn-padding-x-lg:      2rem;
 
+$input-disabled-color:        $gray-700;
+$input-disabled-bg:           $gray-500;
+
 
 // Buttons
 //
@@ -214,7 +217,10 @@ $theme-primary-deg-last: #2ecc71;
 
 
 // Header
-$theme-header-min-height: 4.6rem;
+$theme-header-min-height:     4.6rem;
+$theme-header-min-height-lg:  5.1rem;
+$theme-header-min-height-xl:  5.9rem;
+$theme-header-min-height-xxl: 7.1rem;
 
 
 // Animations

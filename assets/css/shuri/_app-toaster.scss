@@ -1,0 +1,19 @@
+// Toaster is a container for Bootstrap Toast
+//
+
+.app-toaster {
+  flex-direction: column;
+  width: 100%;
+  // positioning
+  position: fixed;
+  z-index: 10;
+  bottom: 0;
+  right: 0;
+
+  .toast {
+    // DEBUG > Forcing toast visibility for testing, must removing it later
+    // opacity: 1;
+    // Forcing margin-bottom for every toast
+    margin-bottom: $toast-padding-x;
+  }
+}

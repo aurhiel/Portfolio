@@ -84,17 +84,71 @@ var shuri = {
     }
   },
   form_contact__submit : function () {
+    var self = this;
 
+    // Add CSS class to form in order to disable any manipulation (ugly for security but simple solution)
+    self.$form_contact.addClass('disabled');
+
+    // Submit form with ajax
+    $.ajax({
+      method  : 'POST',
+      url     : this.$form_contact.attr('action'),
+      data    : this.$form_contact.serialize(),
+      error   : function(jqXHR, status, error) {
+        // Abort raven (remove body class, ...)
+        raven.abort();
+        // Print problem if not an abort()
+        if(error != 'abort')
+          alert(error);
+      },
+      success : function(response) {
+        // Filling Toast with Message
+        self.$contact_toast.find('.toast-body').html(response.message);
+        self.$contact_toast.removeClass('toast-success toast-error').toast('show');
+
+        if (response.status == 1) {
+          self.$contact_toast.addClass('toast-success');
+
+          // Reset form
+          self.form_contact__reset();
+
+          // Hide form
+          self.$body.removeClass('app-core--display-form-contact');
+        } else {
+          self.$contact_toast.addClass('toast-error');
+        }
+      }
+    });
   },
   // Not used, to delete ?
   form_contact__reset : function () {
-    this.$form_contact.find('input').val('');
+    // Re-activate form
+    this.$form_contact.removeClass('disabled');
+
+    // Reset classic inputs
+    this.$form_contact.find('input, textarea').not('[type="hidden"]').val('');
+
+    // Reset <select>
+    this.$form_contact.find('select').each(function() {
+      var $select     = $(this);
+      var $options    = $select.find('option');
+      var select_val  = $options.first().val();
+
+      if($options.filter('[selected]').length > 0)
+        select_val = $options.filter('[selected]').val();
+
+      $select.val(select_val);
+    });
   },
 
 
   // Rocket launcher ! > code executed immediately (before document ready)
   //
   launch : function() {
+    //
+    // Variables (private & public)
+    //
+
     // Le viss
     var self = this;
     // Scroll object
@@ -115,8 +169,11 @@ var shuri = {
     self.$header_navbar = self.$header.find('.navbar');
     // // Set scroll elems node
     self.$scroll_elems  = self.$body.find('.scrolling-machine');
+    // // Toaster (main toast container)
+    self.$toaster       = self.$body.find('.app-toaster');
     // // Contact form
     self.$form_contact            = self.$body.find('.app-section--contact .form--contact');
+    self.$contact_toast           = self.$toaster.find('.toast-form-contact');
     self.$contact_quote_checkbox  = self.$form_contact.find('#contact_is_quote');
     self.$contact_quote_inputs    = self.$form_contact.find('.contact-inputs-quote').find('select, input');
 
@@ -131,6 +188,9 @@ var shuri = {
 
     // Set loading
     self.loading();
+
+    // Init toast
+    self.$toaster.find('.toast').toast();
 
 
 
@@ -197,6 +257,17 @@ var shuri = {
     // // Contact form > Quote checkbox change event
     self.$contact_quote_checkbox.on('change', function() {
       self.form_contact__toggle_is_quote($(this).is(':checked'));
+    });
+    // // // Toggle quote inputs on first load, if needed
+    self.form_contact__toggle_is_quote(self.$contact_quote_checkbox.is(':checked'));
+    // // // Form submit interception
+    self.$form_contact.on('submit', function(e) {
+      // Launch submit function
+      self.form_contact__submit();
+
+      // disable form submit
+      e.preventDefault();
+      return false;
     });
 
 

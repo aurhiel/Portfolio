@@ -1,0 +1,28 @@
+// Toast (notification)
+//
+
+.toast-success, .toast-error {
+  color: $white;
+
+  .toast-header {
+    background-color: $dark;
+    color: inherit;
+  }
+
+  .close {
+    color: inherit;
+  }
+
+  .toast-body {
+    font-weight: bold;
+    text-shadow: 0 .1em 0 transparentize($dark, .75);
+  }
+}
+
+.toast-success {
+  background-color: $primary;
+}
+
+.toast-error {
+  background-color: $red;
+}

@@ -89,10 +89,12 @@
 }
 
 
-// Maximize header content to align with .app-main-content
 
 @include media-breakpoint-up(lg) {
   .app-header {
+    min-height: $theme-header-min-height-lg;
+
+    // Maximize header content to align with .app-main-content
     .container-fluid {
       max-width: map-get($grid-breakpoints, lg);
     }
@@ -101,6 +103,8 @@
 
 @include media-breakpoint-up(xl) {
   .app-header {
+    min-height: $theme-header-min-height-xl;
+
     .container-fluid {
       max-width: map-get($grid-breakpoints, xl);
     }
@@ -109,6 +113,8 @@
 
 @include media-breakpoint-up(xxl) {
   .app-header {
+    min-height: $theme-header-min-height-xxl;
+
     .container-fluid {
       max-width: map-get($grid-breakpoints, xxl);
     }

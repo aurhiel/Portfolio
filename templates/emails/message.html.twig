@@ -1,0 +1,24 @@
+{% extends 'emails/layout.html.twig' %}
+
+{# Body (.app-body) #}
+{% block body %}
+  <p>
+    Nom:    <b>{{ contact.lastname }}</b>
+    Prénom: <b>{{ contact.firstname }}</b><br>
+    Email:  <b>{{ contact.email }}</b>
+  </p>
+  <p>
+    Message:<br>
+    <b>{{ contact.message|nl2br }}</b>
+  </p>
+  {% if contact.amount is not empty %}
+  <p style="margin-bottom: 0;">
+      Budget: <b>{{ contact.amount }}</b>
+  </p>
+  {% endif %}
+  {% if contact.projectType is not empty %}
+  <p>
+      Type de projet: <b>{{ contact.projectType }}</b>
+  </p>
+  {% endif %}
+{% endblock %}

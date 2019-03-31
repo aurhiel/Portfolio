@@ -2,5 +2,8 @@
 
 {# Body (.app-body) #}
 {% block body %}
-  {# Nothing here, just forcing displaying form popin #}
+  {# This page is for non-JS users, redirect user's with Javascript #}
+  <script type="text/javascript">
+    document.location.href = '{{ path('home') }}';
+  </script>
 {% endblock %}

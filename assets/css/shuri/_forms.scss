@@ -1,0 +1,28 @@
+// Textual form controls
+//
+
+
+// Disabled form
+
+form {
+  &.disabled {
+    .form-control {
+      background-color: $input-disabled-bg;
+      color: $input-disabled-color;
+      pointer-events: none;
+    }
+
+    .btn, .custom-checkbox, .custom-radio {
+      opacity: .5;
+      pointer-events: none;
+    }
+  }
+}
+
+
+.form-control {
+  &:disabled,
+  &[readonly] {
+    color: $input-disabled-color;
+  }
+}

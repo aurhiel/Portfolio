@@ -20,24 +20,27 @@
 
 // Shuri itself
 
-@import 'shuri/reboot';
 @import 'shuri/root';
-@import 'shuri/logo';
-@import 'shuri/identity';
+@import 'shuri/reboot';
 @import 'shuri/type';
-@import 'shuri/lists';
-@import 'shuri/card';
-@import 'shuri/alert';
+@import "shuri/forms";
 @import 'shuri/buttons';
 @import 'shuri/navbar';
+@import 'shuri/card';
 @import 'shuri/jumbotron';
+@import 'shuri/alert';
+@import 'shuri/toast';
 @import 'shuri/utilities';
+@import 'shuri/lists';
+@import 'shuri/logo';
+@import 'shuri/identity';
 
 // Shuri app components (core/header/footer/...)
 
 @import 'shuri/app-core';
 @import 'shuri/app-header';
 @import 'shuri/app-section';
+@import 'shuri/app-toaster';
 @import 'shuri/app-footer';
 
 @import 'shuri/scrolling-machine';

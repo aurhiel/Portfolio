@@ -1,0 +1,38 @@
+
+// Core --no-script
+
+.app-core {
+  &--no-script {
+    .message-no-script {
+      margin-top: 4.8rem;
+      margin-bottom: -1rem;
+
+      .alert {
+        margin-bottom: 0;
+      }
+    }
+  }
+}
+
+
+@include media-breakpoint-up(sm) {
+  .app-core {
+    &--no-script {
+      .message-no-script {
+        margin-top: 5.2rem;
+        margin-bottom: -3.4rem;
+      }
+    }
+  }
+}
+
+@include media-breakpoint-up(lg) {
+  .app-core {
+    &--no-script {
+      .message-no-script {
+        margin-top: 5.6rem;
+        margin-bottom: -4.2rem;
+      }
+    }
+  }
+}
