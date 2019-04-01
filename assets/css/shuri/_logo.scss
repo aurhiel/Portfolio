@@ -2,10 +2,11 @@
 //
 
 .#{$theme-prefix}logo {
-  color: $primary;
+  // color: $primary;
 
   &--svg {
-    fill: currentcolor; // Reset filled color
+    // fill: currentcolor; // Reset filled color
+    fill: url(#gradient-vertical-primary) $primary;
     width: 2.875em;
     height: auto;
   }
