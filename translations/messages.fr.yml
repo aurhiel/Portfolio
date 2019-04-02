@@ -2,13 +2,13 @@ form_contact :
     # Inputs
     lastname :
         label       : "Nom"
-        placeholder : "Nom (ex: Anderson)"
+        placeholder : "Nom"
     firstname :
         label       : "Prénom"
-        placeholder : "Prénom (ex: Thomas)"
+        placeholder : "Prénom"
     email :
         label       : "Email"
-        placeholder : "Email (ex: anderson.thomas@metacortex.com)"
+        placeholder : "Email"
     message :
         label       : "Message"
         placeholder : "Votre message ici ..."
