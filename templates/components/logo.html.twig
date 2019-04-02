@@ -14,5 +14,5 @@
 
 {# Display identity (names & status) #}
 {% if display_identity == true %}
-  {% include 'components/identity.html.twig' %}
+  {% include 'components/identity.html.twig' with { set_titles : set_titles } %}
 {% endif %}
