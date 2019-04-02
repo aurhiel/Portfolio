@@ -1,7 +1,17 @@
+{% set set_titles = (set_titles is defined) ? set_titles : true %}
+
 <div class="shuri-identity">
+{% if set_titles %}
   <h1 class="--names">
-    <span>{{ identity.last_name }} {{ identity.first_name }}</span> 
+    <span>{{ identity.last_name }} {{ identity.first_name }}</span>
     <span class="--badge">Freelance</span>
   </h1>
   <h2 class="--status">{{ identity.status }}</h2>
+{% else %}
+  <div class="--names">
+    <span>{{ identity.last_name }} {{ identity.first_name }}</span>
+    <span class="--badge">Freelance</span>
+  </div>
+  <div class="--status">{{ identity.status }}</div>
+{% endif %}
 </div>

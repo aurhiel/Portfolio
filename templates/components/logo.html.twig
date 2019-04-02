@@ -5,6 +5,7 @@
   <img src="{{ asset('/images/logo.png') }}" class="shuri-logo shuri-logo--no-script" alt="Logo de {{ identity.last_name }} {{ identity.first_name }}">
 </noscript>
 #}
+{% set display_identity = (display_identity is defined) ? display_identity : false %}
 
 {# SVG Logo #}
 <svg class="shuri-logo shuri-logo--svg" width="46" height="55" viewBox="0 0 46 55">
@@ -12,6 +13,6 @@
 </svg>
 
 {# Display identity (names & status) #}
-{% if display_identity is defined and display_identity == true %}
+{% if display_identity == true %}
   {% include 'components/identity.html.twig' %}
 {% endif %}
