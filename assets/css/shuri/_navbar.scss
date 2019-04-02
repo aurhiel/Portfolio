@@ -1,6 +1,42 @@
 // Navbar
 //
 
+
+.app-core {
+  &--navbar-show {
+    overflow: hidden;
+
+    .navbar-collapse {
+      // show
+      opacity: 1;
+      bottom: 0;
+      pointer-events: auto;
+      overflow: visible;
+      transition: opacity $theme-transition-duration ease-in-out;
+    }
+
+    .nav-item {
+      opacity: 1;
+
+      transition:
+        margin $theme-transition-duration * 2.2 ease-in-out,
+        opacity $theme-transition-duration ease-in-out $theme-transition-duration;
+
+      &:nth-child(2) {
+        transition:
+          margin $theme-transition-duration * 2.2 ease-in-out,
+          opacity $theme-transition-duration ease-in-out $theme-transition-duration + 200ms;
+      }
+
+      &:nth-child(3) {
+        transition:
+          margin $theme-transition-duration * 2.2 ease-in-out,
+          opacity $theme-transition-duration ease-in-out $theme-transition-duration + 400ms;
+      }
+    }
+  }
+}
+
 .navbar {
   background-color: $navbar-bg;
   transition: background-color 300ms ease;
@@ -21,14 +57,67 @@
   }
 }
 
+.navbar-collapse {
+  background-color: transparentize($dark, .05);
+  // text
+  font-size: 2.6rem;
+  font-weight: bold;
+  text-align: center;
+  // alignments
+  display: flex;
+  justify-content: center;
+  // positioning
+  position: fixed;
+  top: $theme-header-min-height;
+  left: 0;
+  // bottom: 0;
+  width: 100%;
+  // hiding
+  bottom: 100%;
+  opacity: 0;
+  pointer-events: none;
+  overflow: hidden;
+  // transitions
+  transition:
+    opacity $theme-transition-duration ease-in-out,
+    bottom 0 linear $theme-transition-duration;
+}
+
 .nav-item {
+  opacity: 0;
   transition: margin $theme-transition-duration * 2.2 ease-in-out;
 }
 
 
 @include media-breakpoint-up(sm) {
+  .app-core {
+    &--navbar-show {
+      overflow: auto;
+    }
+  }
+
+  .navbar-collapse {
+    background: none;
+    // text
+    font-size: 1rem;
+    font-weight: normal;
+    text-align: right;
+    // show
+    opacity: 1;
+    bottom: 0;
+    pointer-events: auto;
+    overflow: visible;
+    // positioning
+    position: static;
+  }
+
+  .navbar-nav {
+    margin-left: auto;
+  }
+
   .nav-item {
     margin: 0 .4rem;
+    opacity: 1;
   }
 }
 
@@ -64,7 +153,7 @@
       }
     }
   }
-  
+
   .nav-item {
     margin-top: 1.8rem;
     margin-bottom: 1.8rem;

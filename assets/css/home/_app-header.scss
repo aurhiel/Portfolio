@@ -18,8 +18,8 @@
       }
     }
 
-    // 
-    &.app-core--navbar-fixed {
+    // display brand & navbar if header is fixed OR click on mobile
+    &.app-core--navbar-fixed, &.app-core--navbar-show {
       .app-header {
         .navbar-brand {
           opacity: 1;

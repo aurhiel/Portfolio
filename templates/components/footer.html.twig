@@ -1,11 +1,25 @@
-
 {% include 'components/form-contact.html.twig' %}
 
-<footer class="app-footer text-light py-2 scrolling-machine" style="min-height: 240px;">
-  <div class="container-fluid">
-    <ul class="list-inline mb-0">
-      <li class="list-inline-item">Mentions légales</li>
-      <li class="list-inline-item">Lorem</li>
-    </ul>
+<footer class="app-footer py-3 scrolling-machine container-fluid">
+  <div class="row align-items-center">
+    <div class="footer-item--left col-lg-6 my-1">
+      © {{ 'now' | date('Y') }} - Site web conçu avec un peu de
+      <abbr title="code" class="icon icon-code" data-toggle="tooltip"></abbr>
+      et beaucoup de
+      <abbr title="passion" class="icon icon-heart" data-toggle="tooltip"></abbr>
+    </div>
+    <div class="footer-item--right col-lg-6 my-1">
+      <ul class="list-inline mb-0">
+        <li class="list-inline-item">
+          <a href="{{ path('static_pages', { page_slug : 'mentions-legales' }) }}">
+            Mentions légales
+          </a>
+        </li>
+        <li class="list-inline-item">
+          <a href="https://linearicons.com/" target="_blank">Linearicons</a>
+          by <a href="https://perxis.com/" target="_blank">Perxis</a>
+        </li>
+      </ul>
+    </div>
   </div>
 </footer>

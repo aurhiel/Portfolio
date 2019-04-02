@@ -45,6 +45,15 @@ var shuri = {
     else if ( direction == scroll.SCROLL_UP && scroll.position <= 0 )
       this.$body.removeClass(this.fixed_navbar_class + ' ' + this.oos_navbar_class);
   },
+  // Navbar close/open functions
+  navbar__open : function() {
+    this.$body.addClass('app-core--navbar-show');
+    this.$navbar_toggler.attr('aria-expanded', 'true');
+  },
+  navbar__close : function() {
+    this.$body.removeClass('app-core--navbar-show');
+    this.$navbar_toggler.attr('aria-expanded', 'false');
+  },
 
   /*
     Scroll animation feature
@@ -61,8 +70,13 @@ var shuri = {
     self.$scroll_elems.each(function() {
       var $elem = $(this);
       var position_show_elem = scroll.position + (self.$window.height() * .9); // 0.9 = 10% of window height
+      // get if must display elements on bottom of the website (who are not displayed due to 10%)
+      var position_max = scroll.position + self.$window.height();
+      var has_reached_end = (position_max >= Math.round(self.$body.height()));
 
-      if( position_show_elem > $elem.offset().top )
+      // console.log(position_max+' >= '+Math.round(self.$body.height()), has_reached_end);
+
+      if( position_show_elem > $elem.offset().top || has_reached_end)
         $elem.removeClass(self.scroll_hide_class);
       else
         $elem.addClass(self.scroll_hide_class);
@@ -120,7 +134,6 @@ var shuri = {
       }
     });
   },
-  // Not used, to delete ?
   form_contact__reset : function () {
     // Re-activate form
     this.$form_contact.removeClass('disabled');
@@ -222,14 +235,17 @@ var shuri = {
     // // Scroll to event
     self.$body.on('click', '.scroll-to', function(e) {
       // get element ID where to scroll from link #href
-      var anchor_id = $(this).attr('href');
-      var $elem     = self.$body.find(anchor_id);
+      var anchor_id = $(this).attr('href').match(/#(.*$)/)[1];
+      var $elem     = self.$body.find('#'+anchor_id);
 
       if($elem.length > 0) {
         var offset = self.$header_navbar.outerHeight() + parseInt($elem.css('marginTop'));
         self.$html_body.animate({
           scrollTop: $elem.offset().top - offset
         }, 300);
+
+        // Close navbar for mobile menu
+        self.navbar__close();
       }
 
       // disable anchor in url
@@ -270,6 +286,18 @@ var shuri = {
       return false;
     });
 
+    // // Toggle Menu display CSS class on body
+    self.$navbar_toggler = self.$header_navbar.find('.navbar-toggler');
+    self.$navbar_toggler.on('click', function() {
+      var $toggler = $(this);
+
+      if( self.$body.hasClass('app-core--navbar-show') ) {
+        self.navbar__close();
+      } else {
+        self.navbar__open();
+      }
+    });
+
 
 
     //
@@ -281,6 +309,9 @@ var shuri = {
 
       // Remove loading (not used yet...)
       self.unload();
+
+      // Enable Bootstrap Tooltips
+      self.$body.find('[data-toggle="tooltip"]').tooltip();
 
       // Trigger scroll event after ready to display elements already on screen
       self.$window.trigger('scroll');

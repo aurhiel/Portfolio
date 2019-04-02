@@ -90,7 +90,28 @@
 
 
 
+//
+// Responsive
+//
+
+
 @include media-breakpoint-up(lg) {
+  .app-core {
+    // OOS : Out Of Screen
+    &--navbar-oos {
+      .app-header {
+        .navbar { top: -$theme-header-min-height-lg; }
+      }
+    }
+
+    // Fixed navbar
+    &--navbar-fixed {
+      .app-header {
+        .navbar { top: 0; }
+      }
+    }
+  }
+
   .app-header {
     min-height: $theme-header-min-height-lg;
 
@@ -102,6 +123,22 @@
 }
 
 @include media-breakpoint-up(xl) {
+  .app-core {
+    // OOS : Out Of Screen
+    &--navbar-oos {
+      .app-header {
+        .navbar { top: -$theme-header-min-height-xl; }
+      }
+    }
+
+    // Fixed navbar
+    &--navbar-fixed {
+      .app-header {
+        .navbar { top: 0; }
+      }
+    }
+  }
+
   .app-header {
     min-height: $theme-header-min-height-xl;
 
@@ -112,6 +149,22 @@
 }
 
 @include media-breakpoint-up(xxl) {
+  .app-core {
+    // OOS : Out Of Screen
+    &--navbar-oos {
+      .app-header {
+        .navbar { top: -$theme-header-min-height-xxl; }
+      }
+    }
+
+    // Fixed navbar
+    &--navbar-fixed {
+      .app-header {
+        .navbar { top: 0; }
+      }
+    }
+  }
+
   .app-header {
     min-height: $theme-header-min-height-xxl;
 

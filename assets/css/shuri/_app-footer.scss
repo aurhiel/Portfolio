@@ -3,14 +3,63 @@
 
 
 .app-footer {
+  color: $gray-600;
+  font-size: .85rem;
+  text-align: center;
 
+  a {
+    color: $gray-400;
+
+    &:hover {
+      color: $gray-200;
+    }
+  }
+
+  .icon {
+    color: $gray-400;
+    text-decoration: none;
+  }
+
+  .list-inline-item {
+    &:not(:first-child) {
+      &:before {
+        content: '';
+        background-color: currentcolor;
+        opacity: .5;
+        display: inline-block;
+        vertical-align: middle;
+        height: .22rem;
+        width: .22rem;
+        border-radius: 50%;
+        margin-top: -.22rem;
+        margin-right: $list-inline-padding;
+      }
+    }
+  }
 }
+
+
+
+//
+// Responsive
+//
+
 
 @include media-breakpoint-up(lg) {
   .app-footer {
     max-width: map-get($grid-breakpoints, lg);
     margin-left: auto;
     margin-right: auto;
+
+    .footer-item {
+      &--left {
+        text-align: left;
+      }
+
+      &--right {
+        text-align: right;
+      }
+    }
   }
 }
 

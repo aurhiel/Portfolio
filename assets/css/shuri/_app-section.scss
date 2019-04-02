@@ -222,6 +222,14 @@
 @include media-breakpoint-up(md) {
   .app-section {
     padding: 3rem 2rem;
+
+    &--contact {
+      padding: 0;
+
+      .--inner {
+        padding: 3.2rem 1.2rem;
+      }
+    }
   }
 }
 
