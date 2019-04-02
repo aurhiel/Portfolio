@@ -18,6 +18,9 @@
     {# meta.favicons #}
     {% include 'components/head-favicons.html.twig' %}
 
+    {# OGs #}
+    <meta property="og:image" content="{{ asset('build/images/og-image.png') }}">
+
     {# meta.desc #}
     {%- block meta_desc -%}
       {% if meta.desc is defined and meta.desc is not empty %}
