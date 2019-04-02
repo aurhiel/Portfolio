@@ -71,10 +71,10 @@ var shuri = {
       var $elem = $(this);
       var position_show_elem = scroll.position + (self.$window.height() * .9); // 0.9 = 10% of window height
       // get if must display elements on bottom of the website (who are not displayed due to 10%)
-      var position_max = scroll.position + self.$window.height();
+      var position_max = scroll.position + self.$window.height() + 5; // ugly fix for mobile
       var has_reached_end = (position_max >= Math.round(self.$body.height()));
 
-      // console.log(position_max+' >= '+Math.round(self.$body.height()), has_reached_end);
+      // console.log($elem.attr('class')+': '+position_max+' >= '+Math.round(self.$body.height()), has_reached_end);
 
       if( position_show_elem > $elem.offset().top || has_reached_end)
         $elem.removeClass(self.scroll_hide_class);
@@ -110,7 +110,7 @@ var shuri = {
       data    : this.$form_contact.serialize(),
       error   : function(jqXHR, status, error) {
         // Abort raven (remove body class, ...)
-        raven.abort();
+        // raven.abort();
         // Print problem if not an abort()
         if(error != 'abort')
           alert(error);
@@ -128,6 +128,9 @@ var shuri = {
 
           // Hide form
           self.$body.removeClass('app-core--display-form-contact');
+
+          // Force navbar close for mobile (< sm)
+          self.navbar__close();
         } else {
           self.$contact_toast.addClass('toast-error');
         }
@@ -178,8 +181,9 @@ var shuri = {
     self.$html_body = $('html, body')
     self.$window    = $(window);
     // // Set header nodes
-    self.$header        = self.$body.find('.app-header');
-    self.$header_navbar = self.$header.find('.navbar');
+    self.$header          = self.$body.find('.app-header');
+    self.$header_navbar   = self.$header.find('.navbar');
+    self.$navbar_toggler  = self.$header_navbar.find('.navbar-toggler');
     // // Set scroll elems node
     self.$scroll_elems  = self.$body.find('.scrolling-machine');
     // // Toaster (main toast container)
@@ -287,7 +291,6 @@ var shuri = {
     });
 
     // // Toggle Menu display CSS class on body
-    self.$navbar_toggler = self.$header_navbar.find('.navbar-toggler');
     self.$navbar_toggler.on('click', function() {
       var $toggler = $(this);
 

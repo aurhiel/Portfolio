@@ -4,7 +4,7 @@
 
 .app-footer {
   color: $gray-600;
-  font-size: .85rem;
+  font-size: .8rem;
   text-align: center;
 
   a {
@@ -44,13 +44,17 @@
 // Responsive
 //
 
-
-@include media-breakpoint-up(lg) {
+// // DOWN
+@include media-breakpoint-down(sm) {
   .app-footer {
-    max-width: map-get($grid-breakpoints, lg);
-    margin-left: auto;
-    margin-right: auto;
+    padding-left: 0;
+    padding-right: 0;
+  }
+}
 
+// // UP
+@include media-breakpoint-up(md) {
+  .app-footer {
     .footer-item {
       &--left {
         text-align: left;
@@ -60,6 +64,14 @@
         text-align: right;
       }
     }
+  }
+}
+
+@include media-breakpoint-up(lg) {
+  .app-footer {
+    max-width: map-get($grid-breakpoints, lg);
+    margin-left: auto;
+    margin-right: auto;
   }
 }
 
