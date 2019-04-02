@@ -46,7 +46,7 @@ class StaticPagesController extends AbstractController
             'data' => array(
                 'meta' => array(
                     'title'   => 'Mentions Légales',
-                    'robots'  => 'noindex, nofollow'
+                    'robots'  => 'index, follow'
                 ),
                 'owner'     => $owner,
                 'developer' => $developer,

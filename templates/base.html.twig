@@ -1,5 +1,6 @@
 {# default twig values #}
 {% if bg_animated is not defined %}{% set bg_animated = false %}{% endif %}
+{% set domain = app.request.getSchemeAndHttpHost() %}
 <!DOCTYPE html>
 <html lang="fr">
   <head>
@@ -19,7 +20,13 @@
     {% include 'components/head-favicons.html.twig' %}
 
     {# OGs #}
-    <meta property="og:image" content="{{ asset('build/images/og-image.png') }}">
+    <meta property="og:url" content="{{ domain }}{{ path(app.request.attributes.get('_route'), app.request.attributes.get('_route_params')) }}">
+    <meta property="og:type" content="website">
+    <meta property="og:title" content="{% if meta.title is defined and meta.title is not empty %}{{ meta.title }} - {% endif %}Litti Aurélien | Développeur Web - Indépendant - Fullstack | Aix-en-Provence, Marseille, Toulon">
+    {% if meta.desc is defined and meta.desc is not empty %}
+    <meta property="og:description" content="{{ meta.desc }}" />
+    {% endif %}
+    <meta property="og:image" content="{{ domain }}{{ asset('build/images/og-image.png') }}">
 
     {# meta.desc #}
     {%- block meta_desc -%}

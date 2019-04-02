@@ -24,6 +24,10 @@ class HomeController extends AbstractController
         ]);
 
         return $this->render('home.html.twig', [
+            'meta'          => [
+                'robots'  => 'index, follow',
+                'desc'    => 'Développeur web freelance à Aix-en-provence et Toulon, je maîtrise plusieurs langages web (HTML, CSS, JS, PHP), CMS (Prestashop, Wordpress) et framework (Symfony, Silex, ...) me permettant de gérer tout type de projet sur-mesure ou non.'
+            ],
             'core_class'    => 'app-core--home',
             'bg_animated'   => true,
             'form_contact'  => $form_contact->createView()
