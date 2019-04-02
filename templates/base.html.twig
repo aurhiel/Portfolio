@@ -11,8 +11,10 @@
     <title>
     {%- block meta_title -%}
       {%- if meta.title is defined and meta.title is not empty -%}
-        {{ meta.title }} -
-      {%- endif -%}Litti Aurélien | Développeur Web - Indépendant - Fullstack | Aix-en-Provence, Marseille, Toulon
+        {{ meta.title }} - Litti Aurélien | Développeur Web - Indépendant - Fullstack | Aix-en-Provence, Marseille, Toulon
+      {% else %}
+        Litti Aurélien | Développeur Web - Indépendant - Fullstack | Aix-en-Provence, Marseille, Toulon
+      {%- endif -%}
     {%- endblock -%}
     </title>
 
