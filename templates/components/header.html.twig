@@ -1,9 +1,15 @@
+{% set is_home = (app.request.attributes.get('_route') == 'home') %}
+{% set nav_link_class = '' %}
+{% if is_home %}
+  {% set nav_link_class = ' scroll-to' %}
+{% endif %}
+
 <div class="app-header">
   <nav class="navbar navbar-expand-sm navbar-dark">
     <div class="container-fluid">
       {% block nav_brand %}
         {# NOTE Remove link (<a>) arround logo (brand) if current route (~path) is "home" #}
-        {% if app.request.attributes.get('_route') == 'home' %}
+        {% if is_home %}
         <span class="navbar-brand">
           {% include 'components/logo.html.twig' with { display_identity: true } %}
         </span>
@@ -23,13 +29,13 @@
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
           <ul class="navbar-nav ml-auto">
             <li class="nav-item">
-              <a class="nav-link scroll-to" href="#whoami">
-                À propos
+              <a class="nav-link{{ nav_link_class }}" href="{{ path('home') }}#qui-suis-je">
+                Qui suis-je ?
               </a>
             </li>
             <li class="nav-item{% if app.request.attributes.get('_route') == 'projects' %} active{% endif %}">
               {#<a class="nav-link" href="{{ path('projects') }}">#}
-              <a class="nav-link scroll-to" href="#projects">
+              <a class="nav-link{{ nav_link_class }}" href="{{ path('home') }}#projets">
                 Projets
               </a>
             </li>
@@ -37,7 +43,7 @@
               <a class="nav-link" href="#">Logs.</a>
             </li>#}
             <li class="nav-item">
-              <a class="btn-toggle-form-contact nav-link" href="#contact-form">
+              <a class="btn-toggle-form-contact nav-link" href="{{ path('home') }}#contact-form">
                 Contact
               </a>
             </li>
