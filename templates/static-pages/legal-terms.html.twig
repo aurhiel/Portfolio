@@ -1,0 +1,73 @@
+{% extends 'base.html.twig' %}
+{% set core_class = 'app-core--static-page' %}
+
+{% block body %}
+<div class="app-main-content bg-white p-4">
+  <h1 class="heading h2 mt-0">Mentions Légales</h1>
+
+  <p class="text-contextual">
+    Conformément à l'article L.122-4 du Code de la Propriété Intellectuelle,
+    « toute représentation ou reproduction intégrale ou partielle faite sans
+    le consentement de l' auteur ou de ses ayants droit ou ayants cause est
+    illicite. Il en est de même pour la traduction, l'adaptation ou la
+    transformation, l'arrangement ou la reproduction par un art ou un
+    procédé quelconque ».
+  </p>
+
+  <h2 class="h5">Propriétaire &amp; concepteur du site</h2>
+  <ul class="list-group-wonderful">
+    <li>
+      <span class="label">Nom : </span>
+      <span class="value">{{ developer.firstname }} {{ developer.lastname }}</span>
+    </li>
+    <li>
+      <span class="label">Téléphone : </span>
+      <span class="value">{{ owner.phone }}</span>
+    </li>
+    <li>
+      <span class="label">Email : </span>
+      <span class="value">{{ owner.email }}</span>
+    </li>
+  </ul>
+
+  <h2 class="h5">Hébergeur du site</h2>
+  <ul class="list-group-wonderful">
+    <li>
+      <span class="label">Nom : </span>
+      <span class="value">{{ web_host.name }}</span>
+    </li>
+    <li>
+      <span class="label">Forme sociale : </span>
+      <span class="value">{{ web_host.social_form }}</span>
+    </li>
+    <li>
+      <span class="label">Adresse postale : </span>
+      <span class="value">{{ web_host.address }}</span>
+    </li>
+    <li>
+      <span class="label">Téléphone : </span>
+      <span class="value">{{ web_host.phone }}</span>
+    </li>
+  </ul>
+
+  <h2 class="heading h2">Médias &amp; technologies utilisées</h2>
+  <p class="text-contextual">
+    Ce site web a été développé à l'aide du framework PHP <a href="http://symfony.com/" target="_blank">Symfony</a>
+    (version 4.1), du framework HTML <a href="https://getbootstrap.com/" target="_blank">Bootstrap</a>
+    (version 4.1.1) et de la bibliothèque JS <a href="http://jquery.com/">jQuery</a>.
+  </p>
+  <p class="text-contextual">
+    Les icônes d'illustration, <a href="https://linearicons.com/" target="_blank">Linearicons</a>,
+    sont la propriétées de son créateur <a href="https://perxis.com/" target="_blank">Perxis</a>
+    et sous licence <a href="https://creativecommons.org/licenses/by-sa/4.0/">CC BY-SA 4.0</a>.
+    Le fond du noir du site vient quant à lui du site <a href="https://www.toptal.com/designers/subtlepatterns/">Subtle Patterns par Toptal</a>.
+  </p>
+
+  <h2 class="heading h2">Données utilisateurs</h2>
+  <p class="text-contextual">
+    Aucunes données, tel que des cookies ou la localisation,
+    ne sont utilisés par ce site. Vous ne serez contacté à des fins commerciales
+    que dans le cas où vous utiliseriez le formulaire de contact.
+  </p>
+</div>
+{% endblock %}
