@@ -92,7 +92,8 @@ class ContactType extends AbstractType
                   'form_contact.project_type.choices.1.label' => 'from-scratch',
                   'form_contact.project_type.choices.2.label' => 'cms',
                   'form_contact.project_type.choices.3.label' => 'landing',
-                  'form_contact.project_type.choices.4.label' => 'update'
+                  'form_contact.project_type.choices.4.label' => 'update',
+                  'form_contact.project_type.choices.5.label' => 'other'
                 ]
             ])
             ->add('cancel',         ButtonType::class, [

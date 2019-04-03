@@ -43,6 +43,8 @@ form_contact :
             label : "Site de présentation simple (sur-mesure et statique)"
           4 :
             label : "Reprise ou mise-à-jour d'un site existant (tout type)"
+          5 :
+            label : "Autre type de site (à préciser dans votre message)"
     # Buttons
     cancel :
         label       : "Annuler"
