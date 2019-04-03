@@ -17,37 +17,59 @@ class ContactType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('lastname',     TextType::class, [
+            ->add('lastname',       TextType::class, [
                 'label'       => 'form_contact.lastname.label',
                 'label_attr'  => [ 'class' => 'sr-only'],
-                'attr'        => [ 'placeholder' => 'form_contact.lastname.placeholder' ]
-            ])
-            ->add('firstname',    TextType::class, [
-                'label' => 'form_contact.firstname.label',
-                'required'    => true,
-                'label_attr'  => [ 'class' => 'sr-only'],
-                'attr'  => [ 'placeholder' => 'form_contact.firstname.placeholder' ]
-            ])
-            ->add('email',        EmailType::class, [
-                'label' => 'form_contact.email.label',
-                'label_attr'  => [ 'class' => 'sr-only'],
-                'attr'  => [ 'placeholder' => 'form_contact.email.placeholder' ]
-            ])
-            ->add('message',      TextareaType::class, [
-                'label' => 'form_contact.message.label',
-                'label_attr'  => [ 'class' => 'sr-only'],
-                'attr'  => [
-                    'placeholder' => 'form_contact.message.placeholder',
-                    'rows'        => 5
+                'attr'        => [
+                    'placeholder' => 'form_contact.lastname.placeholder',
+                    'class'       => 'required-giga'
                 ]
             ])
-            ->add('is_quote',     CheckboxType::class, [
+            ->add('firstname',      TextType::class, [
+                'label'       => 'form_contact.firstname.label',
+                'required'    => true,
+                'label_attr'  => [ 'class' => 'sr-only'],
+                'attr'        => [
+                    'placeholder' => 'form_contact.firstname.placeholder',
+                    'class'       => 'required-supra'
+                ]
+            ])
+            ->add('email',          EmailType::class, [
+                'label'       => 'form_contact.email.label',
+                'label_attr'  => [ 'class' => 'sr-only'],
+                'attr'        => [
+                    'placeholder' => 'form_contact.email.placeholder',
+                    'class'       => 'required-supra'
+                ]
+            ])
+            // Anti-bot attempt
+            ->add('email_confirm',  EmailType::class, [
+                'label'       => false,
+                'label_attr'  => [ 'class' => 'sr-only'],
+                'attr'        => [
+                    'placeholder' => 'form_contact.email_confirm.placeholder',
+                    'class'       => 'required-maxi',
+                    // remove tab focus for classic users (but may help bot to not complete the input ...)
+                    'tabIndex'    => '-1'
+                ],
+                'required'    => false
+            ])
+            ->add('message',        TextareaType::class, [
+                'label'       => 'form_contact.message.label',
+                'label_attr'  => [ 'class' => 'sr-only'],
+                'attr'        => [
+                    'placeholder' => 'form_contact.message.placeholder',
+                    'rows'        => 5,
+                    'class'       => 'required-giga'
+                ]
+            ])
+            ->add('is_quote',       CheckboxType::class, [
                 'label'       => 'form_contact.is_quote.label',
                 'label_attr'  => [ 'class' => 'checkbox-custom' ],
                 'required'    => false,
                 'mapped'      => false
             ])
-            ->add('amount',       ChoiceType::class, [
+            ->add('amount',         ChoiceType::class, [
                 'label'       => 'form_contact.amount.label',
                 'label_attr'  => ['class' => 'sr-only'],
                 // 'label_attr'  => ['class' => 'custom-select'], // TODO : not working ... (select-custom either)
@@ -60,7 +82,7 @@ class ContactType extends AbstractType
                   'form_contact.amount.choices.4.label' => '10k+'
                 ]
             ])
-            ->add('project_type', ChoiceType::class, [
+            ->add('project_type',   ChoiceType::class, [
                 'label'       => 'form_contact.project_type.label',
                 'label_attr'  => [ 'class' => 'sr-only'],
                 // 'label_attr'  => ['class' => 'custom-select'], // TODO : not working ... (select-custom either)
@@ -73,13 +95,17 @@ class ContactType extends AbstractType
                   'form_contact.project_type.choices.4.label' => 'update'
                 ]
             ])
-            ->add('cancel',       ButtonType::class, [
+            ->add('cancel',         ButtonType::class, [
                 'label' => 'form_contact.cancel.label',
-                'attr' => [ 'class' => 'btn-toggle-form-contact btn-outline-secondary text-white mx-2' ]
+                'attr'  => [
+                    'class' => 'btn-toggle-form-contact btn-outline-secondary text-white mx-2'
+                ]
             ])
-            ->add('send',         SubmitType::class, [
+            ->add('send',           SubmitType::class, [
                 'label' => 'form_contact.submit.label',
-                'attr' => [ 'class' => 'btn-send btn-primary px-5 mx-2' ]
+                'attr'  => [
+                    'class' => 'btn-send btn-primary px-5 mx-2'
+                ]
             ])
         ;
     }

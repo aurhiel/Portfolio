@@ -37,6 +37,12 @@
         </div>
 
         <div class="form-group">
+          {{ form_label(form_contact.email_confirm) }}
+          {{ form_widget(form_contact.email_confirm) }}
+          {{ form_errors(form_contact.email_confirm) }}
+        </div>
+
+        <div class="form-group">
           {{ form_label(form_contact.message) }}
           {{ form_widget(form_contact.message) }}
           {{ form_errors(form_contact.message) }}

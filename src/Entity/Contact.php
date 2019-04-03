@@ -23,6 +23,11 @@ class Contact
     protected $email;
 
     /**
+     * @Assert\Email
+     */
+    protected $email_confirm;
+
+    /**
      * @Assert\NotBlank
      */
     protected $message;
@@ -63,6 +68,18 @@ class Contact
     public function setEmail(string $email): self
     {
         $this->email = $email;
+
+        return $this;
+    }
+
+    public function getEmailConfirm(): ?string
+    {
+        return $this->email_confirm;
+    }
+
+    public function setEmailConfirm(string $email_confirm): self
+    {
+        $this->email_confirm = $email_confirm;
 
         return $this;
     }

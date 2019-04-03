@@ -18,7 +18,7 @@
 
       .#{$theme-prefix}identity {
         max-width: 20rem;
-        text-align: left;
+        text-align: center;
         margin: 2rem auto 0 auto;
       }
 
@@ -58,6 +58,7 @@
         padding-top: 4.4rem;
 
         .#{$theme-prefix}identity {
+          text-align: left;
           margin-left: 0;
         }
 

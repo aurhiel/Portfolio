@@ -9,6 +9,9 @@ form_contact :
     email :
         label       : "Email"
         placeholder : "Email"
+    email_confirm :
+        label       : "Email de confirmation"
+        placeholder : "Email de confirmation"
     message :
         label       : "Message"
         placeholder : "Votre message ici ..."

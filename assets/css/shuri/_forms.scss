@@ -26,3 +26,15 @@ form {
     color: $input-disabled-color;
   }
 }
+
+
+// Specific form
+//
+
+.form--contact {
+  // Anti-bot attempt
+  .required-maxi {
+    position: absolute;
+    left: -100%;
+  }
+}
