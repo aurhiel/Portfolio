@@ -33,6 +33,12 @@
           margin $theme-transition-duration * 2.2 ease-in-out,
           opacity $theme-transition-duration ease-in-out $theme-transition-duration + 400ms;
       }
+
+      &:nth-child(4) {
+        transition:
+          margin $theme-transition-duration * 2.2 ease-in-out,
+          opacity $theme-transition-duration ease-in-out $theme-transition-duration + 600ms;
+      }
     }
   }
 }
@@ -89,7 +95,7 @@
 }
 
 
-@include media-breakpoint-up(sm) {
+@include media-breakpoint-up(md) {
   .app-core {
     &--navbar-show {
       overflow: auto;

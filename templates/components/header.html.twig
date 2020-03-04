@@ -5,7 +5,7 @@
 {% endif %}
 
 <header class="app-header">
-  <nav class="navbar navbar-expand-sm navbar-dark">
+  <nav class="navbar navbar-expand-md navbar-dark">
     <div class="container-fluid">
       {% block nav_brand %}
         {# NOTE Remove link (<a>) arround logo (brand) if current route (~path) is "home" #}
@@ -37,6 +37,11 @@
               {#<a class="nav-link" href="{{ path('projects') }}">#}
               <a class="nav-link{{ nav_link_class }}" href="{{ path('home') }}#projets">
                 Projets
+              </a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link{{ nav_link_class }}"  href="{{ path('home') }}#temoignages">
+                Témoignages
               </a>
             </li>
             {#<li class="nav-item">
