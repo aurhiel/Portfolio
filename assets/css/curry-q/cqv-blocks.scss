@@ -134,10 +134,10 @@
 
       &:after {
         content: '';
-        background-color: currentColor;
+        border-bottom: .1em solid;
         display: block;
         width: 3em;
-        height: .1em;
+        height: 0;
         margin: .2em auto 0;
         opacity: .1;
       }

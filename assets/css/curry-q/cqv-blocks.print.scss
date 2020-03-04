@@ -3,6 +3,10 @@
 .cqv-block {
   padding: 0;
 
+  &.block--default {
+    background: none;
+  }
+
   &.block--transparent {
     background: none;
     color: #444;
@@ -15,6 +19,10 @@
     width: 75%;
     padding: 1em;
     margin-bottom: 3em;
+
+    &:after {
+      display: none;
+    }
 
     > ._name {
       display: block;
@@ -61,10 +69,14 @@
   }
 
   &.block--spare-time {
-    margin-top: 4em;
+    margin-top: 2em;
 
     > ._title {
       color: darken($text-color, 10%);
+    }
+
+    &:after {
+      display: none;
     }
   }
 

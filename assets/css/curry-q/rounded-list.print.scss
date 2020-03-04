@@ -13,24 +13,28 @@
 
   &.item--music {
     > ._icon {
+      background: none;
       color: #e67e22;
     }
   }
 
   &.item--cinema {
     > ._icon {
+      background: none;
       color: #3498db;
     }
   }
 
   &.item--moto {
     > ._icon {
+      background: none;
       color: #34495e;
     }
   }
 
   &.item--gaming {
     > ._icon {
+      background: none;
       color: #9b59b6;
     }
   }

@@ -5,8 +5,8 @@ version: "3.1"
 services:
 
     mysql:
-      image: mysql:8.0
-      container_name: litti-aurelien-mysql
+      image: mysql:5.7
+      container_name: la--mysql
       working_dir: /application
       volumes:
         - .:/application
@@ -17,10 +17,14 @@ services:
         - MYSQL_PASSWORD=dbuserpw
       ports:
         - "8004:3306"
+      # Opens port 3306 on the container
+      ## (useful for softwares like MySQL Workbench)
+      expose:
+        - '3306'
 
     webserver:
       image: nginx:alpine
-      container_name: litti-aurelien-webserver
+      container_name: la--webserver
       working_dir: /application
       volumes:
           - .:/application
@@ -30,9 +34,8 @@ services:
 
     php-fpm:
       build: phpdocker/php-fpm
-      container_name: litti-aurelien-php-fpm
+      container_name: la--php-fpm
       working_dir: /application
       volumes:
         - .:/application
         - ./phpdocker/php-fpm/php-ini-overrides.ini:/etc/php/7.2/fpm/conf.d/99-overrides.ini
-

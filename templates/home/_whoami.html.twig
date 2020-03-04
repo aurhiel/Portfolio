@@ -4,7 +4,7 @@
       <h3 class="heading" id="qui-suis-je" data-text="Qui suis-je ?">Qui suis-je ?</h3>
       <p class="text-contextual">
         Développeur web depuis maintenant {{ 'now'|date('Y') - identity.year_start_work }}&nbsp;ans,
-        et en tant que freelance depuis {{ 'now'|date('Y') - identity.year_start_freelance }}&nbsp;an,
+        et en tant que freelance depuis {{ 'now'|date('Y') - identity.year_start_freelance }}&nbsp;an{% if ('now'|date('Y') - identity.year_start_freelance) > 1 %}s{% endif %},
         j'aime me diversifier dans les multiples domaines du web, allant de la
         réalisation d'une maquette, en passant par son intégration (front-end)
         et développement (back-end).
@@ -39,7 +39,7 @@
             </p>
           </div>
           <div class="card-hidden-info d-flex align-items-center p-4">
-            <div class="--text w-100 text-center">
+            <div class="--text">
               L'ensemble de mes sites sont réalisés de manière &laquo;&nbsp;responsive&nbsp;&raquo;,
               ils s'adaptent à tous les formats d'écran.
             </div>
@@ -55,7 +55,7 @@
             </p>
           </div>
           <div class="card-hidden-info d-flex align-items-center p-4">
-            <div class="--text w-100 text-center">
+            <div class="--text">
               Je développe mes applications web pour qu'elles soient à la fois
               performantes mais aussi adaptées à tout profil d'utilisateur.
             </div>
@@ -71,7 +71,7 @@
             </p>
           </div>
           <div class="card-hidden-info d-flex align-items-center p-4">
-            <div class="--text w-100 text-center">
+            <div class="--text">
               J'aime créer des designs simples mais toujours originaux
               afin qu'ils perdurent dans le temps.
             </div>
@@ -87,7 +87,7 @@
             </p>
           </div>
           <div class="card-hidden-info d-flex align-items-center p-4">
-            <div class="--text w-100 text-center">
+            <div class="--text">
               Je m'efforce à produire un code clair, commenté, voir documenté
               afin de faciliter son suivi &amp; son amélioration.
             </div>
@@ -103,7 +103,7 @@
             </p>
           </div>
           <div class="card-hidden-info d-flex align-items-center p-4">
-            <div class="--text w-100 text-center">
+            <div class="--text">
               Front-end : Bootstrap, jQuery<strongr>
               Back-end : Symfony<strongr>
               CMS : Prestashop, Wordpress<strongr>
@@ -123,7 +123,7 @@
             </p>
           </div>
           <div class="card-hidden-info d-flex align-items-center p-4">
-            <div class="--text w-100 text-center">
+            <div class="--text">
               &amp; écologique ! // TODO
             </div>
           </div>
