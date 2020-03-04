@@ -6,7 +6,7 @@ services:
 
     mysql:
       image: mysql:5.7
-      container_name: la--mysql
+      container_name: litti-aurelien-mysql
       working_dir: /application
       volumes:
         - .:/application
@@ -24,7 +24,7 @@ services:
 
     webserver:
       image: nginx:alpine
-      container_name: la--webserver
+      container_name: litti-aurelien-webserver
       working_dir: /application
       volumes:
           - .:/application
@@ -34,7 +34,7 @@ services:
 
     php-fpm:
       build: phpdocker/php-fpm
-      container_name: la--php-fpm
+      container_name: litti-aurelien-php-fpm
       working_dir: /application
       volumes:
         - .:/application
