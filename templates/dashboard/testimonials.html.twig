@@ -1,0 +1,72 @@
+{% extends 'dashboard/components/base.html.twig' %}
+
+{% block body %}
+  <div class="container">
+    <h2 class="h4 mb-3">Générer un témoignage</h2>
+
+    <form class="form form-inline" action="{{ path('dashboard_testimonials') }}" method="post">
+      <label class="sr-only" for="testimonial-client">Client</label>
+      <!-- <input type="text" class="form-control mb-2 mb-sm-0 mr-sm-2" id="testimonial-client" placeholder="Jane Doe"> -->
+      <select class="custom-select mb-2 mb-sm-0 mr-sm-2" id="testimonial-client" name="testimonial-client" required="required">
+        {% for client in clients %}
+          <option value="{{ client.id }}">{{ client.lastname }} {{ client.firstname }}</option>
+        {% endfor %}
+      </select>
+
+      <button class="btn btn-primary" type="submit" name="launch" value="exec">Générer le token</button>
+    </form>
+
+    <hr class="w-50 mx-auto my-5">
+
+    <h2 class="h4 mb-3">Liste des témoignages</h2>
+    {% if testimonials is defined and testimonials is not empty %}
+      <div class="table-responsive table-bordered">
+        <table class="table table-striped mb-0">
+          <thead>
+            <tr>
+              <th scope="col"></th>
+              <th scope="col">#</th>
+              <th scope="col">Client</th>
+              <th scope="col">Token</th>
+              <th scope="col">Message</th>
+            </tr>
+          </thead>
+          <tbody>
+          {% for testimonial in testimonials %}
+            <tr>
+              <td>
+                <div class="custom-control custom-checkbox checkbox-toggle-testimonial">
+                  <input type="checkbox" class="custom-control-input"
+                    id="show-{{ testimonial.id }}" name="show-{{ testimonial.id }}" value="{{ testimonial.id }}"
+                      {% if testimonial.isActive %}checked="checked"{% endif %}>
+                  <label class="custom-control-label" for="show-{{ testimonial.id }}">
+                    <span class="sr-only">activer le témoignagne</span>
+                  </label>
+                </div>
+              </td>
+              <td>{{ testimonial.id }}</td>
+              <td>[{{ testimonial.client.company }}] {{ testimonial.client.lastname }} {{ testimonial.client.firstname }}</td>
+              <td>
+                <a href="{{ path('golden_book', { token: testimonial.token }) }}"
+                  target="_blank">
+                  {{ testimonial.token }}
+                </a>
+              </td>
+              <td>{{ testimonial.message|nl2br }}</td>
+            </tr>
+          {% endfor %}
+          </tbody>
+        </table>
+      </div>
+    {% else %}
+      <div class="alert alert-secondary">Aucun témoignage</div>
+    {% endif %}
+  </div>
+  <script type="text/javascript">
+    var DASH_SETTINGS = {
+      urls : {
+        toggle_testimonial: '{{ path('dashboard_testimonials_toggle', { id: '__ID__' }) }}'
+      }
+    };
+  </script>
+{% endblock %}

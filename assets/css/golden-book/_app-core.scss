@@ -1,0 +1,33 @@
+// Core
+//
+
+.app-core {
+  &--golden-book {
+    margin: 0 auto;
+
+    .app-main-content {
+      background-color: $white;
+      margin-bottom: 2rem;
+
+      .form {
+        max-width: 32rem;
+        margin: 0 auto;
+      }
+    }
+  }
+}
+
+
+@include media-breakpoint-up(md) {
+  .app-core {
+    &--golden-book {
+      max-width: 700px;
+
+      .app-main-content {
+        margin-left: $grid-gutter-width / 2;
+        margin-right: $grid-gutter-width / 2;
+        border-radius: .4rem;
+      }
+    }
+  }
+}

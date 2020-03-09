@@ -1,0 +1,53 @@
+{% extends 'base.html.twig' %}
+{% set core_class = 'app-core--golden-book app-core--hide-menu' %}
+
+{# Add Stylesheets #}
+{% block stylesheets %}
+  <link rel="stylesheet" href="{{ asset('build/golden-book.css') }}">
+{% endblock %}
+
+{% block body %}
+  <div class="app-main-content">
+    <section class="app-section">
+      <h1 class="heading h3 text-center my-4 mt-md-2" data-text="Livre d'Or" style="--heading-text-drop-offset: -2.3em;">
+        Livre d'Or
+      </h1>
+      <div class="description small text-muted text-center mx-auto mb-4">
+        <p class="mb-1">
+          Bienvenue sur l'espace de saisi de votre témoignage, {{ client.firstname }}.
+        </p>
+        <p class="mb-1">
+          Je vous ai récemment contacté afin que vous me donniez votre avis
+          sur mon travail passé ou en cours.
+        </p>
+        <p class="mb-0">
+          Vous trouverez donc ci-dessous un formulaire pour que vous puissiez me
+          faire ce retour en quelques mots, il sera ensuite visible sur la page
+          d'accueil du site, une fois validé.
+        </p>
+      </div>
+
+      <form class="form text-center" method="post">
+        <label for="testimonial-message" class="sr-only">Témoignage</label>
+        <textarea class="form-control form-control--bordered" id="testimonial-message"
+          name="testimonial-message" rows="6" required="required"
+            placeholder="Saisissez ici votre témoignage...">{{ testimonial.message }}</textarea>
+
+        <div class="custom-control custom-control--bordered custom-checkbox mt-2">
+          <input type="checkbox" {% if testimonial.displayNames is null or testimonial.displayNames == true %}checked="checked" {% endif %}
+            id="testimonial-display-names" name="testimonial-display-names" class="custom-control-input">
+          <label class="custom-control-label text-left" for="testimonial-display-names">
+            Afficher votre nom & prénom ({{ client.firstname }} {{ client.lastname|first }}.) sur le site
+            <small class="text-hint">Sinon seul le nom de l'entreprise sera visible</small>
+          </label>
+        </div>
+
+        <button class="btn btn-primary mt-3" type="submit" name="testimonial-send" value="exec">
+          Envoyer
+        </button>
+      </form>
+    </section>
+  </div>
+{% endblock %}
+
+{% block footer %}{# hide footer #}{% endblock %}

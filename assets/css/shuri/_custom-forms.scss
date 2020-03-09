@@ -1,0 +1,21 @@
+// Custom forms
+//
+
+
+// Bordered
+.custom-control {
+
+  &--bordered {
+    .custom-control-label {
+      &:before {
+        border-width: 1px;
+      }
+    }
+  }
+
+  .text-hint {
+    color: $text-muted;
+    display: block;
+    margin-top: -.25rem;
+  }
+}

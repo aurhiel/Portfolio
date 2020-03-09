@@ -39,11 +39,13 @@
                 Projets
               </a>
             </li>
-            <li class="nav-item">
-              <a class="nav-link{{ nav_link_class }}"  href="{{ path('home') }}#temoignages">
-                Témoignages
-              </a>
-            </li>
+            {% if testimonials is defined and testimonials|length > 0 %}
+              <li class="nav-item">
+                <a class="nav-link{{ nav_link_class }}"  href="{{ path('home') }}#temoignages">
+                  Témoignages
+                </a>
+              </li>
+            {% endif %}
             {#<li class="nav-item">
               <a class="nav-link" href="#">Logs.</a>
             </li>#}

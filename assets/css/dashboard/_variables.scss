@@ -1,0 +1,237 @@
+// Bootstrap's variables
+//
+// Bootstrap's variables overrides for Shuri's theme
+
+
+
+// Colors system
+//
+
+// Black, Gray and White pallet
+$white:    #fff;
+// $gray-100: #f8f9fa;
+// $gray-200: #e9ecef;
+// $gray-300: #dee2e6;
+// $gray-400: #ced4da;
+$gray-500: #adb5bd;
+// $gray-600: #6c757d;
+$gray-700: #38353c;
+$gray-800: #27252a; // #2d2733;
+$gray-900: #29262C;
+// $black:    #211f23;
+
+// Colors pallet
+// $blue:    #23B07F;
+// $indigo:  #6610f2;
+// $purple:  #6f42c1;
+// $pink:    #e83e8c;
+// $red:     #dc3545;
+// $orange:  #fd7e14;
+// $yellow:  #ffc107;
+// $green:   #28a745;
+$teal:    #23b07f;
+// $cyan:    #17a2b8;
+
+$primary:       $teal;
+// $secondary:     $gray-600;
+// $success:       $green;
+// $info:          $cyan;
+// $warning:       $yellow;
+// $danger:        $red;
+// $light:         $gray-100;
+$dark:          $gray-800;
+
+
+// Body
+//
+// Settings for the `<body>` element.
+
+$body-bg:                   $white;
+// $body-color:                $gray-900 !default;
+
+
+
+// Grid breakpoints
+//
+
+$grid-breakpoints: (
+  xs: 0,
+  sm: 576px,
+  md: 768px,
+  lg: 992px,
+  xl: 1200px,
+  xxl: 1400px
+);
+
+
+// Grid containers
+//
+
+$container-max-widths: (
+  sm: 540px,
+  md: 720px,
+  lg: 960px,
+  xl: 1140px,
+  xxl: 1340px
+);
+
+
+
+// Options
+//
+// Quickly modify global styling by enabling or disabling optional features.
+
+// $enable-caret:                                true !default;
+// $enable-rounded:                              true !default;
+// $enable-shadows:                              true;
+// $enable-gradients:                            false !default;
+// $enable-transitions:                          true !default;
+// $enable-prefers-reduced-motion-media-query:   true !default;
+// $enable-hover-media-query:                    false !default; // Deprecated, no longer affects any compiled CSS
+// $enable-grid-classes:                         true !default;
+// $enable-pointer-cursor-for-buttons:           true !default;
+// $enable-print-styles:                         true !default;
+// $enable-responsive-font-sizes:                false !default;
+// $enable-validation-icons:                     true !default;
+// $enable-deprecation-messages:                 true !default;
+
+
+// Typography
+//
+// Font, line-height, and color for body text, headings, and more.
+
+// $font-size-base:              1rem !default; // Assumes the browser default, typically `16px`
+// $font-size-lg:                $font-size-base * 1.25 !default;
+// $font-size-sm:                $font-size-base * .875 !default;
+
+// $font-weight-lighter:         lighter !default;
+// $font-weight-light:           300 !default;
+// $font-weight-normal:          400 !default;
+$font-weight-bold:            600;
+// $font-weight-bolder:          bolder !default;
+
+// stylelint-disable value-keyword-case
+$font-family-sans-serif:      'Space Mono', SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+// $font-family-monospace:       SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+// $font-family-base:            $font-family-sans-serif;
+
+// $headings-margin-bottom:      $spacer / 2 !default;
+// $headings-font-family:        null !default;
+$headings-font-weight:        700;
+// $headings-line-height:        1.2 !default;
+// $headings-color:              null !default;
+
+
+// Text contextual (prettier text)
+//
+
+$contextual-font-size: .875rem;
+
+
+
+// Components
+//
+// Define common padding and border radius sizes and more.
+
+$border-radius:               .25rem;
+$border-radius-lg:            .3rem;
+$border-radius-sm:            .2rem;
+
+
+// Buttons + Form
+//
+
+$input-btn-padding-x:         1.5rem;
+$input-btn-padding-x-sm:      1rem;
+$input-btn-padding-x-lg:      2rem;
+
+$input-disabled-color:        $gray-700;
+$input-disabled-bg:           $gray-500;
+
+
+// Buttons
+//
+
+$btn-font-weight:             $font-weight-bold;
+
+// NOTE Transform buttons into pills
+$btn-border-radius:           $border-radius * 5;
+$btn-border-radius-lg:        $border-radius-lg * 5;
+$btn-border-radius-sm:        $border-radius-sm * 5;
+
+
+// NOTE Transform inputs into pills
+$input-border-radius: $border-radius * 4;
+$input-border-radius-sm: $border-radius-sm * 4;
+$input-border-radius-lg: $border-radius-lg * 4;
+
+// Remove border
+// $input-border-width: 0;
+$input-focus-box-shadow:  0 0 0 .2rem rgba($primary, .5);
+
+// Custom <select>
+$custom-select-border-radius: $input-border-radius;
+$custom-select-border-radius-sm: $input-border-radius-sm;
+$custom-select-border-radius-lg: $input-border-radius-lg;
+
+
+
+// Navbar (menu)
+//
+
+$navbar-bg:                   $dark;
+
+
+// Alerts
+//
+// Define alert colors, border radius, and padding.
+
+$alert-bg-level:                    0;
+$alert-border-level:                0;
+$alert-color-level:                 -10;
+
+$alert-font-weight:                 600;
+
+
+
+
+// Theme's variables
+//
+// Theme's variables should follow the `$component-state-property-size` formula for
+// consistent naming, coming from Bootstrap logic.
+
+
+// Prefix use for some CSS classes
+$theme-prefix: 'shuri-';
+
+// Roots for ressources
+$theme-root-build: '/build';
+$theme-root-fonts: '#{$theme-root-build}/fonts';
+$theme-root-images: '#{$theme-root-build}/images';
+$theme-bg-pattern: '#{$theme-root-images}/patterns/seigaiha.png';
+
+
+// Custom colors
+$theme-primary-deg-first: $primary;
+$theme-primary-deg-last:  #2ecc71; // #1abc9c; old one
+
+
+// Header
+$theme-header-min-height:     4.6rem;
+$theme-header-min-height-lg:  5.1rem;
+$theme-header-min-height-xl:  5.9rem;
+$theme-header-min-height-xxl: 7.1rem;
+
+
+// Animations
+$theme-transition-duration: 300ms;
+
+
+
+
+// Linearicons's variables
+//
+// NOTE After "Theme's variables" because of using variable $theme-root-fonts,
+//    coming from Theme's variables
+
+$icons-font-path: '#{$theme-root-fonts}/linearicons';

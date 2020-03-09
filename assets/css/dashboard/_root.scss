@@ -1,0 +1,15 @@
+// Root
+//
+
+:root {
+  font-size: 12px;
+}
+
+
+// Responsive
+
+@include media-breakpoint-up(lg) {
+  :root {
+    font-size: 14px;
+  }
+}

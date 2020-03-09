@@ -30,6 +30,25 @@
     }
   }
 
+  &--hide-menu {
+    .navbar-brand {
+      font-size: 1.4rem;
+      margin-top: -.2rem;
+    }
+
+    .navbar {
+      text-align: center;
+      display: block;
+      .container, .container-fluid {
+        display: block;
+      }
+    }
+
+    .navbar-toggler, .navbar-collapse {
+      display: none !important;
+    }
+  }
+
   &--static-page {
     .text-contextual {
       max-width: 42rem;
@@ -64,6 +83,14 @@
 // Maximized main content with border radiuses
 
 @include media-breakpoint-up(lg) {
+  .app-core {
+    &--hide-menu {
+      .navbar-brand {
+        margin-top: 0;
+      }
+    }
+  }
+
   .app-main-content {
     max-width: map-get($grid-breakpoints, lg);
     margin-left: auto;
@@ -74,12 +101,29 @@
 }
 
 @include media-breakpoint-up(xl) {
+  .app-core {
+    &--hide-menu {
+      .navbar-brand {
+        font-size: 1.6rem;
+        margin-top: .2rem;
+      }
+    }
+  }
+
   .app-main-content {
     max-width: map-get($grid-breakpoints, xl);
   }
 }
 
 @include media-breakpoint-up(xxl) {
+  .app-core {
+    &--hide-menu {
+      .navbar-brand {
+        margin-top: .8rem;
+      }
+    }
+  }
+
   .app-main-content {
     max-width: map-get($grid-breakpoints, xxl);
   }

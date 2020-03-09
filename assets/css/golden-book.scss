@@ -1,0 +1,14 @@
+// Golden Book page
+//
+
+
+// Libraries
+
+@import 'shuri/variables';
+@import 'shuri/mixins';
+@import 'bootstrap/required';  // node_module : Bootstrap required (Variables, Functions & Mixins)
+
+
+// Page components (core/header/footer/section/...)
+
+@import 'golden-book/app-core';

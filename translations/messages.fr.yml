@@ -1,52 +1,72 @@
 form_contact :
-    # Inputs
-    lastname :
-        label       : "Nom"
-        placeholder : "Nom"
-    firstname :
-        label       : "Prénom"
-        placeholder : "Prénom"
-    email :
-        label       : "Email"
-        placeholder : "Email"
-    email_confirm :
-        label       : "Email de confirmation"
-        placeholder : "Email de confirmation"
-    message :
-        label       : "Message"
-        placeholder : "Votre message ici ..."
-    # Checkboxes / Radios
-    is_quote :
-        label       : "Demande de devis"
-    # Selects
-    amount :
-        label       : "Budget"
-        placeholder : "Budget"
-        choices :
-          1 :
-            label : "500 - 1 000€"
-          2 :
-            label : "1 000 - 5 000€"
-          3 :
-            label : "5 000 - 10 000€"
-          4 :
-            label : "+10 000€"
-    project_type :
-        label       : "Type de projet"
-        placeholder : "Type de projet"
-        choices :
-          1 :
-            label : "Site sur-mesure (Symfony)"
-          2 :
-            label : "Site CMS (Wordpress, Prestashop, ...)"
-          3 :
-            label : "Site de présentation simple (sur-mesure et statique)"
-          4 :
-            label : "Reprise ou mise-à-jour d'un site existant (tout type)"
-          5 :
-            label : "Autre type de site (à préciser dans votre message)"
-    # Buttons
-    cancel :
-        label       : "Annuler"
-    submit :
-        label       : "Envoyer"
+  # Inputs
+  lastname :
+    label       : "Nom"
+    placeholder : "Nom"
+  firstname :
+    label       : "Prénom"
+    placeholder : "Prénom"
+  email :
+    label       : "Email"
+    placeholder : "Email"
+  email_confirm :
+    label       : "Email de confirmation"
+    placeholder : "Email de confirmation"
+  message :
+    label       : "Message"
+    placeholder : "Votre message ici ..."
+  # Checkboxes / Radios
+  is_quote :
+    label       : "Demande de devis"
+  # Selects
+  amount :
+    label       : "Budget"
+    placeholder : "Budget"
+    choices :
+      1 :
+        label : "500 - 1 000€"
+      2 :
+        label : "1 000 - 5 000€"
+      3 :
+        label : "5 000 - 10 000€"
+      4 :
+        label : "+10 000€"
+  project_type :
+    label       : "Type de projet"
+    placeholder : "Type de projet"
+    choices :
+      1 :
+        label : "Site sur-mesure (Symfony)"
+      2 :
+        label : "Site CMS (Wordpress, Prestashop, ...)"
+      3 :
+        label : "Site de présentation simple (sur-mesure et statique)"
+      4 :
+        label : "Reprise ou mise-à-jour d'un site existant (tout type)"
+      5 :
+        label : "Autre type de site (à préciser dans votre message)"
+  # Buttons
+  cancel :
+    label       : "Annuler"
+  submit :
+    label       : "Envoyer"
+
+## DASHBOARD TRANSLATIONS ##
+# Dashboard / Client form
+form_client :
+  # Inputs
+  company :
+    label       : "Société"
+    placeholder : "Société"
+  lastname :
+    label       : "Nom"
+    placeholder : "Nom"
+  firstname :
+    label       : "Prénom"
+    placeholder : "Prénom"
+  email :
+    label       : "Email"
+    placeholder : "Email"
+  # Buttons
+  submit :
+    label       : "Envoyer"

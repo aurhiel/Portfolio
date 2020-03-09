@@ -7,6 +7,7 @@ use Symfony\Component\Routing\Annotation\Route;
 
 // Entities
 use App\Entity\Contact;
+use App\Entity\Testimonial;
 
 // Forms
 use App\Form\ContactType;
@@ -18,10 +19,17 @@ class HomeController extends AbstractController
      */
     public function index()
     {
+        $em = $this->getDoctrine()->getManager();
+
+        // Create contact form
         $contact      = new Contact();
         $form_contact = $this->createForm(ContactType::class, $contact, [
             'action' => $this->generateUrl('contact')
         ]);
+
+        // Retrieve testimonials
+        $r_testimonials = $em->getRepository(Testimonial::class);
+        $testimonials   = $r_testimonials->findAll(true);
 
         return $this->render('home.html.twig', [
             'meta'          => [
@@ -30,7 +38,8 @@ class HomeController extends AbstractController
             ],
             'core_class'    => 'app-core--home',
             'bg_animated'   => true,
-            'form_contact'  => $form_contact->createView()
+            'form_contact'  => $form_contact->createView(),
+            'testimonials'  => $testimonials
         ]);
     }
 }

@@ -19,6 +19,23 @@ class TestimonialRepository extends ServiceEntityRepository
         parent::__construct($registry, Testimonial::class);
     }
 
+    public function findAll($only_active = false)
+    {
+        $q = $this->createQueryBuilder('t', 't.id');
+
+        // Join relations
+        $q->join('t.client', 'client')
+          ->addSelect('client');
+
+        // Add WHERE limits
+        if ($only_active === true)
+            $q->andWhere('t.isActive = true');
+
+        return $q->orderBy('t.id', 'ASC')
+                 ->getQuery()
+                 ->getResult();
+    }
+
     // /**
     //  * @return Testimonial[] Returns an array of Testimonial objects
     //  */

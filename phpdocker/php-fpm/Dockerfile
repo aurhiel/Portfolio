@@ -1,6 +1,10 @@
 FROM phpdockerio/php72-fpm:latest
 WORKDIR "/application"
 
+# Force Timezone to "Europe/Paris"
+ENV TZ=Europe/Paris
+RUN ln -snf /usr/share/zoneinfo/$TZ /etc/localtime && echo $TZ > /etc/timezone
+
 # Fix debconf warnings upon build
 ARG DEBIAN_FRONTEND=noninteractive
 

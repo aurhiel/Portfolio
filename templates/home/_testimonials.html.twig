@@ -1,10 +1,15 @@
-<div class="app-section app-section--testimonials bg-white" style="min-height: 300px">
-  <div class="--inner scrolling-machine sm--from-center">
-    <h3 class="heading text-center" id="temoignages" data-text="Témoignages" style="--heading-text-drop-offset: -3em">Témoignages</h3>
+{% if testimonials is defined and testimonials|length > 0 %}
+  <div class="app-section app-section--testimonials bg-white" style="min-height: 300px">
+    <div class="--inner scrolling-machine sm--from-center">
+      <h3 class="heading text-center" id="temoignages" data-text="Témoignages" style="--heading-text-drop-offset: -3em">Témoignages</h3>
 
-    <div class="alert alert-warning text-center w-75 mx-auto">
-      <span class="icon icon-construction" style="font-size:1.4rem;margin-right:.4rem;opacity:.5;"></span>
-      <span style="font-family:monospace">/*TODO get testimonials*/</span>
+      {% for testimonial in testimonials %}
+        <div class="text-center">
+          <p>{{ testimonial.message|nl2br }}</p>
+          {% if testimonial.displayNames %}{{ testimonial.client.firstname }} {{ testimonial.client.lastname|first }}.<br>{% endif %}
+          <b>{{ testimonial.client.company }}</b>
+        </div>
+      {% endfor %}
     </div>
   </div>
-</div>
+{% endif %}

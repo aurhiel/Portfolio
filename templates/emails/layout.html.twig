@@ -172,13 +172,15 @@
         <td class="container">
           <div class="content">
             <div class="header">
-              <table border="0" cellpadding="0" cellspacing="0">
-                <tr>
-                  <td class="content-logo">
-                    <img src="https://litti-aurelien.fr/build/images/logo-circled.png" />
-                  </td>
-                </tr>
-              </table>
+              {% block header %}
+                <table border="0" cellpadding="0" cellspacing="0">
+                  <tr>
+                    <td class="content-logo">
+                      <img src="https://litti-aurelien.fr/build/images/logo-circled.png" />
+                    </td>
+                  </tr>
+                </table>
+              {% endblock %}
             </div>
             <table class="main">
               <tr>
@@ -196,17 +198,20 @@
               </tr>
             </table>
             <div class="footer">
-              <table border="0" cellpadding="0" cellspacing="0">
-                <tr>
-                  <td class="content-block">
-                    {# need to use real URL in twig file, because when an email is sent by the server result is "localhost" #}
-                    Email envoyé via le site
-                    <a href="https://litti-aurelien.fr/">Litti Aurélien</a>,
-                    <br>
-                    <b>IP</b> {{ visitor.ip }} - <b>HTTP_USER_AGENT</b> {{ visitor.agent }}
-                  </td>
-                </tr>
-              </table>
+              {% block footer %}
+                <table border="0" cellpadding="0" cellspacing="0">
+                  <tr>
+                    <td class="content-block">
+                      {# need to use real URL in twig file, because when an email is sent by the server result is "localhost" #}
+                      Email envoyé via le site
+                      <a href="https://litti-aurelien.fr/">Litti Aurélien</a>{% if visitor is defined and visitor.ip is defined and visitor.agent is defined %},
+                      <br>
+                      <b>IP</b> {{ visitor.ip }} - <b>HTTP_USER_AGENT</b> {{ visitor.agent }}
+                      {% endif %}
+                    </td>
+                  </tr>
+                </table>
+              {% endblock %}
             </div>
           </div>
         </td>

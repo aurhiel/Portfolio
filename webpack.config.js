@@ -26,8 +26,14 @@ Encore
     // // Page : Home
     .addStyleEntry('home', './assets/css/home.scss')
 
+    // // Page : Golden book "Livre d'Or"
+    .addStyleEntry('golden-book', './assets/css/golden-book.scss')
+
     // // Page : Curriculum vitae
     .addStyleEntry('curry-q', './assets/css/curry-q.scss')
+
+    // Dashboard theme
+    .addEntry('dashboard', './assets/js/dashboard.js')
 
     // will require an extra script tag for runtime.js
     // but, you probably want this, unless you're building a single-page app
@@ -46,7 +52,9 @@ Encore
     // Google Fonts
     .addPlugin(new GoogleFontsPlugin({
       fonts: [
-        // { family: "Quicksand", variants: [ "400", "500", "700" ] },
+        // { family: "Roboto Mono", variants: [ "400", "700" ] },
+        // { family: "PT Mono", variants: [ "400", "700" ] },
+        { family: "Space Mono", variants: [ "400", "700" ] },
         { family: "Raleway", variants: [
           "300", "400", "500", "600", "700",
           // "400italic", "500italic", "600italic", "700italic"

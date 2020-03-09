@@ -1,0 +1,23 @@
+// Dashboard
+//
+
+// NOTE Variables & Mixins are located before bootstrap to override
+//   default variables
+
+@import 'dashboard/variables';
+// @import 'dashboard/mixins';
+
+
+// Libraries
+
+@import 'bootstrap/bootstrap';
+@import "~bootstrap/scss/badge";
+@import "~bootstrap/scss/tables";
+// @import 'linearicons/linearicons';
+
+
+
+// Dashboard itself
+
+@import 'dashboard/root';
+@import 'dashboard/app-core';
