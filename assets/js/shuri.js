@@ -107,7 +107,9 @@ var shuri = {
       $slides.removeClass(this.class_current).eq(position).addClass('-current');
       $slides.css('left', (position * -100) + '%');
 
-      $slider.removeClass('-is-first -is-last').addClass(position == 0 ? '-is-first' : (position == ($slides.length - 1) ? '-is-last': ''));
+      $slider.removeClass('-is-first -is-last')
+        .addClass(position == 0 ? '-is-first' : '')
+        .addClass(position == ($slides.length - 1) ? '-is-last': '');
     },
     init: function($sliders) {
       // EVENTS : Buttons

@@ -22,6 +22,14 @@
       }
     }
   }
+  &.-is-first.-is-last {
+    .simple-slider-nav {
+      .-btn {
+        opacity: 0;
+        display: none;
+      }
+    }
+  }
 
   // Bootstrap overrides
   .blockquote {

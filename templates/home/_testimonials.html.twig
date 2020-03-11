@@ -6,7 +6,7 @@
         Quoi de mieux que mes clients et collaborateurs pour parler de mon travail ?
       </p>
 
-      <div class="simple-slider simple-slider--testimonials -is-first">
+      <div class="simple-slider simple-slider--testimonials -is-first{% if testimonials|length == 1 %} -is-last{% endif %}">
         <ul class="simple-slider-inner">
         {% for testimonial in testimonials %}
           <li class="simple-slider-item{% if loop.first %} -current{% endif %}">
