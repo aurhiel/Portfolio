@@ -1,15 +1,41 @@
 {% if testimonials is defined and testimonials|length > 0 %}
   <div class="app-section app-section--testimonials bg-white" style="min-height: 300px">
-    <div class="--inner scrolling-machine sm--from-center">
-      <h3 class="heading text-center" id="temoignages" data-text="Témoignages" style="--heading-text-drop-offset: -3em">Témoignages</h3>
+    <div class="-inner scrolling-machine sm--from-center">
+      <h3 class="heading text-center mb-4" id="temoignages" data-text="Témoignages" style="--heading-text-drop-offset: -3em">Témoignages</h3>
+      <p class="text-muted mb-5">
+        Quoi de mieux que mes clients et collaborateurs pour parler de mon travail ?
+      </p>
 
-      {% for testimonial in testimonials %}
-        <div class="text-center">
-          <p>{{ testimonial.message|nl2br }}</p>
-          {% if testimonial.displayNames %}{{ testimonial.client.firstname }} {{ testimonial.client.lastname|first }}.<br>{% endif %}
-          <b>{{ testimonial.client.company }}</b>
+      <div class="simple-slider simple-slider--testimonials -is-first">
+        <ul class="simple-slider-inner">
+        {% for testimonial in testimonials %}
+          <li class="simple-slider-item{% if loop.first %} -current{% endif %}">
+            <blockquote class="blockquote">
+              <p>{{ testimonial.message|nl2br }}</p>
+              <footer class="blockquote-footer">
+                {% if testimonial.displayNames %}{{ testimonial.client.firstname }} {{ testimonial.client.lastname|first }}.<br>{% endif %}
+                <b>{{ testimonial.client.company }}</b>
+              </footer>
+            </blockquote>
+          </li>
+        {% endfor %}
+        </ul>
+        <div class="simple-slider-nav">
+          <button class="-btn -btn-previous" type="button" name="previous">
+            <span class="sr-only">précédent</span>
+          </button>
+          <button class="-btn -btn-next" type="button" name="next">
+            <span class="sr-only">suivant</span>
+          </button>
+        {#
+          <div class="-dots">
+          {% for testimonial in testimonials %}
+            <span class="-dot"></span>
+          {% endfor %}
+          </div>
+        #}
         </div>
-      {% endfor %}
+      </div>
     </div>
   </div>
 {% endif %}

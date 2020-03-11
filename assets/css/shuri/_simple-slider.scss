@@ -1,0 +1,112 @@
+// Simple Slider
+//
+
+.simple-slider {
+  position: relative;
+  z-index: 1;
+
+  // Status
+  &.-is-first {
+    .simple-slider-nav {
+      .-btn-previous {
+        opacity: .1;
+        pointer-events: none;
+      }
+    }
+  }
+  &.-is-last {
+    .simple-slider-nav {
+      .-btn-next {
+        opacity: .1;
+        pointer-events: none;
+      }
+    }
+  }
+
+  // Bootstrap overrides
+  .blockquote {
+    font-style: italic;
+    line-height: 1.2;
+    margin-bottom: 0;
+  }
+  .blockquote-footer {
+    font-style: normal;
+    &:before {
+      margin-left: -1.4rem;
+    }
+  }
+
+  // Alternatives themes
+  &--testimonials {
+    text-align: center;
+    margin: 0 auto;
+    max-width: 42rem;
+
+    .simple-slider-inner {
+      width: 90%;
+    }
+  }
+}
+
+.simple-slider-inner {
+  list-style: none;
+  white-space: nowrap;
+  padding: 0 1.5rem;
+  margin: 0 auto;
+  // overflow-x: auto;
+  // overflow-y: hidden;
+  position: relative;
+  z-index: 1;
+}
+
+.simple-slider-item {
+  white-space: normal;
+  display: inline-block;
+  vertical-align: middle;
+  width: 100%;
+  position: relative;
+  left: 0;
+  opacity: 0;
+  transform: scale(.5);
+  transition: opacity 400ms ease,
+    left 600ms ease, transform 600ms ease;
+
+  &.-current {
+    transform: scale(1);
+    opacity: 1;
+  }
+}
+
+.simple-slider-nav {
+  .-btn {
+    background: none;
+    display: block;
+    height: 1.2rem;
+    width: 1.2rem;
+    border: 0;
+    border-top: .14rem solid;
+    position: absolute;
+    z-index: 5;
+    top: 50%;
+    margin-top: -.6rem;
+    opacity: .5;
+    outline: 0;
+    transition: opacity 400ms ease;
+
+    &:hover {
+      opacity: 1;
+    }
+
+    &-previous {
+      left: .5rem;
+      border-left: .14rem solid;
+      transform: rotate(-45deg);
+    }
+
+    &-next {
+      right: .5rem;
+      border-right: .14rem solid;
+      transform: rotate(45deg);
+    }
+  }
+}

@@ -83,6 +83,43 @@ var shuri = {
     });
   },
 
+  /*
+    Simple slider (testimonials)
+    NOTE : TODO docs
+  */
+  simple_sliders: {
+    class_main: 'simple-slider',
+    class_items: 'simple-slider-item',
+    class_current: '-current',
+    get_current_position: function($slider) {
+      return $slider.find('.simple-slider-item.' + this.class_current).index();
+    },
+    next: function($slider) {
+      var new_pos = Math.min(($slider.find('.'+this.class_items).length - 1), (this.get_current_position($slider) + 1));
+      this.goto($slider, new_pos);
+    },
+    previous: function($slider) {
+      var new_pos = Math.max(0, (this.get_current_position($slider) - 1));
+      this.goto($slider, new_pos);
+    },
+    goto : function($slider, position) {
+      var $slides = $slider.find('.'+this.class_items);
+      $slides.removeClass(this.class_current).eq(position).addClass('-current');
+      $slides.css('left', (position * -100) + '%');
+
+      $slider.removeClass('-is-first -is-last').addClass(position == 0 ? '-is-first' : (position == ($slides.length - 1) ? '-is-last': ''));
+    },
+    init: function($sliders) {
+      // EVENTS : Buttons
+      $sliders.on('click', '.-btn', function() {
+        var $button = $(this);
+        var $slider = $button.parents('.'+shuri.simple_sliders.class_main).first();
+
+        if ($button.hasClass('-btn-next')) shuri.simple_sliders.next($slider);
+        else shuri.simple_sliders.previous($slider);
+      });
+    }
+  },
 
   /*
     Contact form managnment
@@ -193,6 +230,8 @@ var shuri = {
     self.$contact_toast           = self.$toaster.find('.toast-form-contact');
     self.$contact_quote_checkbox  = self.$form_contact.find('#contact_is_quote');
     self.$contact_quote_inputs    = self.$form_contact.find('.contact-inputs-quote').find('select, input');
+    // // Simple Sliders
+    self.$simple_sliders = self.$body.find('.simple-slider');
 
 
 
@@ -209,6 +248,8 @@ var shuri = {
     // Init toast
     self.$toaster.find('.toast').toast();
 
+    // Simple slider
+    self.simple_sliders.init(self.$simple_sliders);
 
 
     //

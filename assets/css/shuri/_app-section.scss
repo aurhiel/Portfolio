@@ -56,7 +56,7 @@
   &--whoami {
     background-color: $white;
 
-    .--inner {
+    .-inner {
       max-width: 1200px;
       margin-left: auto;
       margin-right: auto;
@@ -67,12 +67,23 @@
     background-color: $light;
     text-align: center;
 
-    .--inner {
+    .-inner {
       max-width: 900px;
       margin-left: auto;
       margin-right: auto;
 
       .text-muted {
+        max-width: 570px;
+        margin-left: auto;
+        margin-right: auto;
+      }
+    }
+  }
+
+  &--testimonials {
+    .-inner {
+      .text-muted {
+        text-align: center;
         max-width: 570px;
         margin-left: auto;
         margin-right: auto;
@@ -102,7 +113,7 @@
     transition: opacity $theme-transition-duration ease-in-out;
     overflow-x: hidden;
 
-    .--inner {
+    .-inner {
       max-width: 44rem;
       margin-left: auto;
       margin-right: auto;
@@ -224,7 +235,7 @@
     &--contact {
       padding: 0;
 
-      .--inner {
+      .-inner {
         padding: 3.2rem 1.2rem;
       }
     }
