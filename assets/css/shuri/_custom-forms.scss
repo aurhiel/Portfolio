@@ -4,7 +4,6 @@
 
 // Bordered
 .custom-control {
-
   &--bordered {
     .custom-control-label {
       &:before {
@@ -13,9 +12,13 @@
     }
   }
 
+  .custom-control-label {
+    line-height: 1.2;
+  }
+
   .text-hint {
     color: $text-muted;
     display: block;
-    margin-top: -.25rem;
+    // margin-top: -.25rem;
   }
 }

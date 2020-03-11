@@ -10,6 +10,8 @@ use Ramsey\Uuid\Uuid;
  */
 class Testimonial
 {
+    const SIGN_TYPES = array('names', 'company', 'both');
+
     /**
      * @ORM\Id()
      * @ORM\GeneratedValue()
@@ -43,9 +45,9 @@ class Testimonial
     private $tokenExpiresAt;
 
     /**
-     * @ORM\Column(type="boolean", nullable=true)
+     * @ORM\Column(type="string", length=64)
      */
-    private $displayNames;
+    private $signType;
 
     /**
      * @ORM\Column(type="boolean", nullable=true)
@@ -109,14 +111,19 @@ class Testimonial
         return $this->tokenExpiresAt;
     }
 
-    public function getDisplayNames(): ?bool
+    public function getSignType(): ?string
     {
-        return $this->displayNames;
+        return $this->signType;
     }
 
-    public function setDisplayNames(?bool $displayNames): self
+    public function getSignTypes()
     {
-        $this->displayNames = $displayNames;
+        return self::SIGN_TYPES;
+    }
+
+    public function setSignType(string $signType): self
+    {
+        $this->signType = $signType;
 
         return $this;
     }

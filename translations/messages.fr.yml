@@ -51,8 +51,9 @@ form_contact :
   submit :
     label       : "Envoyer"
 
+
 ## DASHBOARD TRANSLATIONS ##
-# Dashboard / Client form
+# DASHBOARD // Client form
 form_client :
   # Inputs
   company :
@@ -70,3 +71,11 @@ form_client :
   # Buttons
   submit :
     label       : "Envoyer"
+# DASHBOARD // Testimonial form
+form_testimonial:
+  names:
+    label: Afficher votre nom & prénom
+  company:
+    label: Afficher le nom de l'entreprise
+  both:
+    label: Afficher les deux

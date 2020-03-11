@@ -13,8 +13,14 @@
             <blockquote class="blockquote">
               <p>{{ testimonial.message|nl2br }}</p>
               <footer class="blockquote-footer">
-                {% if testimonial.displayNames %}{{ testimonial.client.firstname }} {{ testimonial.client.lastname|first }}.<br>{% endif %}
-                <b>{{ testimonial.client.company }}</b>
+                {% if testimonial.signType == 'both' %}
+                  {{ testimonial.client.firstname }} {{ testimonial.client.lastname|first }}.<br>
+                  <b>{{ testimonial.client.company }}</b>
+                {% elseif testimonial.signType == 'company'%}
+                  <b>{{ testimonial.client.company }}</b>
+                {% else %}
+                  {{ testimonial.client.firstname }} {{ testimonial.client.lastname|first }}.
+                {% endif %}
               </footer>
             </blockquote>
           </li>

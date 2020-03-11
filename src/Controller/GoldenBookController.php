@@ -31,9 +31,9 @@ class GoldenBookController extends AbstractController
                 // 2) Update testimonial
                 $testimonial
                     ->setMessage($r->get('testimonial-message'))
+                    ->setSignType($r->get('testimonial-sign-type'))
                     ->setIp($request->getClientIp())
                     ->setAgent($request->server->get('HTTP_USER_AGENT'))
-                    ->setDisplayNames(($r->get('testimonial-display-names') !== null))
                 ;
 
                 // 3) Save !
