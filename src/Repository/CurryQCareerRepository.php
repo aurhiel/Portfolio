@@ -1,0 +1,50 @@
+<?php
+
+namespace App\Repository;
+
+use App\Entity\CurryQCareer;
+use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
+use Symfony\Bridge\Doctrine\RegistryInterface;
+
+/**
+ * @method CurryQCareer|null find($id, $lockMode = null, $lockVersion = null)
+ * @method CurryQCareer|null findOneBy(array $criteria, array $orderBy = null)
+ * @method CurryQCareer[]    findAll()
+ * @method CurryQCareer[]    findBy(array $criteria, array $orderBy = null, $limit = null, $offset = null)
+ */
+class CurryQCareerRepository extends ServiceEntityRepository
+{
+    public function __construct(RegistryInterface $registry)
+    {
+        parent::__construct($registry, CurryQCareer::class);
+    }
+
+    // /**
+    //  * @return CurryQCareer[] Returns an array of CurryQCareer objects
+    //  */
+    /*
+    public function findByExampleField($value)
+    {
+        return $this->createQueryBuilder('c')
+            ->andWhere('c.exampleField = :val')
+            ->setParameter('val', $value)
+            ->orderBy('c.id', 'ASC')
+            ->setMaxResults(10)
+            ->getQuery()
+            ->getResult()
+        ;
+    }
+    */
+
+    /*
+    public function findOneBySomeField($value): ?CurryQCareer
+    {
+        return $this->createQueryBuilder('c')
+            ->andWhere('c.exampleField = :val')
+            ->setParameter('val', $value)
+            ->getQuery()
+            ->getOneOrNullResult()
+        ;
+    }
+    */
+}

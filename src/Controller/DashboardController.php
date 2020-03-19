@@ -10,6 +10,7 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
 // Entities
 use App\Entity\Client;
 use App\Entity\Testimonial;
+use App\Entity\CurryQSkill;
 
 // Forms
 use App\Form\ClientType;
