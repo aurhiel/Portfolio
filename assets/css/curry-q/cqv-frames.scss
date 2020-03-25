@@ -43,6 +43,11 @@
       line-height: 1em;
       font-weight: bold;
       margin-bottom: .2em;
+
+      span {
+        display: inline-block; // Need this to enable ::first-letter
+        &:first-letter { text-transform: uppercase; }
+      }
     }
 
     > ._text {
