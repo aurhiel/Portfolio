@@ -55,7 +55,7 @@ class Testimonial
     private $isActive;
 
     /**
-     * @ORM\OneToOne(targetEntity="App\Entity\Client", inversedBy="testimonial", cascade={"persist", "remove"})
+     * @ORM\OneToOne(targetEntity="App\Entity\Client", inversedBy="testimonial")
      * @ORM\JoinColumn(nullable=false)
      */
     private $client;

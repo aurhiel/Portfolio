@@ -96,7 +96,7 @@ class DashboardController extends AbstractController
     }
 
     /**
-     * @Route("/dashboard/curriculum-vitae/projets/delete/{id}", name="dashboard_clients_delete")
+     * @Route("/dashboard/clients/delete/{id}", name="dashboard_clients_delete")
      */
     public function clients_delete($id, Request $request)
     {
