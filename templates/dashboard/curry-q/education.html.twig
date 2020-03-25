@@ -2,6 +2,71 @@
 
 {% block body %}
   <div class="container">
-    <div class="alert alert-warning text-dark">[education] work in progress...</div>
+    <div class="card mb-4">
+      <div class="card-header">
+        <h4 class="mb-0">Gestion des formations</h4>
+      </div>
+      <div class="card-body">
+        {{ form_start(form, { 'attr' : { 'class': 'form form-education' } }) }}
+          {# Form inputs #}
+          <div class="form--inputs">
+            <div class="form-row">
+              <div class="col-md-6 mb-3">
+                {{ form_label(form.year_start) }}
+                {{ form_widget(form.year_start) }}
+                {{ form_errors(form.year_start) }}
+              </div>
+              <div class="col-md-6 mb-3">
+                {{ form_label(form.year_end) }}
+                {{ form_widget(form.year_end) }}
+                {{ form_errors(form.year_end) }}
+              </div>
+            </div>
+
+            <div class="form-group">
+              {{ form_label(form.label) }}
+              {{ form_widget(form.label) }}
+              {{ form_errors(form.label) }}
+            </div>
+          </div>
+
+          {# Form buttons #}
+          <div class="form--actions text-center">
+            {{ form_widget(form.send) }}
+          </div>
+        {{ form_end(form) }}
+      </div>
+    </div>
+
+    {% if educations is not empty %}
+      <div class="table-responsive table-bordered">
+        <table class="table table-striped mb-0">
+          <thead>
+            <tr>
+              <th>#</th>
+              <th>Nom</th>
+              <th>Année de début</th>
+              <th>Année de fin</th>
+              <th>Actions</th>
+            </tr>
+          </thead>
+          <tbody>
+            {% for edu in educations %}
+              <tr>
+                <td>{{ edu.id }}</td>
+                <td>{{ edu.label|raw }}</td>
+                <td>{{ edu.yearStart }}</td>
+                <td>{{ edu.yearEnd }}</td>
+                <td>
+                  <a class="btn btn-sm btn-danger" href="{{ path('dashboard_curry_q_education_delete', { id: edu.id }) }}">
+                    del.
+                  </a>
+                </td>
+              </tr>
+            {% endfor %}
+          </tbody>
+        </table>
+      </div>
+    {% endif %}
   </div>
 {% endblock %}

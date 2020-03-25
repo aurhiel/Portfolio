@@ -30,6 +30,7 @@ class CurryQSkillCategory
 
     /**
      * @ORM\OneToMany(targetEntity="App\Entity\CurryQSkill", mappedBy="category", orphanRemoval=true)
+     * @ORM\JoinColumn(nullable=true)
      */
     private $curryQSkills;
 

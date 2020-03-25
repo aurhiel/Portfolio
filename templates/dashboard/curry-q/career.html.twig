@@ -2,6 +2,88 @@
 
 {% block body %}
   <div class="container">
-    <div class="alert alert-warning text-dark">[career] work in progress...</div>
+    <div class="card mb-4">
+      <div class="card-header">
+        <h4 class="mb-0">Gestion des parcours</h4>
+      </div>
+      <div class="card-body">
+        {{ form_start(form, { 'attr' : { 'class': 'form form-career' } }) }}
+          {# Form inputs #}
+          <div class="form--inputs">
+            <div class="form-row">
+              <div class="col-md-6 mb-3">
+                {{ form_label(form.date_start) }}
+                {{ form_widget(form.date_start) }}
+                {{ form_errors(form.date_start) }}
+              </div>
+              <div class="col-md-6 mb-3">
+                {{ form_label(form.date_end) }}
+                {{ form_widget(form.date_end) }}
+                {{ form_errors(form.date_end) }}
+              </div>
+            </div>
+
+            <div class="form-row">
+              <div class="col-md-6 mb-3">
+                {{ form_label(form.job) }}
+                {{ form_widget(form.job) }}
+                {{ form_errors(form.job) }}
+              </div>
+              <div class="col-md-6 mb-3">
+                {{ form_label(form.company) }}
+                {{ form_widget(form.company) }}
+                {{ form_errors(form.company) }}
+              </div>
+            </div>
+
+            <div class="form-group">
+              {{ form_label(form.description) }}
+              {{ form_widget(form.description) }}
+              {{ form_errors(form.description) }}
+            </div>
+          </div>
+
+          {# Form buttons #}
+          <div class="form--actions text-center">
+            {{ form_widget(form.send) }}
+          </div>
+        {{ form_end(form) }}
+      </div>
+    </div>
+
+    {% if careers is not empty %}
+      <div class="table-responsive table-bordered">
+        <table class="table table-striped mb-0">
+          <thead>
+            <tr>
+              <th>#</th>
+              <th>Société</th>
+              <th>Emploi</th>
+              <th>Description</th>
+              <th>Date de début</th>
+              <th>Date de fin</th>
+              <th>Actions</th>
+            </tr>
+          </thead>
+          <tbody>
+            {% for career in careers %}
+              <tr>
+                <td>{{ career.id }}</td>
+                <td>{{ career.company|raw }}</td>
+                <td>{{ career.job }}</td>
+                <td>{{ career.description|raw }}</td>
+                <td>{{ career.dateStart|date('Y-m-d') }}</td>
+                <td>{% if career.dateEnd is not null %}{{ career.dateEnd|date('Y-m-d') }}{% else %}-{% endif %}</td>
+                <td>
+                  <a class="btn btn-sm btn-danger" href="{{ path('dashboard_curry_q_career_delete', { id: career.id }) }}">
+                    del.
+                  </a>
+                </td>
+              </tr>
+            {% endfor %}
+          </tbody>
+        </table>
+      </div>
+    {% endif %}
   </div>
 {% endblock %}

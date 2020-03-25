@@ -94,7 +94,7 @@ class CurryQCareer
         return $this;
     }
 
-    public function getDateEnd(): ?\DateTimeInterface
+    public function getDateEnd()
     {
         return $this->date_end;
     }

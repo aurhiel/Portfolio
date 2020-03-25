@@ -19,6 +19,16 @@ class CurryQEducationRepository extends ServiceEntityRepository
         parent::__construct($registry, CurryQEducation::class);
     }
 
+    public function findAll()
+    {
+        return $this->createQueryBuilder('e', 'e.id')
+            // Order
+            ->orderBy('e.year_start', 'DESC')
+            ->getQuery()
+            ->getResult()
+        ;
+    }
+
     // /**
     //  * @return CurryQEducation[] Returns an array of CurryQEducation objects
     //  */

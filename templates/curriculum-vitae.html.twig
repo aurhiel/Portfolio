@@ -70,206 +70,36 @@
             <div class="cqv-frame frame--formations">
               <h2 class="_title">Formations</h2>
               <span class="_icon"><span class="icon-graduation-cap"></span></span>
-              <div class="_content">
-                <div class="_subtitle">2011 - 2012</div>
-                <div class="_text">
-                  Licence Pro<br>
-                  Multimédia Internet et Webmaster
-                </div>
-              </div>
 
-              <div class="_content">
-                <div class="_subtitle">2009 - 2011</div>
-                <div class="_text">
-                  BTS Informatique &amp; Réseau (IRIS)
+              {% for edu in educations %}
+                <div class="_content">
+                  <div class="_subtitle">{{ edu.yearStart }} - {{ edu.yearEnd }}</div>
+                  <div class="_text">{{ edu.label|raw }}</div>
                 </div>
-              </div>
-
-              <div class="_content">
-                <div class="_subtitle">2007 - 2009</div>
-                <div class="_text">
-                  Bac STI Génie Elecronique
-                </div>
-              </div>
+              {% endfor %}
             </div>
 
             <div class="cqv-frame frame--skills">
               <h2 class="_title">Compétences</h2>
               <span class="_icon"><span class="icon-magic"></span></span>
 
-              <div class="_content skills-scale--techs">
-                <div class="_subtitle">Techs. &amp; framework</div>
-                <div class="_text">
-                  <span class="skills-scale">
-                    <span class="_rating">
-                      <span class="_rate"></span>
-                      <span class="_rate"></span>
-                      <span class="_rate"></span>
-                      <span class="_rate rate--empty"></span>
-                      <span class="_rate rate--empty"></span>
-                    </span>
-                    <span class="_label">Git</span>
-                  </span>
+              {% for skill_category in skills_categories %}
+                <div class="_content skills-scale--{{ skill_category.slug }}">
+                  <div class="_subtitle">{{ skill_category.label }}</div>
+                  <div class="_text">
+                  {% for skill in skill_category.curryQSkills %}
                     <span class="skills-scale">
                       <span class="_rating">
-                        <span class="_rate"></span>
-                        <span class="_rate"></span>
-                        <span class="_rate"></span>
-                        <span class="_rate"></span>
-                        <span class="_rate rate--empty"></span>
+                      {% for i in 1..5 %}
+                        <span class="_rate{% if skill.level < i %} rate--empty{% endif %}"></span>
+                      {% endfor %}
                       </span>
-                      <span class="_label">Docker</span>
+                      <span class="_label">{{ skill.label }}</span>
                     </span>
-                    <span class="skills-scale">
-                      <span class="_rating">
-                        <span class="_rate"></span>
-                        <span class="_rate"></span>
-                        <span class="_rate"></span>
-                        <span class="_rate"></span>
-                        <span class="_rate rate--empty"></span>
-                      </span>
-                      <span class="_label">Prestashop</span>
-                    </span>
-                    <span class="skills-scale">
-                      <span class="_rating">
-                        <span class="_rate"></span>
-                        <span class="_rate"></span>
-                        <span class="_rate"></span>
-                        <span class="_rate"></span>
-                        <span class="_rate rate--empty"></span>
-                      </span>
-                      <span class="_label">Wordpress</span>
-                    </span>
-                    <span class="skills-scale">
-                      <span class="_rating">
-                        <span class="_rate"></span>
-                        <span class="_rate"></span>
-                        <span class="_rate"></span>
-                        <span class="_rate rate--empty"></span>
-                        <span class="_rate rate--empty"></span>
-                      </span>
-                      <span class="_label">Symfony</span>
-                    </span>
+                  {% endfor %}
+                  </div>
                 </div>
-              </div>
-
-              <div class="_content skills-scale--software">
-                <div class="_subtitle">Logiciels</div>
-                <div class="_text">
-                  <span class="skills-scale">
-                    <span class="_rating">
-                      <span class="_rate"></span>
-                      <span class="_rate"></span>
-                      <span class="_rate"></span>
-                      <span class="_rate"></span>
-                      <span class="_rate rate--empty"></span>
-                    </span>
-                    <span class="_label">GitKraken</span>
-                  </span>
-                  <span class="skills-scale">
-                    <span class="_rating">
-                      <span class="_rate"></span>
-                      <span class="_rate"></span>
-                      <span class="_rate"></span>
-                      <span class="_rate"></span>
-                      <span class="_rate rate--empty"></span>
-                    </span>
-                    <span class="_label">PHPStorm / Atom</span>
-                  </span>
-                  <span class="skills-scale">
-                    <span class="_rating">
-                      <span class="_rate"></span>
-                      <span class="_rate"></span>
-                      <span class="_rate"></span>
-                      <span class="_rate"></span>
-                      <span class="_rate rate--empty"></span>
-                    </span>
-                    <span class="_label">Adobe Photoshop</span>
-                  </span>
-                  <span class="skills-scale">
-                    <span class="_rating">
-                      <span class="_rate"></span>
-                      <span class="_rate"></span>
-                      <span class="_rate"></span>
-                      <span class="_rate"></span>
-                      <span class="_rate"></span>
-                    </span>
-                    <span class="_label">Libre/Open Office</span>
-                  </span>
-                </div>
-              </div>
-
-              <div class="_content skills-scale--dev">
-                <div class="_subtitle">Langages <small>Programmation</small></div>
-                <div class="_text">
-                  <span class="skills-scale">
-                    <span class="_rating">
-                      <span class="_rate"></span>
-                      <span class="_rate"></span>
-                      <span class="_rate"></span>
-                      <span class="_rate"></span>
-                      <span class="_rate rate--empty"></span>
-                    </span>
-                    <span class="_label">PHP</span>
-                  </span>
-                  <span class="skills-scale">
-                    <span class="_rating">
-                      <span class="_rate"></span>
-                      <span class="_rate"></span>
-                      <span class="_rate"></span>
-                      <span class="_rate"></span>
-                      <span class="_rate"></span>
-                    </span>
-                    <span class="_label">HTML / CSS</span>
-                  </span>
-                  <span class="skills-scale">
-                    <span class="_rating">
-                      <span class="_rate"></span>
-                      <span class="_rate"></span>
-                      <span class="_rate"></span>
-                      <span class="_rate"></span>
-                      <span class="_rate"></span>
-                    </span>
-                    <span class="_label">SASS &amp; Less</span>
-                  </span>
-                  <span class="skills-scale">
-                    <span class="_rating">
-                      <span class="_rate"></span>
-                      <span class="_rate"></span>
-                      <span class="_rate"></span>
-                      <span class="_rate"></span>
-                      <span class="_rate"></span>
-                    </span>
-                    <span class="_label">Javascript</span>
-                  </span>
-                </div>
-              </div>
-
-              <div class="_content skills-scale--speak">
-                <div class="_subtitle">Langages <small>Parlé/écrit</small></div>
-                <div class="_text">
-                  <span class="skills-scale">
-                    <span class="_rating">
-                      <span class="_rate"></span>
-                      <span class="_rate"></span>
-                      <span class="_rate"></span>
-                      <span class="_rate"></span>
-                      <span class="_rate rate--empty"></span>
-                    </span>
-                    <span class="_label">Anglais</span>
-                  </span>
-                  <span class="skills-scale">
-                    <span class="_rating">
-                      <span class="_rate"></span>
-                      <span class="_rate"></span>
-                      <span class="_rate rate--empty"></span>
-                      <span class="_rate rate--empty"></span>
-                      <span class="_rate rate--empty"></span>
-                    </span>
-                    <span class="_label">Italien</span>
-                  </span>
-                </div>
-              </div>
+              {% endfor %}
             </div>
           </div>
 
@@ -279,68 +109,52 @@
               <h2 class="_title">Parcours</h2>
               <span class="_icon"><span class="icon-briefcase"></span></span>
 
+              {% for career in careers %}
               <div class="_content">
-                <div class="_subtitle">Août 2012 - Janvier 2017</div>
+                <div class="_subtitle">
+                  {% if career.dateEnd|date('Y') - career.dateStart|date('Y') < 1 %}
+                    {{ career.dateStart|date('F') }}
+                  {% else %}
+                    {{ career.dateStart|date('F Y') }}
+                  {% endif %}
+                  {% if career.dateEnd is not null %}
+                    - {{ career.dateEnd|date('F Y') }}
+                  {% else %}
+                    - Aujourd'hui
+                  {% endif %}
+                </div>
                 <div class="_text">
-                  Développeur Web / Intégrateur - <span style="color: yellowgreen;">e-frogg</span><br>
-                  <small>
-                    Intégration &amp; Développement sur divers CMS &amp; framework (framework interne, Prestashop, Wordpress, Drupal, ...)
-                  </small>
+                  {{ career.job }} - {{ career.company|raw }}<br>
+                  <small>{{ career.description|raw }}</small>
                 </div>
               </div>
-
-              <div class="_content">
-                <div class="_subtitle">Avril - Juin 2012</div>
-                <div class="_text">
-                  Stage - Live<span style="color:red;">2</span>Times<br>
-                  <small>Maintenance et développement de sites</small>
-                </div>
-              </div>
-
-              <div class="_content">
-                <div class="_subtitle">Mai - Juin 2010</div>
-                <div class="_text">
-                  Stage - Pacaéo Informatique<br>
-                  <small>Logiciel récupération photo, C#</small>
-                </div>
-              </div>
+              {% endfor %}
             </div>
 
             <div class="cqv-frame frame--experiences">
-              <h2 class="_title">Expériences</h2>
+              <h2 class="_title">Projets</h2>
               <span class="_icon"><span class="icon-paper-plane"></span></span>
 
+              {% for project in projects %}
               <div class="_content">
-                <div class="_subtitle">Juin 2019 - Février 2020</div>
+                <div class="_subtitle">
+                  {% if project.dateEnd|date('Y') - project.dateStart|date('Y') < 1 %}
+                    {{ project.dateStart|date('F') }}
+                  {% else %}
+                    {{ project.dateStart|date('F Y') }}
+                  {% endif %}
+                  {% if project.dateEnd is not null %}
+                    - {{ project.dateEnd|date('F Y') }}
+                  {% else %}
+                    - En cours
+                  {% endif %}
+                </div>
                 <div class="_text">
-                  Carteland<br>
-                  <small>Site web de vente en ligne de faire-part (Prestashop, Bootstrap & jQuery)</small>
+                  {{ project.label }}<br>
+                  <small>{{ project.description|raw }}</small>
                 </div>
               </div>
-
-              <div class="_content">
-                <div class="_subtitle">Juillet - Septembre 2019</div>
-                <div class="_text">
-                  WinMedia<br>
-                  <small>Maintenance & améliorations de la solution WinMam de WinMedia (ReactJS)</small>
-                </div>
-              </div>
-
-              <div class="_content">
-                <div class="_subtitle">Avril 2018 - En cours</div>
-                <div class="_text">
-                  Ateliers Ingeneria<br>
-                  <small>Site de gestion d'ateliers pour la société de formation Ingeneria (Symfony, Bootstrap, jQuery & FullCalendar)</small>
-                </div>
-              </div>
-
-              <div class="_content">
-                <div class="_subtitle">Mars - Avril 2018</div>
-                <div class="_text">
-                  Kargain<br>
-                  <small>Prototype HTML d'une application de vente de véhicules</small>
-                </div>
-              </div>
+              {% endfor %}
             </div>
           </div>
       </div>

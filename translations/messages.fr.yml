@@ -1,3 +1,10 @@
+## GENERIC / BASIC FORMS ##
+form_basic:
+  save:
+    label: Sauvegarder
+
+
+## CONTACT FORM ##
 form_contact :
   # Inputs
   lastname :
@@ -73,9 +80,74 @@ form_client :
     label       : "Envoyer"
 # DASHBOARD // Testimonial form
 form_testimonial:
-  names:
-    label: Afficher votre nom & prénom
-  company:
-    label: Afficher le nom de l'entreprise
-  both:
-    label: Afficher les deux
+  names :
+    label : Afficher votre nom & prénom
+  company :
+    label : Afficher le nom de l'entreprise
+  both :
+    label : Afficher les deux
+
+# DASHBOARD // CV Skills form
+form_skill:
+  name :
+    label       : 'Nom de la compétence'
+    placeholder : 'Nom de la compétence (ex: Git, PHP, ...)'
+  level :
+    label       : 'Niveau'
+    placeholder : 'Niveau (de 1 à 5)'
+  category :
+    label       : 'Catégorie'
+    placeholder : 'Choisir une catégorie'
+# DASHBOARD // CV Skill's categories form
+form_skill_category:
+  name :
+    label       : 'Nom de la catégorie'
+    placeholder : 'Nom de la catégorie (ex: Techs. & framework, Logiciels, ...)'
+  position :
+    label       : 'Position'
+    placeholder : 'Position (de 1 à 100)'
+  slug :
+    label       : 'Slug'
+    placeholder : 'Slug (ex: techs, software)'
+# DASHBOARD // CV Education form
+form_education:
+  name :
+    label       : 'Nom de la formation'
+    placeholder : 'Nom de la formation (ex: BTS Informatique & Réseau (IRIS), ...)'
+  year_start :
+    label       : 'Année de début'
+    placeholder : 'Année de début (ex: 2009)'
+  year_end :
+    label       : 'Année de fin'
+    placeholder : 'Année de fin (ex: 2011)'
+# DASHBOARD // CV Career form
+form_career:
+  job :
+    label       : 'Emploi'
+    placeholder : 'Emploi (ex: Développeur web, ...)'
+  company :
+    label       : 'Société'
+    placeholder : 'Société'
+  date_start :
+    label       : 'Date de début'
+    placeholder : 'Date de début (ex: 2009)'
+  date_end :
+    label       : 'Date de fin'
+    placeholder : 'Date de fin (ex: 2011)'
+  description :
+    label       : 'Description'
+    placeholder : 'Description'
+# DASHBOARD // CV Career form
+form_project:
+  date_start :
+    label       : 'Date de début'
+    placeholder : 'Date de début (ex: 2009)'
+  date_end :
+    label       : 'Date de fin'
+    placeholder : 'Date de fin (ex: 2011)'
+  name :
+    label       : 'Nom du projet'
+    placeholder : 'Nom du projet'
+  description :
+    label       : 'Description'
+    placeholder : 'Description'

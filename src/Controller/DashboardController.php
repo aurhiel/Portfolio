@@ -96,6 +96,29 @@ class DashboardController extends AbstractController
     }
 
     /**
+     * @Route("/dashboard/curriculum-vitae/projets/delete/{id}", name="dashboard_clients_delete")
+     */
+    public function clients_delete($id, Request $request)
+    {
+        $em = $this->getDoctrine()->getManager();
+
+        // Retrieve item to delete
+        $repo   = $em->getRepository(Client::class);
+        $entity = $repo->findOneById($id);
+
+        if ($entity !== null) {
+            $em->remove($entity);
+            $em->flush();
+        } else {
+            $request->getSession()->getFlashBag()->add('error',
+              'Le client avec pour ID: <b>' . $id . '</b> n\'existe pas en base de données.');
+        }
+
+        // No direct access
+        return $this->redirectToRoute('dashboard_clients');
+    }
+
+    /**
      * @Route("/dashboard/temoignages", name="dashboard_testimonials")
      */
     public function testimonials(Request $request)
@@ -113,6 +136,7 @@ class DashboardController extends AbstractController
             $testimonial = new Testimonial();
             $testimonial
                 ->setClient($clients[$id_client])
+                ->setSignType('both')
                 ->setIsActive(false)
                 ->generateToken(new \DateInterval('P7D'));
 
@@ -159,5 +183,28 @@ class DashboardController extends AbstractController
             // No direct access
             return $this->redirectToRoute('dashboard');
         }
+    }
+
+    /**
+     * @Route("/dashboard/temoignages/delete/{id}", name="dashboard_testimonials_delete")
+     */
+    public function testimonial_delete($id, Request $request)
+    {
+        $em = $this->getDoctrine()->getManager();
+
+        // Retrieve item to delete
+        $r_testimonials = $em->getRepository(Testimonial::class);
+        $testimonial    = $r_testimonials->findOneById($id);
+
+        if ($testimonial !== null) {
+            $em->remove($testimonial);
+            $em->flush();
+        } else {
+            $request->getSession()->getFlashBag()->add('error',
+              'Le témoignage avec pour ID: <b>' . $id . '</b> n\'existe pas en base de données.');
+        }
+
+        // No direct access
+        return $this->redirectToRoute('dashboard_testimonials');
     }
 }

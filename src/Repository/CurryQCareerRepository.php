@@ -19,6 +19,16 @@ class CurryQCareerRepository extends ServiceEntityRepository
         parent::__construct($registry, CurryQCareer::class);
     }
 
+    public function findAll()
+    {
+        return $this->createQueryBuilder('c', 'c.id')
+            // Order
+            ->orderBy('c.date_start', 'DESC')
+            ->getQuery()
+            ->getResult()
+        ;
+    }
+
     // /**
     //  * @return CurryQCareer[] Returns an array of CurryQCareer objects
     //  */

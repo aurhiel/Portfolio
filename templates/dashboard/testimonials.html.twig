@@ -30,6 +30,7 @@
               <th scope="col">Token</th>
               <th scope="col">Message</th>
               <th scope="col">Type signature</th>
+              <th scope="col">Actions</th>
             </tr>
           </thead>
           <tbody>
@@ -55,6 +56,11 @@
               </td>
               <td>{{ testimonial.message|nl2br }}</td>
               <td>{{ testimonial.signType }}</td>
+              <td>
+                <a class="btn btn-sm btn-danger" href="{{ path('dashboard_testimonials_delete', { id: testimonial.id }) }}">
+                  del.
+                </a>
+              </td>
             </tr>
           {% endfor %}
           </tbody>

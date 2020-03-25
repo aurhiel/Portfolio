@@ -10,9 +10,9 @@
     <title>
     {%- block meta_title -%}
       {%- if meta.title is defined and meta.title is not empty -%}
-        {{ meta.title }} - Litti Aurélien | Développeur Web - Indépendant - Fullstack | Aix-en-Provence, Marseille, Toulon
+        {{ meta.title }} - Dashboard | Litti Aurélien | Développeur Web - Indépendant - Fullstack | Aix-en-Provence, Marseille, Toulon
       {% else %}
-        Litti Aurélien | Développeur Web - Indépendant - Fullstack | Aix-en-Provence, Marseille, Toulon
+        Dashboard | Litti Aurélien | Développeur Web - Indépendant - Fullstack | Aix-en-Provence, Marseille, Toulon
       {%- endif -%}
     {%- endblock -%}
     </title>
@@ -62,15 +62,29 @@
             <li class="nav-item{% if app.request.attributes.get('_route') == 'dashboard_testimonials' %} active{% endif %}">
               <a class="nav-link" href="{{ path('dashboard_testimonials') }}">Témoignages</a>
             </li>
-            <li class="nav-item dropdown{% if app.request.attributes.get('_route') == 'dashboard_curry_q_skills' %} active{% endif %}">
+            <li class="nav-item dropdown{% if app.request.attributes.get('_route') in [
+              'dashboard_curry_q_education', 'dashboard_curry_q_career',
+                'dashboard_curry_q_skills', 'dashboard_curry_q_projects' ] %} active{% endif %}">
               <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                 Curriculum Vitae
               </a>
               <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                <a class="dropdown-item" href="{{ path('dashboard_curry_q_education') }}">Formations</a>
-                <a class="dropdown-item" href="{{ path('dashboard_curry_q_career') }}">Parcours</a>
-                <a class="dropdown-item" href="{{ path('dashboard_curry_q_skills') }}">Compétences</a>
-                <a class="dropdown-item" href="{{ path('dashboard_curry_q_projects') }}">Projets</a>
+                <a class="dropdown-item{% if app.request.attributes.get('_route') == 'dashboard_curry_q_education' %} active{% endif %}"
+                  href="{{ path('dashboard_curry_q_education') }}">
+                  Formations
+                </a>
+                <a class="dropdown-item{% if app.request.attributes.get('_route') == 'dashboard_curry_q_career' %} active{% endif %}"
+                  href="{{ path('dashboard_curry_q_career') }}">
+                  Parcours
+                </a>
+                <a class="dropdown-item{% if app.request.attributes.get('_route') == 'dashboard_curry_q_skills' %} active{% endif %}"
+                  href="{{ path('dashboard_curry_q_skills') }}">
+                  Compétences
+                </a>
+                <a class="dropdown-item{% if app.request.attributes.get('_route') == 'dashboard_curry_q_projects' %} active{% endif %}"
+                  href="{{ path('dashboard_curry_q_projects') }}">
+                  Projets
+                </a>
               </div>
             </li>
           </ul>

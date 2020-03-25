@@ -19,6 +19,16 @@ class CurryQProjectRepository extends ServiceEntityRepository
         parent::__construct($registry, CurryQProject::class);
     }
 
+    public function findAll()
+    {
+        return $this->createQueryBuilder('p', 'p.id')
+            // Order
+            ->orderBy('p.date_end', 'DESC')
+            ->getQuery()
+            ->getResult()
+        ;
+    }
+
     // /**
     //  * @return CurryQProject[] Returns an array of CurryQProject objects
     //  */
