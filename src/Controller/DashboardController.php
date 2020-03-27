@@ -132,13 +132,14 @@ class DashboardController extends AbstractController
         // Handle submit new testimonial generation
         $id_client = (int) $request->request->get('testimonial-client');
         if ($id_client > 0 && isset($clients[$id_client])) {
+            $nb_days = max((int) $request->request->get('testimonial-nb-days'), 7);
             // Generate new testimonial (to complete by client)
             $testimonial = new Testimonial();
             $testimonial
                 ->setClient($clients[$id_client])
                 ->setSignType('both')
                 ->setIsActive(false)
-                ->generateToken(new \DateInterval('P7D'));
+                ->generateToken(new \DateInterval('P' . $nb_days . 'D'));
 
             // Persist & flush client's testimonial
             $em->persist($testimonial);

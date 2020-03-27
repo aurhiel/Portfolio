@@ -7,13 +7,20 @@
     <form class="form form-inline" action="{{ path('dashboard_testimonials') }}" method="post">
       <label class="sr-only" for="testimonial-client">Client</label>
       <!-- <input type="text" class="form-control mb-2 mb-sm-0 mr-sm-2" id="testimonial-client" placeholder="Jane Doe"> -->
-      <select class="custom-select mb-2 mb-sm-0 mr-sm-2" id="testimonial-client" name="testimonial-client" required="required">
+      <select class="custom-select mb-2 mb-sm-0 mr-sm-2" id="testimonial-client"
+        name="testimonial-client" required="required">
         {% for client in clients %}
           <option value="{{ client.id }}">{{ client.lastname }} {{ client.firstname }}</option>
         {% endfor %}
       </select>
 
-      <button class="btn btn-primary" type="submit" name="launch" value="exec">Générer le token</button>
+      <div class="form-group mb-2 mb-sm-0 mr-2">
+        <label class="sr-only required" for="testimonial-nb-days">Nb jours d'accès</label>
+        <input type="number" id="testimonial-nb-days" name="testimonial-nb-days" min="7" max="200"
+          required="required" placeholder="Nb jours d'accès" class="required-giga form-control w-100" style="min-width: 14rem">
+      </div>
+
+      <button class="btn btn-primary mb-2 mb-sm-0" type="submit" name="launch" value="exec">Générer le token</button>
     </form>
 
     <hr class="w-50 mx-auto my-5">
@@ -27,7 +34,7 @@
               <th scope="col"></th>
               <th scope="col">#</th>
               <th scope="col">Client</th>
-              <th scope="col">Token</th>
+              <th scope="col">Date fin d'accès</th>
               <th scope="col">Message</th>
               <th scope="col">Type signature</th>
               <th scope="col">Actions</th>
@@ -46,13 +53,15 @@
                   </label>
                 </div>
               </td>
-              <td>{{ testimonial.id }}</td>
-              <td>[{{ testimonial.client.company }}] {{ testimonial.client.lastname }} {{ testimonial.client.firstname }}</td>
               <td>
                 <a href="{{ path('golden_book', { token: testimonial.token }) }}"
                   target="_blank">
-                  {{ testimonial.token }}
+                  {{ testimonial.id }}
                 </a>
+              </td>
+              <td>[{{ testimonial.client.company }}] {{ testimonial.client.lastname }} {{ testimonial.client.firstname }}</td>
+              <td>
+                {{ testimonial.tokenExpiresAt|localizeddate('none', 'none', 'fr', 'Europe/Paris', 'd MMMM y') }}
               </td>
               <td>{{ testimonial.message|nl2br }}</td>
               <td>{{ testimonial.signType }}</td>
