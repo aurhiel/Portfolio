@@ -23,9 +23,15 @@ class QuoteRepository extends ServiceEntityRepository
     {
         $qb = $this->createQueryBuilder('q')
             ->select('q AS quote')
-            // Retrieve workshops count
+            // Left joins
+            ->leftJoin('q.client', 'c')
+            ->addSelect('c')
+            ->leftJoin('c.testimonial', 't')
+            ->addSelect('t')
+            // Retrieve invoices count
             ->leftJoin('q.invoices', 'invoices')
-            ->addSelect('COUNT(invoices) AS invoices_count')
+            ->addSelect('COUNT(invoices) AS invoices_count, SUM(invoices.amount) AS invoices_total_amount')
+            // Group By
             ->groupBy('q.id')
             // Order
             ->orderBy('q.date_signed', 'ASC');
@@ -36,8 +42,9 @@ class QuoteRepository extends ServiceEntityRepository
         foreach ($results as $result) {
             $quote = $result['quote'];
 
-            // Set workshops count into theme entity
+            // Set invoices count & total amount into quote entity
             $quote->setInvoicesCount($result['invoices_count']);
+            $quote->setInvoicesTotalAmount($result['invoices_total_amount']);
 
             $quotes[] = $quote;
         }
@@ -49,6 +56,7 @@ class QuoteRepository extends ServiceEntityRepository
     {
         return $this->createQueryBuilder('q')
             ->select('SUM(q.amount) total_amount, YEAR(q.date_signed) AS year_signed')
+            // Group By
             ->groupBy('year_signed')
             ->getQuery()
             ->getResult()

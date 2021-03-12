@@ -62,6 +62,8 @@ class Quote
 
     private $invoices_count = 0;
 
+    private $invoices_total_amount = 0;
+
     public function __construct()
     {
         $this->invoices = new ArrayCollection();
@@ -194,5 +196,15 @@ class Quote
     public function getInvoicesCount()
     {
         return $this->invoices_count;
+    }
+
+    public function setInvoicesTotalAmount($invoices_total_amount)
+    {
+        $this->invoices_total_amount = floatval($invoices_total_amount);
+    }
+
+    public function getInvoicesTotalAmount()
+    {
+        return $this->invoices_total_amount;
     }
 }

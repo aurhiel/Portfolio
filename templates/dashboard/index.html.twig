@@ -2,6 +2,77 @@
 
 {% block body %}
   <div class="container">
-    <div class="alert alert-warning text-dark">work in progress...</div>
+    <div class="alert alert-warning text-dark mb-4">work in progress...</div>
+    {% if stats.turnover_years is not empty or stats.turnover_clients is not empty %}
+      <div class="row">
+        <div class="col-12 col-md-6">
+          <div class="card">
+            <div class="card-header">
+              <h4 class="mb-0">Chiffre d'affaire</h4>
+            </div>
+            {% if stats.turnover_years is not empty %}
+              <div class="card-body text-center">
+                // TODO chart.js
+              </div>
+              <table class="table table-striped mb-0">
+                <thead>
+                  <tr>
+                    <th scope="col">Année</th>
+                    <th scope="col">Devis</th>
+                    <th scope="col">Factures</th>
+                  </tr>
+                </thead>
+                <tbody>
+                {% set rest_pay = 0 %}
+                {% for year, to_year in stats.turnover_years %}
+                  {% set rest_pay = rest_pay + (to_year.quotes_amount - to_year.invoices_amount) %}
+                  <tr>
+                    <td><b>{{ year }}</b></td>
+                    <td class="text-info">{{ to_year.quotes_amount }}€</td>
+                    <td class="text-success">{{ to_year.invoices_amount }}€</td>
+                  </tr>
+                {% endfor %}
+                </tbody>
+              </table>
+              <div class="card-footer text-right">
+                Reste à payer: <span class="text-{% if rest_pay > 0 %}danger{% else %}success{% endif %}">{{ rest_pay }}€</span>
+              </div>
+            {% endif %}
+          </div>
+        </div>
+
+        <div class="col-12 col-md-6">
+          <div class="card">
+            <div class="card-header">
+              <h4 class="mb-0">Clients</h4>
+            </div>
+            {% if stats.turnover_clients is not empty %}
+              <div class="card-body text-center">
+                // TODO chart.js
+              </div>
+              <table class="table table-striped mb-0">
+                <thead>
+                  <tr>
+                    <th scope="col">[Société] Client</th>
+                    <th scope="col">Devis</th>
+                    <th scope="col">Reste à payer</th>
+                  </tr>
+                </thead>
+                <tbody>
+                {% for dc in stats.turnover_clients %}
+                  {% set rest_pay = dc.quotes_amount - dc.invoices_amount %}
+                  <tr>
+                    <td>[{{ dc.client.company }}] {{ dc.client.firstname }} {{ dc.client.lastname }}</td>
+                    <td>{{ dc.quotes_amount }}€</td>
+                    <td class="text-{% if rest_pay > 0 %}danger{% else %}success{% endif %}">{{ rest_pay }}€</td>
+                  </tr>
+                {% endfor %}
+                </tbody>
+              </table>
+            {% endif %}
+          </div>
+        </div>
+      </div>
+    {% endif %}
   </div>
 {% endblock %}

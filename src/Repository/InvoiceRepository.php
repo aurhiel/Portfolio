@@ -33,7 +33,9 @@ class InvoiceRepository extends ServiceEntityRepository
     {
         return $this->createQueryBuilder('inv')
             ->select('SUM(inv.amount) total_amount, YEAR(inv.date_paid) AS year_paid')
+            // Where
             ->where('inv.date_paid IS NOT NULL')
+            // Group By
             ->groupBy('year_paid')
             ->getQuery()
             ->getResult()
