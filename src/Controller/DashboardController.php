@@ -69,8 +69,6 @@ class DashboardController extends AbstractController
             $turnovers_clients[$id_client]['invoices_amount'] += $quote->getInvoicesTotalAmount();
         }
 
-        dump($quotes, $turnovers_clients);
-
         return $this->render('dashboard/index.html.twig', [
             'stats' => [
               'turnover_years'    => $turnover_years,
