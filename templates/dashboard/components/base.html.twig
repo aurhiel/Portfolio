@@ -63,6 +63,28 @@
               <a class="nav-link" href="{{ path('dashboard_testimonials') }}">Témoignages</a>
             </li>
             <li class="nav-item dropdown{% if app.request.attributes.get('_route') in [
+              'dashboard_accounting_quotes', 'dashboard_accounting_invoices',
+                'dashboard_accounting_recipe_books' ] %} active{% endif %}">
+              <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                Compta.
+              </a>
+              <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                <a class="dropdown-item{% if app.request.attributes.get('_route') == 'dashboard_accounting_quotes' %} active{% endif %}"
+                  href="{{ path('dashboard_accounting_quotes') }}">
+                  Devis
+                </a>
+                <a class="dropdown-item{% if app.request.attributes.get('_route') == 'dashboard_accounting_invoices' %} active{% endif %}"
+                  href="{{ path('dashboard_accounting_invoices') }}">
+                  Factures
+                </a>
+                <div class="dropdown-divider"></div>
+                <a class="dropdown-item{% if app.request.attributes.get('_route') == 'dashboard_accounting_recipe_books' %} active{% endif %}"
+                  href="{{ path('dashboard_accounting_recipe_books') }}">
+                  Livres de recette
+                </a>
+              </div>
+            </li>
+            <li class="nav-item dropdown{% if app.request.attributes.get('_route') in [
               'dashboard_curry_q_education', 'dashboard_curry_q_career',
                 'dashboard_curry_q_skills', 'dashboard_curry_q_projects' ] %} active{% endif %}">
               <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">

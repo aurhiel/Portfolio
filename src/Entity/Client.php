@@ -45,6 +45,16 @@ class Client
      */
     private $testimonial;
 
+    /**
+     * @ORM\OneToMany(targetEntity=Quote::class, mappedBy="client")
+     */
+    private $quotes;
+
+    public function __construct()
+    {
+        $this->quotes = new ArrayCollection();
+    }
+
     public function getId(): ?int
     {
         return $this->id;
@@ -110,6 +120,36 @@ class Client
         // set the owning side of the relation if necessary
         if ($this !== $testimonial->getClient()) {
             $testimonial->setClient($this);
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|Quote[]
+     */
+    public function getQuotes(): Collection
+    {
+        return $this->quotes;
+    }
+
+    public function addQuote(Quote $quote): self
+    {
+        if (!$this->quotes->contains($quote)) {
+            $this->quotes[] = $quote;
+            $quote->setClient($this);
+        }
+
+        return $this;
+    }
+
+    public function removeQuote(Quote $quote): self
+    {
+        if ($this->quotes->removeElement($quote)) {
+            // set the owning side to null (unless already changed)
+            if ($quote->getClient() === $this) {
+                $quote->setClient(null);
+            }
         }
 
         return $this;

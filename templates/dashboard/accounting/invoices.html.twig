@@ -1,0 +1,100 @@
+{% extends 'dashboard/components/base.html.twig' %}
+
+{% block body %}
+<div class="container">
+  <div class="card mb-4">
+    <div class="card-header">
+      <h4 class="mb-0">Ajouter une facture</h4>
+    </div>
+    <div class="card-body">
+      {{ form_start(form, { 'attr' : { 'class': 'form form-invoice' } }) }}
+        {# Form inputs #}
+        <div class="form--inputs">
+          <div class="form-row">
+            <div class="col-md-6 form-group">
+              {{ form_label(form.quote) }}
+              {{ form_widget(form.quote) }}
+              {{ form_errors(form.quote) }}
+            </div>
+            <div class="col-md-6 form-group">
+              {{ form_label(form.sku) }}
+              {{ form_widget(form.sku) }}
+              {{ form_errors(form.sku) }}
+            </div>
+          </div>
+
+          <div class="form-row">
+            <div class="col-md-12 col-lg-4 form-group">
+              {{ form_label(form.document) }}
+              {{ form_widget(form.document) }}
+              {{ form_errors(form.document) }}
+            </div>
+            <div class="col-md-6 col-lg-4 form-group">
+              {{ form_label(form.amount) }}
+              {{ form_widget(form.amount) }}
+              {{ form_errors(form.amount) }}
+            </div>
+            <div class="col-md-6 col-lg-4 form-group">
+              {{ form_label(form.date_paid) }}
+              {{ form_widget(form.date_paid) }}
+              {{ form_errors(form.date_paid) }}
+            </div>
+          </div>
+        </div>
+
+        {# Form buttons #}
+        <div class="form--actions text-center">
+          {{ form_widget(form.send) }}
+        </div>
+      {{ form_end(form) }}
+    </div>
+  </div>
+
+  {% if invoices is not empty %}
+    <hr class="w-50 mx-auto my-5">
+
+    <h2 class="h4 mb-3">Liste des factures</h2>
+
+    <div class="table-responsive table-bordered">
+      <table class="table table-striped mb-0">
+        <thead>
+          <tr>
+            <th>#</th>
+            <th>Devis</th>
+            <th>Réf.</th>
+            <th>Montant</th>
+            <th>Date de paiement</th>
+            <th>Doc.</th>
+            <th>Actions</th>
+          </tr>
+        </thead>
+        <tbody>
+          {% for invoice in invoices %}
+            <tr>
+              <td>{{ invoice.id }}</td>
+              <td>{{ invoice.quote.label }}</td>
+              <td>{{ invoice.sku }}</td>
+              <td>{{ invoice.amount }}€</td>
+              <td>{{ invoice.datePaid|format_date(pattern='d MMMM y') }}</td>
+              <td>
+                {% if invoice.documentFilename is not empty %}
+                  <a href="{{ asset('uploads/documents/invoices/' ~ invoice.documentFilename) }}" target="_blank">
+                    {{ invoice.documentFilename }}
+                  </a>
+                {% else %}
+                  -
+                {% endif %}
+              </td>
+              <td>
+                <a class="btn btn-sm btn-danger" href="{{ path('dashboard_accounting_invoices_delete', { id: invoice.id }) }}">
+                  del.
+                </a>
+              </td>
+            </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+    </div>
+  {% endif %}
+</div>
+{% endblock %}

@@ -112,13 +112,14 @@ var shuri = {
         .addClass(position == ($slides.length - 1) ? '-is-last': '');
     },
     init: function($sliders) {
+      var self = this;
       // EVENTS : Buttons
       $sliders.on('click', '.-btn', function() {
         var $button = $(this);
-        var $slider = $button.parents('.'+shuri.simple_sliders.class_main).first();
+        var $slider = $button.parents('.'+self.class_main).first();
 
-        if ($button.hasClass('-btn-next')) shuri.simple_sliders.next($slider);
-        else shuri.simple_sliders.previous($slider);
+        if ($button.hasClass('-btn-next')) self.next($slider);
+        else self.previous($slider);
       });
     }
   },

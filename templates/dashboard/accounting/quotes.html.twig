@@ -1,0 +1,119 @@
+{% extends 'dashboard/components/base.html.twig' %}
+
+{% block body %}
+<div class="container">
+  <div class="card mb-4">
+    <div class="card-header">
+      <h4 class="mb-0">Ajouter un devis</h4>
+    </div>
+    <div class="card-body">
+      {{ form_start(form, { 'attr' : { 'class': 'form form-quote' } }) }}
+        {# Form inputs #}
+        <div class="form--inputs">
+          <div class="form-row">
+            <div class="col-md-12 col-lg-4 form-group">
+              {{ form_label(form.client) }}
+              {{ form_widget(form.client) }}
+              {{ form_errors(form.client) }}
+            </div>
+            <div class="col-md-6 col-lg-4 form-group">
+              {{ form_label(form.label) }}
+              {{ form_widget(form.label) }}
+              {{ form_errors(form.label) }}
+            </div>
+            <div class="col-md-6 col-lg-4 form-group">
+              {{ form_label(form.sku) }}
+              {{ form_widget(form.sku) }}
+              {{ form_errors(form.sku) }}
+            </div>
+          </div>
+
+          <div class="form-row">
+            <div class="col-md-6 form-group">
+              {{ form_label(form.document) }}
+              {{ form_widget(form.document) }}
+              {{ form_errors(form.document) }}
+            </div>
+            <div class="col-md-6 form-group">
+              {{ form_label(form.amount) }}
+              {{ form_widget(form.amount) }}
+              {{ form_errors(form.amount) }}
+            </div>
+          </div>
+
+          <div class="form-row">
+            <div class="col-md-6 form-group">
+              {{ form_label(form.date_created) }}
+              {{ form_widget(form.date_created) }}
+              {{ form_errors(form.date_created) }}
+            </div>
+            <div class="col-md-6 form-group">
+              {{ form_label(form.date_signed) }}
+              {{ form_widget(form.date_signed) }}
+              {{ form_errors(form.date_signed) }}
+            </div>
+          </div>
+        </div>
+
+        {# Form buttons #}
+        <div class="form--actions text-center">
+          {{ form_widget(form.send) }}
+        </div>
+      {{ form_end(form) }}
+    </div>
+  </div>
+
+  {% if quotes is not empty %}
+    <hr class="w-50 mx-auto my-5">
+
+    <h2 class="h4 mb-3">Liste des devis</h2>
+
+    <div class="table-responsive table-bordered">
+      <table class="table table-striped mb-0">
+        <thead>
+          <tr>
+            <th>#</th>
+            <th>Client</th>
+            <th>[Réf.] Intitulé</th>
+            <th>Montant</th>
+            <th>Date de création</th>
+            <th>Date signature</th>
+            <th>Doc.</th>
+            <th>Actions</th>
+          </tr>
+        </thead>
+        <tbody>
+          {% for quote in quotes %}
+            <tr>
+              <td>{{ quote.id }}</td>
+              <td>{{ quote.client.lastname }} {{ quote.client.firstname }} ({{ quote.client.company }})</td>
+              <td>
+                {% if quote.sku is not empty %}[{{ quote.sku }}] {% endif %}
+                {{ quote.label }}<br>
+                <small class="text-muted">({{ quote.invoicesCount }} facture{% if quote.invoicesCount > 1 %}s{% endif %})</small>
+              </td>
+              <td>{{ quote.amount }}€</td>
+              <td>{{ quote.dateCreated|format_date(pattern='d MMMM y') }}</td>
+              <td>{{ quote.dateSigned|format_date(pattern='d MMMM y') }}</td>
+              <td>
+                {% if quote.documentFilename is not empty %}
+                  <a href="{{ asset('uploads/documents/quotes/' ~ quote.documentFilename) }}" target="_blank">
+                    {{ quote.documentFilename }}
+                  </a>
+                {% else %}
+                  -
+                {% endif %}
+              </td>
+              <td>
+                <a class="btn btn-sm btn-danger" href="{{ path('dashboard_accounting_quotes_delete', { id: quote.id }) }}">
+                  del.
+                </a>
+              </td>
+            </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+    </div>
+  {% endif %}
+</div>
+{% endblock %}

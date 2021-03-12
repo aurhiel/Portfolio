@@ -151,3 +151,47 @@ form_project:
   description :
     label       : 'Description'
     placeholder : 'Description'
+
+# DASHBOARD // Accounting forms
+form_quote :
+  client :
+    label       : 'Client'
+    placeholder : 'Choisissez un client'
+  name :
+    label       : 'Intitulé du devis'
+    placeholder : 'Intitulé du devis (ex: Ateliers Ingeneria - ajout copie des ateliers, ...)'
+  sku :
+    label       : 'Référence'
+    placeholder : 'Référence (ex: D19030500001)'
+  document :
+    label       : 'Document (format PDF)'
+    placeholder : 'Document (format PDF)'
+  amount :
+    label       : 'Montant'
+    placeholder : 'Montant (ex: 1500)'
+  date_created :
+    label       : 'Date de création'
+    placeholder : 'Date de création'
+  date_signed :
+    label       : 'Date de signature'
+    placeholder : 'Date de signature'
+#--
+form_invoice :
+  quote :
+    label       : 'Devis'
+    placeholder : 'Choisissez un devis'
+  name :
+    label       : 'Intitulé de la facture'
+    placeholder : 'Intitulé de la facture (optionnel)'
+  sku :
+    label       : 'Référence'
+    placeholder : 'Référence (ex: F18071100003)'
+  document :
+    label       : 'Document (format PDF)'
+    placeholder : 'Document (format PDF)'
+  amount :
+    label       : 'Montant'
+    placeholder : 'Montant (ex: 750)'
+  date_paid :
+    label       : 'Date paiement'
+    placeholder : 'Date paiement'

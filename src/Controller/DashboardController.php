@@ -10,7 +10,8 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
 // Entities
 use App\Entity\Client;
 use App\Entity\Testimonial;
-use App\Entity\CurryQSkill;
+use App\Entity\Quote;
+use App\Entity\Invoice;
 
 // Forms
 use App\Form\ClientType;
@@ -27,6 +28,12 @@ class DashboardController extends AbstractController
      */
     public function index()
     {
+        $em = $this->getDoctrine()->getManager();
+        $r_quote = $em->getRepository(Quote::class);
+        $r_invoice = $em->getRepository(Invoice::class);
+
+        dump($r_quote->findTotalAmountsGroupByYear(), $r_invoice->findTotalAmountsGroupByYear());
+
         return $this->render('dashboard/index.html.twig', [
             'controller_name' => 'DashboardController',
         ]);
