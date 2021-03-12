@@ -64,7 +64,7 @@
               <td>{{ client.firstname }}</td>
               <td>{{ client.email }}</td>
               <td>
-                {% if client.testimonial is not null %}
+                {% if client.testimonial is not null and client.testimonial.token is not null %}
                   <a href="{{ path('golden_book', { token: client.testimonial.token }) }}" target="_blank">
                     {{ client.testimonial.token }}
                   </a>
