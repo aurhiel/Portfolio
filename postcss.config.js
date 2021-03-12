@@ -7,7 +7,7 @@ module.exports = {
 
         // add browserslist config to package.json (see below)
         autoprefixer: {
-          "browsers": [
+          "overrideBrowserslist": [
             // this config = defaults, see here : https://github.com/browserslist/browserslist
             "> 0.5%",
             "last 2 versions",

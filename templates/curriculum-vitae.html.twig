@@ -113,12 +113,12 @@
               <div class="_content">
                 <div class="_subtitle">
                   {% if career.dateEnd|date('Y') - career.dateStart|date('Y') < 1 %}
-                    <span>{{ career.dateStart|localizeddate('none', 'none', 'fr', 'Europe/Paris', 'MMMM') }}</span>
+                    <span>{{ career.dateStart|format_date(pattern='MMMM') }}</span>
                   {% else %}
-                    <span>{{ career.dateStart|localizeddate('none', 'none', 'fr', 'Europe/Paris', 'MMMM y') }}</span>
+                    <span>{{ career.dateStart|format_date(pattern='MMMM y') }}</span>
                   {% endif %}
                   {% if career.dateEnd is not null %}
-                    - <span>{{ career.dateEnd|localizeddate('none', 'none', 'fr', 'Europe/Paris', 'MMMM y') }}</span>
+                    - <span>{{ career.dateEnd|format_date(pattern='MMMM y') }}</span>
                   {% else %}
                     - Aujourd'hui
                   {% endif %}
@@ -139,12 +139,12 @@
               <div class="_content">
                 <div class="_subtitle">
                   {% if project.dateEnd|date('Y') - project.dateStart|date('Y') < 1 %}
-                    <span>{{ project.dateStart|localizeddate('none', 'none', 'fr', 'Europe/Paris', 'MMMM') }}</span>
+                    <span>{{ project.dateStart|format_date(pattern='MMMM') }}</span>
                   {% else %}
-                    <span>{{ project.dateStart|localizeddate('none', 'none', 'fr', 'Europe/Paris', 'MMMM y') }}</span>
+                    <span>{{ project.dateStart|format_date(pattern='MMMM y') }}</span>
                   {% endif %}
                   {% if project.dateEnd is not null %}
-                    - <span>{{ project.dateEnd|localizeddate('none', 'none', 'fr', 'Europe/Paris', 'MMMM y') }}</span>
+                    - <span>{{ project.dateEnd|format_date(pattern='MMMM y') }}</span>
                   {% else %}
                     - En cours
                   {% endif %}

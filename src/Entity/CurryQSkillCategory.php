@@ -29,15 +29,15 @@ class CurryQSkillCategory
     private $position;
 
     /**
+     * @ORM\Column(type="string", length=128)
+     */
+    private $slug;
+
+    /**
      * @ORM\OneToMany(targetEntity="App\Entity\CurryQSkill", mappedBy="category", orphanRemoval=true)
      * @ORM\JoinColumn(nullable=true)
      */
     private $curryQSkills;
-
-    /**
-     * @ORM\Column(type="string", length=128)
-     */
-    private $slug;
 
     public function __construct()
     {
@@ -73,6 +73,18 @@ class CurryQSkillCategory
         return $this;
     }
 
+    public function getSlug(): ?string
+    {
+        return $this->slug;
+    }
+
+    public function setSlug(string $slug): self
+    {
+        $this->slug = $slug;
+
+        return $this;
+    }
+
     /**
      * @return Collection|CurryQSkill[]
      */
@@ -100,18 +112,6 @@ class CurryQSkillCategory
                 $curryQSkill->setCategory(null);
             }
         }
-
-        return $this;
-    }
-
-    public function getSlug(): ?string
-    {
-        return $this->slug;
-    }
-
-    public function setSlug(string $slug): self
-    {
-        $this->slug = $slug;
 
         return $this;
     }

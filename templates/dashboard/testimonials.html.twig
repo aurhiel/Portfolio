@@ -54,14 +54,18 @@
                 </div>
               </td>
               <td>
-                <a href="{{ path('golden_book', { token: testimonial.token }) }}"
-                  target="_blank">
+                {% if testimonial.token is not null %}
+                  <a href="{{ path('golden_book', { token: testimonial.token }) }}"
+                    target="_blank">
+                    {{ testimonial.id }}
+                  </a>
+                {% else %}
                   {{ testimonial.id }}
-                </a>
+                {% endif %}
               </td>
               <td>[{{ testimonial.client.company }}] {{ testimonial.client.lastname }} {{ testimonial.client.firstname }}</td>
               <td>
-                {{ testimonial.tokenExpiresAt|localizeddate('none', 'none', 'fr', 'Europe/Paris', 'd MMMM y') }}
+                {{ testimonial.tokenExpiresAt|format_date(pattern='d MMMM y') }}
               </td>
               <td>{{ testimonial.message|nl2br }}</td>
               <td>{{ testimonial.signType }}</td>
