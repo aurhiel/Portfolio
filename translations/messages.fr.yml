@@ -66,6 +66,9 @@ form_client :
   company :
     label       : "Société"
     placeholder : "Société"
+  color :
+    label       : "Couleur"
+    placeholder : "Couleur"
   lastname :
     label       : "Nom"
     placeholder : "Nom"

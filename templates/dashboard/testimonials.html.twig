@@ -2,7 +2,7 @@
 
 {% block body %}
   <div class="container">
-    <h2 class="h4 mb-3">Générer un témoignage</h2>
+    <h2 class="h3 mb-3">Générer un témoignage</h2>
 
     <form class="form form-inline" action="{{ path('dashboard_testimonials') }}" method="post">
       <label class="sr-only" for="testimonial-client">Client</label>
@@ -25,7 +25,7 @@
 
     <hr class="w-50 mx-auto my-5">
 
-    <h2 class="h4 mb-3">Liste des témoignages</h2>
+    <h2 class="h3 mb-3">Liste des témoignages</h2>
     {% if testimonials is defined and testimonials is not empty %}
       <div class="table-responsive table-bordered">
         <table class="table table-striped mb-0">
