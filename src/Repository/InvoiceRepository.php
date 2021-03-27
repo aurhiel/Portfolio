@@ -29,6 +29,32 @@ class InvoiceRepository extends ServiceEntityRepository
         ;
     }
 
+    public function findAllByYear($year)
+    {
+        return $this->createQueryBuilder('inv')
+            // Where
+            ->where('YEAR(inv.date_paid) = :year')
+            ->setParameter('year', (int)$year)
+            // Order
+            ->orderBy('inv.date_paid', 'ASC')
+            ->getQuery()
+            ->getResult()
+        ;
+    }
+
+    public function findAllYears()
+    {
+        return $this->createQueryBuilder('inv')
+            ->select('YEAR(inv.date_paid) AS year_paid')
+            // Group By (NOTE not working...)
+            // ->groupBy('YEAR(inv.date_paid)')
+            // Order
+            ->orderBy('inv.date_paid', 'ASC')
+            ->getQuery()
+            ->getResult()
+        ;
+    }
+
     public function findTotalAmountsGroupByYear()
     {
         return $this->createQueryBuilder('inv')

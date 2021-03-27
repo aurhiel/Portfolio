@@ -15,13 +15,19 @@ use App\Service\FileUploader;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\HttpFoundation\Request;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
 
+/**
+  * Require ROLE_ADMIN for *every* controller method in this class.
+  *
+  * @IsGranted("ROLE_ADMIN")
+  */
 class DashboardAccountingController extends AbstractController
 {
     /**
-     * @Route("/dashboard/compta/devis", name="dashboard_accounting_quotes")
+     * @Route("/dashboard/compta/devis/{year}", name="dashboard_accounting_quotes", defaults={"year"=null})
      */
-    public function accounting_quotes(Request $request, FileUploader $fileUploader)
+    public function accounting_quotes($year, Request $request, FileUploader $fileUploader)
     {
         $em = $this->getDoctrine()->getManager();
 
@@ -83,11 +89,24 @@ class DashboardAccountingController extends AbstractController
 
         // Retrieve entities
         $r_entity = $em->getRepository(Quote::class);
-        $entities = $r_entity->findAll();
+        $entities = (!is_null($year) && !empty((int)$year)) ? $r_entity->findAllByYear($year) : $r_entity->findAll();
+
+        // Retrieve years based on quotes list
+        $quotes_years = array();
+        $years_signed = $r_entity->findAllYears();
+        foreach ($years_signed as $year_signed) {
+          $curr_year = (int)$year_signed['year_signed'];
+          if (!in_array($curr_year, $quotes_years))
+              $quotes_years[] = $curr_year;
+        }
 
         return $this->render('dashboard/accounting/quotes.html.twig', [
-            'form'    => $form->createView(),
-            'quotes'  => $entities
+            'form'          => $form->createView(),
+            'quotes'        => $entities,
+            'quotes_years'  => $quotes_years,
+            'filters'       => [
+                'year' => $year
+            ]
         ]);
     }
 
@@ -117,9 +136,9 @@ class DashboardAccountingController extends AbstractController
     }
 
     /**
-     * @Route("/dashboard/compta/factures", name="dashboard_accounting_invoices")
+     * @Route("/dashboard/compta/factures/{year}", name="dashboard_accounting_invoices", defaults={"year"=null})
      */
-    public function accounting_invoices(Request $request, FileUploader $fileUploader)
+    public function accounting_invoices($year, Request $request, FileUploader $fileUploader)
     {
         $em = $this->getDoctrine()->getManager();
 
@@ -181,11 +200,24 @@ class DashboardAccountingController extends AbstractController
 
         // Retrieve entities
         $r_entity = $em->getRepository(Invoice::class);
-        $entities = $r_entity->findAll();
+        $entities = (!is_null($year) && !empty((int)$year)) ? $r_entity->findAllByYear($year) : $r_entity->findAll();
+
+        // Retrieve years based on invoices list
+        $invoices_years = array();
+        $years_paid = $r_entity->findAllYears();
+        foreach ($years_paid as $year_paid) {
+          $curr_year = (int)$year_paid['year_paid'];
+          if (!in_array($curr_year, $invoices_years))
+              $invoices_years[] = $curr_year;
+        }
 
         return $this->render('dashboard/accounting/invoices.html.twig', [
-            'form'      => $form->createView(),
-            'invoices'  => $entities
+            'form'            => $form->createView(),
+            'invoices'        => $entities,
+            'invoices_years'  => $invoices_years,
+            'filters'         => [
+                'year' => $year
+            ]
         ]);
     }
 
@@ -215,10 +247,75 @@ class DashboardAccountingController extends AbstractController
     }
 
     /**
-     * @Route("/dashboard/compta/livres-recette", name="dashboard_accounting_recipe_books")
+     * @Route("/dashboard/compta/livres-recette/{year}", name="dashboard_accounting_recipe_books", defaults={"year"=null})
      */
-    public function accounting_recipe_books()
+    public function accounting_recipe_books($year)
     {
-        exit('recipe books. // TODO');
+        $em         = $this->getDoctrine()->getManager();
+        $r_invoice  = $em->getRepository(Invoice::class);
+        $r_quote    = $em->getRepository(Quote::class);
+
+        // Retrieve years based on invoices list
+        $invoices_years = array();
+        $years_paid     = $r_invoice->findAllYears();
+        foreach ($years_paid as $year_paid) {
+          $curr_year = (int)$year_paid['year_paid'];
+          if (!in_array($curr_year, $invoices_years))
+              $invoices_years[$curr_year] = $curr_year;
+        }
+
+        // Retrieve & check $year
+        $year = ((is_null($year)) ? end($invoices_years) : ((isset($invoices_years[$year])) ? $year : null));
+
+        // Retrieve invoices & quotes
+        $invoices = (!is_null($year) && !empty((int)$year)) ? $r_invoice->findAllByYear($year) : array();
+        $quotes   = (!is_null($year) && !empty((int)$year)) ? $r_quote->findAllByYear($year) : array();
+
+        // Loop on invoices to retrieve some data
+        $turnovers_clients  = array();
+        $turnovers_months   = array();
+        $quotes             = array();
+        $total_turnover     = 0;
+        foreach ($invoices as $inv) {
+            $quote  = $inv->getQuote();
+            $client = $quote->getClient();
+            $id_client = $client->getId();
+            $inv_month = (int)$inv->getDatePaid()->format('m');
+
+            // Create initial months turnovers
+            if (!isset($turnovers_months[$inv_month]))
+              $turnovers_months[$inv_month] = 0;
+
+            // Retrieve quote item
+            if (!isset($quotes[$quote->getId()]))
+              $quotes[$quote->getId()] = $quote;
+
+            // Create initial client turnover (= invoices total amount)
+            if (!isset($turnovers_clients[$id_client]))
+                $turnovers_clients[$id_client] = array('client' => $client, 'invoices_amount' => 0);
+
+            // Update client invoices amount
+            $turnovers_clients[$id_client]['invoices_amount'] += $inv->getAmount();
+
+            // Update total turnover & turnovers by months
+            $total_turnover += $inv->getAmount();
+            $turnovers_months[$inv_month] += $inv->getAmount();
+        }
+
+        // Retrieve average monthly turnover TODO current year = less months
+        $monthly_turnovers = $total_turnover / 12;
+
+        return $this->render('dashboard/accounting/recipe-books.html.twig', [
+            'invoices'      => $invoices,
+            'quotes'        => $quotes,
+            'current_year'  => $year,
+            'years'         => $invoices_years,
+            'quotes'        => $quotes,
+            // Stats
+            'turnovers_clients' => $turnovers_clients,
+            'turnovers_months'  => $turnovers_months,
+            'monthly_turnover'  => $monthly_turnovers,
+            'total_turnover'    => $total_turnover,
+        ]);
     }
 }

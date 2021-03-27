@@ -52,6 +52,55 @@ class QuoteRepository extends ServiceEntityRepository
         return $quotes;
     }
 
+    public function findAllYears()
+    {
+        return $this->createQueryBuilder('q')
+            ->select('YEAR(q.date_signed) AS year_signed')
+            // Group By (NOTE not working...)
+            // ->groupBy('YEAR(q.date_signed)')
+            // Order
+            ->orderBy('q.date_signed', 'ASC')
+            ->getQuery()
+            ->getResult()
+        ;
+    }
+
+    public function findAllByYear($year)
+    {
+        $qb = $this->createQueryBuilder('q')
+            ->select('q AS quote')
+            // Left joins
+            ->leftJoin('q.client', 'c')
+            ->addSelect('c')
+            ->leftJoin('c.testimonial', 't')
+            ->addSelect('t')
+            // Retrieve invoices count
+            ->leftJoin('q.invoices', 'invoices')
+            ->addSelect('COUNT(invoices) AS invoices_count, SUM(invoices.amount) AS invoices_total_amount')
+            // Where
+            ->where('YEAR(q.date_signed) = :year')
+            ->setParameter('year', (int)$year)
+            // Group By
+            ->groupBy('q.id')
+            // Order
+            ->orderBy('q.date_signed', 'ASC');
+
+        $results  = $qb->getQuery()->getResult();
+        $quotes   = array();
+
+        foreach ($results as $result) {
+            $quote = $result['quote'];
+
+            // Set invoices count & total amount into quote entity
+            $quote->setInvoicesCount($result['invoices_count']);
+            $quote->setInvoicesTotalAmount($result['invoices_total_amount']);
+
+            $quotes[] = $quote;
+        }
+
+        return $quotes;
+    }
+
     public function findTotalAmountsGroupByYear()
     {
         return $this->createQueryBuilder('q')

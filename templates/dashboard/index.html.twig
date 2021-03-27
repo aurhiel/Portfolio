@@ -2,17 +2,46 @@
 
 {% block body %}
   <div class="container">
-    <div class="alert alert-warning text-dark mb-4">work in progress...</div>
     {% if stats.turnover_years is not empty or stats.turnover_clients is not empty %}
       <div class="row">
         <div class="col-12 col-md-6">
           <div class="card">
             <div class="card-header">
-              <h4 class="mb-0">Chiffre d'affaire</h4>
+              <h4 class="h3 mb-0">Devis &amp; Factures par année</h4>
             </div>
             {% if stats.turnover_years is not empty %}
               <div class="card-body text-center">
-                // TODO chart.js
+                <div class="chart-js" data-chartjs-type="line" data-chartjs-data-name="turnovers_by_years"
+                  data-chartjs-legend-position="right" data-chartjs-legend-hide="xs|sm|md|lg"> <!-- data-chartjs-legend-display="false" -->
+                  <canvas></canvas>
+                </div>
+
+                <script type="text/javascript">
+                  var turnovers_by_years = {
+                    labels    : [],
+                    datasets  : [{
+                      label : 'Devis',
+                      data : [],
+                      backgroundColor : 'rgba(23, 162, 184, 0.5)',
+                      borderColor     : 'rgba(23, 162, 184, .75)',
+                      borderWidth     : 2
+                    },
+                    {
+                      label : 'Factures',
+                      data : [],
+                      data : [],
+                      backgroundColor : 'rgba(40, 167, 69, 0.5)',
+                      borderColor     : 'rgba(40, 167, 69, .75)',
+                      borderWidth     : 2
+                    }]
+                  };
+
+                  {% for year, to_year in stats.turnover_years %}
+                    turnovers_by_years.labels.push('{{ year }}');
+                    turnovers_by_years.datasets[0].data.push({{ to_year.quotes_amount }});
+                    turnovers_by_years.datasets[1].data.push({{ to_year.invoices_amount }});
+                  {% endfor %}
+                </script>
               </div>
               <table class="table table-striped mb-0">
                 <thead>
@@ -44,11 +73,29 @@
         <div class="col-12 col-md-6">
           <div class="card">
             <div class="card-header">
-              <h4 class="mb-0">Clients</h4>
+              <h4 class="h3 mb-0">Clients</h4>
             </div>
             {% if stats.turnover_clients is not empty %}
               <div class="card-body text-center">
-                // TODO chart.js
+                <div class="chart-js" data-chartjs-type="pie" data-chartjs-data-name="turnovers_by_clients"
+                  data-chartjs-legend-position="right" data-chartjs-legend-hide="xs|sm|md|lg">
+                  <canvas></canvas>
+                </div>
+                <script type="text/javascript">
+                  var turnovers_by_clients = {
+                    labels    : [],
+                    datasets  : [{
+                      data: [],
+                      backgroundColor : [],
+                    }]
+                  };
+
+                  {% for dc in stats.turnover_clients %}
+                    turnovers_by_clients.labels.push('[{{ dc.client.company }}] {{ dc.client.firstname }} {{ dc.client.lastname }}');
+                    turnovers_by_clients.datasets[0].data.push({{ dc.quotes_amount }});
+                    turnovers_by_clients.datasets[0].backgroundColor.push('{{ dc.client.color }}');
+                  {% endfor %}
+                </script>
               </div>
               <table class="table table-striped mb-0">
                 <thead>
@@ -62,7 +109,9 @@
                 {% for dc in stats.turnover_clients %}
                   {% set rest_pay = dc.quotes_amount - dc.invoices_amount %}
                   <tr>
-                    <td>[{{ dc.client.company }}] {{ dc.client.firstname }} {{ dc.client.lastname }}</td>
+                    <td>
+                      <span{% if dc.client.color is not empty %} style="color: {{ dc.client.color }}"{% endif %}><span class="dot"></span> [{{ dc.client.company }}]</span> {{ dc.client.firstname }} {{ dc.client.lastname }}
+                    </td>
                     <td>{{ dc.quotes_amount }}€</td>
                     <td class="text-{% if rest_pay > 0 %}danger{% else %}success{% endif %}">{{ rest_pay }}€</td>
                   </tr>
@@ -73,6 +122,8 @@
           </div>
         </div>
       </div>
+    {% else %}
+      <div class="alert alert-secondary">Aucunes données à afficher.</div>
     {% endif %}
   </div>
 {% endblock %}

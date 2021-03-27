@@ -128,6 +128,15 @@
     {# Footer #}
     {% block footer %}{% endblock %}
 
+    <span class="viewport-sizes">
+      <span class="d-block d-sm-none" data-viewport-size-slug="xs"></span>
+      <span class="d-none d-sm-block d-md-none" data-viewport-size-slug="sm"></span>
+      <span class="d-none d-md-block d-lg-none" data-viewport-size-slug="md"></span>
+      <span class="d-none d-lg-block d-xl-none" data-viewport-size-slug="lg"></span>
+      <span class="d-none d-xl-block d-xxl-none" data-viewport-size-slug="xl"></span>
+      <span class="d-none d-xxl-block" data-viewport-size-slug="xxl"></span>
+    </span>
+
     {# Custom javascripts from twig templates #}
     {% block javascripts_defines %}{% endblock %}
 

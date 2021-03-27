@@ -1,0 +1,182 @@
+{% extends 'dashboard/components/base.html.twig' %}
+
+{% block body %}
+<div class="container recipe-book-container">
+  {% set has_past = years[current_year - 1] is defined %}
+  {% set has_future = years[current_year + 1] is defined %}
+  {% if has_past == true or has_future == true %}
+  <div class="rb-nav d-print-none">
+    <div class="row align-items-center">
+        <div class="col-12 col-md-3">
+          {% if has_past == true %}
+          <a class="btn btn-sm btn-outline-secondary"
+            href="{{ path('dashboard_accounting_recipe_books', { year : current_year - 1 }) }}">
+            <span class="icon icon-arrow-left"></span> {{ current_year - 1 }}
+          </a>
+          {% endif %}
+        </div>
+
+        <div class="d-none d-md-block col-md-6 text-center">
+          <h2 class="h3 mb-0">Livre de recette {{ current_year }}</h2>
+        </div>
+
+        <div class="col-12 col-md-3 text-right">
+          {% if has_future == true %}
+          <a class="btn btn-sm btn-outline-secondary"
+            href="{{ path('dashboard_accounting_recipe_books', { year : current_year + 1 }) }}">
+            {{ current_year + 1 }} <span class="icon icon-arrow-right"></span>
+          </a>
+          {% endif %}
+        </div>
+    </div>
+
+    <hr class="mt-3 mb-2 mb-md-5">
+  </div>
+  {% endif %}
+
+  <h2 class="h3 mb-4{% if has_past == true or has_future == true %} d-md-none d-print-block{% endif %}">
+    Livre de recette {{ current_year }}
+  </h2>
+
+  <div class="card mb-4 rb-key-stats">
+    <div class="card-header">
+      <h4 class="mb-0">Quelques chiffres clé</h4>
+    </div>
+    <div class="card-body">
+      <div class="list-icons row justify-content-center">
+        <div class="-item col-6 col-md-3 mb-2 mb-md-0">
+          <span class="icon icon-users"></span>
+          <span class="-title">Nb. clients</span>
+          <span class="-number text-primary">{{ turnovers_clients|length }}</span>
+        </div>
+        <div class="-item col-6 col-md-3 mb-2 mb-md-0">
+          <span class="icon icon-calendar-full"></span>
+          <span class="-title">CA mensuel</span>
+          <span class="-number text-primary">{{ monthly_turnover|round(2) }}€</span>
+        </div>
+        <div class="-item col-6 col-md-3 mb-2 mb-md-0">
+          <span class="icon icon-briefcase"></span>
+          <span class="-title">CA total</span>
+          <span class="-number text-primary">{{ total_turnover }}€</span>
+        </div>
+        <div class="-item col-6 col-md-3">
+          <span class="icon icon-file-empty"></span>
+          <span class="-title">Nb. devis</span>
+          <span class="-number text-primary">{{ quotes|length }}</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-12 col-sm-6 col-print-12 mb-4">
+      <div class="card">
+        <div class="card-header">
+          <h4 class="mb-0">Chiffre d'affaire mensuelle</h4>
+        </div>
+        {% if turnovers_months is not empty %}
+          <div class="card-body">
+            <div class="chart-js w-100" data-chartjs-type="line" data-chartjs-data-name="turnovers_by_months"
+              data-chartjs-legend-position="right" data-chartjs-legend-display="false"> <!-- data-chartjs-legend-display="false" -->
+              <canvas></canvas>
+            </div>
+
+            <script type="text/javascript">
+              var turnovers_by_months = {
+                labels    : [],
+                datasets  : [{
+                  label : 'Chiffre d\'affaire par mois',
+                  data : [],
+                  backgroundColor : 'rgba(35, 176, 127, 0.5)',
+                  borderColor     : 'rgba(35, 176, 127, .75)',
+                  borderWidth     : 2
+                }]
+              };
+
+              {% for month_num in 1..12 %}
+                turnovers_by_months.labels.push('{{ date('2021-' ~ month_num ~ '-01')|format_date(pattern='MMMM')|capitalize }}');
+                turnovers_by_months.datasets[0].data.push({{ (turnovers_months[month_num] is defined ? turnovers_months[month_num] : 0) }});
+              {% endfor %}
+            </script>
+          </div>
+          <table class="table table-striped mb-0 d-none d-print-table">
+            <thead>
+              <tr>
+                <th scope="col">Mois</th>
+                <th scope="col">Montant</th>
+              </tr>
+            </thead>
+            <tbody>
+            {% for month_num in 1..12 %}
+              <tr>
+                <td>{{ date('2021-' ~ month_num ~ '-01')|format_date(pattern='MMMM')|capitalize }}</td>
+                <td>
+                  {% if turnovers_months[month_num] is defined %}{{ turnovers_months[month_num] }}€
+                  {% else %}0€{% endif %}
+                </td>
+              </tr>
+            {% endfor %}
+            </tbody>
+          </table>
+        {% else %}
+          <div class="card-body">
+            <div class="alert alert-secondary">Aucunes données par mois à afficher.</div>
+          </div>
+        {% endif %}
+      </div>
+    </div>
+    <div class="col-12 col-sm-6 col-print-12">
+      <div class="card">
+        <div class="card-header">
+          <h4 class="mb-0">Chiffre d'affaire par client</h4>
+        </div>
+        {% if turnovers_clients is not empty %}
+          <div class="card-body text-center">
+            <div class="chart-js" data-chartjs-type="pie" data-chartjs-data-name="turnovers_by_clients"
+              data-chartjs-legend-position="right" data-chartjs-legend-hide="xs|sm|md|lg">
+              <canvas></canvas>
+            </div>
+            <script type="text/javascript">
+              var turnovers_by_clients = {
+                labels    : [],
+                datasets  : [{
+                  data: [],
+                  backgroundColor : [],
+                }]
+              };
+
+              {% for dc in turnovers_clients %}
+                turnovers_by_clients.labels.push('[{{ dc.client.company }}] {{ dc.client.firstname }} {{ dc.client.lastname }}');
+                turnovers_by_clients.datasets[0].data.push({{ dc.invoices_amount }});
+                turnovers_by_clients.datasets[0].backgroundColor.push('{{ dc.client.color }}');
+              {% endfor %}
+            </script>
+          </div>
+          <table class="table table-striped mb-0 d-none d-print-table">
+            <thead>
+              <tr>
+                <th scope="col">[Société] Client</th>
+                <th scope="col">Devis</th>
+              </tr>
+            </thead>
+            <tbody>
+            {% for dc in turnovers_clients %}
+              <tr>
+                <td>
+                  <span{% if dc.client.color is not empty %} style="color: {{ dc.client.color }}"{% endif %}><span class="dot"></span> [{{ dc.client.company }}]</span> {{ dc.client.firstname }} {{ dc.client.lastname }}
+                </td>
+                <td>{{ dc.invoices_amount }}€</td>
+              </tr>
+            {% endfor %}
+            </tbody>
+          </table>
+        {% else %}
+          <div class="card-body">
+            <div class="alert alert-secondary">Aucunes données par clients à afficher.</div>
+          </div>
+        {% endif %}
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock %}
