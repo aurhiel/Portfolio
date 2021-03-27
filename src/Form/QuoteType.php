@@ -38,7 +38,10 @@ class QuoteType extends AbstractType
                 },
                 'choice_label'  => function ($client) {
                     return $client->getLastname() . ' ' . $client->getFirstname() . ' (' . $client->getCompany() . ')';
-                }
+                },
+                'attr' => [
+                  'class' => 'custom-select'
+                ]
             ])
             ->add('label', TextType::class, [
                 'label'       => 'form_quote.name.label',

@@ -37,7 +37,10 @@ class InvoiceType extends AbstractType
                 },
                 'choice_label'  => function ($quote) {
                     return ((!empty($quote->getSku())) ? $quote->getSku() . ' - ' : '') . $quote->getLabel();
-                }
+                },
+                'attr' => [
+                  'class' => 'custom-select'
+                ]
             ])
             ->add('document', FileType::class, [
                 'label' => 'form_invoice.document.label',

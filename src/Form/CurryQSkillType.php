@@ -52,7 +52,10 @@ class CurryQSkillType extends AbstractType
               },
               'choice_label'  => function ($skill_category) {
                   return $skill_category->getLabel();
-              }
+              },
+              'attr' => [
+                'class' => 'custom-select'
+              ]
           ])
           ->add('send', SubmitType::class, [
               'label' => 'form_basic.save.label',
