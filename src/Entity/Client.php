@@ -50,6 +50,11 @@ class Client
      */
     private $quotes;
 
+    /**
+     * @ORM\Column(type="string", length=32, nullable=true)
+     */
+    private $color;
+
     public function __construct()
     {
         $this->quotes = new ArrayCollection();
@@ -151,6 +156,18 @@ class Client
                 $quote->setClient(null);
             }
         }
+
+        return $this;
+    }
+
+    public function getColor(): ?string
+    {
+        return $this->color;
+    }
+
+    public function setColor(?string $color): self
+    {
+        $this->color = $color;
 
         return $this;
     }

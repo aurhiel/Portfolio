@@ -14,7 +14,7 @@
 @import "~bootstrap/scss/badge";
 @import "~bootstrap/scss/dropdown";
 @import "~bootstrap/scss/tables";
-// @import 'linearicons/linearicons';
+@import 'linearicons/linearicons';
 
 
 
@@ -22,3 +22,22 @@
 
 @import 'dashboard/root';
 @import 'dashboard/app-core';
+@import 'dashboard/grid';
+@import 'dashboard/lists';
+@import 'dashboard/forms';
+
+.dot {
+  background-color: currentcolor;
+  display: inline-block;
+  vertical-align: middle;
+  border-radius: 50%;
+  height: .358em;
+  width: .358em;
+  margin-top: -.1em;
+}
+
+@media print {
+  .dot {
+    display: none;
+  }
+}

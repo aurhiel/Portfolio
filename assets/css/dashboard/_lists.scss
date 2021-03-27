@@ -1,0 +1,22 @@
+// Lists (styles for <ul>, <ol>, ...)
+//
+
+.list-icons {
+  .-item {
+    text-align: center;
+
+    > * {
+      display: block;
+    }
+  }
+
+  .icon {
+    font-size: 2em;
+    opacity: .6;
+  }
+
+  .-number {
+    font-size: 1.8em;
+    font-weight: bold;
+  }
+}
