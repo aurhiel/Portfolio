@@ -5,6 +5,9 @@ namespace App\Controller;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\Mailer\MailerInterface;
+use Symfony\Component\Mime\Email;
+use Symfony\Component\Mime\Address;
 
 // Entities
 use App\Entity\Contact;
@@ -18,7 +21,7 @@ class ContactController extends AbstractController
     /**
      * @Route("/contact.html", name="contact")
      */
-    public function index(Request $request, \Swift_Mailer $mailer)
+    public function index(Request $request, MailerInterface $mailer)
     {
         $contact      = new Contact();
         $form_contact = $this->createForm(ContactType::class, $contact, [
@@ -46,24 +49,20 @@ class ContactController extends AbstractController
             try {
                 // Anti-bot attempt (email confirm is a fake input)
                 if (empty($contact->getEmailConfirm())) {
-                    $message = (new \Swift_Message('[litti-aurelien.fr] ' . $message_title))
-                        ->setFrom([
-                            $contact->getEmail() => $contact->getFirstname() . ' ' . $contact->getLastname()
-                        ])
-                        ->setTo('litti.aurelien@gmail.com')
-                        ->setBody(
-                            $this->renderView(
-                                'emails/message.html.twig',
-                                [
-                                    'contact' => $contact,
-                                    'visitor' => [
-                                          'ip'    => $request->getClientIp(),
-                                          'agent' => $request->server->get('HTTP_USER_AGENT')
-                                    ],
-                                ]
-                            ),
-                            'text/html'
-                        )
+                    $message = (new Email())
+                        ->from([new Address($contact->getEmail(), $contact->getFirstname() . ' ' . $contact->getLastname())])
+                        ->to('litti.aurelien@gmail.com')
+                        ->subject('[litti-aurelien.fr] ' . $message_title)
+                        ->html($this->renderView(
+                            'emails/message.html.twig',
+                            [
+                                'contact' => $contact,
+                                'visitor' => [
+                                      'ip'    => $request->getClientIp(),
+                                      'agent' => $request->server->get('HTTP_USER_AGENT')
+                                ],
+                            ]
+                        ))
                     ;
 
                     // Send email
@@ -73,6 +72,9 @@ class ContactController extends AbstractController
                 $status         = 1;
                 $message_status = "Votre " . (($is_quote == true) ? "devis" : "message" ) . " a bien été envoyé, je vous répondrai dès sa réception, à très bientôt !";
             } catch (\Exception $e) {
+                $message_status = $e->getMessage();
+                // dump();
+                // exit;
                 // $request->getSession()->getFlashBag()->add('error',
                 //   "");
             }
