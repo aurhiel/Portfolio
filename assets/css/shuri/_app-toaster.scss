@@ -15,5 +15,7 @@
     // opacity: 1;
     // Forcing margin-bottom for every toast
     margin-bottom: $toast-padding-x;
+    // Reset flex-basis to avoid height problems on firefox & chrome
+    flex-basis: auto;
   }
 }

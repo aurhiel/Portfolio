@@ -100,7 +100,7 @@
               <table class="table table-striped mb-0">
                 <thead>
                   <tr>
-                    <th scope="col">[Société] Client</th>
+                    <th scope="col"><span class="dot"></span> <span class="d-none d-print-inline">[Société] </span>Client</th>
                     <th scope="col">Devis</th>
                     <th scope="col">Reste à payer</th>
                   </tr>
@@ -110,7 +110,9 @@
                   {% set rest_pay = dc.quotes_amount - dc.invoices_amount %}
                   <tr>
                     <td>
-                      <span{% if dc.client.color is not empty %} style="color: {{ dc.client.color }}"{% endif %}><span class="dot"></span> [{{ dc.client.company }}]</span> {{ dc.client.firstname }} {{ dc.client.lastname }}
+                      <span{% if dc.client.color is not empty %} style="color: {{ dc.client.color }}"{% endif %}>
+                        <span class="dot"></span><span class="d-none d-print-inline"> [{{ dc.client.company }}]</span>
+                      </span> {{ dc.client.firstname }} {{ dc.client.lastname }}
                     </td>
                     <td>{{ dc.quotes_amount }}€</td>
                     <td class="text-{% if rest_pay > 0 %}danger{% else %}success{% endif %}">{{ rest_pay }}€</td>
