@@ -254,6 +254,7 @@ class DashboardAccountingController extends AbstractController
         $em         = $this->getDoctrine()->getManager();
         $r_invoice  = $em->getRepository(Invoice::class);
         $r_quote    = $em->getRepository(Quote::class);
+        $now        = new \DateTime();
 
         // Retrieve years based on invoices list
         $invoices_years = array();
@@ -302,8 +303,9 @@ class DashboardAccountingController extends AbstractController
             $turnovers_months[$inv_month] += $inv->getAmount();
         }
 
-        // Retrieve average monthly turnover TODO current year = less months
-        $monthly_turnovers = $total_turnover / 12;
+        // Retrieve average monthly turnover
+        $nb_months = (!is_null($year) && $year == (int)$now->format('Y')) ? (int)$now->format('n') : 12;
+        $monthly_turnovers = $total_turnover / $nb_months;
 
         return $this->render('dashboard/accounting/recipe-books.html.twig', [
             'invoices'      => $invoices,
