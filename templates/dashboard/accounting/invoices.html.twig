@@ -65,7 +65,7 @@
           <div class="col-auto">
             <label class="sr-only" for="filter-year">Filtrer par année</label>
             <select class="custom-select mb-2 mb-md-0" id="filter-year" name="filter-year" required="required">
-              <option value="0">Tous les devis</option>
+              <option value="0">Toutes les factures</option>
             {% for year in invoices_years %}
               <option value="{{ year }}" {% if filters.year == year %}selected="selected"{% endif %}>
                 {{ year }}
