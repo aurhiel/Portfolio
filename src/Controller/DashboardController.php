@@ -9,7 +9,7 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
 
 // Entities
 // use App\Entity\Client;
-// use App\Entity\Testimonial;
+use App\Entity\Testimonial;
 use App\Entity\Quote;
 use App\Entity\Invoice;
 
@@ -31,11 +31,12 @@ class DashboardController extends AbstractController
         $em         = $this->getDoctrine()->getManager();
         $r_quote    = $em->getRepository(Quote::class);
         $r_invoice  = $em->getRepository(Invoice::class);
+        $now        = new \DateTime();
 
         // Retrieve turnover (quotes, invoices & rest to pay) by years
         $quote_total_years    = $r_quote->findTotalAmountsGroupByYear();
         $invoice_total_years  = $r_invoice->findTotalAmountsGroupByYear();
-        $turnover_years = array();
+        $turnover_years       = array();
         if (!empty($quote_total_years)) {
             foreach ($quote_total_years as $quote_year) {
                 $curr_year = (int)$quote_year['year_signed'];
@@ -55,9 +56,10 @@ class DashboardController extends AbstractController
             }
         }
 
-        // Retrieve turnover by clients
-        $quotes = $r_quote->findAll();
-        $turnovers_clients = array();
+        // Retrieve turnover by clients & over key stats.
+        $quotes             = $r_quote->findAll();
+        $turnovers_clients  = array();
+        $total_turnover     = 0;
         foreach ($quotes as $quote) {
             $client = $quote->getClient();
             $id_client = $client->getId();
@@ -67,12 +69,28 @@ class DashboardController extends AbstractController
             // Update quotes & invoices amount
             $turnovers_clients[$id_client]['quotes_amount'] += $quote->getAmount();
             $turnovers_clients[$id_client]['invoices_amount'] += $quote->getInvoicesTotalAmount();
+
+            // Update total turnover & turnovers by months
+            $total_turnover += $quote->getInvoicesTotalAmount();
         }
 
+        // Retrieve nb years of activity & monthly turnovers
+        $nb_years_activity = (int)$now->format('Y') - array_key_first($turnover_years);
+        $monthly_turnovers = $total_turnover / (($nb_years_activity * 12) + (int)$now->format('n'));
+
+        // Retrieve testimonials
+        $r_testimonials = $em->getRepository(Testimonial::class);
+        $testimonials   = $r_testimonials->findAll();
+
         return $this->render('dashboard/index.html.twig', [
-            'stats' => [
+            'quotes'  => $quotes,
+            'stats'   => [
               'turnover_years'    => $turnover_years,
               'turnover_clients'  => $turnovers_clients,
+              'total_turnover'    => $total_turnover,
+              'monthly_turnover'  => $monthly_turnovers,
+              'nb_years_activity' => $nb_years_activity,
+              'nb_testimonials'   => count($testimonials),
             ],
         ]);
     }

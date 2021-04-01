@@ -15,8 +15,15 @@
     opacity: .6;
   }
 
+  .-title {
+    font-size: .8em;
+    line-height: 1;
+    margin-top: .2em;
+  }
+
   .-number {
     font-size: 1.8em;
     font-weight: bold;
+    margin-top: .2em;
   }
 }

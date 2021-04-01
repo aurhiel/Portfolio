@@ -2,6 +2,52 @@
 
 {% block body %}
   <div class="container">
+    <div class="card mb-4 rb-key-stats">
+      <div class="card-header">
+        <h4 class="mb-0">Quelques chiffres clé</h4>
+      </div>
+      <div class="card-body">
+        <div class="list-icons row justify-content-center">
+          <div class="-item col-6 col-md-4 col-lg-2 mb-2 mb-md-0">
+            <span class="icon icon-rocket"></span>
+            <span class="-title">Années d'activité</span>
+            <span class="-number text-primary">
+              {% if stats.nb_years_activity < 1 %}
+                &lt;1an
+              {% else %}
+                +{{ stats.nb_years_activity }}an{% if stats.nb_years_activity > 1 %}s{% endif %}
+              {% endif %}
+            </span>
+          </div>
+          <div class="-item col-6 col-md-4 col-lg-2 mb-2 mb-md-0">
+            <span class="icon icon-users"></span>
+            <span class="-title">Nb. clients</span>
+            <span class="-number text-primary">{{ stats.turnover_clients|length }}</span>
+          </div>
+          <div class="-item col-6 col-md-4 col-lg-2 mb-2 mb-md-0">
+            <span class="icon icon-star-half"></span>
+            <span class="-title">Nb. témoignages</span>
+            <span class="-number text-primary">{{ stats.nb_testimonials }}</span>
+          </div>
+          <div class="-item col-6 col-md-4 col-lg-2 mb-2 mb-md-0">
+            <span class="icon icon-calendar-full"></span>
+            <span class="-title">CA mensuel</span>
+            <span class="-number text-primary">{{ stats.monthly_turnover|round(2) }}€</span>
+          </div>
+          <div class="-item col-6 col-md-4 col-lg-2 mb-2 mb-md-0">
+            <span class="icon icon-briefcase"></span>
+            <span class="-title">CA total</span>
+            <span class="-number text-primary">{{ stats.total_turnover }}€</span>
+          </div>
+          <div class="-item col-6 col-md-4 col-lg-2">
+            <span class="icon icon-file-empty"></span>
+            <span class="-title">Nb. devis</span>
+            <span class="-number text-primary">{{ quotes|length }}</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
     {% if stats.turnover_years is not empty or stats.turnover_clients is not empty %}
       <div class="row">
         <div class="col-12 col-md-6">
