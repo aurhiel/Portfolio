@@ -145,7 +145,8 @@ class DashboardAccountingController extends AbstractController
         // 1) Build the form
         $entity = new Invoice();
         $form = $this->createForm(InvoiceType::class, $entity, [
-            'action' => $this->generateUrl('dashboard_accounting_invoices', [ 'year' => $year ])
+            'action'  => $this->generateUrl('dashboard_accounting_invoices', [ 'year' => $year ]),
+            'year'    => $year
         ]);
 
         // 2) Handle form

@@ -30,13 +30,21 @@ class InvoiceType extends AbstractType
                 'label_attr'  => [ 'class' => 'sr-only'],
                 'required'      => false,
                 'placeholder'   => 'form_invoice.quote.placeholder',
-                'query_builder' => function (QuoteRepository $repo) {
-                    return $repo->createQueryBuilder('q')
-                        // Order on date created, from newest to oldest
-                        ->addOrderBy('q.date_created', 'DESC');
+                'query_builder' => function (QuoteRepository $repo) use ($options) {
+                    $qb = $repo->createQueryBuilder('q');
+
+                    // Where $year
+                    if (!is_null($options['year']))
+                        $qb->where('YEAR(q.date_signed) = :year')
+                          ->setParameter('year', (int)$options['year']);
+
+                    // Order on date created, from newest to oldest
+                    $qb->addOrderBy('q.date_signed', 'DESC');
+
+                    return $qb;
                 },
                 'choice_label'  => function ($quote) {
-                    return ((!empty($quote->getSku())) ? $quote->getSku() . ' - ' : '') . $quote->getLabel();
+                    return '[' . $quote->getDateSigned()->format('Y-m-d') . '] ' .((!empty($quote->getSku())) ? $quote->getSku() . ' - ' : '') . $quote->getLabel();
                 },
                 'attr' => [
                   'class' => 'custom-select'
@@ -94,7 +102,8 @@ class InvoiceType extends AbstractType
     public function configureOptions(OptionsResolver $resolver)
     {
         $resolver->setDefaults([
-            'data_class' => Invoice::class,
+            'data_class'  => Invoice::class,
+            'year'        => null
         ]);
     }
 }
