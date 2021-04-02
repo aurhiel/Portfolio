@@ -7,7 +7,7 @@
   {% if has_past == true or has_future == true %}
   <div class="rb-nav d-print-none">
     <div class="row align-items-center">
-        <div class="col-12 col-md-3">
+        <div class="col-6 col-md-3">
           {% if has_past == true %}
           <a class="btn btn-sm btn-outline-secondary"
             href="{{ path('dashboard_accounting_recipe_books', { year : current_year - 1 }) }}">
@@ -20,7 +20,7 @@
           <h2 class="h3 mb-0">Livre de recette {{ current_year }}</h2>
         </div>
 
-        <div class="col-12 col-md-3 text-right">
+        <div class="col-6 col-md-3 text-right">
           {% if has_future == true %}
           <a class="btn btn-sm btn-outline-secondary"
             href="{{ path('dashboard_accounting_recipe_books', { year : current_year + 1 }) }}">
@@ -44,22 +44,22 @@
     </div>
     <div class="card-body">
       <div class="list-icons row justify-content-center">
-        <div class="-item col-6 col-md-3 mb-2 mb-md-0">
+        <div class="-item col-6 col-md-3 col-print-3 mb-2 mb-md-0">
           <span class="icon icon-users"></span>
           <span class="-title">Nb. clients</span>
           <span class="-number text-primary">{{ turnovers_clients|length }}</span>
         </div>
-        <div class="-item col-6 col-md-3 mb-2 mb-md-0">
+        <div class="-item col-6 col-md-3 col-print-3 mb-2 mb-md-0">
           <span class="icon icon-calendar-full"></span>
           <span class="-title">CA mensuel</span>
           <span class="-number text-primary">{{ monthly_turnover|round(2) }}€</span>
         </div>
-        <div class="-item col-6 col-md-3 mb-2 mb-md-0">
+        <div class="-item col-6 col-md-3 col-print-3 mb-2 mb-md-0">
           <span class="icon icon-briefcase"></span>
           <span class="-title">CA total</span>
           <span class="-number text-primary">{{ total_turnover }}€</span>
         </div>
-        <div class="-item col-6 col-md-3">
+        <div class="-item col-6 col-md-3 col-print-3">
           <span class="icon icon-file-empty"></span>
           <span class="-title">Nb. devis</span>
           <span class="-number text-primary">{{ quotes|length }}</span>
