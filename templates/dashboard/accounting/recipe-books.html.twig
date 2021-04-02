@@ -69,7 +69,7 @@
   </div>
 
   <div class="row">
-    <div class="col-12 col-sm-6 col-print-12 mb-4">
+    <div class="col-12 col-sm-6 col-print-6 mb-4">
       <div class="card">
         <div class="card-header">
           <h4 class="mb-0">Chiffre d'affaire mensuelle</h4>
@@ -78,7 +78,7 @@
           <div class="card-body">
             <div class="chart-js w-100" data-chartjs-type="line" data-chartjs-data-name="turnovers_by_months"
               data-chartjs-legend-position="right" data-chartjs-legend-display="false"> <!-- data-chartjs-legend-display="false" -->
-              <canvas></canvas>
+              <canvas class="w-100"></canvas>
             </div>
 
             <script type="text/javascript">
@@ -125,7 +125,7 @@
         {% endif %}
       </div>
     </div>
-    <div class="col-12 col-sm-6 col-print-12">
+    <div class="col-12 col-sm-6 col-print-6">
       <div class="card">
         <div class="card-header">
           <h4 class="mb-0">Chiffre d'affaire par client</h4>
@@ -134,7 +134,7 @@
           <div class="card-body text-center">
             <div class="chart-js" data-chartjs-type="pie" data-chartjs-data-name="turnovers_by_clients"
               data-chartjs-legend-position="right" data-chartjs-legend-hide="xs|sm|md|lg">
-              <canvas></canvas>
+              <canvas class="w-100"></canvas>
             </div>
             <script type="text/javascript">
               var turnovers_by_clients = {

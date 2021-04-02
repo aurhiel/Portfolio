@@ -50,7 +50,7 @@
 
     {% if stats.turnover_years is not empty or stats.turnover_clients is not empty %}
       <div class="row">
-        <div class="col-12 col-md-6 col-print-12 mb-4">
+        <div class="col-12 col-md-6 col-print-6 mb-4">
           <div class="card">
             <div class="card-header">
               <h4 class="h3 mb-0">Devis &amp; Factures par année</h4>
@@ -59,7 +59,7 @@
               <div class="card-body text-center">
                 <div class="chart-js" data-chartjs-type="line" data-chartjs-data-name="turnovers_by_years"
                   data-chartjs-legend-position="right" data-chartjs-legend-hide="xs|sm|md|lg"> <!-- data-chartjs-legend-display="false" -->
-                  <canvas></canvas>
+                  <canvas class="w-100"></canvas>
                 </div>
 
                 <script type="text/javascript">
@@ -116,7 +116,7 @@
           </div>
         </div>
 
-        <div class="col-12 col-md-6 col-print-12">
+        <div class="col-12 col-md-6 col-print-6">
           <div class="card">
             <div class="card-header">
               <h4 class="h3 mb-0">Clients</h4>
@@ -125,7 +125,7 @@
               <div class="card-body text-center">
                 <div class="chart-js" data-chartjs-type="pie" data-chartjs-data-name="turnovers_by_clients"
                   data-chartjs-legend-position="right" data-chartjs-legend-hide="xs|sm|md|lg">
-                  <canvas></canvas>
+                  <canvas class="w-100"></canvas>
                 </div>
                 <script type="text/javascript">
                   var turnovers_by_clients = {
