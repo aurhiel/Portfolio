@@ -34,9 +34,13 @@ class InvoiceType extends AbstractType
                     $qb = $repo->createQueryBuilder('q');
 
                     // Where $year
-                    if (!is_null($options['year']))
+                    if (!is_null($options['year'])) {
                         $qb->where('YEAR(q.date_signed) = :year')
                           ->setParameter('year', (int)$options['year']);
+
+                        $qb->orWhere('YEAR(q.date_signed) = :year_previous')
+                          ->setParameter('year_previous', ((int)$options['year']) - 1);
+                    }
 
                     // Order on date created, from newest to oldest
                     $qb->addOrderBy('q.date_signed', 'DESC');
