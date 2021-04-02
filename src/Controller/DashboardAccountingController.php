@@ -15,6 +15,7 @@ use App\Service\FileUploader;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\Filesystem\Filesystem;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
 
 /**
@@ -113,7 +114,7 @@ class DashboardAccountingController extends AbstractController
     /**
      * @Route("/dashboard/compta/devis/delete/{id}", name="dashboard_accounting_quotes_delete")
      */
-    public function accounting_quotes_delete($id, Request $request)
+    public function accounting_quotes_delete($id, Request $request, Filesystem $filesystem)
     {
         $em = $this->getDoctrine()->getManager();
 
@@ -122,10 +123,16 @@ class DashboardAccountingController extends AbstractController
         $entity = $repo->findOneById($id);
 
         if ($entity !== null) {
+            // Retrieve filename before deleting quote
+            $filename = $entity->getDocumentFilename();
+
+            // Delete quote
             $em->remove($entity);
             $em->flush();
 
-            // TODO: Delete quote document file
+            // Delete quote document file
+            if (!is_null($filename))
+                $filesystem->remove('../public/uploads/documents/quotes/' . $filename);
         } else {
             $request->getSession()->getFlashBag()->add('error',
               'Le devis avec pour ID: <b>' . $id . '</b> n\'existe pas en base de données.');
@@ -225,7 +232,7 @@ class DashboardAccountingController extends AbstractController
     /**
      * @Route("/dashboard/compta/factures/delete/{id}", name="dashboard_accounting_invoices_delete")
      */
-    public function accounting_invoices_delete($id, Request $request)
+    public function accounting_invoices_delete($id, Request $request, Filesystem $filesystem)
     {
         $em = $this->getDoctrine()->getManager();
 
@@ -234,10 +241,16 @@ class DashboardAccountingController extends AbstractController
         $entity = $repo->findOneById($id);
 
         if ($entity !== null) {
+            // Retrieve filename before deleting invoice
+            $filename = $entity->getDocumentFilename();
+
+            // Delete invoice
             $em->remove($entity);
             $em->flush();
 
-            // TODO: Delete invoice document file
+            // Delete invoice document file
+            if (!is_null($filename))
+                $filesystem->remove('../public/uploads/documents/invoices/' . $filename);
         } else {
             $request->getSession()->getFlashBag()->add('error',
               'La facture avec pour ID: <b>' . $id . '</b> n\'existe pas en base de données.');
