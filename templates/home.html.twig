@@ -28,7 +28,11 @@
     {% include 'home/_projects.html.twig' %}
 
     {# Testimonials block #}
-    {% include 'home/_testimonials.html.twig' %}
+    <div class="row mx-0 bg-white overflow-hidden">
+      {% include 'home/_testimonials.html.twig' with { section_classes: ((clients is defined and clients|length > 0) ? 'col-xl-6' : 'col-12') } %}
+
+      {% include 'home/_clients.html.twig' with { section_classes: 'col-xl-6' } %}
+    </div>
 
     {# Logs (~blog) block
     {% include 'home/_logs.html.twig' %} #}

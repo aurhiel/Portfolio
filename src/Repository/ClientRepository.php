@@ -32,6 +32,21 @@ class ClientRepository extends ServiceEntityRepository
         ;
     }
 
+    public function findAllWithLogo()
+    {
+        return $this->createQueryBuilder('c', 'c.id')
+            // Join relations
+            ->leftJoin('c.testimonial', 'testimonial')
+            ->addSelect('testimonial')
+            // Where
+            ->andWhere('c.logo_filename IS NOT null')
+            // Order
+            ->orderBy('c.id', 'ASC')
+            ->getQuery()
+            ->getResult()
+        ;
+    }
+
     // /**
     //  * @return Client[] Returns an array of Client objects
     //  */

@@ -13,6 +13,9 @@ use App\Entity\Client;
 // Forms
 use App\Form\ClientType;
 
+// Services
+use App\Service\FileUploader;
+
 /**
   * Require ROLE_ADMIN for *every* controller method in this class.
   *
@@ -23,7 +26,7 @@ class DashboardClientsController extends AbstractController
     /**
      * @Route("/dashboard/clients/{id}", name="dashboard_clients", defaults={"id"=null})
      */
-    public function index($id, Request $request)
+    public function index($id, Request $request, FileUploader $fileUploader)
     {
         $em   = $this->getDoctrine()->getManager();
         $repo = $em->getRepository(Client::class);
@@ -37,6 +40,16 @@ class DashboardClientsController extends AbstractController
         $data = array();
 
         if ($form->isSubmitted() && $form->isValid()) {
+            /** @var UploadedFile $documentFile */
+            $logoFile = $form->get('logo')->getData();
+
+            // this condition is needed because the 'brochure' field is not required
+            // so the PDF file must be processed only when a file is uploaded
+            if ($logoFile) {
+                $logoFileName = $fileUploader->upload($logoFile, '/clients');
+                $client->setLogoFilename($logoFileName);
+            }
+
             // 3) Save !
             $em->persist($client);
 

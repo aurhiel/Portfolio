@@ -41,6 +41,16 @@ class Client
     private $company;
 
     /**
+     * @ORM\Column(type="string", length=32, nullable=true)
+     */
+    private $color;
+
+    /**
+     * @ORM\Column(type="string", length=255, nullable=true)
+     */
+    private $logo_filename;
+
+    /**
      * @ORM\OneToOne(targetEntity="App\Entity\Testimonial", mappedBy="client", cascade={"persist", "remove"})
      */
     private $testimonial;
@@ -49,11 +59,6 @@ class Client
      * @ORM\OneToMany(targetEntity=Quote::class, mappedBy="client")
      */
     private $quotes;
-
-    /**
-     * @ORM\Column(type="string", length=32, nullable=true)
-     */
-    private $color;
 
     public function __construct()
     {
@@ -113,6 +118,30 @@ class Client
         return $this;
     }
 
+    public function getColor(): ?string
+    {
+        return $this->color;
+    }
+
+    public function setColor(?string $color): self
+    {
+        $this->color = $color;
+
+        return $this;
+    }
+
+    public function getLogoFilename(): ?string
+    {
+        return $this->logo_filename;
+    }
+
+    public function setLogoFilename(?string $logo_filename): self
+    {
+        $this->logo_filename = $logo_filename;
+
+        return $this;
+    }
+
     public function getTestimonial(): ?Testimonial
     {
         return $this->testimonial;
@@ -156,18 +185,6 @@ class Client
                 $quote->setClient(null);
             }
         }
-
-        return $this;
-    }
-
-    public function getColor(): ?string
-    {
-        return $this->color;
-    }
-
-    public function setColor(?string $color): self
-    {
-        $this->color = $color;
 
         return $this;
     }

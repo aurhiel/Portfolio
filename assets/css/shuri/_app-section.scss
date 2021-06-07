@@ -81,6 +81,10 @@
   }
 
   &--testimonials {
+    background-color: $white;
+    min-height: 300px;
+    overflow: hidden;
+
     .-inner {
       .text-muted {
         text-align: center;
@@ -88,6 +92,27 @@
         margin-left: auto;
         margin-right: auto;
       }
+    }
+  }
+
+  &--clients {
+    position: relative;
+    z-index: 1;
+
+    &:before {
+      content: ' ';
+      background-color: lighten($primary, 54%);
+      position: absolute;
+      z-index: 0;
+      top: 0;
+      left: 0;
+      height: 100%;
+      width: 100%;
+    }
+
+    .-inner {
+      position: relative;
+      z-index: 5;
     }
   }
 
@@ -247,6 +272,19 @@
     .--text {
       padding-left: 1.4rem;
       padding-right: 1.4rem;
+    }
+  }
+}
+
+@include media-breakpoint-up(xl) {
+  .app-section {
+    &--clients {
+      &:before {
+        top: -10%;
+        height: 120%;
+        width: 120%;
+        transform: rotate(6deg);
+      }
     }
   }
 }

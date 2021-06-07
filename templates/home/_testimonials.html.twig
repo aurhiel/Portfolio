@@ -1,6 +1,6 @@
 {% if testimonials is defined and testimonials|length > 0 %}
-  <div class="app-section app-section--testimonials bg-white" style="min-height: 300px">
-    <div class="-inner scrolling-machine sm--from-center">
+  <div class="app-section app-section--testimonials{% if section_classes is defined and section_classes is not empty %} {{ section_classes }}{% endif %}">
+    <div class="-inner scrolling-machine sm--from-left">
       <h3 class="heading text-center mb-4" id="temoignages" data-text="Témoignages" style="--heading-text-drop-offset: -3em">Témoignages</h3>
       <p class="text-muted mb-5">
         Quoi de mieux que mes clients et collaborateurs pour parler de mon travail ?
