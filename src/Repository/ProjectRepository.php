@@ -19,6 +19,21 @@ class ProjectRepository extends ServiceEntityRepository
         parent::__construct($registry, Project::class);
     }
 
+    public function findAll()
+    {
+        return $this->createQueryBuilder('p', 'p.id')
+            // Join relations, specs & screenshots
+            ->leftJoin('p.specs', 'specs')
+            ->addSelect('specs')
+            ->leftJoin('p.screenshots', 'screenshots')
+            ->addSelect('screenshots')
+            // Order
+            ->orderBy('p.id', 'ASC')
+            ->getQuery()
+            ->getResult()
+        ;
+    }
+
     // /**
     //  * @return Project[] Returns an array of Project objects
     //  */

@@ -1,0 +1,165 @@
+{% extends 'dashboard/components/base.html.twig' %}
+
+{% block body %}
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-5 col-xl-4">
+        <h2 class="h3 mb-3">Ajouter une caractéristique</h2>
+        {{ form_start(form_spec, { 'attr' : { 'class': 'form form-inline form-project-spec mb-4' } }) }}
+          {# Form inputs #}
+          <div class="form-group mb-0 mb-xl-2 mb-xxl-0 mr-2">
+            {{ form_label(form_spec.name) }}
+            {{ form_widget(form_spec.name) }}
+            {{ form_errors(form_spec.name) }}
+          </div>
+          <div class="form-group mb-0">
+            {{ form_widget(form_spec.send) }}
+          </div>
+        {{ form_end(form_spec) }}
+
+        <h2 class="h3 mb-3">Ajouter un projet</h2>
+        {{ form_start(form_project, { 'attr' : { 'class': 'form form-project' } }) }}
+          {# Form inputs #}
+          <div class="form--inputs">
+            <div class="form-row">
+              <div class="col-sm-6 col-md-4 col-lg-6 mb-3">
+                {{ form_label(form_project.name) }}
+                {{ form_widget(form_project.name) }}
+                {{ form_errors(form_project.name) }}
+              </div>
+              <div class="col-sm-6 col-md-4 col-lg-6 mb-3">
+                {{ form_label(form_project.name_long) }}
+                {{ form_widget(form_project.name_long) }}
+                {{ form_errors(form_project.name_long) }}
+              </div>
+              <div class="col-sm-12 col-md-4 col-lg-12 mb-3">
+                {{ form_label(form_project.url) }}
+                {{ form_widget(form_project.url) }}
+                {{ form_errors(form_project.url) }}
+              </div>
+            </div>
+
+            <div class="form-group">
+              {{ form_label(form_project.description) }}
+              {{ form_widget(form_project.description) }}
+              {{ form_errors(form_project.description) }}
+            </div>
+
+            <div class="form-group">
+              {{ form_label(form_project.illustration) }}
+              {{ form_widget(form_project.illustration) }}
+              {{ form_errors(form_project.illustration) }}
+            </div>
+
+            <div class="form-group form-image-lib">
+              {{ form_label(form_project.screenshots) }}
+              {{ form_widget(form_project.screenshots) }}
+              {{ form_errors(form_project.screenshots) }}
+              <div class="-images-library" data-initial-text="Aucune photo sélectionnée">
+                Aucune photo sélectionnée
+              </div>
+            </div>
+
+            <div class="form-group">
+              {{ form_label(form_project.specs) }}
+              {{ form_widget(form_project.specs) }}
+              {{ form_errors(form_project.specs) }}
+            </div>
+          </div>
+
+          {# Form buttons #}
+          <div class="form--actions text-center">
+            {{ form_widget(form_project.send) }}
+          </div>
+        {{ form_end(form_project) }}
+
+        <hr class="w-50 mx-auto my-5 d-lg-none">
+      </div>
+
+      <div class="col-lg-7 col-xl-8 pl-xl-4 pl-xxl-5">
+        <h2 class="h3 mb-3">Liste des caractéristiques &amp; projets</h2>
+        {% if project_specs is defined and project_specs is not empty %}
+          <div class="mb-3">
+          {% for spec in project_specs %}
+            <div class="btn-group mt-2">
+              <button type="button" class="btn btn-sm btn-outline-dark dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                {{ spec.name }}
+                <span class="sr-only">Afficher le menu déroulant des actions pour la caractéristique "{{ spec.name }}"</span>
+              </button>
+              <div class="dropdown-menu dropdown-menu-right">
+                <a class="dropdown-item" href="{{ path('dashboard_projects_specs_delete', { id: spec.id }) }}">Supprimer</a>
+                {# <div class="dropdown-divider"></div>
+                <a class="dropdown-item" href="#">Separated link</a> #}
+              </div>
+            </div>
+          {% endfor %}
+          </div>
+
+          <hr class="my-3">
+        {% else %}
+          <div class="alert alert-secondary mb-3">Aucune caractéristique</div>
+        {% endif %}
+
+        {% if projects is defined and projects is not empty %}
+          <div class="card-columns">
+          {% for project in projects %}
+            <div class="card">
+              {% if project.illustrationFilename is not empty %}
+                <img class="card-img-top px-2 pt-2" src="{{ asset('uploads/documents/projects/illustrations/' ~ project.illustrationFilename) }}" alt="{{ project.name }}">
+              {% endif %}
+              <div class="card-body pb-0">
+                <h5 class="card-title">
+                  <small class="text-muted">{{ project.name }}</small><br>
+                  {{ project.nameLong }}
+                  {% if project.specs is not empty %}
+                    <small class="d-block text-muted">
+                      {% for spec in project.specs %}
+                        {{ spec.name }}{% if loop.last == false %} / {% endif %}
+                      {% endfor %}
+                    </small>
+                  {% endif %}
+                </h5>
+              </div>
+              <div class="card-body--scrollable">
+                <div class="-inner {% if project.screenshots is not empty %}py-0{% else %}pt-0{% endif %}">
+                  {{ project.description|nl2br }}
+                </div>
+              </div>
+              {% if project.screenshots is not empty %}
+                <div class="card-body">
+                  <div class="row mx-n2">
+                    {% for screen in project.screenshots %}
+                    <div class="col-3 col-sm-4 col-md-3 col-lg-4 col-xl-3 px-1">
+                      <a class="embed-responsive embed-responsive-1by1 embed-responsive-bg rounded" href="{{ asset('uploads/documents/projects/screenshots/' ~ screen.filename) }}" target="_blank">
+                        <span style="background-image: url({{ asset('uploads/documents/projects/screenshots/' ~ screen.filename) }})"></span>
+                      </a>
+                    </div>
+                    {% endfor %}
+                  </div>
+                </div>
+              {% endif %}
+              <div class="card-footer text-right">
+                {% if project.url is not empty %}
+                  <a class="btn btn-sm btn-outline-primary" href="{{ project.url }}" target="_blank">
+                    lien >
+                  </a>
+                {% endif %}
+                <a class="btn btn-sm btn-secondary"
+                  href="{{ path('dashboard_projects', { id: project.id }) }}">
+                  edit
+                </a>
+                <a class="btn btn-sm btn-danger"
+                  href="{{ path('dashboard_projects_delete', { id: project.id }) }}">
+                  del.
+                </a>
+              </div>
+            </div>
+          {% endfor %}
+          </div>
+        {% else %}
+          <div class="alert alert-secondary">Aucun projet</div>
+        {% endif %}
+      </div>
+    </div>
+  </div>
+{% endblock %}

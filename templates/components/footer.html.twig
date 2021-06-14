@@ -1,12 +1,16 @@
 {% include 'components/form-contact.html.twig' %}
 
+{% include 'components/project-popup.html.twig' %}
+
 <footer class="app-footer py-3 scrolling-machine container-fluid">
   <div class="row align-items-center">
     <div class="footer-item--left col-md-6 my-1">
       © {{ 'now' | date('Y') }} - Site web conçu avec un peu de
-      <abbr title="code" class="icon icon-code" data-toggle="tooltip"></abbr>
+      {% if random() % 2 == 0 %}<abbr title="code" class="icon icon-code" data-toggle="tooltip"></abbr>
+      {% else %}<abbr title="magie" class="icon icon-magic-wand" data-toggle="tooltip"></abbr>{% endif %}
       et beaucoup de
-      <abbr title="passion" class="icon icon-heart" data-toggle="tooltip"></abbr>
+      {% if random() % 2 == 0 %}<abbr title="passion" class="icon icon-heart" data-toggle="tooltip"></abbr>
+      {% else %}<abbr title="café" class="icon icon-coffee-cup" data-toggle="tooltip"></abbr>{% endif %}
     </div>
     <div class="footer-item--right col-md-6 my-1">
       <ul class="list-inline mb-0">

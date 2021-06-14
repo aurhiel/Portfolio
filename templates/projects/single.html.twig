@@ -1,0 +1,17 @@
+{% extends 'base.html.twig' %}
+{% set core_class = 'app-core--static-page' %}
+
+{% block body %}
+<div class="app-main-content bg-white p-4">
+  {{ dump(project) }}
+  <h1 class="heading text-center mt-0 mb-2">{{ project.name }}</h1>
+  <h2 class="h6 font-weight-normal text-center text-muted d-block mb-4">{{ project.nameLong }}</h2>
+
+  <div class="row align-items-center mx-xl-n4 mx-xxl-n5">
+    <div class="-project-desc col-12 col-lg-6 px-xl-4 px-xxl-5">
+      {{ project.description|raw }}
+    </div>
+    <div class="-project-screenshots col-12 col-lg-6 px-xl-4 px-xxl-5"></div>
+  </div>
+</div>
+{% endblock %}

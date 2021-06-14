@@ -26,9 +26,16 @@
     }
   }
 
-  &--display-form-contact {
+  &--hide-stage {
     overflow: hidden;
 
+    // blur others elements
+    .app-header, .app-body, .app-footer {
+      filter: blur(4rem);
+    }
+  }
+
+  &--display-form-contact {
     // Contact form
     .app-section--contact {
       opacity: 1;
@@ -36,10 +43,15 @@
       overflow-y: scroll;
       pointer-events: auto;
     }
+  }
 
-    // blur others elements
-    .app-header, .app-body, .app-footer {
-      filter: blur(4rem);
+  &--display-project-popup {
+    overflow: hidden;
+    .app-section--project-popup {
+      opacity: 1;
+      // visibility: visible;
+      overflow-y: scroll;
+      pointer-events: auto;
     }
   }
 }
@@ -116,8 +128,8 @@
     }
   }
 
-  // Popup contact form
-  &--contact {
+  // Global popup
+  &--popup {
     background-color: $dark;
     background-color: transparentize($dark, .04);
     color: $white;
@@ -139,10 +151,27 @@
     overflow-x: hidden;
 
     .-inner {
+      position: relative;
+    }
+
+    .-popup-btn-close {
+      padding: .5rem .75rem;
+      position: absolute;
+      z-index: 5;
+      top: 1rem;
+      right: 1rem;
+    }
+  }
+
+  // Popup contact form
+  &--contact {
+    .-inner {
       max-width: 44rem;
       margin-left: auto;
       margin-right: auto;
       padding: 1.8rem 1rem;
+      // Hide anti-bot inputs out of the screen
+      position: static;
     }
 
     .form-group {
@@ -163,6 +192,43 @@
       .contact-inputs-quote {
         display: block;
       }
+    }
+  }
+
+  // Projects popup
+  &--project-popup {
+    background-color: $dark;
+    background-color: transparentize($dark, .1);
+    display: flex;
+    align-items: center;
+    // Cursor pointer type when closing popup by clicking on his background
+    cursor: pointer;
+
+    .-inner {
+      background-color: $dark;
+      background-color: transparentize($dark, .04);
+      padding: 4.6rem 1.4rem;
+      margin: 0 auto;
+      max-width: 68rem;
+      width: 94%;
+      border-radius: 1.6rem;
+      box-shadow: 0 0 0 .4rem transparentize($dark, .7);
+      max-height: 80%;
+      overflow: auto;
+      cursor: auto;
+    }
+
+    .-project-title {
+      font-weight: bold;
+      line-height: 1;
+      margin-top: 0;
+      padding-bottom: .2em;
+    }
+
+    .-project-desc {
+      font-size: .9rem;
+      line-height: 2;
+      text-align: justify;
     }
   }
 }
@@ -253,21 +319,47 @@
   }
 }
 
+
+
+// Responsive parts
+
 @include media-breakpoint-up(md) {
   .app-section {
     padding: 3rem 2rem;
 
-    &--contact {
+    &--popup {
       padding: 0;
 
+      .-popup-btn-close {
+        top: 2rem;
+        right: 2rem;
+      }
+    }
+
+    &--contact {
       .-inner {
         padding: 3.2rem 1.2rem;
+      }
+    }
+
+    // Projects popup
+    &--project-popup {
+      .-inner {
+        padding: 3.4rem 4rem;
       }
     }
   }
 }
 
 @include media-breakpoint-up(lg) {
+  .app-section {
+    &--contact {
+      .-inner {
+        padding-top: 4.6rem;
+      }
+    }
+  }
+
   .app-project-item {
     .--text {
       padding-left: 1.4rem;
@@ -278,6 +370,19 @@
 
 @include media-breakpoint-up(xl) {
   .app-section {
+    padding-top: 5rem;
+    padding-bottom: 5rem;
+
+    &--popup {
+      padding: 0;
+    }
+
+    &--contact {
+      .-inner {
+        padding-top: 6.4rem;
+      }
+    }
+
     &--clients {
       &:before {
         top: -10%;

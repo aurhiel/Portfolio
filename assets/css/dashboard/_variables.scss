@@ -182,6 +182,7 @@ $custom-select-border-radius-lg: $input-border-radius-lg;
 $navbar-bg:                   $dark;
 
 
+
 // Alerts
 //
 // Define alert colors, border radius, and padding.
@@ -194,6 +195,12 @@ $alert-font-weight:                 600;
 
 
 
+// Cards
+//
+
+$card-border-radius: $border-radius * 2;
+$card-columns-gap: 2;
+$card-columns-count: 2;
 
 // Theme's variables
 //

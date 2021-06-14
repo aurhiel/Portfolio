@@ -167,7 +167,7 @@ var shuri = {
           self.form_contact__reset();
 
           // Hide form
-          self.$body.removeClass('app-core--display-form-contact');
+          self.$body.removeClass('app-core--display-form-contact app-core--hide-stage');
 
           // Force navbar close for mobile (< sm)
           self.navbar__close();
@@ -195,6 +195,52 @@ var shuri = {
 
       $select.val(select_val);
     });
+  },
+
+  /*
+    Contact form managnment
+    NOTE : TODO docs
+  */
+  project_popup__display: function(project) {
+    // Update HTML
+    this.$project_popup.find('.-project-title').html(project.name);
+    this.$project_popup.find('.-project-desc').html(project.description);
+
+    // Add screenshots
+    if (project.screenshots.length > 0) {
+      var $screenshots  = this.$project_popup.find('.-project-screenshots');
+      var $slider       = $screenshots.find('.simple-slider');
+      var $slider_inner = $slider.find('.simple-slider-inner');
+
+      project.screenshots.forEach((screen, i) => {
+        // console.log(screen);
+        $slider_inner.append($('<li class="simple-slider-item' + ((i == 0) ? ' -current' : '') + '">' +
+            '<img class="img-fluid" src="' + this.project_screens_path + screen.filename + '">' +
+          '</li>'
+        ));
+      });
+
+      // Display $screenshots column
+      $screenshots.removeClass('d-none');
+    }
+
+    // Display popup
+    this.$body.addClass('app-core--display-project-popup');
+  },
+  project_popup__close: function() {
+    // TODO clear & reset HTML tags
+    var $screenshots  = this.$project_popup.find('.-project-screenshots');
+    var $slider       = $screenshots.find('.simple-slider');
+    var $slider_inner = $slider.find('.simple-slider-inner');
+
+    // Hide $screenshots column
+    $screenshots.addClass('d-none');
+    //   + reset slider classes & remove slider items
+    $slider.removeClass('-is-last -reduced -expanded').addClass('-is-first');
+    $slider_inner.html('');
+
+    // Hide popup
+    this.$body.removeClass('app-core--display-project-popup');
   },
 
 
@@ -235,6 +281,11 @@ var shuri = {
     self.$contact_quote_inputs    = self.$form_contact.find('.contact-inputs-quote').find('select, input');
     // // Simple Sliders
     self.$simple_sliders = self.$body.find('.simple-slider');
+    // // Projects
+    self.$section_projects      = self.$body.find('.app-section--projects');
+    self.$project_popup         = self.$body.find('.app-section--project-popup')
+    self.$projects_links        = self.$section_projects.find('.btn-display-project');
+    self.project_screens_path   = self.$section_projects.data('project-screens-path');
 
 
 
@@ -311,7 +362,7 @@ var shuri = {
       self.form_contact__toggle_is_quote(is_quote);
 
       // Display form
-      self.$body.toggleClass('app-core--display-form-contact');
+      self.$body.toggleClass('app-core--display-form-contact app-core--hide-stage');
 
       // disable click
       e.preventDefault();
@@ -332,6 +383,59 @@ var shuri = {
       // disable form submit
       e.preventDefault();
       return false;
+    });
+
+    // // Click on project link > open popup
+    self.$projects_links.on('click', function(e) {
+      var $link = $(this);
+      var $project_item = $link.parents('.app-project-item').first();
+
+      // Get project data
+      $.ajax({
+        method: 'GET',
+        url: $link.attr('href'),
+        error   : function(jqXHR, status, error) {
+          // Print problem
+          if(error != 'abort')
+            alert(error);
+        },
+        success : function(project) {
+          if (project != null && typeof project.name != 'undefined')
+            self.project_popup__display(project);
+        }
+      });
+
+      // Ultimate event STOP !!
+      e.stopPropagation();
+      e.preventDefault();
+      return false;
+    });
+    // Closing project popup
+    self.$project_popup.on('click', function(e) {
+      if ($(e.target).hasClass('app-section--project-popup'))
+        self.project_popup__close();
+    });
+    self.$project_popup.on('click', '.-popup-btn-close', function(e) {
+      self.project_popup__close();
+
+      // Ultimate event STOP !!
+      e.stopPropagation();
+      e.preventDefault();
+      return false;
+    });
+    // Easter eggs clicks
+    self.$project_popup.find('.simple-slider-fake-buttons').on('click', '.-fk-b', function() {
+      var $fk_b         = $(this);
+      var $screenshots  = self.$project_popup.find('.-project-screenshots');
+      var $slider       = $screenshots.find('.simple-slider');
+
+      if ($fk_b.hasClass('-fk-b--close')) {
+        $screenshots.addClass('d-none');
+      } else if ($fk_b.hasClass('-fk-b--reduce')) {
+        $slider.removeClass('-expanded').toggleClass('-reduced');
+      } else if ($fk_b.hasClass('-fk-b--expand')) {
+        $slider.removeClass('-reduced').toggleClass('-expanded');
+      }
     });
 
     // // Toggle Menu display CSS class on body

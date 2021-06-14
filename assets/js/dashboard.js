@@ -185,7 +185,35 @@ var dashboard = {
       });
 
       dashboard.$body.find('.custom-file-input').on('change', function(e) {
-        $(this).parents('.custom-file').first().find('.custom-file-label').html(this.value.replace(/^.*?([^\\\/]*)$/, '$1'));
+        var str_files = '';
+        if (typeof this.files !== "undefined") {
+          for (var i = 0; i < this.files.length; i++) {
+            str_files += this.files[i].name + ((i < this.files.length - 1) ? '<span class="text-">, ' : '');
+          }
+        }
+        $(this).parents('.custom-file').first().find('.custom-file-label').html(str_files);
+      });
+
+      // Images library preview
+      dashboard.$body.on('change', '.form-image-lib input', function() {
+        var $file_input = $(this);
+        var files       = $file_input.get(0).files;
+        var $parent     = $file_input.parents('.form-image-lib').first();
+        var $library    = $parent.find('.-images-library');
+
+        if (files.length > 0) {
+          $library.addClass('-has-images').html('');
+          for (var i = 0; i < files.length; i++) {
+            var reader = new FileReader();
+            reader.onload = function(e) {
+              $library.append($('<span class="-item embed-responsive embed-responsive-1by1" style="background-image: url(' + e.currentTarget.result + ');"></span>'));
+            };
+            reader.readAsDataURL(files[i]);
+          }
+        } else {
+          // Reset if no files selected
+          $library.removeClass('-has-images').html($library.data('initial-text'));
+        }
       });
 
       // Auto-fill invoices & quotes dates & reference based on file name

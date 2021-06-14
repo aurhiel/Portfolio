@@ -18,30 +18,30 @@ class CurryQProjectType extends AbstractType
     {
         $builder
             ->add('date_start', DateType::class, array(
-              'label'       => 'form_project.date_start.label',
+              'label'       => 'form_cv_project.date_start.label',
               'label_attr'  => [ 'class' => 'ml-2'],
               'widget'      => 'single_text'
             ))
             ->add('date_end', DateType::class, array(
-              'label'       => 'form_project.date_end.label',
+              'label'       => 'form_cv_project.date_end.label',
               'label_attr'  => [ 'class' => 'ml-2'],
               'widget'      => 'single_text',
               'required'    => false
             ))
             ->add('label', TextType::class, [
-                'label'       => 'form_project.name.label',
+                'label'       => 'form_cv_project.name.label',
                 'label_attr'  => [ 'class' => 'sr-only'],
                 'attr'        => [
-                    'placeholder' => 'form_project.name.placeholder',
+                    'placeholder' => 'form_cv_project.name.placeholder',
                     'class'       => 'required-giga'
                 ]
             ])
             ->add('description', TextareaType::class, [
-                'label'       => 'form_project.description.label',
+                'label'       => 'form_cv_project.description.label',
                 'label_attr'  => [ 'class' => 'sr-only'],
                 'required'    => false,
                 'attr'        => [
-                    'placeholder' => 'form_project.description.placeholder',
+                    'placeholder' => 'form_cv_project.description.placeholder',
                     'class'       => 'required-giga'
                 ]
   					])

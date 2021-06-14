@@ -1,0 +1,58 @@
+{% if projects is defined and projects is not empty %}
+  <div class="app-section app-section--popup app-section--project-popup">
+    <div class="-inner">
+      <button class="-popup-btn-close btn btn-outline-primary text-white"
+        type="button" name="close-popup">
+        <span class="icon icon-cross"></span>
+      </button>
+
+      <div class="row align-items-center mx-xl-n4 mx-xxl-n5">
+        <div class="col-12 col-lg-6 px-xl-4 px-xxl-5">
+          <div class="-project-title heading mb-3">
+            [TITLE]
+          </div>
+
+          <div class="-project-details mb-4">
+            <span class="-project-date mr-2">
+              <span class="icon icon-calendar-full text-muted"></span>
+              <span class="value">[DATE]</span>
+            </span>
+            <span class="-project-specs">
+              <span class="icon icon-tag text-muted"></span>
+              <span class="value">[SPECS_LIST]</span>
+            </span>
+          </div>
+
+          <div class="-project-desc">
+            [DESC.]
+          </div>
+        </div>
+        <div class="-project-screenshots col-12 col-lg-6 px-xl-4 px-xxl-5 mt-4 mt-md-5 mt-lg-0 d-none">
+          <div class="simple-slider simple-slider--screenshots -is-first">
+            <span class="simple-slider-fake-buttons">
+              <span class="-fk-b -fk-b--expand" title="Agrandir"></span>
+              <span class="-fk-b -fk-b--reduce" title="Réduire"></span>
+              <span class="-fk-b -fk-b--close" title="Fermer"></span>
+            </span>
+            <ul class="simple-slider-inner">
+              {# <li class="simple-slider-item -current"></li> #}
+            </ul>
+            <div class="simple-slider-nav">
+              <button class="-btn -btn-previous" type="button" name="previous">
+                <span class="sr-only">précédent</span>
+              </button>
+              <button class="-btn -btn-next" type="button" name="next">
+                <span class="sr-only">suivant</span>
+              </button>
+              {#
+              <div class="-dots">
+                <span class="-dot"></span>
+              </div>
+              #}
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+{% endif %}

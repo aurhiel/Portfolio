@@ -1,0 +1,18 @@
+// Embed
+//
+
+
+.embed-responsive-bg {
+  display: inline-block;
+  overflow: hidden;
+  > * {
+    display: block;
+    background: no-repeat center;
+    background-size: cover;
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+  }
+}

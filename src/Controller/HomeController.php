@@ -9,6 +9,7 @@ use Symfony\Component\Routing\Annotation\Route;
 use App\Entity\Contact;
 use App\Entity\Testimonial;
 use App\Entity\Client;
+use App\Entity\Project;
 
 // Forms
 use App\Form\ContactType;
@@ -32,9 +33,13 @@ class HomeController extends AbstractController
         $r_testimonials = $em->getRepository(Testimonial::class);
         $testimonials   = $r_testimonials->findAll(true);
 
-        // TODO Retrieve clients
+        // Retrieve clients
         $r_clients = $em->getRepository(Client::class);
         $clients = $r_clients->findAllWithLogo();
+
+        // Retrieve projects
+        $r_projects = $em->getRepository(Project::class);
+        $projects   = $r_projects->findAll();
 
         return $this->render('home.html.twig', [
             'meta'          => [
@@ -45,7 +50,8 @@ class HomeController extends AbstractController
             'bg_animated'   => true,
             'form_contact'  => $form_contact->createView(),
             'testimonials'  => $testimonials,
-            'clients'       => $clients
+            'clients'       => $clients,
+            'projects'      => $projects,
         ]);
     }
 }

@@ -1,4 +1,4 @@
-<section class="app-section app-section--projects">
+<section class="app-section app-section--projects" data-project-screens-path="{{ asset('uploads/documents/projects/screenshots/') }}">
   <div class="-inner scrolling-machine sm--from-center">
     <h3 class="heading text-center mb-4" id="projets"
       data-text="Quelques projets" style="--heading-text-drop-offset: -4em;">
@@ -11,51 +11,73 @@
     </p>
 
     <div class="row justify-content-center">
-      <div class="col-sm-6 col-md-4">
-        <figure class="app-project-item">
-          <img class="--img img-fluid" src="{{ asset('build/images/projects/thumb-ingeneria.png') }}" alt="Ateliers Ingeneria">
-          <figcaption class="--text">
-            <h4 class="--title">Site web de gestion d'ateliers pour Ingeneria</h4>
-            <ul class="--specs">
-              <li>Symfony</li>
-              <li>Bootstrap</li>
-              <li>FullCalendar</li>
-            </ul>
-            <span class="btn btn-sm btn-secondary btn-disabled">
-              Accès sur demande
-            </span>
-          </figcaption>
-        </figure>
-      </div>
-      <div class="col-sm-6 col-md-4">
-        <figure class="app-project-item">
-          <img class="--img img-fluid" src="{{ asset('build/images/projects/thumb-kargain.png') }}" alt="Kargain">
-          <figcaption class="--text">
-            <h4 class="--title">Prototype HTML d'une application de vente de véhicule BtoB et BtoC</h4>
-            <ul class="--specs">
-              <li>Silex</li>
-              <li>Bootstrap</li>
-              <li>jQuery</li>
-            </ul>
-            <a href="http://dev.spectcar.litti-aurelien.fr/"
-              class="btn btn-sm btn-primary" target="_blank">Voir le site</a>
-          </figcaption>
-        </figure>
-      </div>
-      <div class="col-sm-6 col-md-4">
-        <figure class="app-project-item">
-          <img class="--img img-fluid" src="{{ asset('build/images/projects/thumb-kakeibo.png') }}" alt="Kakeibo">
-          <figcaption class="--text">
-            <h4 class="--title">Projet personnel de gestion de compte bancaire</h4>
-            <ul class="--specs">
-              <li>Symfony</li>
-              <li>Bootstrap</li>
-              <li>jQuery</li>
-            </ul>
-            <span class="btn btn-sm btn-secondary btn-disabled">En cours</span>
-          </figcaption>
-        </figure>
-      </div>
+      {% if projects is defined and projects is not empty %}
+        {% for project in projects %}
+          <div class="col-sm-6 col-md-4">
+            <figure class="app-project-item">
+              <img class="--img img-fluid" src="{{ asset('uploads/documents/projects/illustrations/' ~ project.illustrationFilename) }}" alt="{{ project.name }}">
+              <figcaption class="--text">
+                <h4 class="--title">{{ project.nameLong }}</h4>
+                <ul class="--specs">
+                  {% for spec in project.specs %}
+                    <li>{{ spec.name }}</li>
+                  {% endfor %}
+                </ul>
+                <a class="btn btn-display-project btn-sm btn-outline-primary btn-disabled text-white px-4"
+                  href="{{ path('projects_single', { id: project.id, slug: project.slug }) }}">
+                  + info
+                </a>
+              </figcaption>
+            </figure>
+          </div>
+        {% endfor %}
+      {% else %}
+        <div class="col-sm-6 col-md-4">
+          <figure class="app-project-item">
+            <img class="--img img-fluid" src="{{ asset('build/images/projects/thumb-ingeneria.png') }}" alt="Ateliers Ingeneria">
+            <figcaption class="--text">
+              <h4 class="--title">Site web de gestion d'ateliers pour Ingeneria</h4>
+              <ul class="--specs">
+                <li>Symfony</li>
+                <li>Bootstrap</li>
+                <li>FullCalendar</li>
+              </ul>
+              <span class="btn btn-sm btn-secondary btn-disabled">
+                Accès sur demande
+              </span>
+            </figcaption>
+          </figure>
+        </div>
+        <div class="col-sm-6 col-md-4">
+          <figure class="app-project-item">
+            <img class="--img img-fluid" src="{{ asset('build/images/projects/thumb-kargain.png') }}" alt="Kargain">
+            <figcaption class="--text">
+              <h4 class="--title">Prototype HTML d'une application de vente de véhicule BtoB et BtoC</h4>
+              <ul class="--specs">
+                <li>Silex</li>
+                <li>Bootstrap</li>
+                <li>jQuery</li>
+              </ul>
+              <a href="http://dev.spectcar.litti-aurelien.fr/"
+                class="btn btn-sm btn-primary" target="_blank">Voir le site</a>
+            </figcaption>
+          </figure>
+        </div>
+        <div class="col-sm-6 col-md-4">
+          <figure class="app-project-item">
+            <img class="--img img-fluid" src="{{ asset('build/images/projects/thumb-kakeibo.png') }}" alt="Kakeibo">
+            <figcaption class="--text">
+              <h4 class="--title">Projet personnel de gestion de compte bancaire</h4>
+              <ul class="--specs">
+                <li>Symfony</li>
+                <li>Bootstrap</li>
+                <li>jQuery</li>
+              </ul>
+              <span class="btn btn-sm btn-secondary btn-disabled">En cours</span>
+            </figcaption>
+          </figure>
+        </div>
+      {% endif %}
     </div>
   </div>
 </section>

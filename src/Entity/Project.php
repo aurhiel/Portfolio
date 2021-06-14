@@ -6,6 +6,7 @@ use App\Repository\ProjectRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use Cocur\Slugify\Slugify;
 
 /**
  * @ORM\Entity(repositoryClass=ProjectRepository::class)
@@ -30,14 +31,19 @@ class Project
     private $name_long;
 
     /**
-     * @ORM\Column(type="string", length=255, nullable=true)
+     * @ORM\Column(type="string", length=128)
      */
-    private $url;
+    private $date;
 
     /**
      * @ORM\Column(type="text")
      */
     private $description;
+
+    /**
+     * @ORM\Column(type="string", length=255, nullable=true)
+     */
+    private $url;
 
     /**
      * @ORM\Column(type="string", length=255)
@@ -89,14 +95,20 @@ class Project
         return $this;
     }
 
-    public function getUrl(): ?string
+    public function getSlug()
     {
-        return $this->url;
+        $slugger = new Slugify();
+        return $slugger->slugify($this->name);
     }
 
-    public function setUrl(?string $url): self
+    public function getDate(): ?string
     {
-        $this->url = $url;
+        return $this->date;
+    }
+
+    public function setDate(string $date): self
+    {
+        $this->date = $date;
 
         return $this;
     }
@@ -109,6 +121,18 @@ class Project
     public function setDescription(string $description): self
     {
         $this->description = $description;
+
+        return $this;
+    }
+
+    public function getUrl(): ?string
+    {
+        return $this->url;
+    }
+
+    public function setUrl(?string $url): self
+    {
+        $this->url = $url;
 
         return $this;
     }

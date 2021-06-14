@@ -1,10 +1,9 @@
 <?php
-// src/Controller/LuckyController.php
+
 namespace App\Controller;
 
 // Components
-use Symfony\Bundle\FrameworkBundle\Controller\Controller;
-// use Symfony\Component\HttpFoundation\Response;
+use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Routing\Annotation\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
 
@@ -13,7 +12,7 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
   *
   * @IsGranted("ROLE_ADMIN")
   */
-class LuckyController extends Controller
+class LuckyController extends AbstractController
 {
     /**
      * @Route("/boo/{max}", name="app_lucky_number")

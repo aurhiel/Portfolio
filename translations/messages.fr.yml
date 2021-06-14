@@ -140,8 +140,8 @@ form_career:
   description :
     label       : 'Description'
     placeholder : 'Description'
-# DASHBOARD // CV Career form
-form_project:
+# DASHBOARD // CV Project form
+form_cv_project:
   date_start :
     label       : 'Date de début'
     placeholder : 'Date de début (ex: 2009)'
@@ -198,3 +198,33 @@ form_invoice :
   date_paid :
     label       : 'Date paiement'
     placeholder : 'Date paiement'
+
+# DASHBOARD // Project & specs forms
+form_project:
+  name :
+    label       : "Nom"
+    placeholder : "Nom (ex: Ateliers Ingeneria)"
+  name_long :
+    label       : "Nom long"
+    placeholder : "Nom long (ex: Site web de gestion d'ateliers pour Ingeneria)"
+  url :
+    label       : "Lien vers le projet"
+    placeholder : "Lien vers le projet (ex: https://ateliers-ingeneria.fr/connexion)"
+  description :
+    label       : "Description"
+    placeholder : "Description"
+  illustration :
+    label       : "Image d'illustration"
+    placeholder : "Image d'illustration"
+    error       : "Merci d'envoyer une image valide !"
+  screenshots :
+    label       : "Capture d'écran"
+    placeholder : "Capture d'écran"
+  specs :
+    label       : "Caractéristiques"
+    placeholder : "Caractéristiques (ex: Symfony, Prestashop, PHP, ...)"
+#--
+form_project_spec:
+  name :
+    label       : "Nom"
+    placeholder : "Nom (ex: Symfony, PHP, Bootstrap, ...)"

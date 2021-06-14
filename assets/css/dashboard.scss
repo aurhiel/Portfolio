@@ -23,9 +23,11 @@
 @import 'dashboard/root';
 @import 'dashboard/app-core';
 @import 'dashboard/grid';
+@import 'dashboard/card';
 @import 'dashboard/lists';
 @import 'dashboard/tables';
 @import 'dashboard/forms';
+@import 'dashboard/embed';
 
 .dot {
   background-color: currentcolor;
