@@ -10,6 +10,8 @@ var shuri = {
   //
   $body : null,
 
+  projects : {},
+
 
   // Functions
   //
@@ -202,6 +204,7 @@ var shuri = {
     NOTE : TODO docs
   */
   project_popup__display: function(project) {
+    // console.log(project);
     // Update HTML
     this.$project_popup.find('.-project-title').html(project.name);
     this.$project_popup.find('.-project-desc').html(project.description);
@@ -224,23 +227,48 @@ var shuri = {
       $screenshots.removeClass('d-none');
     }
 
+    // Add specs
+    if (project.specs.length > 0) {
+      var specs_text = '';
+      project.specs.forEach((spec, j) => {
+        specs_text += spec.name + (((j + 1) < project.specs.length) ? ' / ' : '');
+      });
+
+      var $specs = this.$project_popup.find('.-project-specs');
+      $specs.removeClass('d-none').find('.value').html(specs_text);
+    }
+
     // Display popup
     this.$body.addClass('app-core--display-project-popup');
   },
+  project_popup__timeout_close: null,
   project_popup__close: function() {
-    // TODO clear & reset HTML tags
-    var $screenshots  = this.$project_popup.find('.-project-screenshots');
-    var $slider       = $screenshots.find('.simple-slider');
-    var $slider_inner = $slider.find('.simple-slider-inner');
-
-    // Hide $screenshots column
-    $screenshots.addClass('d-none');
-    //   + reset slider classes & remove slider items
-    $slider.removeClass('-is-last -reduced -expanded').addClass('-is-first');
-    $slider_inner.html('');
-
+    var self = this;
     // Hide popup
     this.$body.removeClass('app-core--display-project-popup');
+
+    // Clear previous timeout & wait a few ms before clearing popup
+    clearTimeout(this.project_popup__timeout_close);
+    this.project_popup__timeout_close = setTimeout(function() {
+      // Reset title & description HTML content
+      self.$project_popup.find('.-project-title').html('');
+      self.$project_popup.find('.-project-desc').html('');
+
+      // TODO clear & reset HTML tags
+      var $screenshots  = self.$project_popup.find('.-project-screenshots');
+      var $slider       = $screenshots.find('.simple-slider');
+      var $slider_inner = $slider.find('.simple-slider-inner');
+
+      // Hide $screenshots column
+      $screenshots.addClass('d-none');
+      //   + reset slider classes & remove slider items
+      $slider.removeClass('-is-last -reduced -expanded').addClass('-is-first');
+      $slider_inner.html('');
+
+      // Hide $specs & reset HTML
+      var $specs = self.$project_popup.find('.-project-specs');
+      $specs.addClass('d-none').find('.value').html('');
+    }, 400);
   },
 
 
@@ -387,23 +415,31 @@ var shuri = {
 
     // // Click on project link > open popup
     self.$projects_links.on('click', function(e) {
-      var $link = $(this);
-      var $project_item = $link.parents('.app-project-item').first();
+      var $link           = $(this);
+      var $project_item   = $link.parents('.app-project-item').first();
+      var project_cached  = self.projects[$project_item.data('project-id')];
 
-      // Get project data
-      $.ajax({
-        method: 'GET',
-        url: $link.attr('href'),
-        error   : function(jqXHR, status, error) {
-          // Print problem
-          if(error != 'abort')
-            alert(error);
-        },
-        success : function(project) {
-          if (project != null && typeof project.name != 'undefined')
-            self.project_popup__display(project);
-        }
-      });
+      // Get project data from "cache"
+      if (typeof project_cached != 'undefined') {
+        self.project_popup__display(project_cached);
+      } else {
+        // Get project data
+        $.ajax({
+          method: 'GET',
+          url: $link.attr('href'),
+          error   : function(jqXHR, status, error) {
+            // Print problem
+            if(error != 'abort')
+              alert(error);
+          },
+          success : function(project) {
+            if (project != null && typeof project.name != 'undefined') {
+              self.project_popup__display(project);
+              self.projects[project.id] = project;
+            }
+          }
+        });
+      }
 
       // Ultimate event STOP !!
       e.stopPropagation();

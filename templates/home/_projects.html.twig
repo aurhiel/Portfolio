@@ -14,7 +14,7 @@
       {% if projects is defined and projects is not empty %}
         {% for project in projects %}
           <div class="col-sm-6 col-md-4">
-            <figure class="app-project-item">
+            <figure class="app-project-item" data-project-id="{{ project.id }}">
               <img class="--img img-fluid" src="{{ asset('uploads/documents/projects/illustrations/' ~ project.illustrationFilename) }}" alt="{{ project.name }}">
               <figcaption class="--text">
                 <h4 class="--title">{{ project.nameLong }}</h4>
