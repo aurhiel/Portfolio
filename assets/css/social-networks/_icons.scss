@@ -1,0 +1,36 @@
+// Linearicons .icon & .icon- classes
+//
+
+[class^="icon-sn-"], [class*=" icon-sn-"] {
+  /* use !important to prevent issues with browser extensions that change fonts */
+	font-family: $icons-networks-font-family;
+  speak: never;
+  font-style: normal;
+  font-weight: normal;
+  font-variant: normal;
+  text-transform: none;
+  line-height: 1;
+
+  /* Better Font Rendering =========== */
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+.icon-sn-github:before {
+  content: "\e900";
+}
+.icon-sn-gitlab:before {
+  content: "\e901";
+}
+.icon-sn-instagram:before {
+  content: "\e902";
+}
+.icon-sn-linkedin:before {
+  content: "\e903";
+}
+.icon-sn-twitch:before {
+  content: "\e904";
+}
+.icon-sn-twitter:before {
+  content: "\e905";
+}

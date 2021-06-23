@@ -102,20 +102,31 @@ class DashboardProjectsController extends AbstractController
                 $em->flush();
 
                 // Upload project screenshots only if project was correctly saved
+                //  & remove previous screenshots
                 $screenshots = $form_project->get('screenshots')->getData();
-                foreach ($screenshots as $screenData) {
-                    // Upload new advert image
-                    $imageFileName = $fileUploader->upload($screenData, '/projects/screenshots');
+                if (!empty($screenshots)) {
+                    // Delete previous screenshots
+                    $old_screens = $project->getScreenshots();
+                    foreach ($old_screens as $screen) {
+                        $project->removeScreenshot($screen);
+                        $em->remove($screen);
+                    }
 
-                    // Create & persist new Image entity after upload
-                    $image = new Image();
-                    $image->setFilename($imageFileName);
+                    // Upload & add screenshots
+                    foreach ($screenshots as $screenData) {
+                        // Upload new advert image
+                        $imageFileName = $fileUploader->upload($screenData, '/projects/screenshots');
 
-                    // Add new image to current advert
-                    $project->addScreenshot($image);
+                        // Create & persist new Image entity after upload
+                        $image = new Image();
+                        $image->setFilename($imageFileName);
 
-                    $em->persist($image);
-                    $em->flush();
+                        // Add new image to current advert
+                        $project->addScreenshot($image);
+
+                        $em->persist($image);
+                        $em->flush();
+                    }
                 }
 
                 $data = array(

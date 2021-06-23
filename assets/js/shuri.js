@@ -106,12 +106,25 @@ var shuri = {
     },
     goto : function($slider, position) {
       var $slides = $slider.find('.'+this.class_items);
-      $slides.removeClass(this.class_current).eq(position).addClass('-current');
-      $slides.css('left', (position * -100) + '%');
+      var $inner  = $slider.find('.simple-slider-inner');
+
+      // Get slides % width & nb slides by page in order to change current & position after
+      var slides_width_percent = Math.round(($slides.first().outerWidth() * 100 / $inner.width()) * 100) / 100;
+      var nb_slides_by_page = Math.round(100 / slides_width_percent);
+
+      // Update current & position
+      $slides.removeClass(this.class_current).slice(position, (position + nb_slides_by_page)).addClass('-current');
+      $slides.css('left', (position * -slides_width_percent) + '%');
 
       $slider.removeClass('-is-first -is-last')
         .addClass(position == 0 ? '-is-first' : '')
-        .addClass(position == ($slides.length - 1) ? '-is-last': '');
+        .addClass(position == ($slides.length - nb_slides_by_page) ? '-is-last': '');
+
+      // Automatically update dots .-current class if slider has them
+      if ($slider.hasClass('-has-dots')) {
+        var $dots = $slider.find('.-dot');
+        $dots.removeClass('-current').eq(position).addClass('-current');
+      }
     },
     init: function($sliders) {
       var self = this;
@@ -122,6 +135,25 @@ var shuri = {
 
         if ($button.hasClass('-btn-next')) self.next($slider);
         else self.previous($slider);
+      });
+
+      // Dots
+      $sliders.on('click', '.-dots .-dot', function(e) {
+        var $dot = $(this);
+        // Change slider position only if not clicked on current slide
+        if ($dot.hasClass('-current') == false)
+          self.goto($dot.parents('.'+self.class_main).first(), $dot.index());
+      });
+
+      // Resize: reset sliders (.goto) after 200ms
+      var timeout_resize = null;
+      $(window).on('resize', function() {
+        clearTimeout(timeout_resize);
+        timeout_resize = setTimeout(function() {
+          $sliders.each(function() {
+            self.goto($(this), 0);
+          });
+        }, 200);
       });
     }
   },
@@ -205,26 +237,44 @@ var shuri = {
   */
   project_popup__display: function(project) {
     // console.log(project);
+    var $screenshots  = this.$project_popup.find('.-project-screenshots');
+    var $slider       = $screenshots.find('.simple-slider');
+
     // Update HTML
     this.$project_popup.find('.-project-title').html(project.name);
     this.$project_popup.find('.-project-desc').html(project.description);
 
+    // Add link
+    if (project.url) {
+      var $link = this.$project_popup.find('.-project-link');
+      $link.removeClass('d-none').find('.-link').attr('href', project.url);
+    }
+
     // Add screenshots
     if (project.screenshots.length > 0) {
-      var $screenshots  = this.$project_popup.find('.-project-screenshots');
-      var $slider       = $screenshots.find('.simple-slider');
       var $slider_inner = $slider.find('.simple-slider-inner');
+      var $slider_dots  = $slider.find('.simple-slider-nav .-dots');
 
+      // Clear dots
+      $slider_dots.html('');
+
+      // Append screenshots to the slider
       project.screenshots.forEach((screen, i) => {
-        // console.log(screen);
+        // Add screenshot image
         $slider_inner.append($('<li class="simple-slider-item' + ((i == 0) ? ' -current' : '') + '">' +
             '<img class="img-fluid" src="' + this.project_screens_path + screen.filename + '">' +
           '</li>'
         ));
+        //  & add dots
+        $slider_dots.append($('<span class="-dot' + ((i == 0) ? ' -current' : '') + '"></span>'));
       });
 
       // Display $screenshots column
       $screenshots.removeClass('d-none');
+
+      // Remove "-is-last" to enable slider if there is more than 1 screenshot
+      if (project.screenshots.length > 1)
+        $slider.removeClass('-is-last');
     }
 
     // Add specs
@@ -236,6 +286,24 @@ var shuri = {
 
       var $specs = this.$project_popup.find('.-project-specs');
       $specs.removeClass('d-none').find('.value').html(specs_text);
+    }
+
+    // Add date
+    if (project.date != null) {
+      var $date = this.$project_popup.find('.-project-date');
+
+      // Display date field & update value
+      $date.removeClass('d-none')
+        .find('.value').html(project.date);
+    }
+
+    // Mobile ? (only for Kargain project)
+    if (project.slug == 'kargain') {
+      $slider.addClass('-is-mobile');
+
+      // Add columns size for XXL media breakpoint
+      this.$project_popup.find('.-project-textual-content').addClass('col-xl-7');
+      $screenshots.addClass('col-xl-5');
     }
 
     // Display popup
@@ -254,7 +322,11 @@ var shuri = {
       self.$project_popup.find('.-project-title').html('');
       self.$project_popup.find('.-project-desc').html('');
 
-      // TODO clear & reset HTML tags
+      // Reset link
+      self.$project_popup.find('.-project-link').addClass('d-none')
+        .find('.-link').attr('href', '#');
+
+      // Clear & reset HTML tags
       var $screenshots  = self.$project_popup.find('.-project-screenshots');
       var $slider       = $screenshots.find('.simple-slider');
       var $slider_inner = $slider.find('.simple-slider-inner');
@@ -262,12 +334,26 @@ var shuri = {
       // Hide $screenshots column
       $screenshots.addClass('d-none');
       //   + reset slider classes & remove slider items
-      $slider.removeClass('-is-last -reduced -expanded').addClass('-is-first');
+      $slider.removeClass('-reduced -expanded').addClass('-is-first -is-last');
       $slider_inner.html('');
 
-      // Hide $specs & reset HTML
+      // Hide $specs & reset value
       var $specs = self.$project_popup.find('.-project-specs');
       $specs.addClass('d-none').find('.value').html('');
+
+      // Hide $date field & reset value
+      var $date = self.$project_popup.find('.-project-date');
+      $date.addClass('d-none').find('.value').html('');
+
+      // Disable mobile mode
+      $slider.removeClass('-is-mobile');
+      // Remove columns size for XXL media breakpoint
+      self.$project_popup.find('.-project-textual-content').removeClass('col-xl-7');
+      $screenshots.removeClass('col-xl-5');
+
+      // Disable iframe
+      $slider.find('.simple-slider-item--iframe').remove();
+      $slider.removeClass('-iframed');
     }, 400);
   },
 
@@ -466,13 +552,58 @@ var shuri = {
       var $slider       = $screenshots.find('.simple-slider');
 
       if ($fk_b.hasClass('-fk-b--close')) {
-        $screenshots.addClass('d-none');
+        // When clicking on close button if there is an iframe display
+        //  remove it & disable "iframe" mode on slider
+        if ($slider.hasClass('-iframed')) {
+          $slider.find('.simple-slider-item--iframe').remove();
+          $slider.removeClass('-iframed');
+        } else {
+          $screenshots.addClass('d-none');
+        }
       } else if ($fk_b.hasClass('-fk-b--reduce')) {
         $slider.removeClass('-expanded').toggleClass('-reduced');
       } else if ($fk_b.hasClass('-fk-b--expand')) {
         $slider.removeClass('-reduced').toggleClass('-expanded');
       }
     });
+    var nb_clicks = 0;
+    var timeout_project_link = null;
+    self.$project_popup.on('click', '.-project-link .-link', function(e) {
+      var $link = $(this);
+      nb_clicks++;
+
+      // Wait few times to trigger ifram easter egg
+      //  or simply go to the project's link
+      clearTimeout(timeout_project_link);
+      timeout_project_link = setTimeout(function() {
+        if (nb_clicks < 2) {
+          window.open($link.attr('href'), $link.attr('target'));
+        } else {
+          var $slider       = self.$project_popup.find('.simple-slider');
+          var $slider_inner = self.$project_popup.find('.simple-slider-inner');
+          var $iframe       = $slider_inner.find('iframe');
+
+          // Create iframe if not exist yet
+          if ($iframe.length < 1) {
+            $slider_inner.append($('<li class="simple-slider-item simple-slider-item--iframe -current">' +
+                '<iframe src="">' +
+            '</li>'));
+            $iframe = $slider_inner.find('iframe');
+          }
+
+          // Update iframe url & activate "iframe" mode on slider
+          $iframe.attr('src', $link.attr('href'));
+          $slider.addClass('-iframed');
+        }
+        nb_clicks = 0;
+      }, 160);
+
+      // Ultimate event STOP !!
+      e.stopPropagation();
+      e.preventDefault();
+      return false;
+    });
+
 
     // // Toggle Menu display CSS class on body
     self.$navbar_toggler.on('click', function() {
@@ -502,6 +633,9 @@ var shuri = {
 
       // Trigger scroll event after ready to display elements already on screen
       self.$window.trigger('scroll');
+
+      // Trigger goto() on projects slider to init -current classes
+      self.simple_sliders.goto(self.$body.find('.simple-slider--projects'), 0);
     })();
   }
 };

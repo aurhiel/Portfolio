@@ -7,28 +7,31 @@
       </button>
 
       <div class="row align-items-center mx-xl-n4 mx-xxl-n5">
-        <div class="col-12 col-lg-6 px-xl-4 px-xxl-5">
-          <div class="-project-title heading mb-3">
-            [TITLE]
-          </div>
+        <div class="-project-textual-content col-12 col-lg-6 px-xl-4 px-xxl-5">
+          <div class="-project-title heading mb-3"></div>
 
           <div class="-project-details mb-4">
             <span class="-project-date mr-2 d-none">
               <span class="icon icon-calendar-full text-muted"></span>
-              <span class="value">[DATE]</span>
+              <span class="value"></span>
             </span>
             <span class="-project-specs d-none">
               <span class="icon icon-tag text-muted"></span>
-              <span class="value">[SPECS_LIST]</span>
+              <span class="value"></span>
             </span>
           </div>
 
-          <div class="-project-desc">
-            [DESC.]
+          <div class="-project-desc"></div>
+
+          <div class="-project-link d-none">
+            <hr class="my-4 ml-0">
+            <a class="-link btn btn-primary" href="#" target="_blank">
+              Voir le site
+            </a>
           </div>
         </div>
         <div class="-project-screenshots col-12 col-lg-6 px-xl-4 px-xxl-5 mt-4 mt-md-5 mt-lg-0 d-none">
-          <div class="simple-slider simple-slider--screenshots -is-first">
+          <div class="simple-slider simple-slider--screenshots -has-dots -is-first -is-last">
             <span class="simple-slider-fake-buttons">
               <span class="-fk-b -fk-b--expand" title="Agrandir"></span>
               <span class="-fk-b -fk-b--reduce" title="Réduire"></span>
@@ -38,17 +41,15 @@
               {# <li class="simple-slider-item -current"></li> #}
             </ul>
             <div class="simple-slider-nav">
-              <button class="-btn -btn-previous" type="button" name="previous">
+              {#<button class="-btn -btn-previous" type="button" name="previous">
                 <span class="sr-only">précédent</span>
               </button>
               <button class="-btn -btn-next" type="button" name="next">
                 <span class="sr-only">suivant</span>
-              </button>
-              {#
+              </button>#}
               <div class="-dots">
-                <span class="-dot"></span>
+                {#<span class="-dot"></span>#}
               </div>
-              #}
             </div>
           </div>
         </div>

@@ -31,7 +31,7 @@ class Project
     private $name_long;
 
     /**
-     * @ORM\Column(type="string", length=128)
+     * @ORM\Column(type="string", length=128, nullable=true)
      */
     private $date;
 
@@ -59,6 +59,11 @@ class Project
      * @ORM\ManyToMany(targetEntity=Image::class)
      */
     private $screenshots;
+
+    /**
+     * @ORM\Column(type="smallint")
+     */
+    private $position;
 
     public function __construct()
     {
@@ -106,7 +111,7 @@ class Project
         return $this->date;
     }
 
-    public function setDate(string $date): self
+    public function setDate(?string $date): self
     {
         $this->date = $date;
 
@@ -193,6 +198,18 @@ class Project
     public function removeScreenshot(Image $screenshot): self
     {
         $this->screenshots->removeElement($screenshot);
+
+        return $this;
+    }
+
+    public function getPosition(): ?int
+    {
+        return $this->position;
+    }
+
+    public function setPosition(int $position): self
+    {
+        $this->position = $position;
 
         return $this;
     }

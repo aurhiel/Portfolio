@@ -22,17 +22,27 @@
           {# Form inputs #}
           <div class="form--inputs">
             <div class="form-row">
-              <div class="col-sm-6 col-md-4 col-lg-6 mb-3">
+              <div class="col-3 col-sm-2 col-md-2 col-lg-3 mb-3">
+                {{ form_label(form_project.position) }}
+                {{ form_widget(form_project.position) }}
+                {{ form_errors(form_project.position) }}
+              </div>
+              <div class="col-9 col-sm-5 col-md-4 col-lg-9 mb-3">
                 {{ form_label(form_project.name) }}
                 {{ form_widget(form_project.name) }}
                 {{ form_errors(form_project.name) }}
               </div>
-              <div class="col-sm-6 col-md-4 col-lg-6 mb-3">
+              <div class="col-12 col-sm-5 col-md-6 col-lg-12 mb-3">
                 {{ form_label(form_project.name_long) }}
                 {{ form_widget(form_project.name_long) }}
                 {{ form_errors(form_project.name_long) }}
               </div>
-              <div class="col-sm-12 col-md-4 col-lg-12 mb-3">
+              <div class="col-sm-5 col-md-4 col-lg-5 mb-3">
+                {{ form_label(form_project.date) }}
+                {{ form_widget(form_project.date) }}
+                {{ form_errors(form_project.date) }}
+              </div>
+              <div class="col-sm-7 col-md-8 col-lg-7 mb-3">
                 {{ form_label(form_project.url) }}
                 {{ form_widget(form_project.url) }}
                 {{ form_errors(form_project.url) }}
@@ -111,12 +121,20 @@
                 <h5 class="card-title">
                   <small class="text-muted">{{ project.name }}</small><br>
                   {{ project.nameLong }}
-                  {% if project.specs is not empty %}
-                    <small class="d-block text-muted">
-                      {% for spec in project.specs %}
-                        {{ spec.name }}{% if loop.last == false %} / {% endif %}
-                      {% endfor %}
-                    </small>
+                  {% if project.specs is not empty or project.date is not empty %}
+                  <div class="small text-muted">
+                    {% if project.date is not empty %}
+                      <span>{{ project.date }}</span>
+                    {% endif %}
+                    {% if project.specs is not empty %}
+                      {% if project.date is not empty %}-{% endif %}
+                      <span>
+                        {% for spec in project.specs %}
+                          {{ spec.name }}{% if loop.last == false %} / {% endif %}
+                        {% endfor %}
+                      </span>
+                    {% endif %}
+                  </div>
                   {% endif %}
                 </h5>
               </div>
@@ -138,20 +156,30 @@
                   </div>
                 </div>
               {% endif %}
-              <div class="card-footer text-right">
-                {% if project.url is not empty %}
-                  <a class="btn btn-sm btn-outline-primary" href="{{ project.url }}" target="_blank">
-                    lien >
-                  </a>
-                {% endif %}
-                <a class="btn btn-sm btn-secondary"
-                  href="{{ path('dashboard_projects', { id: project.id }) }}">
-                  edit
+
+              {% if project.url is not empty %}
+              <div class="px-2 pb-2 text-center">
+                <a class="btn btn-sm btn-outline-primary my-1" href="{{ project.url }}" target="_blank">
+                  lien >
                 </a>
-                <a class="btn btn-sm btn-danger"
-                  href="{{ path('dashboard_projects_delete', { id: project.id }) }}">
-                  del.
-                </a>
+              </div>
+              {% endif %}
+              <div class="card-footer">
+                <div class="row align-items-center">
+                  <div class="col-4">
+                    <span class="badge badge-primary bold">Pos. {{ project.position }}</span>
+                  </div>
+                  <div class="col-8 text-right">
+                    <a class="btn btn-sm btn-secondary"
+                      href="{{ path('dashboard_projects', { id: project.id }) }}">
+                      edit
+                    </a>
+                    <a class="btn btn-sm btn-danger"
+                      href="{{ path('dashboard_projects_delete', { id: project.id }) }}">
+                      del.
+                    </a>
+                  </div>
+                </div>
               </div>
             </div>
           {% endfor %}

@@ -1,0 +1,23 @@
+// Social Networks icons
+//
+// social-networks v1.0
+
+
+// Variables
+@import 'variables';
+
+// Font face
+@font-face {
+	font-family: $icons-networks-font-family;
+	src:url('#{$icons-networks-font-path}/#{$icons-networks-font-family}.eot?');
+	src:url('#{$icons-networks-font-path}/#{$icons-networks-font-family}.eot?#{$icons-networks-font-hash}#iefix') format('embedded-opentype'),
+    url('#{$icons-networks-font-path}/#{$icons-networks-font-family}.ttf?#{$icons-networks-font-hash}') format('truetype'),
+		url('#{$icons-networks-font-path}/#{$icons-networks-font-family}.woff?#{$icons-networks-font-hash}') format('woff'),
+		url('#{$icons-networks-font-path}/#{$icons-networks-font-family}.svg?#{$icons-networks-font-hash}##{$icons-networks-font-family}') format('svg');
+  font-weight: normal;
+  font-style: normal;
+  font-display: block;
+}
+
+// Icons
+@import 'icons';

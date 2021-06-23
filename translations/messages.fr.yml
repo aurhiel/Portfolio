@@ -201,12 +201,18 @@ form_invoice :
 
 # DASHBOARD // Project & specs forms
 form_project:
+  position :
+    label       : "Position"
+    placeholder : "Position (ex: 1)"
   name :
     label       : "Nom"
     placeholder : "Nom (ex: Ateliers Ingeneria)"
   name_long :
     label       : "Nom long"
     placeholder : "Nom long (ex: Site web de gestion d'ateliers pour Ingeneria)"
+  date :
+    label       : "Date"
+    placeholder : "Date (ex: Avril 2018)"
   url :
     label       : "Lien vers le projet"
     placeholder : "Lien vers le projet (ex: https://ateliers-ingeneria.fr/connexion)"

@@ -16,6 +16,7 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
 
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\Extension\Core\Type\TextareaType;
+use Symfony\Component\Form\Extension\Core\Type\IntegerType;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\Extension\Core\Type\FileType;
 use Symfony\Component\Validator\Constraints\File;
@@ -26,9 +27,18 @@ class ProjectType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
+            ->add('position', IntegerType::class, [
+                'label'       => 'form_project.position.label',
+                'required'    => true,
+                'label_attr'  => [ 'class' => 'sr-only'],
+                'attr'        => [
+                    'placeholder' => 'form_project.position.placeholder',
+                    'class'       => 'required-giga'
+                ]
+            ])
             ->add('name', TextType::class, [
                 'label'       => 'form_project.name.label',
-                'required'    => false,
+                'required'    => true,
                 'label_attr'  => [ 'class' => 'sr-only'],
                 'attr'        => [
                     'placeholder' => 'form_project.name.placeholder',
@@ -37,10 +47,19 @@ class ProjectType extends AbstractType
             ])
             ->add('name_long', TextType::class, [
                 'label'       => 'form_project.name_long.label',
-                'required'    => false,
+                'required'    => true,
                 'label_attr'  => [ 'class' => 'sr-only'],
                 'attr'        => [
                     'placeholder' => 'form_project.name_long.placeholder',
+                    'class'       => 'required-giga'
+                ]
+            ])
+            ->add('date', TextType::class, [
+                'label'       => 'form_project.date.label',
+                'required'    => false,
+                'label_attr'  => [ 'class' => 'sr-only'],
+                'attr'        => [
+                    'placeholder' => 'form_project.date.placeholder',
                     'class'       => 'required-giga'
                 ]
             ])
@@ -55,6 +74,7 @@ class ProjectType extends AbstractType
             ])
             ->add('description', TextareaType::class, [
                 'label'       => 'form_project.description.label',
+                'required'    => true,
                 'label_attr'  => [ 'class' => 'sr-only'],
                 'attr'        => [
                     'placeholder' => 'form_project.description.placeholder',

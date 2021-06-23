@@ -80,7 +80,6 @@
     text-align: center;
 
     .-inner {
-      max-width: 900px;
       margin-left: auto;
       margin-right: auto;
 
@@ -219,6 +218,7 @@
     }
 
     .-project-title {
+      font-size: 2.4rem;
       font-weight: bold;
       line-height: 1;
       margin-top: 0;
@@ -238,6 +238,7 @@
 // // Project section items
 
 .app-project-item {
+  display: inline-block;
   max-width: 270px; // = thumbs width / 2
   margin-left: auto;
   margin-right: auto;
@@ -245,6 +246,7 @@
   z-index: 0;
   overflow: hidden;
   border-radius: .5rem;
+  margin: $grid-gutter-width / 2 0;
 
   &:hover {
     .--img {
@@ -358,6 +360,13 @@
         padding-top: 4.6rem;
       }
     }
+
+    // Projects popup
+    &--project-popup {
+      .-inner {
+        padding: 4.2rem 5rem;
+      }
+    }
   }
 
   .app-project-item {
@@ -389,6 +398,17 @@
         height: 120%;
         width: 120%;
         transform: rotate(6deg);
+      }
+    }
+  }
+}
+
+@include media-breakpoint-up(xxl) {
+  .app-section {
+    // Projects popup
+    &--project-popup {
+      .-inner {
+        max-width: 76rem;
       }
     }
   }

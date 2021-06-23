@@ -28,7 +28,7 @@ class ProjectRepository extends ServiceEntityRepository
             ->leftJoin('p.screenshots', 'screenshots')
             ->addSelect('screenshots')
             // Order
-            ->orderBy('p.id', 'ASC')
+            ->orderBy('p.position', 'DESC')
             ->getQuery()
             ->getResult()
         ;
