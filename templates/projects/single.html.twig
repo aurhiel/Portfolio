@@ -1,17 +1,74 @@
 {% extends 'base.html.twig' %}
 {% set core_class = 'app-core--static-page' %}
+{% set slider_mobile_mode = (project.slug == 'kargain') %}
 
 {% block body %}
-<div class="app-main-content bg-white p-4">
-  {{ dump(project) }}
-  <h1 class="heading text-center mt-0 mb-2">{{ project.name }}</h1>
-  <h2 class="h6 font-weight-normal text-center text-muted d-block mb-4">{{ project.nameLong }}</h2>
+<div class="app-main-content bg-white p-4 p-lg-5">
+  <div class="row mx-xl-n4 mx-xxl-n5">
+    <div class="-project-textual-content col-12 col-lg-6 px-xl-4 px-xxl-5{% if slider_mobile_mode %} col-xl-7{% endif %}">
+      <h1 class="-project-title heading mt-0 mb-3">{{ project.name }}</h1>
+      {#<h2 class="h6 font-weight-normal text-muted d-block mb-4">{{ project.nameLong }}</h2>#}
 
-  <div class="row align-items-center mx-xl-n4 mx-xxl-n5">
-    <div class="-project-desc col-12 col-lg-6 px-xl-4 px-xxl-5">
-      {{ project.description|raw }}
+      <div class="-project-details mb-4">
+      {% if project.date is not empty %}
+        <span class="-project-date mr-2">
+          <span class="icon icon-calendar-full text-muted"></span>
+          <span class="value">{{ project.date }}</span>
+        </span>
+      {% endif %}
+      {% if project.specs is not empty %}
+        {% set specs_text = '' %}
+        {% for spec in project.specs %}
+          {% set specs_text = specs_text ~ spec.name ~ ((loop.last == false) ? ', ' : '') %}
+        {% endfor %}
+        <span class="-project-specs">
+          <span class="icon icon-tag text-muted"></span>
+          <span class="value">{{ specs_text }}</span>
+        </span>
+      {% endif %}
+      </div>
+
+      <div class="-project-desc">
+        {{ project.description|raw }}
+      </div>
+
+    {% if project.url is not empty %}
+      <div class="-project-link">
+        <hr class="my-4 ml-0">
+        <a class="-link btn btn-primary" href="{{ project.url }}" target="_blank">
+          Voir le site
+        </a>
+      </div>
+    {% endif %}
     </div>
-    <div class="-project-screenshots col-12 col-lg-6 px-xl-4 px-xxl-5"></div>
+
+    <div class="-project-screenshots col-12 col-lg-6 px-xl-4 px-xxl-5{% if slider_mobile_mode %} col-xl-5{% endif %}">
+    {% if project.screenshots is not empty %}
+      <div class="simple-slider simple-slider--screenshots{% if slider_mobile_mode %} -is-mobile{% endif %} -has-dots -is-first">
+        <span class="simple-slider-fake-buttons">
+          <span class="-fk-b -fk-b--expand" title="Agrandir"></span>
+          <span class="-fk-b -fk-b--reduce" title="Réduire"></span>
+          <span class="-fk-b -fk-b--close" title="Fermer"></span>
+        </span>
+
+        <ul class="simple-slider-inner">
+        {% for screen in project.screenshots %}
+          <li class="simple-slider-item{% if loop.first %} -current{% endif %}">
+            <img class="img-fluid" src="{{ asset('uploads/documents/projects/screenshots/' ~ screen.filename) }}" alt="{{ project.name }} - capture #{{ loop.index + 1 }}">
+          </li>
+        {% endfor %}
+        </ul>
+
+        <div class="simple-slider-nav">
+          <div class="-dots">
+          {% for screen in project.screenshots %}
+            <span class="-dot{% if loop.first %} -current{% endif %}"></span>
+          {% endfor %}
+          </div>
+        </div>
+      </div>
+    {% endif %}
+    </div>
   </div>
 </div>
 {% endblock %}
