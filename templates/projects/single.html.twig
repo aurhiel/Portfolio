@@ -17,9 +17,10 @@
         </span>
       {% endif %}
       {% if project.specs is not empty %}
+        {# Create specs text, joined by a " / " #}
         {% set specs_text = '' %}
         {% for spec in project.specs %}
-          {% set specs_text = specs_text ~ spec.name ~ ((loop.last == false) ? ', ' : '') %}
+          {% set specs_text = specs_text ~ spec.name ~ ((loop.last == false) ? ' / ' : '') %}
         {% endfor %}
         <span class="-project-specs">
           <span class="icon icon-tag text-muted"></span>
