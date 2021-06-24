@@ -118,7 +118,7 @@ var shuri = {
 
       $slider.removeClass('-is-first -is-last')
         .addClass(position == 0 ? '-is-first' : '')
-        .addClass(position == ($slides.length - nb_slides_by_page) ? '-is-last': '');
+        .addClass(position >= ($slides.length - nb_slides_by_page) ? '-is-last': '');
 
       // Automatically update dots .-current class if slider has them
       if ($slider.hasClass('-has-dots')) {
