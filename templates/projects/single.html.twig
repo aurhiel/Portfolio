@@ -55,7 +55,7 @@
         <ul class="simple-slider-inner">
         {% for screen in project.screenshots %}
           <li class="simple-slider-item{% if loop.first %} -current{% endif %}">
-            <img class="img-fluid" src="{{ asset('uploads/documents/projects/screenshots/' ~ screen.filename) }}" alt="{{ project.name }} - capture #{{ loop.index + 1 }}">
+            <img class="img-fluid" src="{{ asset('uploads/documents/projects/screenshots/' ~ screen.filename) }}" alt="{{ project.name }} - Capture #{{ loop.index }}">
           </li>
         {% endfor %}
         </ul>
