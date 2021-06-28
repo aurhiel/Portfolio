@@ -50,7 +50,7 @@ class ContactController extends AbstractController
                 // Anti-bot attempt (email confirm is a fake input)
                 if (empty($contact->getEmailConfirm())) {
                     $message = (new Email())
-                        ->from([new Address($contact->getEmail(), $contact->getFirstname() . ' ' . $contact->getLastname())])
+                        ->from(new Address($contact->getEmail(), $contact->getFirstname() . ' ' . $contact->getLastname()))
                         ->to('litti.aurelien@gmail.com')
                         ->subject('[litti-aurelien.fr] ' . $message_title)
                         ->html($this->renderView(
