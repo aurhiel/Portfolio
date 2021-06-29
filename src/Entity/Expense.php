@@ -34,6 +34,11 @@ class Expense
      */
     private $periodType;
 
+    /**
+     * @ORM\Column(type="smallint", nullable=true)
+     */
+    private $startYear;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -76,6 +81,18 @@ class Expense
     public function setPeriodType(string $periodType): self
     {
         $this->periodType = $periodType;
+
+        return $this;
+    }
+
+    public function getStartYear(): ?int
+    {
+        return $this->startYear;
+    }
+
+    public function setStartYear(?int $startYear): self
+    {
+        $this->startYear = $startYear;
 
         return $this;
     }

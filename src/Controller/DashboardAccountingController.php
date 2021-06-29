@@ -270,9 +270,17 @@ class DashboardAccountingController extends AbstractController
         $em   = $this->getDoctrine()->getManager();
         $repo = $em->getRepository(Expense::class);
 
+        // 0) Get min start year value via twig global params
+        $twig = $this->container->get('twig');
+        $start_year_min = null;
+        if ($twig) {
+            $twig_globals = $twig->getGlobals();
+            $start_year_min = (int) $twig_globals['identity']['year_start_freelance'];
+        }
+
         // 1) Build the form
         $expense = (!is_null($id)) ? $repo->findOneById($id) : new Expense();
-        $form = $this->createForm(ExpenseType::class, $expense);
+        $form = $this->createForm(ExpenseType::class, $expense, [ 'start_year_min' => $start_year_min ]);
 
         // 2) Handle form
         $form->handleRequest($request);
@@ -412,18 +420,37 @@ class DashboardAccountingController extends AbstractController
         $nb_months = (!is_null($year) && $year == (int)$now->format('Y')) ? (int)$now->format('n') : 12;
         $monthly_turnovers = $total_turnover / $nb_months;
 
+        // Retrieve expenses
+        $r_expenses  = $em->getRepository(Expense::class);
+        $expenses    = $r_expenses->findByMaxYear($year);
+
+        // Get $total_expenses according to expenses limited by max $year
+        $total_expenses = 0;
+        foreach ($expenses as $exp) {
+            switch ($exp->getPeriodType()) {
+              case 'monthly':
+                $total_expenses += ($exp->getAmount() * $nb_months);
+                break;
+              case 'yearly':
+              default:
+                $total_expenses += $exp->getAmount();
+                break;
+            }
+        }
+
         return $this->render('dashboard/accounting/recipe-books.html.twig', [
             'invoices'        => $invoices,
             'quotes'          => $quotes,
+            'expenses'        => $expenses,
             'displayed_year'  => $year,
             'nb_months'       => $nb_months,
             'years'           => $invoices_years,
-            'quotes'          => $quotes,
             // Stats
             'turnovers_clients' => $turnovers_clients,
             'turnovers_months'  => $turnovers_months,
             'monthly_turnover'  => $monthly_turnovers,
             'total_turnover'    => $total_turnover,
+            'total_expenses'    => $total_expenses,
         ]);
     }
 }

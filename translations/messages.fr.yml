@@ -12,11 +12,11 @@ period :
 #
 
 ## GENERIC / BASIC FORMS ##
-form_basic:
-  save:
-    label: Sauvegarder
-  send:
-    label: Envoyer
+form_basic :
+  save :
+    label : Sauvegarder
+  send :
+    label : Envoyer
 
 
 ## CONTACT FORM ##
@@ -220,6 +220,9 @@ form_expense :
   name :
     label       : 'Nom'
     placeholder : 'Nom (ex: Assurance RC Pro)'
+  start_year :
+    label       : 'Année'
+    placeholder : 'Année (ex: 2018)'
   amount :
     label       : 'Montant'
     placeholder : 'Montant (ex: 42,23)'

@@ -19,6 +19,16 @@ class ExpenseRepository extends ServiceEntityRepository
         parent::__construct($registry, Expense::class);
     }
 
+    public function findByMaxYear($max_year)
+    {
+        return $this->createQueryBuilder('e')
+            ->andWhere('e.startYear <= :maxYear')
+            ->setParameter('maxYear', $max_year)
+            ->getQuery()
+            ->getResult()
+        ;
+    }
+
     // /**
     //  * @return Expense[] Returns an array of Expense objects
     //  */

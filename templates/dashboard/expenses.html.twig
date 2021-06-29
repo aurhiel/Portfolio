@@ -8,10 +8,16 @@
         {{ form_start(form, { 'attr' : { 'class': 'form form-expense' } }) }}
           <div class="form-row">
             {# Form inputs #}
-            <div class="form-group col-12">
+            <div class="form-group col-7 col-md-8">
               {{ form_label(form.name) }}
               {{ form_widget(form.name) }}
               {{ form_errors(form.name) }}
+            </div>
+
+            <div class="form-group col-5 col-md-4">
+              {{ form_label(form.startYear) }}
+              {{ form_widget(form.startYear) }}
+              {{ form_errors(form.startYear) }}
             </div>
 
             <div class="form-group col-sm-6 col-md-7">
@@ -42,17 +48,22 @@
             <table class="table table-expenses table-striped mb-0">
               <thead>
                 <tr>
-                  <th scope="col">#</th>
-                  <th scope="col">Nom</th>
-                  <th scope="col">Montant</th>
-                  <th scope="col">Actions</th>
+                  <th scope="col" class="col-id">#</th>
+                  <th scope="col" class="col-name">Nom <small class="text-muted">(année)</small></th>
+                  <th scope="col" class="col-amount">Montant</th>
+                  <th scope="col" class="col-actions">Actions</th>
                 </tr>
               </thead>
               <tbody>
               {% for expense in expenses %}
                 <tr>
                   <td class="col-id">{{ expense.id }}</td>
-                  <td class="col-name">{{ expense.name }}</td>
+                  <td class="col-name">
+                    {{ expense.name }}
+                    {% if expense.startYear %}
+                      <small class="text-muted">({{ expense.startYear }})</small>
+                    {% endif %}
+                  </td>
                   <td class="col-amount">
                     {{ expense.amount|number_format(2, ',', ' ') }}€<span class="text-muted">/{{ ('period.' ~ expense.periodType|replace({'ly': ''}))|trans }}</span>
                   </td>

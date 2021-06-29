@@ -44,25 +44,37 @@
     </div>
     <div class="card-body">
       <div class="list-icons row justify-content-center">
-        <div class="-item col-6 col-md-3 col-print-3 mb-2 mb-md-0">
+        <div class="-item col-6 col-md-4 col-lg-2 col-print-2 mb-2 mb-md-0">
           <span class="icon icon-users"></span>
           <span class="-title">Nb. clients</span>
           <span class="-number text-primary">{{ turnovers_clients|length }}</span>
         </div>
-        <div class="-item col-6 col-md-3 col-print-3 mb-2 mb-md-0">
+        <div class="-item col-6 col-md-4 col-lg-2 col-print-2 mb-2 mb-md-0">
           <span class="icon icon-calendar-full"></span>
           <span class="-title">CA mensuel</span>
           <span class="-number text-primary">{{ monthly_turnover|number_format(2, ',', ' ') }}€</span>
         </div>
-        <div class="-item col-6 col-md-3 col-print-3 mb-2 mb-md-0">
+        <div class="-item col-6 col-md-4 col-lg-2 col-print-2 mb-2 mb-md-0">
           <span class="icon icon-briefcase"></span>
           <span class="-title">CA total</span>
           <span class="-number text-primary">{{ total_turnover|number_format(2, ',', ' ') }}€</span>
         </div>
-        <div class="-item col-6 col-md-3 col-print-3">
+        <div class="-item col-6 col-md-4 col-lg-2 col-print-2">
           <span class="icon icon-file-empty"></span>
           <span class="-title">Nb. devis</span>
           <span class="-number text-primary">{{ quotes|length }}</span>
+        </div>
+        <div class="-item col-6 col-md-4 col-lg-2 col-print-2 mb-2 mb-md-0">
+          <span class="icon icon-cart"></span>
+          <span class="-title">Total dépenses</span>
+          <span class="-number text-{% if total_expenses > 0 %}warning {% else %}muted{% endif %}">
+            -{{ total_expenses|number_format(2, ',', ' ') }}€
+          </span>
+        </div>
+        <div class="-item col-6 col-md-4 col-lg-2 col-print-2 mb-2 mb-md-0">
+          <span class="icon icon-pie-chart"></span>
+          <span class="-title">CA final</span>
+          <span class="-number text-primary">{{ (total_turnover - total_expenses)|number_format(2, ',', ' ') }}€</span>
         </div>
       </div>
     </div>
@@ -178,5 +190,43 @@
       </div>
     </div>
   </div>
+
+  {% if expenses is not empty %}
+  <div class="row">
+    <div class="col-12 col-sm-6 col-print-6">
+      <div class="card">
+        <div class="card-header">
+          <h4 class="mb-0">Dépenses</h4>
+        </div>
+        <table class="table table-expenses table-striped mb-0">
+          <thead>
+            <tr>
+              <th scope="col" class="col-name">Libellé</th>
+              <th scope="col" class="col-amount">Montant</th>
+              <th scope="col" class="col-amount-total">Total</th>
+            </tr>
+          </thead>
+          <tbody>
+          {% for expense in expenses %}
+            <tr>
+              <td class="col-name">{{ expense.name }}</td>
+              <td class="col-amount">
+                {{ expense.amount|number_format(2, ',', ' ') }}€<span class="text-muted">/{{ ('period.' ~ expense.periodType|replace({'ly': ''}))|trans }}</span>
+              </td>
+              <td class="col-amount-total">
+                {% if expense.periodType == 'monthly' %}
+                  {{ (expense.amount * nb_months)|number_format(2, ',', ' ') }}€
+                {% else %}
+                  -
+                {% endif %}
+              </td>
+            </tr>
+          {% endfor %}
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+  {% endif %}
 </div>
 {% endblock %}

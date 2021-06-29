@@ -9,6 +9,7 @@ use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
 use Symfony\Component\Form\Extension\Core\Type\TextType;
+use Symfony\Component\Form\Extension\Core\Type\IntegerType;
 use Symfony\Component\Form\Extension\Core\Type\MoneyType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
@@ -25,6 +26,16 @@ class ExpenseType extends AbstractType
                     'placeholder' => 'form_expense.name.placeholder',
                     'class'       => 'required-giga'
                 ]
+            ])
+            ->add('startYear', IntegerType::class, [
+                'label'       => 'form_expense.start_year.label',
+                'required'    => true,
+                'label_attr'  => [ 'class' => 'sr-only'],
+                'attr'        => [
+                    'placeholder' => 'form_expense.start_year.placeholder',
+                    'class'       => 'required-giga',
+                    'min'         => $options['start_year_min'],
+                ],
             ])
             ->add('amount', MoneyType::class, [
                 'label'       => 'form_expense.amount.label',
@@ -58,7 +69,8 @@ class ExpenseType extends AbstractType
     public function configureOptions(OptionsResolver $resolver)
     {
         $resolver->setDefaults([
-            'data_class' => Expense::class,
+            'data_class'      => Expense::class,
+            'start_year_min'  => null,
         ]);
     }
 }
