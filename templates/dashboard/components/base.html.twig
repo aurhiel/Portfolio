@@ -47,7 +47,7 @@
 
     {# Header #}
     {% block header %}
-    <nav class="navbar navbar-expand-sm navbar-dark bg-dark mb-4">
+    <nav class="navbar navbar-expand-sm navbar-dark bg-dark mb-4 mb-xxl-5">
       <div class="container">
         <a class="navbar-brand" href="{{ path('dashboard') }}">Dashboard</a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
@@ -67,7 +67,7 @@
             </li>
             <li class="nav-item dropdown{% if app.request.attributes.get('_route') in [
               'dashboard_accounting_quotes', 'dashboard_accounting_invoices',
-                'dashboard_accounting_recipe_books' ] %} active{% endif %}">
+                'dashboard_accounting_recipe_books', 'dashboard_accounting_expenses' ] %} active{% endif %}">
               <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                 Compta.
               </a>
@@ -80,7 +80,16 @@
                   href="{{ path('dashboard_accounting_invoices') }}">
                   Factures
                 </a>
+
                 <div class="dropdown-divider"></div>
+
+                <a class="dropdown-item{% if app.request.attributes.get('_route') == 'dashboard_accounting_expenses' %} active{% endif %}"
+                  href="{{ path('dashboard_accounting_expenses') }}">
+                  Dépenses
+                </a>
+
+                <div class="dropdown-divider"></div>
+
                 <a class="dropdown-item{% if app.request.attributes.get('_route') == 'dashboard_accounting_recipe_books' %} active{% endif %}"
                   href="{{ path('dashboard_accounting_recipe_books') }}">
                   Livres de recette

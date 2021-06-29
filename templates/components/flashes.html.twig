@@ -18,10 +18,13 @@
   {% for slug_flash, type_flash in type_flashes %}
     {% set flash_messages = app.session.flashbag.get(slug_flash) %}
     {% if flash_messages is not empty %}
-    <div class="alert alert-{{ type_flash.css_class }}">
+    <div class="alert alert-{{ type_flash.css_class }}{% if loop.last %} mb-4 mb-xxl-5{% endif %}">
       {% for message in flash_messages %}
-        <div>{{ message|raw }}</div>
+        {{ message|raw }}{% if loop.last == false %}<br>{% endif %}
       {% endfor %}
+      <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+        <span aria-hidden="true">&times;</span>
+      </button>
     </div>
     {% endif %}
   {% endfor %}

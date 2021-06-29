@@ -5,10 +5,12 @@ namespace App\Controller;
 // Entities
 use App\Entity\Quote;
 use App\Entity\Invoice;
+use App\Entity\Expense;
 
 // Forms
 use App\Form\QuoteType;
 use App\Form\InvoiceType;
+use App\Form\ExpenseType;
 
 use App\Service\FileUploader;
 
@@ -261,6 +263,95 @@ class DashboardAccountingController extends AbstractController
     }
 
     /**
+     * @Route("/dashboard/depenses/{id}", name="dashboard_accounting_expenses", defaults={"id"=null})
+     */
+    public function accounting_expenses($id, Request $request)
+    {
+        $em   = $this->getDoctrine()->getManager();
+        $repo = $em->getRepository(Expense::class);
+
+        // 1) Build the form
+        $expense = (!is_null($id)) ? $repo->findOneById($id) : new Expense();
+        $form = $this->createForm(ExpenseType::class, $expense);
+
+        // 2) Handle form
+        $form->handleRequest($request);
+        $data = array();
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            // 3) Save !
+            $em->persist($expense);
+
+            // 4) Try to save (flush) or clear
+            try {
+                // Flush OK !
+                $em->flush();
+
+                $data = array(
+                    'query_status'    => 1,
+                    'message_status'  => 'Sauvegarde effectuée avec succès.',
+                    'id_entity'       => $expense->getId()
+                );
+
+                // Clear/reset form
+                $expense = new Expense();
+                $form = $this->createForm(ExpenseType::class, $expense);
+            } catch (\Exception $e) {
+                // Something goes wrong
+                $em->clear();
+
+                $data = array(
+                    'query_status'    => 0,
+                    'exception'       => $e->getMessage(),
+                    'message_status'  => 'Un problème est survenu lors de la sauvegarde de la dépense.'
+                );
+            }
+
+            // 5) Set flash message
+            $request->getSession()->getFlashBag()->add(
+                (($data['query_status'] == 1) ? 'success' : 'error'),
+                $data['message_status']
+            );
+
+            // Redirect on edit to clear edit form
+            if (!is_null($id))
+                return $this->redirectToRoute('dashboard_accounting_expenses');
+        }
+
+        // Retrieve expenses
+        $r_expenses  = $em->getRepository(Expense::class);
+        $expenses    = $r_expenses->findAll();
+
+        return $this->render('dashboard/expenses.html.twig', [
+          'form'    => $form->createView(),
+          'expenses' => $expenses
+        ]);
+    }
+
+    /**
+     * @Route("/dashboard/expenses/delete/{id}", name="dashboard_accounting_expenses_delete")
+     */
+    public function accounting_expenses_delete($id, Request $request)
+    {
+        $em = $this->getDoctrine()->getManager();
+
+        // Retrieve item to delete
+        $repo   = $em->getRepository(Expense::class);
+        $entity = $repo->findOneById($id);
+
+        if ($entity !== null) {
+            $em->remove($entity);
+            $em->flush();
+        } else {
+            $request->getSession()->getFlashBag()->add('error',
+              'La dépense avec pour ID: <b>' . $id . '</b> n\'existe pas en base de données.');
+        }
+
+        // No direct access
+        return $this->redirectToRoute('dashboard_accounting_expenses');
+    }
+
+    /**
      * @Route("/dashboard/compta/livres-recette/{year}", name="dashboard_accounting_recipe_books", defaults={"year"=null})
      */
     public function accounting_recipe_books($year)
@@ -322,11 +413,12 @@ class DashboardAccountingController extends AbstractController
         $monthly_turnovers = $total_turnover / $nb_months;
 
         return $this->render('dashboard/accounting/recipe-books.html.twig', [
-            'invoices'      => $invoices,
-            'quotes'        => $quotes,
-            'current_year'  => $year,
-            'years'         => $invoices_years,
-            'quotes'        => $quotes,
+            'invoices'        => $invoices,
+            'quotes'          => $quotes,
+            'displayed_year'  => $year,
+            'nb_months'       => $nb_months,
+            'years'           => $invoices_years,
+            'quotes'          => $quotes,
             // Stats
             'turnovers_clients' => $turnovers_clients,
             'turnovers_months'  => $turnovers_months,

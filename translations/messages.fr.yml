@@ -1,7 +1,22 @@
+# GENERAL
+#
+
+period :
+  year  : an
+  month : mois
+
+
+
+
+# FORMS
+#
+
 ## GENERIC / BASIC FORMS ##
 form_basic:
   save:
     label: Sauvegarder
+  send:
+    label: Envoyer
 
 
 ## CONTACT FORM ##
@@ -90,6 +105,7 @@ form_testimonial:
   both :
     label : Afficher les deux
 
+
 # DASHBOARD // CV Skills form
 form_skill:
   name :
@@ -155,6 +171,7 @@ form_cv_project:
     label       : 'Description'
     placeholder : 'Description'
 
+
 # DASHBOARD // Accounting forms
 form_quote :
   client :
@@ -198,6 +215,22 @@ form_invoice :
   date_paid :
     label       : 'Date paiement'
     placeholder : 'Date paiement'
+#--
+form_expense :
+  name :
+    label       : 'Nom'
+    placeholder : 'Nom (ex: Assurance RC Pro)'
+  amount :
+    label       : 'Montant'
+    placeholder : 'Montant (ex: 42,23)'
+  period_type :
+    label       : 'Période'
+    placeholder : 'Période (ex: Mensuelle)'
+  monthly :
+    label : 'Mensuelle'
+  yearly :
+    label : 'Annuelle'
+
 
 # DASHBOARD // Project & specs forms
 form_project:

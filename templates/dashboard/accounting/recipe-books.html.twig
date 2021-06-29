@@ -2,29 +2,29 @@
 
 {% block body %}
 <div class="container recipe-book-container">
-  {% set has_past = years[current_year - 1] is defined %}
-  {% set has_future = years[current_year + 1] is defined %}
+  {% set has_past = years[displayed_year - 1] is defined %}
+  {% set has_future = years[displayed_year + 1] is defined %}
   {% if has_past == true or has_future == true %}
   <div class="rb-nav d-print-none">
     <div class="row align-items-center">
         <div class="col-6 col-md-3">
           {% if has_past == true %}
           <a class="btn btn-sm btn-outline-secondary"
-            href="{{ path('dashboard_accounting_recipe_books', { year : current_year - 1 }) }}">
-            <span class="icon icon-arrow-left"></span> {{ current_year - 1 }}
+            href="{{ path('dashboard_accounting_recipe_books', { year : displayed_year - 1 }) }}">
+            <span class="icon icon-arrow-left"></span> {{ displayed_year - 1 }}
           </a>
           {% endif %}
         </div>
 
         <div class="d-none d-md-block col-md-6 text-center">
-          <h2 class="h3 mb-0">Livre de recette {{ current_year }}</h2>
+          <h2 class="h3 mb-0">Livre de recette {{ displayed_year }}</h2>
         </div>
 
         <div class="col-6 col-md-3 text-right">
           {% if has_future == true %}
           <a class="btn btn-sm btn-outline-secondary"
-            href="{{ path('dashboard_accounting_recipe_books', { year : current_year + 1 }) }}">
-            {{ current_year + 1 }} <span class="icon icon-arrow-right"></span>
+            href="{{ path('dashboard_accounting_recipe_books', { year : displayed_year + 1 }) }}">
+            {{ displayed_year + 1 }} <span class="icon icon-arrow-right"></span>
           </a>
           {% endif %}
         </div>
@@ -35,7 +35,7 @@
   {% endif %}
 
   <h2 class="h3 mb-4{% if has_past == true or has_future == true %} d-md-none d-print-block{% endif %}">
-    Livre de recette {{ current_year }}
+    Livre de recette {{ displayed_year }}
   </h2>
 
   <div class="card mb-4 rb-key-stats">
@@ -52,12 +52,12 @@
         <div class="-item col-6 col-md-3 col-print-3 mb-2 mb-md-0">
           <span class="icon icon-calendar-full"></span>
           <span class="-title">CA mensuel</span>
-          <span class="-number text-primary">{{ monthly_turnover|round(2) }}€</span>
+          <span class="-number text-primary">{{ monthly_turnover|number_format(2, ',', ' ') }}€</span>
         </div>
         <div class="-item col-6 col-md-3 col-print-3 mb-2 mb-md-0">
           <span class="icon icon-briefcase"></span>
           <span class="-title">CA total</span>
-          <span class="-number text-primary">{{ total_turnover }}€</span>
+          <span class="-number text-primary">{{ total_turnover|number_format(2, ',', ' ') }}€</span>
         </div>
         <div class="-item col-6 col-md-3 col-print-3">
           <span class="icon icon-file-empty"></span>
@@ -93,7 +93,7 @@
                 }]
               };
 
-              {% for month_num in 1..12 %}
+              {% for month_num in 1..nb_months %}
                 turnovers_by_months.labels.push('{{ date('2021-' ~ month_num ~ '-01')|format_date(pattern='MMMM')|capitalize }}');
                 turnovers_by_months.datasets[0].data.push({{ (turnovers_months[month_num] is defined ? turnovers_months[month_num] : 0) }});
               {% endfor %}
@@ -107,12 +107,12 @@
               </tr>
             </thead>
             <tbody>
-            {% for month_num in 1..12 %}
+            {% for month_num in 1..nb_months %}
               <tr>
                 <td>{{ date('2021-' ~ month_num ~ '-01')|format_date(pattern='MMMM')|capitalize }}</td>
                 <td>
-                  {% if turnovers_months[month_num] is defined %}{{ turnovers_months[month_num] }}€
-                  {% else %}0€{% endif %}
+                  {% if turnovers_months[month_num] is defined %}{{ turnovers_months[month_num]|number_format(2, ',', ' ') }}€
+                  {% else %}0,00€{% endif %}
                 </td>
               </tr>
             {% endfor %}
@@ -165,7 +165,7 @@
                 <td>
                   <span{% if dc.client.color is not empty %} style="color: {{ dc.client.color }}"{% endif %}><span class="dot"></span> [{{ dc.client.company }}]</span> {{ dc.client.firstname }} {{ dc.client.lastname }}
                 </td>
-                <td>{{ dc.invoices_amount }}€</td>
+                <td>{{ dc.invoices_amount|number_format(2, ',', ' ') }}€</td>
               </tr>
             {% endfor %}
             </tbody>
