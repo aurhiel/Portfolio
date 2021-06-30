@@ -23,6 +23,16 @@
             <span class="icon icon-map-marker"></span>
             {{ identity.location.city }}, {{ identity.location.department }}
           </li>
+          {% if identity.social_networks is defined %}
+            {% if identity.social_networks.linkedin is defined %}
+            <li class="position-relative">
+              <span class="icon icon-sn-linkedin-circle"></span>
+              <a class="stretched-link" href="{{ identity.social_networks.linkedin }}" target="_blank">
+                Linkedin
+              </a>
+            </li>
+            {% endif %}
+          {% endif %}
         </ul>
 
         <a class="btn-toggle-form-contact btn btn-primary my-3"

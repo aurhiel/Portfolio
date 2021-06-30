@@ -8,13 +8,15 @@ twig:
     globals:
       # Personal informations for portfolio
       identity:
-        first_name:         'Aurélien'
-        last_name:          'Litti'
-        status:             'Développeur Web - Front & Back-end'
-        mail:               'litti.aurelien@gmail.com'
-        phone:              '06 95 06 40 91'
-        year_start_work :       2012
-        year_start_freelance :  2018
+        first_name:           'Aurélien'
+        last_name:            'Litti'
+        status:               'Développeur Web - Front & Back-end'
+        mail:                 'litti.aurelien@gmail.com'
+        phone:                '06 95 06 40 91'
+        year_start_work:      2012
+        year_start_freelance: 2018
         location:
           city:       'Aix-en-Provence'
           department: 'Bouches-du-Rhône'
+        social_networks:
+          linkedin: "https://www.linkedin.com/in/aurélien-litti/"
