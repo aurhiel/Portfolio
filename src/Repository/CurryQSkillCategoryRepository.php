@@ -26,7 +26,7 @@ class CurryQSkillCategoryRepository extends ServiceEntityRepository
             ->leftJoin('sc.curryQSkills', 'skills')
             ->addSelect('skills')
             // Order
-            ->orderBy('sc.id', 'ASC')
+            ->orderBy('sc.position', 'ASC')
             ->getQuery()
             ->getResult()
         ;
