@@ -19,6 +19,19 @@ class CurryQSkillCategoryRepository extends ServiceEntityRepository
         parent::__construct($registry, CurryQSkillCategory::class);
     }
 
+    public function findAll()
+    {
+        return $this->createQueryBuilder('sc', 'sc.id')
+            // Join relations
+            ->leftJoin('sc.curryQSkills', 'skills')
+            ->addSelect('skills')
+            // Order
+            ->orderBy('sc.id', 'ASC')
+            ->getQuery()
+            ->getResult()
+        ;
+    }
+
     // /**
     //  * @return CurryQSkillCategory[] Returns an array of CurryQSkillCategory objects
     //  */
