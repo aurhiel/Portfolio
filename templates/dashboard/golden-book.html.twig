@@ -76,12 +76,12 @@
   var max_text        = msg_help_text.getElementsByClassName('-max-text')[0];
 
   function update_nb_caracs() {
-      // Update max caracters
-      help_nb_caracs.innerHTML = ((input_msg.value.length > 0) ? input_msg.value.length + '/' : '') + parseInt(input_msg.getAttribute('maxlength'));
+    // Update max caracters
+    help_nb_caracs.innerHTML = ((input_msg.value.length > 0) ? input_msg.value.length + '/' : '') + parseInt(input_msg.getAttribute('maxlength'));
 
-      // Hide / show "Maximum " text
-      if (input_msg.value.length > 0) max_text.classList.add('d-none');
-      else max_text.classList.remove('d-none');
+    // Hide / show "Maximum " text
+    if (input_msg.value.length > 0) max_text.classList.add('d-none');
+    else max_text.classList.remove('d-none');
   }
 
   // Key up AND down event for testimonial message
