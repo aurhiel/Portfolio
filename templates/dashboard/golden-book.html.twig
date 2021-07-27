@@ -31,8 +31,11 @@
       <form class="form text-center" method="post">
         <label for="testimonial-message" class="sr-only">Témoignage</label>
         <textarea class="form-control form-control--bordered" id="testimonial-message"
-          name="testimonial-message" rows="6" required="required"
+          name="testimonial-message" rows="6" maxlength="400" required="required"
             placeholder="Saisissez ici votre témoignage...">{{ testimonial.message }}</textarea>
+        <small id="testimonial-message-help-text" class="form-text text-muted text-right pr-1">
+          <span class="-max-text">Maximum </span><b class="-nb-caracs">400</b> caractères.
+        </small>
 
         <div class="testimonial-sign-type text-left row mx-0 mt-2 px-2">
         {% for signType in testimonial.signTypes %}
@@ -64,3 +67,27 @@
 {% endblock %}
 
 {% block footer %}{# hide footer #}{% endblock %}
+
+{% block javascripts %}
+<script type="text/javascript">
+  var input_msg       = document.getElementById('testimonial-message');
+  var msg_help_text   = document.getElementById('testimonial-message-help-text');
+  var help_nb_caracs  = msg_help_text.getElementsByClassName('-nb-caracs')[0];
+  var max_text        = msg_help_text.getElementsByClassName('-max-text')[0];
+
+  function update_nb_caracs() {
+      // Update max caracters
+      help_nb_caracs.innerHTML = ((input_msg.value.length > 0) ? input_msg.value.length + '/' : '') + parseInt(input_msg.getAttribute('maxlength'));
+
+      // Hide / show "Maximum " text
+      if (input_msg.value.length > 0) max_text.classList.add('d-none');
+      else max_text.classList.remove('d-none');
+  }
+
+  // Key up AND down event for testimonial message
+  input_msg.addEventListener('keyup',   update_nb_caracs);
+  input_msg.addEventListener('keydown', update_nb_caracs);
+  // Auto-trigger keydown event on load
+  input_msg.dispatchEvent(new Event('keydown'));
+</script>
+{% endblock %}

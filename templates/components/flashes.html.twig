@@ -18,7 +18,7 @@
   {% for slug_flash, type_flash in type_flashes %}
     {% set flash_messages = app.session.flashbag.get(slug_flash) %}
     {% if flash_messages is not empty %}
-    <div class="alert alert-{{ type_flash.css_class }}{% if loop.last %} mb-4 mb-xxl-5{% endif %}">
+    <div class="alert alert-{{ type_flash.css_class }}">
       {% for message in flash_messages %}
         {{ message|raw }}{% if loop.last == false %}<br>{% endif %}
       {% endfor %}
