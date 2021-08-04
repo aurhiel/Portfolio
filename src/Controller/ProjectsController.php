@@ -4,6 +4,7 @@ namespace App\Controller;
 
 // Entities
 use App\Entity\Project;
+use App\Entity\Testimonial;
 
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Routing\Annotation\Route;
@@ -22,6 +23,10 @@ class ProjectsController extends AbstractController
         // Retrieve projects
         $r_projects = $em->getRepository(Project::class);
         $project = $r_projects->findOneById($id);
+
+        // Retrieve testimonials
+        $r_testimonials = $em->getRepository(Testimonial::class);
+        $testimonials   = $r_testimonials->findAll(true);
 
         // Add <br> to description
         if (!is_null($project)) {
@@ -45,12 +50,17 @@ class ProjectsController extends AbstractController
                 return $this->redirectToRoute('home');
             }
 
+            $desc_simplified = preg_replace( "/\r|\n/", "", strip_tags($project->getDescription()));
+            $add_etc = (strlen($desc_simplified) > 300);
+
             return $this->render('projects/single.html.twig', [
                 'meta' => [
-                  'title' => 'Projets / ' . $project->getName(),
-                  'desc'  => $project->getDescription()
+                    'robots'  => 'index, follow',
+                    'title'   => 'Projets / ' . $project->getName(),
+                    'desc'    => substr($desc_simplified, 0, 299) . ($add_etc ? '...' : '')
                 ],
-                'project' => $project,
+                'project'       => $project,
+                'testimonials'  => $testimonials,
             ]);
         }
     }
