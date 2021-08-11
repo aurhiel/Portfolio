@@ -93,6 +93,9 @@ form_client :
   email :
     label       : "Email"
     placeholder : "Email"
+  website_link :
+    label       : "Lien vers le site du client"
+    placeholder : "Lien vers le site du client"
   # Buttons
   submit :
     label       : "Envoyer"

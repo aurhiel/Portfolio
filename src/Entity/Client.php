@@ -51,6 +51,11 @@ class Client
     private $logo_filename;
 
     /**
+     * @ORM\Column(type="string", length=128, nullable=true)
+     */
+    private $website_link;
+
+    /**
      * @ORM\OneToOne(targetEntity="App\Entity\Testimonial", mappedBy="client", cascade={"persist", "remove"})
      */
     private $testimonial;
@@ -185,6 +190,18 @@ class Client
                 $quote->setClient(null);
             }
         }
+
+        return $this;
+    }
+
+    public function getWebsiteLink(): ?string
+    {
+        return $this->website_link;
+    }
+
+    public function setWebsiteLink(?string $website_link): self
+    {
+        $this->website_link = $website_link;
 
         return $this;
     }

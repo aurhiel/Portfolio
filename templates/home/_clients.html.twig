@@ -9,8 +9,10 @@
       <ul class="list-logo">
       {% for client in clients %}
         <li class="-item">
+        {% if client.websiteLink is not empty %}<a href="{{ client.websiteLink }}" target="_blank">{% endif %}
           <img src="{{ asset('uploads/documents/clients/' ~ client.logoFilename) }}"
             alt="{{ client.company }}" title="{{ client.company }}">
+        {% if client.websiteLink is not empty %}</a>{% endif %}
         </li>
       {% endfor %}
       </ul>

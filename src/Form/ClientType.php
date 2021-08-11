@@ -85,6 +85,15 @@ class ClientType extends AbstractType
                     ])
                 ],
             ])
+            ->add('website_link',  TextType::class, [
+                'label'       => 'form_client.website_link.label',
+                'required'    => false,
+                'label_attr'  => [ 'class' => 'sr-only'],
+                'attr'        => [
+                    'placeholder' => 'form_client.website_link.placeholder',
+                    'class'       => 'required-supra'
+                ]
+            ])
             ->add('send',       SubmitType::class, [
                 'label' => 'form_contact.submit.label',
                 'attr'  => [

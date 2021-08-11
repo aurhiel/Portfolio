@@ -2,116 +2,147 @@
 
 {% block body %}
   <div class="container">
-    <h2 class="h3 mb-3">Ajouter un client</h2>
-    {{ form_start(form, { 'attr' : { 'class': 'form form-client' } }) }}
-      {# Form inputs #}
-      <div class="form--inputs">
-        <div class="form-row">
-          <div class="col-3 col-md-2 col-lg-1 mb-3">
-            {{ form_label(form.color) }}
-            <span class="custom-color">{{ form_widget(form.color) }}</span>
-            {{ form_errors(form.color) }}
-          </div>
-          <div class="col-9 col-md-6 col-lg-7 mb-3">
-            {{ form_label(form.company) }}
-            {{ form_widget(form.company) }}
-            {{ form_errors(form.company) }}
-          </div>
-          <div class="col-12 col-md-4 col-lg-4 mb-3">
-            {#{ form_label(form.logo) }#}
-            {{ form_widget(form.logo) }}
-            {{ form_errors(form.logo) }}
-          </div>
-        </div>
+    <div class="row">
+      {# Client form #}
+      <div class="col-lg-4 col-xxl-3">
+        <h2 class="h3 mb-3">Ajouter un client</h2>
+        {{ form_start(form, { 'attr' : { 'class': 'form form-client' } }) }}
+          {# Form inputs #}
+          <div class="form--inputs">
+            <div class="form-row">
+              <div class="col-3 col-md-2 col-lg-2 mb-3">
+                {{ form_label(form.color) }}
+                <span class="custom-color">{{ form_widget(form.color) }}</span>
+                {{ form_errors(form.color) }}
+              </div>
+              <div class="col-9 col-md-6 col-lg-10 mb-3">
+                {{ form_label(form.company) }}
+                {{ form_widget(form.company) }}
+                {{ form_errors(form.company) }}
+              </div>
+              <div class="col-12 col-md-4 col-lg-12 mb-3">
+                {#{ form_label(form.logo) }#}
+                {{ form_widget(form.logo) }}
+                {{ form_errors(form.logo) }}
+              </div>
+            </div>
 
-        <div class="form-row">
-          <div class="col-sm-6 col-md-4 mb-3">
-            {{ form_label(form.lastname) }}
-            {{ form_widget(form.lastname) }}
-            {{ form_errors(form.lastname) }}
+            <div class="form-row">
+              <div class="col-sm-6 col-md-4 col-lg-6 mb-3">
+                {{ form_label(form.lastname) }}
+                {{ form_widget(form.lastname) }}
+                {{ form_errors(form.lastname) }}
+              </div>
+              <div class="col-sm-6 col-md-4 col-lg-6 mb-3">
+                {{ form_label(form.firstname) }}
+                {{ form_widget(form.firstname) }}
+                {{ form_errors(form.firstname) }}
+              </div>
+              <div class="col-sm-12 col-md-4 col-lg-12 mb-3">
+                {{ form_label(form.email) }}
+                {{ form_widget(form.email) }}
+                {{ form_errors(form.email) }}
+              </div>
+              <div class="col-12">
+                {{ form_label(form.website_link) }}
+                {{ form_widget(form.website_link) }}
+                {{ form_errors(form.website_link) }}
+              </div>
+            </div>
           </div>
-          <div class="col-sm-6 col-md-4 mb-3">
-            {{ form_label(form.firstname) }}
-            {{ form_widget(form.firstname) }}
-            {{ form_errors(form.firstname) }}
+
+          {# Form buttons #}
+          <div class="form--actions text-center mt-3">
+            {{ form_widget(form.send) }}
           </div>
-          <div class="col-sm-12 col-md-4">
-            {{ form_label(form.email) }}
-            {{ form_widget(form.email) }}
-            {{ form_errors(form.email) }}
-          </div>
-        </div>
+        {{ form_end(form) }}
+
+        <hr class="w-50 mx-auto my-5 d-lg-none">
       </div>
 
-      {# Form buttons #}
-      <div class="form--actions text-center">
-        {{ form_widget(form.send) }}
-      </div>
-    {{ form_end(form) }}
-
-    <hr class="w-50 mx-auto my-5">
-
-    <h2 class="h3 mb-3">Liste des clients</h2>
-    {% if clients is defined and clients is not empty %}
-      <div class="table-responsive table-bordered">
-        <table class="table table-clients table-striped mb-0">
-          <thead>
-            <tr>
-              <th scope="col">#</th>
-              <th scope="col">Société</th>
-              <th scope="col">Logo</th>
-              <th scope="col">Nom</th>
-              <th scope="col">Prénom</th>
-              <th scope="col">Email</th>
-              <th scope="col">Témoignage</th>
-              <th scope="col">Actions</th>
-            </tr>
-          </thead>
-          <tbody>
+      {# Clients list #}
+      <div class="col-lg-8 col-xxl-9 pl-xl-4 pl-xxl-5">
+        <h2 class="h3 mb-3">Liste des clients</h2>
+        {% if clients is defined and clients is not empty %}
+          <div class="card-columns">
           {% for client in clients %}
-            <tr>
-              <td class="col-id">{{ client.id }}</td>
-              <td class="col-company" {% if client.color is not empty %} style="color: {{ client.color }}"{% endif %}>
-                <span class="dot"></span> {{ client.company }}
-              </td>
-              <td class="col-logo">
-                {% if client.logoFilename is not empty %}
-                <a href="{{ asset('uploads/documents/clients/' ~ client.logoFilename) }}" target="_blank">
-                  <img class="img-fluid" src="{{ asset('uploads/documents/clients/' ~ client.logoFilename) }}" alt="{{ client.company }}">
-                </a>
-                {% else %}
-                    -
-                {% endif %}
-              </td>
-              <td class="col-lastname">{{ client.lastname }}</td>
-              <td class="col-firstname">{{ client.firstname }}</td>
-              <td class="col-email">{{ client.email }}</td>
-              <td class="col-testimonial">
-                {% if client.testimonial is not null and client.testimonial.token is not null %}
-                  <a href="{{ path('golden_book', { token: client.testimonial.token }) }}" target="_blank">
-                    {{ client.testimonial.token }}
-                  </a>
-                {% else %}
-                  -
-                {% endif %}
-              </td>
-              <td class="col-actions">
-                <a class="btn btn-sm btn-secondary"
-                  href="{{ path('dashboard_clients', { id: client.id }) }}">
-                  edit
-                </a>
-                <a class="btn btn-sm btn-danger"
-                  href="{{ path('dashboard_clients_delete', { id: client.id }) }}">
-                  del.
-                </a>
-              </td>
-            </tr>
+            <div class="card">
+              <div class="card-body">
+                <h5 class="card-title mb-0">
+                  <span class="text-muted">#{{ client.id }}</span> -
+                  {{ client.firstname }} {{ client.lastname }}
+                </h5>
+              </div>
+              <div class="px-3">
+                <table class="table mb-2">
+                  <tbody>
+                    <tr>
+                      <th>Société</th>
+                      <td {% if client.color is not empty %} style="color: {{ client.color }}"{% endif %}>
+                        <span class="dot"></span> {{ client.company }}
+                      </td>
+                    </tr>
+                    <tr>
+                      <th>Email</th>
+                      <td>
+                        <span class="text-break" style="max-width: 16rem">
+                          {{ client.email }}
+                        </span>
+                      </td>
+                    </tr>
+                    <tr>
+                      <th>Logo</th>
+                      <td>
+                        {% if client.logoFilename is not empty %}
+                        <a href="{{ asset('uploads/documents/clients/' ~ client.logoFilename) }}" target="_blank">
+                          <img class="img-fluid w-25" src="{{ asset('uploads/documents/clients/' ~ client.logoFilename) }}" alt="{{ client.company }}">
+                        </a>
+                        {% else %}
+                            -
+                        {% endif %}
+                      </td>
+                    </tr>
+                    <tr>
+                      <th>Témoignage</th>
+                      <td>
+                        {% if client.testimonial is not null and client.testimonial.token is not null %}
+                          <a class="d-inline-block text-truncate" style="max-width: 14rem" href="{{ path('golden_book', { token: client.testimonial.token }) }}" target="_blank">
+                            {{ client.testimonial.token }}
+                          </a>
+                        {% else %}
+                          -
+                        {% endif %}
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+              <div class="card-footer">
+                <div class="row align-items-center text-center">
+                  <div class="col-12 col-md-6 text-md-left">
+                    {% if client.websiteLink is not empty %}
+                      <a class="btn btn-sm btn-outline-primary mb-2 mb-md-0" href="{{ client.websiteLink }}" target="_blank">
+                        site client
+                      </a>
+                    {% endif %}
+                  </div>
+                  <div class="col-12 col-md-6 pl-md-0 text-md-right">
+                    <a class="btn btn-sm btn-secondary" href="{{ path('dashboard_clients', { id: client.id }) }}">
+                      edit
+                    </a>
+                    <a class="btn btn-sm btn-danger" href="{{ path('dashboard_clients_delete', { id: client.id }) }}">
+                      del.
+                    </a>
+                  </div>
+                </div>
+              </div>
+            </div>
           {% endfor %}
-          </tbody>
-        </table>
+          </div>
+        {% else %}
+          <div class="alert alert-secondary">Aucun client</div>
+        {% endif %}
       </div>
-    {% else %}
-      <div class="alert alert-secondary">Aucun client</div>
-    {% endif %}
+    </div>
   </div>
 {% endblock %}
