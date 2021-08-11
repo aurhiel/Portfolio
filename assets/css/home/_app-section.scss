@@ -66,10 +66,30 @@
 }
 
 
+
+// Responsive
+//
+
+// @include media-breakpoint-up() {
+// }
+
 @include media-breakpoint-up(xl) {
   .app-section--whoami {
     .text-contextual {
       padding-right: 2.75rem;
+    }
+  }
+
+  .app-section--clients {
+    .heading {
+      max-width: 7em;
+      margin-left: auto;
+      margin-right: auto;
+      margin-top: -.2em;
+
+      &:before {
+        white-space: normal;
+      }
     }
   }
 }
