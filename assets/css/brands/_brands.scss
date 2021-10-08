@@ -1,0 +1,23 @@
+// Brands
+//
+// Brands v1.0
+
+
+// Variables
+@import 'variables';
+
+// Font face
+@font-face {
+  font-family: $icons-brands-font-family;
+  src:  url('#{$icons-brands-font-path}/#{$icons-brands-font-family}.eot?#{$icons-brands-font-hash}');
+  src:  url('#{$icons-brands-font-path}/#{$icons-brands-font-family}.eot?#{$icons-brands-font-hash}#iefix') format('embedded-opentype'),
+    url('#{$icons-brands-font-path}/#{$icons-brands-font-family}.ttf?#{$icons-brands-font-hash}') format('truetype'),
+    url('#{$icons-brands-font-path}/#{$icons-brands-font-family}.woff?#{$icons-brands-font-hash}') format('woff'),
+    url('#{$icons-brands-font-path}/#{$icons-brands-font-family}.svg?#{$icons-brands-font-hash}##{$icons-brands-font-family}') format('svg');
+  font-weight: normal;
+  font-style: normal;
+  font-display: block;
+}
+
+// Icons
+@import 'icons';

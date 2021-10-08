@@ -8,6 +8,7 @@ use Symfony\Component\HttpFoundation\Request;
 
 // Entities
 use App\Entity\Contact;
+use App\Entity\Testimonial;
 
 // Forms
 use App\Form\ContactType;
@@ -53,6 +54,16 @@ class StaticPagesController extends AbstractController
                 'web_host'  => $web_host
             )
         );
+
+        $this->pages['carte-de-visite'] = array(
+            'template'      => 'static-pages/business-card.html.twig',
+            'data' => array(
+                'meta' => array(
+                    'title'   => 'Carte de Visite',
+                    'robots'  => 'noindex, nofollow'
+                ),
+            )
+        );
     }
 
     /**
@@ -60,15 +71,27 @@ class StaticPagesController extends AbstractController
      */
     public function index($page_slug)
     {
+        $em = $this->getDoctrine()->getManager();
+
+        // Generate contact form
         $contact      = new Contact();
         $form_contact = $this->createForm(ContactType::class, $contact, [
             'action' => $this->generateUrl('contact')
         ]);
 
+        // Get testimonials repository
+        $r_testimonials = $em->getRepository(Testimonial::class);
+
         if(isset($this->pages[$page_slug])) {
             $page = $this->pages[$page_slug];
-            // Pushing form for contact
-            $page['data']['form_contact'] = $form_contact->createView();
+            // Add some data on all pages expect business card page
+            if ($page_slug != 'carte-de-visite') {
+                // Pushing form for contact
+                $page['data']['form_contact'] = $form_contact->createView();
+
+                // Retrieve testimonials to display link in menu
+                $page['data']['testimonials'] = $r_testimonials->findAll(true);
+            }
 
             return $this->render($page['template'], $page['data']);
         } else {

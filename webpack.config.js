@@ -26,6 +26,9 @@ Encore
     // // Page : Home
     .addStyleEntry('home', './assets/css/home.scss')
 
+    // // Page : "Carte de Visite" page JS & CSS (with SASS)
+    .addEntry('business-card', './assets/js/business-card.js')
+
     // // Page : Golden book "Livre d'Or"
     .addStyleEntry('golden-book', './assets/css/golden-book.scss')
 

@@ -1,0 +1,345 @@
+// Page "business-card"
+//
+
+// Libraries
+
+@import 'shuri/variables';
+@import 'shuri/mixins';
+@import 'bootstrap/required';  // node_module : Bootstrap required (Variables, Functions & Mixins)
+
+// Icons
+@import 'brands/brands';
+
+// Main CSS for "Business Card" page
+// @import 'business-card/variables';
+@import 'business-card/root';
+
+// App components
+@import 'business-card/app-core';
+
+
+.business-cards-container {
+  perspective: 4000px;
+
+  &:hover {
+    > .-inner {
+      transform: rotateY(180deg);
+    }
+  }
+
+  > .-inner {
+    position: relative;
+    z-index: 1;
+    transition: transform 0.8s;
+    transform-style: preserve-3d;
+  }
+
+  // Disable hover & display card's back
+  &.-disable-hover {
+    &:hover {
+      > .-inner {
+        transform: none;
+      }
+    }
+
+    .bc-card--front {
+      margin-bottom: 2rem;
+    }
+
+    .bc-card--back {
+      position: relative;
+      top: auto;
+      left: auto;
+      margin-left: auto;
+      transform: none;
+    }
+  }
+
+  &.-corners-squared {
+    .bc-card {
+      border-radius: 0;
+    }
+  }
+}
+
+.bc-card {
+  border-radius: 1rem;
+  width: 31.375rem;
+  height: 20.3125rem;
+  margin: 0 auto;
+  overflow: hidden;
+  -webkit-backface-visibility: hidden; /* Safari */
+  backface-visibility: hidden;
+
+  > .row {
+    margin: 0;
+  }
+}
+
+.bc-card--front {
+  background: #27252a url("/build/images/patterns/seigaiha.png") repeat;
+  background-size: 24em;
+  color: $white;
+
+  .list-contact-method {
+    font-size: .72rem;
+    margin-left: -.8em;
+    margin-right: -.8em;
+
+    li {
+      margin: .6em .8em;
+
+      &.-item-link {
+        .text {
+          position: relative;
+          &:after {
+            content: '';
+            border-top: .1em solid;
+            position: absolute;
+            left: 0;
+            right: 0;
+            bottom: -.15em;
+            opacity: .1;
+          }
+        }
+      }
+    }
+
+    .icon {
+      background-color: #dde8e3;
+      color: #126b40;
+      font-size: 1.2em;
+      box-shadow: 0 0 0 0.2em #29c0761c;
+      border-radius: 50%;
+      display: inline-block;
+      padding: .4em .389em .4em .4em;
+      margin-right: 0.6em;
+      opacity: 1;
+
+      &-envelope {
+        &:before {
+          position: relative;
+          top: -.075em;
+        }
+      }
+    }
+  }
+
+  .col {
+    padding: 2rem 3rem;
+  }
+
+  .bcc-col-logo {
+    max-width: 12rem;
+    padding-right: 0;
+    padding-left: 2rem;
+
+    > .-inner {
+      background-color: #1d1b1f;
+      padding: 0 8.18%;
+      border-radius: 50%;
+      box-shadow: 0 0 0 .3rem rgba(255, 255, 255, .025),
+        0 0 0 6.2rem rgba(0, 0, 0, .05);
+    }
+
+    .shuri-logo {
+      width: 100%;
+      filter: drop-shadow(0 0 0.28em rgba(0, 0, 0, 0.25));
+    }
+  }
+
+  .bcc-col-identity {
+    padding-left: 2rem;
+
+    .shuri-identity {
+      padding-top: 1rem;
+      font-size: .8rem;
+
+      .--status {
+        font-weight: 500;
+        opacity: .6;
+      }
+    }
+  }
+}
+
+.bc-card--back {
+  background-color: $gray-300;
+  position: absolute;
+  top: 0;
+  left: 50%;
+  margin-left: -15.6875rem;
+  transform: rotateY(180deg);
+
+  .col {
+    position: relative;
+    z-index: 1;
+    padding: 2rem 3rem;
+
+    > .-title {
+      margin-bottom: 1rem;
+    }
+  }
+
+  ul {
+    list-style: none;
+    padding-left: 0;
+    margin-bottom: 0;
+  }
+
+  .bcc-col-benefits {
+    padding-right: 2rem;
+    max-width: 52%;
+
+    .-list {
+      li {
+        position: relative;
+        padding-left: 1rem;
+        line-height: 1.875em;
+        min-height: 1.875em;
+
+        + li {
+          margin-top: 1rem;
+        }
+
+        .icon {
+          font-size: 1.4rem;
+          line-height: 1;
+          position: absolute;
+          left: 0;
+          top: 50%;
+          margin-top: -.5em;
+          opacity: .5;
+        }
+
+        .text {
+          font-size: .85rem;
+          line-height: 1.2;
+          display: inline-block;
+          vertical-align: middle;
+          padding-left: 1rem;
+          margin-top: -.15rem;
+        }
+      }
+    }
+  }
+
+  .bcc-col-tools {
+    text-align: center;
+    z-index: 5;
+    padding: 1rem;
+    max-width: 48%;
+
+    &:after {
+      content: 'SH';
+      position: absolute;
+      font-weight: 700;
+      font-size: .9rem;
+      bottom: -2rem;
+      right: .6rem;
+      opacity: .025;
+    }
+
+    &:before {
+      content: ' ';
+      background: $gray-400 url("/build/images/patterns/seigaiha-light.png") repeat;
+      background-size: 24em;
+      background-blend-mode: multiply;
+      position: absolute;
+      z-index: 0;
+      left: 0;
+      top: -520%;
+      height: 1200%;
+      width: 1200%;
+      opacity: .75;
+      transform: rotate(6deg);
+    }
+
+    > * {
+      position: relative;
+      z-index: 5;
+    }
+
+    .-list {
+      li {
+        line-height: 1;
+        display: inline-block;
+        vertical-align: middle;
+        margin: .3rem .5rem;
+      }
+
+      .icon {
+        background-color: $gray-200;
+        font-size: 2.2rem;
+        border-radius: 50%;
+        margin: 0 auto .4rem;
+        padding: .2em;
+        display: block;
+        height: 1.4em;
+        width: 1.4em;
+        top: 0;
+      }
+
+      .icon-b-bootstrap, .icon-b-jquery {
+        font-size: .85em;
+        position: relative;
+        top: -.07em;
+      }
+
+      .text {
+        background-color: $dark;
+        color: $gray-200;
+        font-size: .3rem;
+        line-height: 1.4;
+        font-weight: 700;
+        letter-spacing: .2em;
+        text-transform: uppercase;
+        border-radius: .4em;
+        display: inline-block;
+        vertical-align: top;
+        padding: .05rem .3rem;
+      }
+    }
+  }
+}
+
+
+
+// Print
+
+@media print {
+  :root {
+    font-size: 26px;
+  }
+
+  .app-bg {
+    display: none;
+  }
+
+  .business-cards-actions {
+    display: none;
+  }
+
+  // Disable hover & display card's back
+  .business-cards-container {
+    margin-top: 6rem;
+
+    &:hover {
+      > .-inner {
+        transform: none;
+      }
+    }
+
+    .bc-card--front {
+      margin-bottom: 2rem;
+    }
+
+    .bc-card--back {
+      position: relative;
+      top: auto;
+      left: auto;
+      margin-left: auto;
+      transform: none;
+    }
+  }
+}

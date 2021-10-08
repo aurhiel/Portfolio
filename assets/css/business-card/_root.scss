@@ -1,0 +1,32 @@
+// Root
+//
+
+:root {
+  font-size: 10px;
+}
+
+// Responsive
+
+@include media-breakpoint-up(sm) {
+  :root {
+    font-size: 12px;
+  }
+}
+
+@include media-breakpoint-up(md) {
+  :root {
+    font-size: 14px;
+  }
+}
+
+@include media-breakpoint-up(lg) {
+  :root {
+    font-size: 24px;
+  }
+}
+
+@include media-breakpoint-up(xl) {
+  :root {
+    font-size: 32px;
+  }
+}

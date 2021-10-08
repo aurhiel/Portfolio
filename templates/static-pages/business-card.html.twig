@@ -1,0 +1,135 @@
+{% extends 'base.html.twig' %}
+{% set core_class = 'app-core--static-page' %}
+{% set bc_disable_hover = false %}
+
+{# Add Stylesheets #}
+{% block stylesheets %}
+  <link rel="stylesheet" href="{{ asset('build/business-card.css') }}">
+{% endblock %}
+
+{# Add Javascripts #}
+{% block javascripts %}
+  <script src="{{ asset('build/business-card.js') }}"></script>
+{% endblock %}
+
+{% block header %}{% endblock %}
+{% block footer %}{% endblock %}
+
+{% block body %}
+  <div class="container mb-4">
+    <div class="business-cards-actions form-inline justify-content-center border-bottom py-2 px-1 mb-4">
+      <div class="custom-control custom-checkbox mr-4">
+        <input type="checkbox" id="bc-disable-hover" class="custom-control-input"{% if bc_disable_hover == true %} checked="checked"{% endif %}>
+        <label class="custom-control-label" for="bc-disable-hover">Afficher les 2 faces</label>
+      </div>
+
+      <div class="custom-control custom-checkbox">
+        <input type="checkbox" id="bc-corners-squared" class="custom-control-input">
+        <label class="custom-control-label" for="bc-corners-squared">Coins carré</label>
+      </div>
+    </div>
+
+    <div class="business-cards-container{% if bc_disable_hover == true %} -disable-hover{% endif %}">
+      <div class="-inner">
+        <div class="bc-card bc-card--front">
+          <div class="row align-items-center h-100">
+            <div class="col bcc-col-logo">
+              <div class="-inner">
+                {% include 'components/logo.html.twig' with { display_identity: false, set_titles : false } %}
+              </div>
+            </div>
+            <div class="col bcc-col-identity">
+              <div class="shuri-identity mb-3">
+                <h1 class="--names">
+                  <span>{{ identity.last_name }} {{ identity.first_name }}</span>
+                  <span class="--badge">Freelance</span>
+                </h1>
+                <h2 class="--status">{{ identity.status }}</h2>
+              </div>
+
+              <hr class="mt-0 mb-4 ml-0">
+
+              <ul class="list-contact-method">
+                <li class="-item-link">
+                  <span class="icon icon-earth"></span>
+                  <span class="text">litti-aurelien.fr</span>
+                </li>
+                <li>
+                  <span class="icon icon-phone-handset"></span>
+                  {{ identity.phone }}
+                </li>
+                <li>
+                  <span class="icon icon-envelope"></span>
+                  {{ identity.mail }}
+                </li>
+                <li>
+                  <span class="icon icon-map-marker"></span>
+                  {{ identity.location.city }}, {{ identity.location.department }}
+                </li>
+              </ul>
+            </div>
+          </div>
+        </div>
+
+        <div class="bc-card bc-card--back">
+          <div class="row align-items-center h-100">
+            <div class="col bcc-col-benefits">
+              <h4 class="-title">Prestations</h4>
+              <ul class="-list">
+                <li>
+                  <span class="icon icon-laptop-phone"></span>
+                  <span class="text">Création de site multi-support</span>
+                </li>
+                <li>
+                  <span class="icon icon-cog"></span>
+                  <span class="text">Site web vitrine ou <br>e-commerce</span>
+                </li>
+                <li>
+                  <span class="icon icon-bubble"></span>
+                  <span class="text">Conseil &amp; Audit</span>
+                </li>
+                <li>
+                  <span class="icon icon-pencil"></span>
+                  <span class="text">Devis gratuit !</span>
+                </li>
+              </ul>
+            </div>
+            <div class="col bcc-col-tools">
+              <!-- <h4 class="-title">Outils</h4> -->
+              <ul class="-list">
+                <li style="margin-left: .6rem; margin-right: .6rem;">
+                  <span class="icon"><span class="icon-b-bootstrap"></span></span>
+                  <span class="text" style="background-color: #563d7c;">Bootstrap</span>
+                </li>
+                <li style="margin-left: .6rem; margin-right: .6rem;">
+                  <span class="icon"><span class="icon-b-jquery"></span></span>
+                  <span class="text" style="background-color: #0769ad;">jQuery</span>
+                </li>
+                <li>
+                  <span class="icon"><span class="icon-b-symfony"></span></span>
+                  <span class="text" style="background-color: #1a171b;">Symfony</span>
+                </li>
+                <li>
+                  <span class="icon"><span class="icon-b-prestashop"></span></span>
+                  <span class="text" style="background-color: #df0067;">Prestashop</span>
+                </li>
+                <li style="margin-left: .6rem; margin-right: .6rem;">
+                  <span class="icon"><span class="icon-b-wordpress"></span></span>
+                  <span class="text" style="background-color: #21759b;">WordPress</span>
+                </li>
+                <li style="margin-left: .6rem; margin-right: .6rem;">
+                  <span class="icon"><span class="icon-b-docker"></span></span>
+                  <span class="text" style="background-color: #1488c6;">Docker</span>
+                </li>
+                <li>
+                  <span class="icon"><span class="icon-b-gitlab"></span></span>
+                  <span class="text" style="background-color: #fca121;">GitLab</span>
+                </li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+{% endblock %}
