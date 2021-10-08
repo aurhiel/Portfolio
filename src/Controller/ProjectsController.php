@@ -3,13 +3,16 @@
 namespace App\Controller;
 
 // Entities
+use App\Entity\Contact;
 use App\Entity\Project;
 use App\Entity\Testimonial;
+
+// Forms
+use App\Form\ContactType;
 
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\HttpFoundation\Request;
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
 
 class ProjectsController extends AbstractController
 {
@@ -24,14 +27,19 @@ class ProjectsController extends AbstractController
         $r_projects = $em->getRepository(Project::class);
         $project = $r_projects->findOneById($id);
 
-        // Retrieve testimonials
+        // Retrieve testimonials to display link in menu
         $r_testimonials = $em->getRepository(Testimonial::class);
         $testimonials   = $r_testimonials->findAll(true);
 
+        // Create contact form
+        $contact      = new Contact();
+        $form_contact = $this->createForm(ContactType::class, $contact, [
+            'action' => $this->generateUrl('contact')
+        ]);
+
         // Add <br> to description
-        if (!is_null($project)) {
+        if (!is_null($project))
             $project->setDescription(nl2br($project->getDescription()));
-        }
 
         // JSON response or HTML display
         if ($request->isXmlHttpRequest()) {
@@ -59,6 +67,7 @@ class ProjectsController extends AbstractController
                     'title'   => 'Projets / ' . $project->getName(),
                     'desc'    => substr($desc_simplified, 0, 299) . ($add_etc ? '...' : '')
                 ],
+                'form_contact'  => $form_contact->createView(),
                 'project'       => $project,
                 'testimonials'  => $testimonials,
             ]);
