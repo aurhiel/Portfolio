@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+{% for url in urls %}
+  {% if url.loc is defined %}
+  <url>
+    <loc>{{ url.loc }}</loc>
+    <lastmod>{{ url.lastmod }}</lastmod>
+  {% if url.priority is defined %}
+    <priority>{{url.priority}}</priority>
+  {% endif %}
+  </url>
+  {% elseif url.children is defined %}
+    {# Display page children (only ONE level) #}
+    {% for child_url in url.children %}
+      <url>
+        <loc>{{ child_url.loc }}</loc>
+        <lastmod>{{ child_url.lastmod }}</lastmod>
+      {% if child_url.priority is defined %}
+        <priority>{{child_url.priority}}</priority>
+      {% endif %}
+      </url>
+    {% endfor %}
+  {% endif %}
+{% endfor %}
+</urlset>

@@ -1,0 +1,33 @@
+{% extends 'base.html.twig' %}
+
+{# Body (.app-body) #}
+{% block body %}
+  <div class="app-main-content bg-white p-4">
+    <h1 class="heading h2 text-center mt-0">Plan du site</h1>
+    <ul>
+      {% for url in urls %}
+        {% if url.loc is defined %}
+          <li>
+            <a href="{{ url.loc }}">
+              {{ url.label }}
+            </a>
+          </li>
+        {% elseif url.children is defined %}
+          <li>
+            {{ url.label }}
+            <ul>
+              {# Display page children (only ONE level) #}
+              {% for child_url in url.children %}
+                <li>
+                  <a href="{{ child_url.loc }}">
+                    {{ child_url.label }}
+                  </a>
+                </li>
+              {% endfor %}
+            </ul>
+          </li>
+        {% endif %}
+      {% endfor %}
+    </ul>
+  </div>
+{% endblock %}
