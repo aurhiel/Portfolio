@@ -50,13 +50,14 @@
 
         <hr class="w-100">
 
-        <div class="contact-checkbox-for-quote text-center">
+        {% set is_freelance = (identity.is_freelance is defined) ? identity.is_freelance : true %}
+        <div class="contact-checkbox-for-quote text-center{% if is_freelance == false %} d-none{% endif %}">
           {{ form_label(form_contact.is_quote) }}
           {{ form_widget(form_contact.is_quote) }}
           {{ form_errors(form_contact.is_quote) }}
         </div>
 
-        <div class="contact-inputs-quote">
+        <div class="contact-inputs-quote{% if is_freelance == false %} d-none{% endif %}">
           <div class="form-row">
             <div class="form-group col-sm-6">
               {{ form_label(form_contact.amount) }}

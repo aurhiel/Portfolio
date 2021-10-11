@@ -35,11 +35,14 @@
           {% endif %}
         </ul>
 
+      {% set is_freelance = (identity.is_freelance is defined) ? identity.is_freelance : true %}
+      {% if is_freelance == true %}
         <a class="btn-toggle-form-contact btn btn-primary my-3"
           href="#contact-form" role="button" data-check-is-quote="true">
           Demande de devis
         </a>
-        <a class="btn-toggle-form-contact btn btn-outline-light mx-3"
+      {% endif %}
+        <a class="btn-toggle-form-contact btn btn-outline-light {% if is_freelance == true %}mx-3{% else %}my-3{% endif %}"
           href="#contact-form" role="button">
           Me contacter
         </a>
