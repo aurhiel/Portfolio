@@ -1,10 +1,12 @@
+{% set is_freelance = (identity.is_freelance is defined) ? identity.is_freelance : true %}
+{% set meta_title_base = "Litti Aurélien | Développeur Web - Fullstack" ~ ((is_freelance == true) ? " - Indépendant" : "") %}
 <!DOCTYPE html>
 <html lang="fr">
   <head>
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta content="width=device-width, initial-scale=1" name="viewport" />
-    <title>Curriculum vitae - Litti Aurélien | Développeur Web - Indépendant - Fullstack</title>
+    <title>Curriculum vitae - {{ meta_title_base }}</title>
 
     <!-- Stylesheets -->
     <!-- <link href="css/bootstrap/bootstrap.css" rel="stylesheet"> -->
@@ -15,8 +17,8 @@
     <div class="curry-q-vitae">
       <header class="cqv-block block--transparent block--header">
         <h1 class="_name">
-          Litti Aurélien
-          <small>Développeur Web - Fullstack</small>
+          {{ identity.last_name }} {{ identity.first_name }}
+          <small>{{ identity.status }}</small>
         </h1>
 
         <div class="_infos">

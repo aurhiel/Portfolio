@@ -42,7 +42,9 @@
               <div class="shuri-identity mb-3">
                 <h1 class="--names">
                   <span>{{ identity.last_name }} {{ identity.first_name }}</span>
-                  <span class="--badge">Freelance</span>
+                  {% if identity.is_freelance is defined and identity.is_freelance == true %}
+                    <span class="--badge">Freelance</span>
+                  {% endif %}
                 </h1>
                 <h2 class="--status">{{ identity.status }}</h2>
               </div>

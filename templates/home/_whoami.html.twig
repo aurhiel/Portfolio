@@ -4,12 +4,13 @@
       <h3 class="heading" id="qui-suis-je" data-text="Qui suis-je ?">Qui suis-je ?</h3>
       <p class="text-contextual">
         Développeur web depuis maintenant {{ 'now'|date('Y') - identity.year_start_work }}&nbsp;ans,
-        et en tant que freelance depuis {{ 'now'|date('Y') - identity.year_start_freelance }}&nbsp;an{% if ('now'|date('Y') - identity.year_start_freelance) > 1 %}s{% endif %},
+        {% if identity.is_freelance is defined and identity.is_freelance == true %}et en tant que freelance depuis {{ 'now'|date('Y') - identity.year_start_freelance }}&nbsp;an{% if ('now'|date('Y') - identity.year_start_freelance) > 1 %}s{% endif %},{% endif %}
         j'aime me diversifier dans les multiples domaines du web, allant de la
         réalisation d'une maquette, en passant par son intégration (front-end)
         et développement (back-end).
       </p>
 
+      {% if identity.is_freelance is defined and identity.is_freelance == true %}
       <p class="text-contextual mb-0">
         Selon vos besoins, je suis à même de réaliser vos projets qu'ils soient
         sur-mesure (<strong class="text-normal">&laquo;&nbsp;from scratch&nbsp;&raquo;</strong>,
@@ -19,6 +20,7 @@
         dans le secteur des <strong class="text-normal">{{ identity.location.department }}</strong>, mais aussi
         jusqu'à <strong>Toulon</strong> par exemple ou via <strong>Skype</strong> si nécessaire.
       </p>
+      {% endif %}
 
       <hr class="my-4 ml-0">
 

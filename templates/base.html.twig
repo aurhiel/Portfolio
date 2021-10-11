@@ -1,6 +1,8 @@
 {# default twig values #}
 {% if bg_animated is not defined %}{% set bg_animated = false %}{% endif %}
 {% set domain = app.request.getSchemeAndHttpHost() %}
+{% set is_freelance = (identity.is_freelance is defined) ? identity.is_freelance : true %}
+{% set meta_title_base = "Litti Aurélien | Développeur Web - Fullstack" ~ ((is_freelance == true) ? " - Indépendant" : "") ~ " | Aix-en-Provence, Marseille, Toulon" %}
 <!DOCTYPE html>
 <html lang="fr">
   <head>
@@ -11,9 +13,9 @@
     <title>
     {%- block meta_title -%}
       {%- if meta.title is defined and meta.title is not empty -%}
-        {{ meta.title }} - Litti Aurélien | Développeur Web - Indépendant - Fullstack | Aix-en-Provence, Marseille, Toulon
+        {{ meta.title }} - {{ meta_title_base }}
       {% else %}
-        Litti Aurélien | Développeur Web - Indépendant - Fullstack | Aix-en-Provence, Marseille, Toulon
+        {{ meta_title_base }}
       {%- endif -%}
     {%- endblock -%}
     </title>
@@ -24,7 +26,7 @@
     {# OGs #}
     <meta property="og:url" content="{{ domain }}{{ path(app.request.attributes.get('_route'), app.request.attributes.get('_route_params')) }}">
     <meta property="og:type" content="website">
-    <meta property="og:title" content="{% if meta.title is defined and meta.title is not empty %}{{ meta.title }} - {% endif %}Litti Aurélien | Développeur Web - Indépendant - Fullstack | Aix-en-Provence, Marseille, Toulon">
+    <meta property="og:title" content="{% if meta.title is defined and meta.title is not empty %}{{ meta.title }} - {% endif %}{{ meta_title_base }}">
     {% if meta.desc is defined and meta.desc is not empty %}
     <meta property="og:description" content="{{ meta.desc }}" />
     {% endif %}

@@ -13,6 +13,7 @@ twig:
         status:               'Développeur Web - Front & Back-end'
         mail:                 'litti.aurelien@gmail.com'
         phone:                '06 95 06 40 91'
+        is_freelance:         true
         year_start_work:      2012
         year_start_freelance: 2018
         location:
