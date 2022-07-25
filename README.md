@@ -1,12 +1,12 @@
 Litti-Aurelien.fr
 ==================================
 
-## Informations diverses
+## Misc. informations
 
 ```bash
-# Connexion à mysql (pass: dbrootpw)
+# Connect to mysql (pass: dbrootpw)
 mysql -u root -p sf_litti_aurelien
 
-# [PROD] Connexion au serveur
+# [PROD] SSH connect
 ssh y****w@ftp.everydayelectro.com
 ```
